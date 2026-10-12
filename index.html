@@ -306,7 +306,7 @@
       </div>
 
       <!-- Package Cards -->
-      <div class="grid md:grid-cols-3 gap-8 mb-16">
+      <div id="packages-grid-container" class="grid md:grid-cols-3 gap-8 mb-16">
         <!-- Paket 1 -->
         <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2" data-aos="fade-up" data-aos-delay="0">
           <div class="bg-gradient-to-br from-orange-400 to-orange-600 p-8 text-white text-center relative">
@@ -451,7 +451,7 @@
         <p class="text-gray-500 max-w-2xl mx-auto">15+ lembar aktivitas edukatif siap cetak (PDF) yang dirancang tim PG PAUD — agar anak tetap senang & belajar selama perjalanan.</p>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+      <div id="kits-grid-container" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
         <!-- Kit 1 -->
         <div class="kit-card bg-gradient-to-br from-orange-50 to-orange-100 rounded-3xl p-6 text-center border border-orange-100 cursor-pointer" data-aos="fade-up" data-aos-delay="0" onclick="openDownloadModal('Lembar Mewarnai Ikon Bali','Lembar mewarnai ikon wisata & seni Bali yang indah — berisi gambar Pura, tari Bali, barong, dan bunga Jepun untuk diwarnai si kecil.','🎨')">
           <div class="text-5xl mb-4">🎨</div>
@@ -629,7 +629,7 @@
 
       <!-- Swiper -->
       <div class="swiper parentingSwiper" data-aos="fade-up">
-        <div class="swiper-wrapper pb-12">
+        <div id="parenting-swiper-wrapper" class="swiper-wrapper pb-12">
           <!-- Tip 1 -->
           <div class="swiper-slide">
             <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-8 md:p-10 h-full border border-purple-100">
@@ -926,6 +926,7 @@
       <!-- Bottom -->
       <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
         <p>© 2026 Bali Little Explorer · Bali Top Holiday.</p>
+        <a href="admin.html" target="_blank" class="hover:text-primary transition font-bold text-gray-500 hover:underline">🔐 Panel Admin</a>
       </div>
     </div>
   </footer>
@@ -976,6 +977,10 @@
     const { createClient } = supabase;
     const db = createClient(SUPABASE_URL, SUPABASE_ANON);
 
+    let currentWA = '6281234567890';
+    let loadedKits = [];
+    let swiperInstance = null;
+
     // ---- AOS Init ----
     AOS.init({ duration: 700, once: true, offset: 60 });
 
@@ -1023,23 +1028,168 @@
       mobileMenu.classList.remove('flex');
     }
 
-    // ---- Swiper ----
-    new Swiper('.parentingSwiper', {
-      slidesPerView: 1,
-      spaceBetween: 24,
-      pagination: { el: '.swiper-pagination', clickable: true },
-      autoplay: { delay: 5000, disableOnInteraction: false },
-      breakpoints: {
-        768: { slidesPerView: 2 },
-        1024: { slidesPerView: 2 },
-      },
-    });
+    // ---- Swiper Init ----
+    function initSwiper() {
+      if (swiperInstance) swiperInstance.destroy(true, true);
+      swiperInstance = new Swiper('.parentingSwiper', {
+        slidesPerView: 1,
+        spaceBetween: 24,
+        pagination: { el: '.swiper-pagination', clickable: true },
+        autoplay: { delay: 5000, disableOnInteraction: false },
+        breakpoints: {
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 2 },
+        },
+      });
+    }
+
+    // ---- Dynamic Content Sync from Supabase ----
+    async function loadDynamicContent() {
+      try {
+        // 1. Settings
+        const { data: settings } = await db.from('site_settings').select('*').eq('id', 'general').single();
+        if (settings && settings.whatsapp_number) {
+          currentWA = settings.whatsapp_number;
+          updateWALinks(currentWA);
+        }
+
+        // 2. Packages
+        const { data: pkgs } = await db.from('packages').select('*').order('order_index', { ascending: true });
+        if (pkgs && pkgs.length > 0) {
+          renderPackages(pkgs);
+        }
+
+        // 3. Activity Kits
+        const { data: kits } = await db.from('activity_kits').select('*').order('order_index', { ascending: true });
+        if (kits && kits.length > 0) {
+          loadedKits = kits;
+          renderActivityKits(kits);
+        }
+
+        // 4. Parenting Tips
+        const { data: tips } = await db.from('parenting_tips').select('*').order('order_index', { ascending: true });
+        if (tips && tips.length > 0) {
+          renderParentingTips(tips);
+        }
+      } catch (err) {
+        console.warn('Dynamic sync fallback to static:', err);
+      }
+    }
+
+    function updateWALinks(wa) {
+      document.querySelectorAll('a[href*="wa.me/"]').forEach(a => {
+        const url = new URL(a.href);
+        const text = url.searchParams.get('text') || '';
+        a.href = `https://wa.me/${wa}${text ? '?text=' + encodeURIComponent(text) : ''}`;
+      });
+    }
+
+    function renderPackages(pkgs) {
+      const container = document.getElementById('packages-grid-container');
+      if (!container) return;
+      container.innerHTML = pkgs.map((p, idx) => {
+        const stops = Array.isArray(p.stops) ? p.stops : [];
+        const waMsg = encodeURIComponent(`Halo, saya tertarik ${p.title} (${p.duration || ''}) untuk liburan keluarga saya di Bali!`);
+        return `
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 ${idx === 1 ? 'ring-2 ring-primary shadow-xl' : ''}">
+            <div class="bg-gradient-to-br ${p.gradient || 'from-orange-400 to-orange-600'} p-8 text-white text-center relative">
+              <div class="text-6xl mb-3">${p.icon || '🏝️'}</div>
+              <h3 class="font-baloo font-bold text-2xl">${p.title}</h3>
+              <p class="text-white/80 text-sm mt-1">${p.duration || 'Full Day'}</p>
+              ${p.badge ? `<div class="absolute top-4 right-4 bg-white/20 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded-lg">${p.badge}</div>` : ''}
+            </div>
+            <div class="p-6">
+              <div class="space-y-3 mb-6">
+                ${stops.map(s => `
+                  <div class="flex items-start gap-3 text-sm text-gray-600">
+                    <span class="text-primary mt-0.5">${s.icon || '📍'}</span>
+                    <div><strong class="text-gray-800">${s.place}</strong><br/>${s.desc}</div>
+                  </div>
+                `).join('')}
+              </div>
+              ${p.includes ? `
+                <div class="bg-orange-50 rounded-2xl p-4 mb-5">
+                  <p class="text-xs text-gray-500 mb-1">🎁 Include:</p>
+                  <p class="text-xs text-gray-700 font-semibold">${p.includes}</p>
+                </div>
+              ` : ''}
+              <a href="https://wa.me/${currentWA}?text=${waMsg}"
+                 target="_blank"
+                 class="block text-center bg-primary text-white py-3 rounded-2xl font-bold hover:bg-primary-dark transition shadow-md">
+                 💬 Tanya Paket Ini
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderActivityKits(kits) {
+      const container = document.getElementById('kits-grid-container');
+      if (!container) return;
+      container.innerHTML = kits.map(k => {
+        const bgGrad = k.badge_color === 'teal' ? 'from-teal-50 to-teal-100 border-teal-100' :
+                       k.badge_color === 'purple' ? 'from-purple-50 to-purple-100 border-purple-100' :
+                       k.badge_color === 'yellow' ? 'from-yellow-50 to-yellow-100 border-yellow-100' :
+                       'from-orange-50 to-orange-100 border-orange-100';
+        const badgeBg = k.badge_color === 'teal' ? 'bg-teal/20 text-teal-dark' :
+                        k.badge_color === 'purple' ? 'bg-purple-200 text-purple-800' :
+                        k.badge_color === 'yellow' ? 'bg-yellow-200 text-yellow-800' :
+                        'bg-orange-200 text-orange-800';
+        return `
+          <div class="kit-card bg-gradient-to-br ${bgGrad} rounded-3xl p-6 text-center border cursor-pointer"
+               onclick="openDownloadModal('${k.title.replace(/'/g, "\\'")}', '${(k.description || '').replace(/'/g, "\\'")}', '${k.icon || '🎨'}', '${k.file_url || ''}')">
+            <div class="text-5xl mb-4">${k.icon || '🎨'}</div>
+            <h4 class="font-baloo font-bold text-gray-800 text-base mb-2">${k.title}</h4>
+            <p class="text-xs text-gray-500 mb-4">${k.description || ''}</p>
+            <div class="text-xs ${badgeBg} font-bold px-3 py-1.5 rounded-full inline-flex items-center gap-1">
+              <span>📄</span> ${k.sheet_count || 'PDF Ready'}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderParentingTips(tips) {
+      const wrapper = document.getElementById('parenting-swiper-wrapper');
+      if (!wrapper) return;
+      wrapper.innerHTML = tips.map(t => {
+        const points = Array.isArray(t.tips) ? t.tips : [];
+        const grad = t.theme_color === 'orange' ? 'from-orange-50 to-yellow-50 border-orange-100' :
+                     t.theme_color === 'teal' ? 'from-teal-50 to-emerald-50 border-teal-100' :
+                     t.theme_color === 'indigo' ? 'from-indigo-50 to-blue-50 border-indigo-100' :
+                     'from-purple-50 to-pink-50 border-purple-100';
+        const numBg = t.theme_color === 'orange' ? 'bg-orange-500' :
+                      t.theme_color === 'teal' ? 'bg-teal' :
+                      t.theme_color === 'indigo' ? 'bg-indigo' :
+                      'bg-purple-500';
+        return `
+          <div class="swiper-slide">
+            <div class="bg-gradient-to-br ${grad} rounded-3xl p-8 md:p-10 h-full border">
+              <div class="text-5xl mb-5">${t.icon || '💡'}</div>
+              <h3 class="font-baloo font-bold text-2xl text-gray-800 mb-4">${t.title}</h3>
+              <div class="space-y-3">
+                ${points.map((p, idx) => `
+                  <div class="flex items-start gap-3">
+                    <span class="${numBg} text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">${idx+1}</span>
+                    <p class="text-sm text-gray-600">${p}</p>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+      initSwiper();
+    }
 
     // ---- Download Modal ----
     let currentDownloadTitle = '';
+    let currentDownloadFileUrl = '';
 
-    function openDownloadModal(title, desc, icon) {
+    function openDownloadModal(title, desc, icon, fileUrl = '') {
       currentDownloadTitle = title;
+      currentDownloadFileUrl = fileUrl;
       document.getElementById('modal-title').textContent = title;
       document.getElementById('modal-desc').textContent = desc;
       document.getElementById('modal-icon').textContent = icon;
@@ -1065,11 +1215,14 @@
       // Save lead to Supabase
       await db.from('download_leads').insert({ name, email: email || null, kit_name: currentDownloadTitle });
 
-      // Redirect to WA with download request
-      const waMsg = encodeURIComponent(
-        `Halo Admin Bali Top Holiday! Saya ${name} ingin mengunduh "${currentDownloadTitle}" dari website Bali Little Explorer. Bisa dikirimkan link-nya? Terima kasih! 🙏`
-      );
-      window.open(`https://wa.me/6281234567890?text=${waMsg}`, '_blank');
+      if (currentDownloadFileUrl) {
+        window.open(currentDownloadFileUrl, '_blank');
+      } else {
+        const waMsg = encodeURIComponent(
+          `Halo Admin Bali Top Holiday! Saya ${name} ingin mengunduh "${currentDownloadTitle}" dari website Bali Little Explorer. Bisa dikirimkan link-nya? Terima kasih! 🙏`
+        );
+        window.open(`https://wa.me/${currentWA}?text=${waMsg}`, '_blank');
+      }
       closeDownloadModal();
     }
 
@@ -1122,7 +1275,7 @@
 
 Mohon info lebih lanjut mengenai paket tersebut. Terima kasih! 🙏`
       );
-      window.open(`https://wa.me/6281234567890?text=${waMsg}`, '_blank');
+      window.open(`https://wa.me/${currentWA}?text=${waMsg}`, '_blank');
 
       submitBtn.textContent = '✅ Terkirim! Terima kasih';
       setTimeout(() => {
@@ -1136,6 +1289,10 @@ Mohon info lebih lanjut mengenai paket tersebut. Terima kasih! 🙏`
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeDownloadModal();
     });
+
+    // Run initial swiper and load dynamic CMS content
+    initSwiper();
+    loadDynamicContent();
   </script>
 
 </body>
