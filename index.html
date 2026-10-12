@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bali Little Explorer – Paket wisata edu-tourism ramah anak usia dini (3–7 tahun) bersama Bali Top Holiday. Rute aman, Activity Kit gratis, panduan parenting selama perjalanan." />
+  <meta name="keywords" content="wisata edukasi anak Bali, family tour Bali, edu-tourism Bali, Bali Little Explorer, paket wisata balita Bali" />
+  <title>Bali Little Explorer 🌴 – Edu-Tourism Hub Ramah Anak | Bali Top Holiday</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary:   { DEFAULT: '#FF6B35', light: '#FF8C5A', dark: '#E05020' },
+            secondary: { DEFAULT: '#FFD166', light: '#FFE499' },
+            teal:      { DEFAULT: '#06D6A0', dark: '#04B882' },
+            indigo:    { DEFAULT: '#4361EE' },
+            cream:     { DEFAULT: '#FFF8F0' },
+          },
+          fontFamily: {
+            nunito: ['Nunito', 'sans-serif'],
+            baloo:  ['Baloo 2', 'cursive'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    * { font-family: 'Nunito', sans-serif; }
+    h1,h2,h3,.font-baloo { font-family: 'Baloo 2', cursive; }
+
+    /* === Gradient Hero === */
+    .hero-gradient {
+      background: linear-gradient(135deg, #FF6B35 0%, #FFD166 50%, #06D6A0 100%);
+    }
+    .hero-overlay {
+      background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.05) 100%);
+    }
+
+    /* === Wave Divider === */
+    .wave-bottom { margin-bottom: -2px; }
+
+    /* === Floating WA Button === */
+    #wa-float {
+      position: fixed; bottom: 24px; right: 24px;
+      z-index: 9999;
+      animation: bounce-wa 2s infinite;
+    }
+    @keyframes bounce-wa {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-8px); }
+    }
+
+    /* === Activity Kit Cards === */
+    .kit-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(255,107,53,.25); }
+    .kit-card { transition: all .3s ease; }
+
+    /* === Timeline === */
+    .timeline-item::before {
+      content: '';
+      position: absolute; left: -9px; top: 50%;
+      transform: translateY(-50%);
+      width: 18px; height: 18px;
+      background: #FF6B35; border-radius: 50%;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 3px #FF6B35;
+    }
+
+    /* === Scroll Smooth === */
+    html { scroll-behavior: smooth; }
+
+    /* === Navbar scroll === */
+    #navbar { transition: all 0.3s ease; }
+    #navbar.scrolled {
+      background: rgba(255,255,255,0.97);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.12);
+    }
+
+    /* === Swiper custom === */
+    .swiper-pagination-bullet-active { background: #FF6B35 !important; }
+
+    /* === Section bg pattern === */
+    .bg-pattern {
+      background-color: #FFF8F0;
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FF6B35' fill-opacity='0.05'%3E%3Ccircle cx='20' cy='20' r='4'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* === Modal === */
+    .modal-overlay { 
+      backdrop-filter: blur(4px);
+      animation: fadeIn .25s ease;
+    }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+    /* === Pulse dot KPI === */
+    .pulse-dot {
+      animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    }
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(6,214,160,0.5); }
+      70%  { box-shadow: 0 0 0 12px rgba(6,214,160,0); }
+      100% { box-shadow: 0 0 0 0 rgba(6,214,160,0); }
+    }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background:#f1f1f1; }
+    ::-webkit-scrollbar-thumb { background:#FF6B35; border-radius:4px; }
+  </style>
+</head>
+<body class="bg-white text-gray-800 overflow-x-hidden">
+
+  <!-- ====================== NAVBAR ====================== -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-3 px-4 md:px-8">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#hero" class="flex items-center gap-2">
+        <span class="text-2xl">🌴</span>
+        <div class="leading-tight">
+          <p class="font-baloo font-bold text-white text-lg leading-none drop-shadow" id="logo-title">Bali Little Explorer</p>
+          <p class="text-white/80 text-xs drop-shadow" id="logo-sub">by Bali Top Holiday</p>
+        </div>
+      </a>
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-6 text-sm font-semibold">
+        <a href="#paket" class="text-white hover:text-secondary transition" id="nav-link">Paket Wisata</a>
+        <a href="#activity-kit" class="text-white hover:text-secondary transition" id="nav-link">Activity Kit</a>
+        <a href="#parenting-tips" class="text-white hover:text-secondary transition" id="nav-link">Parenting Tips</a>
+        <a href="#reservasi" class="text-white hover:text-secondary transition" id="nav-link">Reservasi</a>
+        <a href="#reservasi"
+           class="bg-primary text-white px-5 py-2 rounded-full hover:bg-primary-dark transition shadow-lg">
+           Tanya Via WA 💬
+        </a>
+      </div>
+      <!-- Mobile Hamburger -->
+      <button id="menu-btn" class="md:hidden text-white text-2xl focus:outline-none">☰</button>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white rounded-2xl mt-3 mx-2 shadow-2xl p-4 flex flex-col gap-3 text-sm font-semibold">
+      <a href="#paket" class="text-gray-700 hover:text-primary py-2 border-b" onclick="closeMobileMenu()">🗺️ Paket Wisata</a>
+      <a href="#activity-kit" class="text-gray-700 hover:text-primary py-2 border-b" onclick="closeMobileMenu()">📚 Activity Kit</a>
+      <a href="#parenting-tips" class="text-gray-700 hover:text-primary py-2 border-b" onclick="closeMobileMenu()">💡 Parenting Tips</a>
+      <a href="#reservasi" class="text-gray-700 hover:text-primary py-2" onclick="closeMobileMenu()">📅 Reservasi</a>
+      <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20ingin%20tanya%20paket%20Bali%20Little%20Explorer!" 
+         target="_blank"
+         class="bg-green-500 text-white text-center py-2.5 rounded-xl font-bold shadow">
+         💬 Chat WhatsApp Admin
+      </a>
+    </div>
+  </nav>
+
+  <!-- ====================== HERO ====================== -->
+  <section id="hero" class="hero-gradient min-h-screen flex items-center relative overflow-hidden">
+    <div class="hero-overlay absolute inset-0"></div>
+
+    <!-- Decorative circles -->
+    <div class="absolute top-20 right-10 w-72 h-72 bg-white/10 rounded-full blur-2xl"></div>
+    <div class="absolute bottom-20 left-10 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/3 left-1/2 w-48 h-48 bg-secondary/20 rounded-full blur-xl -translate-x-1/2"></div>
+
+    <div class="relative max-w-6xl mx-auto px-6 py-32 md:py-40 w-full">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <!-- Text -->
+        <div>
+          <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6 border border-white/30" data-aos="fade-right">
+            <span class="pulse-dot w-2 h-2 bg-teal rounded-full inline-block"></span>
+            Edu-Tourism Ramah Anak Usia 3–7 Tahun
+          </div>
+          <h1 class="font-baloo font-extrabold text-5xl md:text-6xl text-white leading-tight mb-4 drop-shadow-lg" data-aos="fade-right" data-aos-delay="100">
+            Liburan Bali<br/>
+            <span class="text-secondary">Seru & Edukatif</span><br/>
+            untuk Si Kecil! 🌺
+          </h1>
+          <p class="text-white/90 text-lg mb-8 leading-relaxed max-w-lg" data-aos="fade-right" data-aos-delay="200">
+            Paket wisata <strong>Bali Little Explorer</strong> dirancang khusus untuk keluarga dengan balita & anak usia dini — rute ramah anak, Activity Kit gratis, dan panduan parenting perjalanan.
+          </p>
+          <div class="flex flex-wrap gap-4" data-aos="fade-right" data-aos-delay="300">
+            <a href="#paket"
+               class="bg-white text-primary font-bold px-8 py-4 rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 text-base">
+               🗺️ Lihat Paket Wisata
+            </a>
+            <a href="#activity-kit"
+               class="bg-transparent border-2 border-white text-white font-bold px-8 py-4 rounded-full hover:bg-white/20 transition-all duration-300 text-base">
+               📥 Unduh Activity Kit Gratis
+            </a>
+          </div>
+
+          <!-- Stats -->
+          <div class="grid grid-cols-3 gap-4 mt-10" data-aos="fade-up" data-aos-delay="400">
+            <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-center border border-white/30">
+              <p class="font-baloo font-black text-3xl text-white">15+</p>
+              <p class="text-white/80 text-xs mt-1">Activity Kit PDF</p>
+            </div>
+            <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-center border border-white/30">
+              <p class="font-baloo font-black text-3xl text-white">3+</p>
+              <p class="text-white/80 text-xs mt-1">Paket Rute Edu</p>
+            </div>
+            <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-center border border-white/30">
+              <p class="font-baloo font-black text-3xl text-white">100%</p>
+              <p class="text-white/80 text-xs mt-1">Ramah Balita</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Illustration / Right side -->
+        <div class="hidden md:flex justify-center items-center" data-aos="zoom-in" data-aos-delay="200">
+          <div class="relative w-full max-w-md">
+            <!-- Main card -->
+            <div class="bg-white rounded-3xl p-6 shadow-2xl">
+              <div class="bg-gradient-to-br from-orange-100 to-yellow-50 rounded-2xl h-56 flex items-center justify-center mb-4 text-8xl relative overflow-hidden">
+                <div class="absolute top-3 left-3 text-4xl opacity-40">🌺</div>
+                <div class="absolute top-3 right-3 text-3xl opacity-40">🦜</div>
+                <div class="absolute bottom-3 left-8 text-3xl opacity-40">🌿</div>
+                <span class="text-9xl">👨‍👩‍👧‍👦</span>
+              </div>
+              <h3 class="font-baloo font-bold text-gray-800 text-xl mb-2">Paket Bali Little Explorer</h3>
+              <p class="text-gray-500 text-sm mb-4">Rute wisata 1 hari penuh ramah anak, edukatif & menyenangkan!</p>
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-xs text-gray-400">Mulai dari</p>
+                  <p class="font-baloo font-black text-2xl text-primary">Hubungi Kami</p>
+                </div>
+                <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20ingin%20tanya%20paket%20Bali%20Little%20Explorer!"
+                   target="_blank"
+                   class="bg-green-500 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow hover:bg-green-600 transition">
+                   💬 Tanya WA
+                </a>
+              </div>
+            </div>
+            <!-- Floating badges -->
+            <div class="absolute -top-4 -right-4 bg-secondary text-gray-800 font-bold text-xs px-3 py-2 rounded-xl shadow-lg rotate-6">
+              ✨ Edu-Tourism
+            </div>
+            <div class="absolute -bottom-4 -left-4 bg-teal text-white font-bold text-xs px-3 py-2 rounded-xl shadow-lg -rotate-3">
+              🎨 Activity Kit Gratis!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wave Bottom -->
+    <div class="wave-bottom absolute bottom-0 left-0 right-0">
+      <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="white"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ====================== TENTANG ====================== -->
+  <section id="tentang" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14" data-aos="fade-up">
+        <span class="bg-orange-100 text-primary font-bold text-sm px-4 py-1.5 rounded-full">Tentang Program</span>
+        <h2 class="font-baloo font-bold text-4xl text-gray-800 mt-4 mb-3">Mengapa <span class="text-primary">Bali Little Explorer</span>?</h2>
+        <p class="text-gray-500 max-w-2xl mx-auto">Kolaborasi lintas ilmu: Pariwisata, PG PAUD, dan Sistem Informasi untuk menghadirkan pengalaman wisata terbaik bagi keluarga Anda.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Card 1 -->
+        <div class="bg-gradient-to-br from-orange-50 to-orange-100/50 rounded-3xl p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-orange-100" data-aos="fade-up" data-aos-delay="0">
+          <div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-5 text-4xl">🗺️</div>
+          <h3 class="font-baloo font-bold text-xl text-gray-800 mb-3">Rute Wisata Terstruktur</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Itinerary ramah anak dengan estimasi waktu, jarak, dan jeda istirahat yang telah dirancang oleh tim pariwisata profesional.</p>
+
+        </div>
+        <!-- Card 2 -->
+        <div class="bg-gradient-to-br from-teal-50 to-teal-100/50 rounded-3xl p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-teal-100" data-aos="fade-up" data-aos-delay="100">
+          <div class="w-20 h-20 bg-teal/10 rounded-2xl flex items-center justify-center mx-auto mb-5 text-4xl">🎨</div>
+          <h3 class="font-baloo font-bold text-xl text-gray-800 mb-3">Activity Kit Edukatif</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">15+ lembar mewarnai, teka-teki visual, dan latihan motorik halus berbasis budaya Bali untuk menjaga anak tetap aktif & gembira.</p>
+
+        </div>
+        <!-- Card 3 -->
+        <div class="bg-gradient-to-br from-indigo-50 to-indigo-100/50 rounded-3xl p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-indigo-100" data-aos="fade-up" data-aos-delay="200">
+          <div class="w-20 h-20 bg-indigo/10 rounded-2xl flex items-center justify-center mx-auto mb-5 text-4xl">📱</div>
+          <h3 class="font-baloo font-bold text-xl text-gray-800 mb-3">Reservasi Mudah & Cepat</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Platform digital mobile-first yang terhubung langsung ke admin Bali Top Holiday via WhatsApp & formulir online kapanpun Anda butuhkan.</p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== PAKET WISATA ====================== -->
+  <section id="paket" class="py-20 bg-pattern">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14" data-aos="fade-up">
+        <span class="bg-orange-100 text-primary font-bold text-sm px-4 py-1.5 rounded-full">Katalog Paket</span>
+        <h2 class="font-baloo font-bold text-4xl text-gray-800 mt-4 mb-3">Paket <span class="text-primary">Bali Little Explorer</span></h2>
+        <p class="text-gray-500 max-w-2xl mx-auto">Rute perjalanan edukatif yang aman, menyenangkan, dan tidak melelahkan si kecil.</p>
+      </div>
+
+      <!-- Package Cards -->
+      <div class="grid md:grid-cols-3 gap-8 mb-16">
+        <!-- Paket 1 -->
+        <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2" data-aos="fade-up" data-aos-delay="0">
+          <div class="bg-gradient-to-br from-orange-400 to-orange-600 p-8 text-white text-center relative">
+            <div class="text-6xl mb-3">🎭</div>
+            <h3 class="font-baloo font-bold text-2xl">Seni & Budaya Bali</h3>
+            <p class="text-white/80 text-sm mt-1">Half Day · 4–5 Jam</p>
+            <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded-lg">POPULER ⭐</div>
+          </div>
+          <div class="p-6">
+            <div class="space-y-3 mb-6">
+              <div class="flex items-start gap-3 text-sm text-gray-600">
+                <span class="text-primary mt-0.5">📍</span>
+                <div><strong class="text-gray-800">Ubud Art Village</strong><br/>Pengenalan seni ukir & tari Bali (40 menit)</div>
+              </div>
+              <div class="flex items-start gap-3 text-sm text-gray-600">
+                <span class="text-teal mt-0.5">☕</span>
+                <div><strong class="text-gray-800">Jeda Snack Ramah Anak</strong><br/>Istirahat 20 menit, area bermain tersedia</div>
+              </div>
+              <div class="flex items-start gap-3 text-sm text-gray-600">
+                <span class="text-primary mt-0.5">📍</span>
+                <div><strong class="text-gray-800">Museum Anak Bali</strong><br/>Interaktif & edukatif untuk usia 3–7 tahun</div>
+              </div>
+              <div class="flex items-start gap-3 text-sm text-gray-600">
+                <span class="text-primary mt-0.5">📍</span>
+                <div><strong class="text-gray-800">Pura Taman Saraswati</strong><br/>Pengenalan budaya Hindu Bali</div>
+              </div>
+            </div>
+            <div class="bg-orange-50 rounded-2xl p-4 mb-5">
+              <p class="text-xs text-gray-500 mb-1">🎁 Include:</p>
+              <p class="text-xs text-gray-700 font-semibold">Activity Kit PDF · Storytelling Guide · Driver Terlatih</p>
+            </div>
+            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20tertarik%20Paket%20Seni%20%26%20Budaya%20Bali%20untuk%20anak%20saya!"
+               target="_blank"
+               class="block text-center bg-primary text-white py-3 rounded-2xl font-bold hover:bg-primary-dark transition shadow-md">
+               💬 Tanya Paket Ini
+            </a>
+          </div>
+        </div>
+
+        <!-- Paket 2 - Featured -->
+        <div class="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 ring-2 ring-primary" data-aos="fade-up" data-aos-delay="100">
+          <div class="bg-gradient-to-br from-primary via-orange-500 to-secondary p-8 text-white text-center relative">
+            <div class="text-6xl mb-3">🌿</div>
+            <h3 class="font-baloo font-bold text-2xl">Alam & Flora Fauna</h3>
+            <p class="text-white/80 text-sm mt-1">Full Day · 7–8 Jam</p>
+            <div class="absolute top-4 right-4 bg-secondary text-gray-800 text-xs font-bold px-2 py-1 rounded-lg">TERLARIS 🏆</div>
+          </div>
+          <div class="p-6">
+            <div class="space-y-3 mb-6">
+              <div class="flex items-start gap-3 text-sm text-gray-600">
+                <span class="text-primary mt-0.5">📍</span>
+                <div><strong class="text-gray-800">Bali Zoo / Bali Bird Park</strong><br/>Pengenalan fauna tropis Bali (60 menit)</div>
+              </div>
+              <div class="flex items-start gap-3 text-sm text-gray-600">
+                <span class="text-teal mt-0.5">🍱</span>
+                <div><strong class="text-gray-800">Makan Siang Keluarga</strong><br/>Restoran baby-friendly, menu anak tersedia</div>
+              </div>
+              <div class="flex items-start gap-3 text-sm text-gray-600">
+                <span class="text-primary mt-0.5">📍</span>
+                <div><strong class="text-gray-800">Kebun Raya Bali</strong><br/>Mengenal flora endemik Bali (45 menit)</div>
+              </div>
+              <div class="flex items-start gap-3 text-sm text-gray-600">
+                <span class="text-primary mt-0.5">📍</span>
+                <div><strong class="text-gray-800">Subak Jatiluwih</strong><br/>Sawah UNESCO, pengenalan pertanian</div>
+              </div>
+            </div>
+            <div class="bg-orange-50 rounded-2xl p-4 mb-5">
+              <p class="text-xs text-gray-500 mb-1">🎁 Include:</p>
+              <p class="text-xs text-gray-700 font-semibold">Activity Kit PDF · Family Travel Guide · Makan Siang · Driver Terlatih</p>
+            </div>
+            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20tertarik%20Paket%20Alam%20%26%20Flora%20Fauna%20Full%20Day%20untuk%20keluarga%20saya!"
+               target="_blank"
+               class="block text-center bg-primary text-white py-3 rounded-2xl font-bold hover:bg-primary-dark transition shadow-md">
+               💬 Tanya Paket Ini
+            </a>
+          </div>
+        </div>
+
+        <!-- Paket 3 -->
+        <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2" data-aos="fade-up" data-aos-delay="200">
+          <div class="bg-gradient-to-br from-teal to-emerald-500 p-8 text-white text-center relative">
+            <div class="text-6xl mb-3">🏖️</div>
+            <h3 class="font-baloo font-bold text-2xl">Pantai & Spiritualitas</h3>
+            <p class="text-white/80 text-sm mt-1">Full Day · 7–8 Jam</p>
+            <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded-lg">SERU 🌊</div>
+          </div>
+          <div class="p-6">
+            <div class="space-y-3 mb-6">
+              <div class="flex items-start gap-3 text-sm text-gray-600">
+                <span class="text-primary mt-0.5">📍</span>
+                <div><strong class="text-gray-800">Tanah Lot Temple</strong><br/>Pura ikonik Bali, pengenalan budaya (45 mnt)</div>
+              </div>
+              <div class="flex items-start gap-3 text-sm text-gray-600">
+                <span class="text-teal mt-0.5">☕</span>
+                <div><strong class="text-gray-800">Jeda Bermain Pasir</strong><br/>Area bermain pantai aman untuk balita</div>
+              </div>
+              <div class="flex items-start gap-3 text-sm text-gray-600">
+                <span class="text-primary mt-0.5">📍</span>
+                <div><strong class="text-gray-800">Pantai Kedungu</strong><br/>Pantai tenang, aman untuk anak kecil</div>
+              </div>
+              <div class="flex items-start gap-3 text-sm text-gray-600">
+                <span class="text-primary mt-0.5">📍</span>
+                <div><strong class="text-gray-800">Desa Seni Singapadu</strong><br/>Workshop mewarnai topeng Bali untuk anak</div>
+              </div>
+            </div>
+            <div class="bg-teal/10 rounded-2xl p-4 mb-5">
+              <p class="text-xs text-gray-500 mb-1">🎁 Include:</p>
+              <p class="text-xs text-gray-700 font-semibold">Activity Kit PDF · Workshop Mewarnai · Driver Terlatih</p>
+            </div>
+            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20tertarik%20Paket%20Pantai%20%26%20Spiritualitas%20untuk%20keluarga%20saya!"
+               target="_blank"
+               class="block text-center bg-teal text-white py-3 rounded-2xl font-bold hover:bg-teal-dark transition shadow-md">
+               💬 Tanya Paket Ini
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Storytelling Banner -->
+      <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-3xl p-8 md:p-12 text-white flex flex-col md:flex-row items-center gap-8" data-aos="fade-up">
+        <div class="text-7xl shrink-0">📖</div>
+        <div>
+          <h3 class="font-baloo font-bold text-2xl md:text-3xl mb-3">Storytelling Budaya Bali 🌺</h3>
+          <p class="text-white/85 text-base leading-relaxed mb-4">
+            Setiap rute dilengkapi dengan <strong>cerita edukasi budaya Bali</strong> yang bisa dibacakan orang tua atau pemandu selama kunjungan — dari pengenalan tari Kecak, flora endemik, hingga cerita rakyat Bali yang menarik untuk anak.
+          </p>
+          <a href="#download-guide" 
+             class="inline-flex items-center gap-2 bg-white text-indigo-600 font-bold px-6 py-3 rounded-xl hover:shadow-xl transition">
+             📥 Download Family Travel Guide
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== ACTIVITY KIT ====================== -->
+  <section id="activity-kit" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14" data-aos="fade-up">
+        <span class="bg-teal/20 text-teal-dark font-bold text-sm px-4 py-1.5 rounded-full">Digital Kids Activity Kit</span>
+        <h2 class="font-baloo font-bold text-4xl text-gray-800 mt-4 mb-3">🎨 Activity Kit <span class="text-teal">Gratis untuk Si Kecil!</span></h2>
+        <p class="text-gray-500 max-w-2xl mx-auto">15+ lembar aktivitas edukatif siap cetak (PDF) yang dirancang tim PG PAUD — agar anak tetap senang & belajar selama perjalanan.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <!-- Kit 1 -->
+        <div class="kit-card bg-gradient-to-br from-orange-50 to-orange-100 rounded-3xl p-6 text-center border border-orange-100 cursor-pointer" data-aos="fade-up" data-aos-delay="0" onclick="openDownloadModal('Lembar Mewarnai Ikon Bali','Lembar mewarnai ikon wisata & seni Bali yang indah — berisi gambar Pura, tari Bali, barong, dan bunga Jepun untuk diwarnai si kecil.','🎨')">
+          <div class="text-5xl mb-4">🎨</div>
+          <h4 class="font-baloo font-bold text-gray-800 text-base mb-2">Lembar Mewarnai Bali</h4>
+          <p class="text-xs text-gray-500 mb-4">Ikon wisata & seni Bali. Pura, tari, barong, & bunga Jepun.</p>
+          <div class="text-xs bg-orange-200 text-orange-800 font-bold px-3 py-1.5 rounded-full inline-flex items-center gap-1">
+            <span>📄</span> 5 Lembar PDF
+          </div>
+        </div>
+        <!-- Kit 2 -->
+        <div class="kit-card bg-gradient-to-br from-teal-50 to-teal-100 rounded-3xl p-6 text-center border border-teal-100 cursor-pointer" data-aos="fade-up" data-aos-delay="100" onclick="openDownloadModal('Teka-Teki Visual Bali','Teka-teki gambar & pengenalan flora-fauna endemik Bali — cocok untuk melatih daya ingat dan pengenalan alam anak usia 3-7 tahun.','🧩')">
+          <div class="text-5xl mb-4">🧩</div>
+          <h4 class="font-baloo font-bold text-gray-800 text-base mb-2">Teka-Teki Visual</h4>
+          <p class="text-xs text-gray-500 mb-4">Pengenalan flora-fauna Bali. Seru & melatih daya ingat anak.</p>
+          <div class="text-xs bg-teal/20 text-teal-dark font-bold px-3 py-1.5 rounded-full inline-flex items-center gap-1">
+            <span>📄</span> 4 Lembar PDF
+          </div>
+        </div>
+        <!-- Kit 3 -->
+        <div class="kit-card bg-gradient-to-br from-purple-50 to-purple-100 rounded-3xl p-6 text-center border border-purple-100 cursor-pointer" data-aos="fade-up" data-aos-delay="200" onclick="openDownloadModal('Latihan Motorik Halus','Aktivitas latihan sensorik-motorik halus untuk anak usia dini — menggunting, menempel, menebalkan garis, dan aktivitas jari lainnya.','✂️')">
+          <div class="text-5xl mb-4">✂️</div>
+          <h4 class="font-baloo font-bold text-gray-800 text-base mb-2">Motorik Halus</h4>
+          <p class="text-xs text-gray-500 mb-4">Latihan sensorik-motorik: menggunting, menempel, & menebalkan.</p>
+          <div class="text-xs bg-purple-200 text-purple-800 font-bold px-3 py-1.5 rounded-full inline-flex items-center gap-1">
+            <span>📄</span> 3 Lembar PDF
+          </div>
+        </div>
+        <!-- Kit 4 -->
+        <div class="kit-card bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-3xl p-6 text-center border border-yellow-100 cursor-pointer" data-aos="fade-up" data-aos-delay="300" onclick="openDownloadModal('Maze & Puzzle Bali','Maze perjalanan wisata & puzzle pengenalan budaya Bali — melatih konsentrasi dan kemampuan berpikir logis anak usia dini.','🔮')">
+          <div class="text-5xl mb-4">🔮</div>
+          <h4 class="font-baloo font-bold text-gray-800 text-base mb-2">Maze & Puzzle Bali</h4>
+          <p class="text-xs text-gray-500 mb-4">Maze perjalanan wisata & puzzle pengenalan budaya Bali.</p>
+          <div class="text-xs bg-yellow-200 text-yellow-800 font-bold px-3 py-1.5 rounded-full inline-flex items-center gap-1">
+            <span>📄</span> 3 Lembar PDF
+          </div>
+        </div>
+      </div>
+
+      <!-- Download All CTA -->
+      <div class="bg-gradient-to-r from-teal to-emerald-500 rounded-3xl p-8 text-center text-white" id="download-guide" data-aos="zoom-in">
+        <div class="text-6xl mb-4">📦</div>
+        <h3 class="font-baloo font-bold text-3xl mb-3">Unduh Semua Activity Kit + Family Travel Guide</h3>
+        <p class="text-white/85 max-w-xl mx-auto mb-6">Gratis! Dapatkan 15+ lembar aktivitas anak (PDF siap cetak) + e-book Family Travel Guide Bali sekarang juga.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <button onclick="openDownloadModal('Complete Activity Kit Bundle','Bundle lengkap 15+ lembar aktivitas anak + Family Travel Guide dalam 1 file ZIP. Siap cetak & digunakan selama perjalanan!','📦')"
+             class="bg-white text-teal-dark font-bold px-8 py-4 rounded-2xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-base">
+             📥 Unduh Activity Kit Gratis
+          </button>
+          <button onclick="openDownloadModal('Family Travel Guide PDF','Panduan lengkap bagi orang tua: daftar perlengkapan anak, rekomendasi fasilitas ramah bayi di destinasi Bali, dan standar keselamatan perjalanan.','📚')"
+             class="bg-white/20 border-2 border-white text-white font-bold px-8 py-4 rounded-2xl hover:bg-white/30 transition text-base">
+             📚 Family Travel Guide
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== ITINERARY TIMELINE ====================== -->
+  <section id="itinerary" class="py-20 bg-gradient-to-br from-orange-50 to-yellow-50">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-14" data-aos="fade-up">
+        <span class="bg-primary/10 text-primary font-bold text-sm px-4 py-1.5 rounded-full">Contoh Itinerary</span>
+        <h2 class="font-baloo font-bold text-4xl text-gray-800 mt-4 mb-3">Perjalanan <span class="text-primary">Sehari Penuh</span> Ramah Anak</h2>
+        <p class="text-gray-500">Contoh susunan perjalanan Paket Alam & Flora Fauna — termasuk jeda istirahat yang cukup untuk balita.</p>
+      </div>
+
+      <div class="relative">
+        <!-- Timeline line -->
+        <div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-primary/20 -translate-x-1/2"></div>
+
+        <div class="space-y-8">
+          <!-- Stop 1 -->
+          <div class="relative flex flex-col md:flex-row items-start md:items-center gap-4" data-aos="fade-right">
+            <div class="md:w-1/2 md:pr-12 md:text-right order-2 md:order-1">
+              <div class="bg-white rounded-2xl p-5 shadow-md border border-orange-100">
+                <p class="text-xs text-primary font-bold mb-1">07.00 – 08.00 WITA</p>
+                <h4 class="font-baloo font-bold text-gray-800 text-lg">🚌 Jemput dari Hotel</h4>
+                <p class="text-xs text-gray-500 mt-1">Driver terlatih menjemput dari hotel. Buku cerita & Activity Kit dibagikan di kendaraan.</p>
+              </div>
+            </div>
+            <div class="relative z-10 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold shrink-0 shadow-lg md:order-2">1</div>
+            <div class="md:w-1/2 md:pl-12 md:order-3 hidden md:block"></div>
+          </div>
+
+          <!-- Stop 2 -->
+          <div class="relative flex flex-col md:flex-row items-start md:items-center gap-4" data-aos="fade-left">
+            <div class="md:w-1/2 md:pr-12 hidden md:block md:order-1"></div>
+            <div class="relative z-10 w-12 h-12 bg-teal rounded-full flex items-center justify-center text-white font-bold shrink-0 shadow-lg md:order-2">2</div>
+            <div class="md:w-1/2 md:pl-12 md:order-3">
+              <div class="bg-white rounded-2xl p-5 shadow-md border border-teal-100">
+                <p class="text-xs text-teal-dark font-bold mb-1">08.30 – 10.00 WITA</p>
+                <h4 class="font-baloo font-bold text-gray-800 text-lg">🦜 Bali Bird Park</h4>
+                <p class="text-xs text-gray-500 mt-1">Pengenalan fauna tropis. Pemandu bercerita tentang burung endemik Bali. Activity Kit: lembar menggambar burung.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stop 3 - Break -->
+          <div class="relative flex flex-col md:flex-row items-start md:items-center gap-4" data-aos="fade-right">
+            <div class="md:w-1/2 md:pr-12 md:text-right md:order-1">
+              <div class="bg-secondary/30 rounded-2xl p-5 shadow-md border border-yellow-200">
+                <p class="text-xs text-yellow-700 font-bold mb-1">10.00 – 10.30 WITA</p>
+                <h4 class="font-baloo font-bold text-gray-800 text-lg">☕ Jeda Snack & Istirahat</h4>
+                <p class="text-xs text-gray-500 mt-1">Area bermain tersedia. Anak dapat bermain bebas sambil orang tua beristirahat sejenak.</p>
+              </div>
+            </div>
+            <div class="relative z-10 w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-gray-700 font-bold shrink-0 shadow-lg md:order-2">☕</div>
+            <div class="md:w-1/2 md:pl-12 md:order-3 hidden md:block"></div>
+          </div>
+
+          <!-- Stop 4 -->
+          <div class="relative flex flex-col md:flex-row items-start md:items-center gap-4" data-aos="fade-left">
+            <div class="md:w-1/2 md:pr-12 hidden md:block md:order-1"></div>
+            <div class="relative z-10 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold shrink-0 shadow-lg md:order-2">3</div>
+            <div class="md:w-1/2 md:pl-12 md:order-3">
+              <div class="bg-white rounded-2xl p-5 shadow-md border border-orange-100">
+                <p class="text-xs text-primary font-bold mb-1">10.30 – 12.00 WITA</p>
+                <h4 class="font-baloo font-bold text-gray-800 text-lg">🌿 Kebun Raya Bali</h4>
+                <p class="text-xs text-gray-500 mt-1">Jalan-jalan ringan. Pengenalan 5 tanaman endemik Bali. Activity Kit: teka-teki flora Bali.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lunch -->
+          <div class="relative flex flex-col md:flex-row items-start md:items-center gap-4" data-aos="fade-right">
+            <div class="md:w-1/2 md:pr-12 md:text-right md:order-1">
+              <div class="bg-green-50 rounded-2xl p-5 shadow-md border border-green-100">
+                <p class="text-xs text-green-700 font-bold mb-1">12.00 – 13.00 WITA</p>
+                <h4 class="font-baloo font-bold text-gray-800 text-lg">🍱 Makan Siang Bersama</h4>
+                <p class="text-xs text-gray-500 mt-1">Restoran baby-friendly dengan menu anak. Waktu istirahat siang & nap time jika diperlukan.</p>
+              </div>
+            </div>
+            <div class="relative z-10 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold shrink-0 shadow-lg md:order-2">🍱</div>
+            <div class="md:w-1/2 md:pl-12 md:order-3 hidden md:block"></div>
+          </div>
+
+          <!-- Stop 5 -->
+          <div class="relative flex flex-col md:flex-row items-start md:items-center gap-4" data-aos="fade-left">
+            <div class="md:w-1/2 md:pr-12 hidden md:block md:order-1"></div>
+            <div class="relative z-10 w-12 h-12 bg-teal rounded-full flex items-center justify-center text-white font-bold shrink-0 shadow-lg md:order-2">4</div>
+            <div class="md:w-1/2 md:pl-12 md:order-3">
+              <div class="bg-white rounded-2xl p-5 shadow-md border border-teal-100">
+                <p class="text-xs text-teal-dark font-bold mb-1">13.30 – 15.00 WITA</p>
+                <h4 class="font-baloo font-bold text-gray-800 text-lg">🌾 Sawah Jatiluwih (UNESCO)</h4>
+                <p class="text-xs text-gray-500 mt-1">Pengenalan sistem Subak & pertanian tradisional Bali. Foto keluarga di terasering iconic.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- End -->
+          <div class="relative flex flex-col md:flex-row items-start md:items-center gap-4" data-aos="fade-right">
+            <div class="md:w-1/2 md:pr-12 md:text-right md:order-1">
+              <div class="bg-primary/10 rounded-2xl p-5 shadow-md border border-orange-100">
+                <p class="text-xs text-primary font-bold mb-1">15.00 – 16.30 WITA</p>
+                <h4 class="font-baloo font-bold text-gray-800 text-lg">🏨 Kembali ke Hotel</h4>
+                <p class="text-xs text-gray-500 mt-1">Perjalanan pulang santai. Driver siap mengantar. Foto kenangan perjalanan dibagikan via WA.</p>
+              </div>
+            </div>
+            <div class="relative z-10 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold shrink-0 shadow-lg md:order-2">🏁</div>
+            <div class="md:w-1/2 md:pl-12 md:order-3 hidden md:block"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== PARENTING TIPS ====================== -->
+  <section id="parenting-tips" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14" data-aos="fade-up">
+        <span class="bg-purple-100 text-purple-700 font-bold text-sm px-4 py-1.5 rounded-full">Parenting Guide</span>
+        <h2 class="font-baloo font-bold text-4xl text-gray-800 mt-4 mb-3">💡 Tips Parenting <span class="text-purple-600">Selama Perjalanan</span></h2>
+        <p class="text-gray-500 max-w-2xl mx-auto">Panduan psikologis singkat dari tim PG PAUD kami untuk orang tua & driver — cara mengatasi anak bosan atau tantrum di perjalanan.</p>
+      </div>
+
+      <!-- Swiper -->
+      <div class="swiper parentingSwiper" data-aos="fade-up">
+        <div class="swiper-wrapper pb-12">
+          <!-- Tip 1 -->
+          <div class="swiper-slide">
+            <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-8 md:p-10 h-full border border-purple-100">
+              <div class="text-5xl mb-5">😴</div>
+              <h3 class="font-baloo font-bold text-2xl text-gray-800 mb-4">Anak Mulai Rewel di Mobil?</h3>
+              <div class="space-y-3">
+                <div class="flex items-start gap-3">
+                  <span class="bg-purple-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">1</span>
+                  <p class="text-sm text-gray-600"><strong>Berikan activity kit</strong> — lembar mewarnai & teka-teki efektif mengalihkan perhatian anak selama 20–30 menit.</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span class="bg-purple-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">2</span>
+                  <p class="text-sm text-gray-600"><strong>Ceritakan perjalanan</strong> — gunakan storytelling guide untuk bercerita tentang destinasi berikutnya agar anak antusias.</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span class="bg-purple-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">3</span>
+                  <p class="text-sm text-gray-600"><strong>Minta driver berhenti sejenak</strong> — 5–10 menit istirahat untuk stretch dan bermain singkat sangat membantu.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Tip 2 -->
+          <div class="swiper-slide">
+            <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-3xl p-8 md:p-10 h-full border border-orange-100">
+              <div class="text-5xl mb-5">😤</div>
+              <h3 class="font-baloo font-bold text-2xl text-gray-800 mb-4">Menghadapi Tantrum di Destinasi</h3>
+              <div class="space-y-3">
+                <div class="flex items-start gap-3">
+                  <span class="bg-orange-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">1</span>
+                  <p class="text-sm text-gray-600"><strong>Tetap tenang & validasi perasaan</strong> — katakan "Mama tahu kamu capek. Yuk kita duduk sebentar dulu."</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span class="bg-orange-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">2</span>
+                  <p class="text-sm text-gray-600"><strong>Berikan pilihan</strong> — "Mau mewarnai dulu atau minum air dulu?" — anak merasa punya kontrol atas situasinya.</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span class="bg-orange-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">3</span>
+                  <p class="text-sm text-gray-600"><strong>Jeda 10 menit</strong> — alihkan ke lingkungan baru (cari pohon rindang, duduk di rumput) untuk reset suasana hati.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Tip 3 -->
+          <div class="swiper-slide">
+            <div class="bg-gradient-to-br from-teal-50 to-emerald-50 rounded-3xl p-8 md:p-10 h-full border border-teal-100">
+              <div class="text-5xl mb-5">🌡️</div>
+              <h3 class="font-baloo font-bold text-2xl text-gray-800 mb-4">Persiapan Kesehatan & Keselamatan</h3>
+              <div class="space-y-3">
+                <div class="flex items-start gap-3">
+                  <span class="bg-teal text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">1</span>
+                  <p class="text-sm text-gray-600"><strong>Bawa snack bergizi</strong> — buah potong, biskuit, air putih. Hindari makanan berat yang memicu mabuk perjalanan.</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span class="bg-teal text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">2</span>
+                  <p class="text-sm text-gray-600"><strong>Tabir surya & topi</strong> — cuaca Bali panas. Aplikasikan sunscreen SPF 30+ untuk anak setiap 2 jam.</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span class="bg-teal text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">3</span>
+                  <p class="text-sm text-gray-600"><strong>P3K mini</strong> — plester, minyak angin, obat diare. Driver kami dilengkapi kotak P3K di setiap kendaraan.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Tip 4 -->
+          <div class="swiper-slide">
+            <div class="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-3xl p-8 md:p-10 h-full border border-indigo-100">
+              <div class="text-5xl mb-5">📚</div>
+              <h3 class="font-baloo font-bold text-2xl text-gray-800 mb-4">Maksimalkan Momen Belajar</h3>
+              <div class="space-y-3">
+                <div class="flex items-start gap-3">
+                  <span class="bg-indigo text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">1</span>
+                  <p class="text-sm text-gray-600"><strong>Ajak anak bercerita</strong> — tanya "Tadi di zoo kamu lihat binatang apa? Warnanya apa?" untuk memperkuat memori.</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span class="bg-indigo text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">2</span>
+                  <p class="text-sm text-gray-600"><strong>Foto bersama</strong> — dokumentasi perjalanan jadi bahan bercerita di rumah & memperkuat ingatan positif.</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span class="bg-indigo text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">3</span>
+                  <p class="text-sm text-gray-600"><strong>Lanjutkan di rumah</strong> — gunakan sisa Activity Kit sebagai kegiatan pasca-liburan untuk memperkuat pengalaman belajar.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== RESERVASI ====================== -->
+  <section id="reservasi" class="py-20 bg-gradient-to-br from-primary via-orange-500 to-secondary">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14" data-aos="fade-up">
+        <span class="bg-white/20 text-white font-bold text-sm px-4 py-1.5 rounded-full border border-white/30">Reservasi & Konsultasi</span>
+        <h2 class="font-baloo font-bold text-4xl text-white mt-4 mb-3">Siap Liburan Bareng <span class="text-secondary">Si Kecil?</span> 🌴</h2>
+        <p class="text-white/85 max-w-xl mx-auto">Isi formulir di bawah atau langsung chat admin Bali Top Holiday via WhatsApp. Konsultasi gratis!</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10 items-start">
+        <!-- Form -->
+        <div class="bg-white rounded-3xl p-8 shadow-2xl" data-aos="fade-right">
+          <h3 class="font-baloo font-bold text-2xl text-gray-800 mb-6">📋 Form Reservasi</h3>
+          <form id="reservation-form" class="space-y-4">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1">Nama Lengkap Orang Tua *</label>
+              <input type="text" id="form-name" placeholder="Contoh: Budi Santoso"
+                     class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition" required />
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">No. WhatsApp *</label>
+                <input type="tel" id="form-phone" placeholder="08xxxxxxxxxx"
+                       class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition" required />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Jumlah Anak</label>
+                <select id="form-kids" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition">
+                  <option>1 anak</option>
+                  <option>2 anak</option>
+                  <option>3 anak</option>
+                  <option>4+ anak</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1">Usia Anak</label>
+              <input type="text" id="form-age" placeholder="Contoh: 3 tahun, 5 tahun"
+                     class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition" />
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1">Paket yang Diminati *</label>
+              <select id="form-package" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition">
+                <option>Paket Seni & Budaya Bali (Half Day)</option>
+                <option>Paket Alam & Flora Fauna (Full Day)</option>
+                <option>Paket Pantai & Spiritualitas (Full Day)</option>
+                <option>Konsultasi Paket Custom</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1">Tanggal Rencana Perjalanan</label>
+              <input type="date" id="form-date"
+                     class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition" />
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1">Pesan / Pertanyaan Tambahan</label>
+              <textarea id="form-message" rows="3" placeholder="Ceritakan kebutuhan spesifik keluarga Anda..."
+                        class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition resize-none"></textarea>
+            </div>
+            <button type="submit"
+                    class="w-full bg-primary text-white py-4 rounded-2xl font-bold text-base hover:bg-primary-dark transition shadow-lg hover:shadow-xl">
+                    📤 Kirim via WhatsApp Admin
+            </button>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="space-y-6" data-aos="fade-left">
+          <!-- WA Direct -->
+          <div class="bg-white/15 backdrop-blur-sm border border-white/30 rounded-3xl p-6 text-white">
+            <h4 class="font-baloo font-bold text-xl mb-4">💬 Chat Langsung Admin</h4>
+            <p class="text-white/80 text-sm mb-5">Lebih cepat? Langsung chat admin Bali Top Holiday via WhatsApp sekarang!</p>
+            <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Bali%20Top%20Holiday%2C%20saya%20ingin%20konsultasi%20Paket%20Bali%20Little%20Explorer%20untuk%20keluarga%20saya.%20Bisa%20dibantu?"
+               target="_blank"
+               class="flex items-center gap-3 bg-green-500 text-white px-6 py-4 rounded-2xl font-bold hover:bg-green-600 transition shadow-lg">
+               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+               Tanya Paket Via WhatsApp
+            </a>
+          </div>
+
+          <!-- Info boxes -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-white/15 backdrop-blur-sm border border-white/30 rounded-2xl p-5 text-white text-center">
+              <div class="text-3xl mb-2">⚡</div>
+              <p class="font-bold text-sm">Respon Cepat</p>
+              <p class="text-white/70 text-xs mt-1">Reply dalam 1–2 jam di jam kerja</p>
+            </div>
+            <div class="bg-white/15 backdrop-blur-sm border border-white/30 rounded-2xl p-5 text-white text-center">
+              <div class="text-3xl mb-2">🆓</div>
+              <p class="font-bold text-sm">Konsultasi Gratis</p>
+              <p class="text-white/70 text-xs mt-1">Tanpa biaya, tanpa komitmen</p>
+            </div>
+            <div class="bg-white/15 backdrop-blur-sm border border-white/30 rounded-2xl p-5 text-white text-center">
+              <div class="text-3xl mb-2">🎨</div>
+              <p class="font-bold text-sm">Activity Kit Gratis</p>
+              <p class="text-white/70 text-xs mt-1">Termasuk dalam setiap paket</p>
+            </div>
+            <div class="bg-white/15 backdrop-blur-sm border border-white/30 rounded-2xl p-5 text-white text-center">
+              <div class="text-3xl mb-2">🚌</div>
+              <p class="font-bold text-sm">Driver Terlatih</p>
+              <p class="text-white/70 text-xs mt-1">Berpengalaman anak & keluarga</p>
+            </div>
+          </div>
+
+          <!-- Hours -->
+          <div class="bg-white/15 backdrop-blur-sm border border-white/30 rounded-2xl p-5 text-white">
+            <h4 class="font-bold mb-3">🕐 Jam Operasional</h4>
+            <div class="space-y-2 text-sm text-white/80">
+              <div class="flex justify-between"><span>Senin – Jumat</span><span class="font-semibold text-white">08.00 – 20.00 WITA</span></div>
+              <div class="flex justify-between"><span>Sabtu – Minggu</span><span class="font-semibold text-white">08.00 – 18.00 WITA</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== TESTIMONIALS ====================== -->
+  <section class="py-20 bg-cream">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14" data-aos="fade-up">
+        <span class="bg-yellow-100 text-yellow-700 font-bold text-sm px-4 py-1.5 rounded-full">Testimoni</span>
+        <h2 class="font-baloo font-bold text-4xl text-gray-800 mt-4 mb-3">Kata <span class="text-primary">Keluarga</span> Kami ❤️</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-3xl p-6 shadow-md hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="0">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-2xl">👩</div>
+            <div>
+              <p class="font-bold text-gray-800">Dewi R., Jakarta</p>
+              <div class="flex text-yellow-400 text-sm">⭐⭐⭐⭐⭐</div>
+            </div>
+          </div>
+          <p class="text-sm text-gray-600 leading-relaxed">"Anak saya yang 4 tahun biasanya susah diajak jalan jauh. Tapi dengan Activity Kit dari Bali Little Explorer, dia anteng banget di mobil! Mewarnai terus sepanjang jalan. Recommended banget!"</p>
+        </div>
+        <div class="bg-white rounded-3xl p-6 shadow-md hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 bg-teal/20 rounded-full flex items-center justify-center text-2xl">👨</div>
+            <div>
+              <p class="font-bold text-gray-800">Andi S., Surabaya</p>
+              <div class="flex text-yellow-400 text-sm">⭐⭐⭐⭐⭐</div>
+            </div>
+          </div>
+          <p class="text-sm text-gray-600 leading-relaxed">"Driver-nya sabar banget sama anak-anak kami. Itinerary-nya pas, nggak terlalu capek tapi tetap banyak yang dikunjungi. Anak pulang bawa cerita banyak tentang Bali. Terima kasih Bali Top Holiday!"</p>
+        </div>
+        <div class="bg-white rounded-3xl p-6 shadow-md hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-2xl">👩‍👧</div>
+            <div>
+              <p class="font-bold text-gray-800">Sari M., Bandung</p>
+              <div class="flex text-yellow-400 text-sm">⭐⭐⭐⭐⭐</div>
+            </div>
+          </div>
+          <p class="text-sm text-gray-600 leading-relaxed">"Family Travel Guide-nya sangat membantu! Saya jadi tahu fasilitas apa yang tersedia di setiap destinasi. Anak saya yang 3 tahun bisa tidur siang di mobil dengan nyaman. Paketnya worth it banget!"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== FOOTER ====================== -->
+  <footer class="bg-gray-900 text-white pt-16 pb-8">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-4 gap-8 mb-12">
+        <!-- Brand -->
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-3xl">🌴</span>
+            <div>
+              <p class="font-baloo font-bold text-xl text-white">Bali Little Explorer</p>
+              <p class="text-gray-400 text-xs">by Bali Top Holiday</p>
+            </div>
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4 max-w-xs">
+            Platform Edu-Tourism Hub untuk wisata keluarga ramah anak usia dini (3–7 tahun) di Bali. Dikembangkan oleh tim lintas prodi MK-PM Kelompok 1.
+          </p>
+          <div class="flex gap-3">
+            <a href="https://wa.me/6281234567890" target="_blank" class="w-10 h-10 bg-green-600 rounded-xl flex items-center justify-center hover:bg-green-500 transition text-lg">💬</a>
+            <a href="#" class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-500 transition text-lg">📘</a>
+            <a href="#" class="w-10 h-10 bg-pink-600 rounded-xl flex items-center justify-center hover:bg-pink-500 transition text-lg">📸</a>
+          </div>
+        </div>
+        <!-- Links -->
+        <div>
+          <h4 class="font-baloo font-bold text-lg mb-4 text-white">Menu</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#paket" class="hover:text-primary transition">🗺️ Paket Wisata</a></li>
+            <li><a href="#activity-kit" class="hover:text-primary transition">🎨 Activity Kit</a></li>
+            <li><a href="#itinerary" class="hover:text-primary transition">📅 Itinerary</a></li>
+            <li><a href="#parenting-tips" class="hover:text-primary transition">💡 Parenting Tips</a></li>
+            <li><a href="#reservasi" class="hover:text-primary transition">📋 Reservasi</a></li>
+          </ul>
+        </div>
+        <!-- Download -->
+        <div>
+          <h4 class="font-baloo font-bold text-lg mb-4 text-white">Unduh Gratis</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><button onclick="openDownloadModal('Lembar Mewarnai Ikon Bali','Lembar mewarnai ikon wisata & seni Bali yang indah.','🎨')" class="hover:text-primary transition text-left">🎨 Lembar Mewarnai</button></li>
+            <li><button onclick="openDownloadModal('Teka-Teki Visual Bali','Teka-teki gambar & pengenalan flora-fauna endemik Bali.','🧩')" class="hover:text-primary transition text-left">🧩 Teka-Teki Visual</button></li>
+            <li><button onclick="openDownloadModal('Latihan Motorik Halus','Aktivitas latihan sensorik-motorik halus untuk anak usia dini.','✂️')" class="hover:text-primary transition text-left">✂️ Motorik Halus</button></li>
+            <li><button onclick="openDownloadModal('Family Travel Guide PDF','Panduan lengkap bagi orang tua selama wisata Bali.','📚')" class="hover:text-primary transition text-left">📚 Family Travel Guide</button></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Bottom -->
+      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+        <p>© 2026 Bali Little Explorer · Bali Top Holiday.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====================== FLOATING WA BUTTON ====================== -->
+  <a id="wa-float"
+     href="https://wa.me/6281234567890?text=Halo%20Kak%2C%20saya%20dari%20website%20Bali%20Little%20Explorer.%20Saya%20ingin%20konsultasi%20paket%20wisata%20ramah%20anak%20untuk%20keluarga%20saya%20%F0%9F%8C%B4"
+     target="_blank"
+     class="bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:bg-green-600 hover:scale-110 transition-all duration-300">
+    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
+
+  <!-- ====================== DOWNLOAD MODAL ====================== -->
+  <div id="download-modal" class="fixed inset-0 z-[9999] hidden items-center justify-center p-4">
+    <div class="modal-overlay absolute inset-0 bg-black/50" onclick="closeDownloadModal()"></div>
+    <div class="relative bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl z-10 text-center" data-aos="zoom-in">
+      <div class="text-6xl mb-4" id="modal-icon">📦</div>
+      <h3 class="font-baloo font-bold text-2xl text-gray-800 mb-2" id="modal-title">Download</h3>
+      <p class="text-gray-500 text-sm mb-6" id="modal-desc">Deskripsi</p>
+
+      <div class="bg-orange-50 rounded-2xl p-4 mb-6 text-left">
+        <p class="text-xs text-gray-500 mb-2">📧 Isi data untuk mendapatkan link download:</p>
+        <input type="text" id="modal-name" placeholder="Nama Anda"
+               class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-primary" />
+        <input type="email" id="modal-email" placeholder="Email (opsional)"
+               class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+      </div>
+
+      <button onclick="handleDownload()"
+              class="w-full bg-primary text-white py-3.5 rounded-2xl font-bold hover:bg-primary-dark transition shadow-lg mb-3">
+              📥 Unduh Sekarang (Gratis)
+      </button>
+      <button onclick="closeDownloadModal()" class="text-sm text-gray-400 hover:text-gray-600 transition">Batal</button>
+    </div>
+  </div>
+
+  <!-- ====================== SCRIPTS ====================== -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    // ---- Supabase Init ----
+    const SUPABASE_URL  = 'https://kbyjkhmgjkuqgmcakvqp.supabase.co';
+    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtieWpraG1namt1cWdtY2FrdnFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3NTc5ODUsImV4cCI6MjEwNzMzMzk4NX0.hCGw_JOF7FfYXqxwIGAllonTC1wwBoolhX9y_IFJn2M';
+    const { createClient } = supabase;
+    const db = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+    // ---- AOS Init ----
+    AOS.init({ duration: 700, once: true, offset: 60 });
+
+    // ---- Navbar scroll effect ----
+    const navbar = document.getElementById('navbar');
+    const logoTitle = document.getElementById('logo-title');
+    const logoSub = document.getElementById('logo-sub');
+    const navLinks = document.querySelectorAll('#nav-link');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) {
+        navbar.classList.add('scrolled');
+        logoTitle.classList.remove('text-white', 'drop-shadow');
+        logoTitle.classList.add('text-gray-800');
+        logoSub.classList.remove('text-white/80', 'drop-shadow');
+        logoSub.classList.add('text-gray-500');
+        navLinks.forEach(l => {
+          l.classList.remove('text-white');
+          l.classList.add('text-gray-700');
+        });
+      } else {
+        navbar.classList.remove('scrolled');
+        logoTitle.classList.add('text-white', 'drop-shadow');
+        logoTitle.classList.remove('text-gray-800');
+        logoSub.classList.add('text-white/80', 'drop-shadow');
+        logoSub.classList.remove('text-gray-500');
+        navLinks.forEach(l => {
+          l.classList.add('text-white');
+          l.classList.remove('text-gray-700');
+        });
+      }
+    });
+
+    // ---- Mobile Menu ----
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      mobileMenu.classList.toggle('flex');
+    });
+
+    function closeMobileMenu() {
+      mobileMenu.classList.add('hidden');
+      mobileMenu.classList.remove('flex');
+    }
+
+    // ---- Swiper ----
+    new Swiper('.parentingSwiper', {
+      slidesPerView: 1,
+      spaceBetween: 24,
+      pagination: { el: '.swiper-pagination', clickable: true },
+      autoplay: { delay: 5000, disableOnInteraction: false },
+      breakpoints: {
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 2 },
+      },
+    });
+
+    // ---- Download Modal ----
+    let currentDownloadTitle = '';
+
+    function openDownloadModal(title, desc, icon) {
+      currentDownloadTitle = title;
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-desc').textContent = desc;
+      document.getElementById('modal-icon').textContent = icon;
+      const modal = document.getElementById('download-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeDownloadModal() {
+      const modal = document.getElementById('download-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    async function handleDownload() {
+      const name  = document.getElementById('modal-name').value.trim();
+      const email = document.getElementById('modal-email').value.trim();
+      if (!name) {
+        document.getElementById('modal-name').classList.add('ring-2', 'ring-red-400');
+        document.getElementById('modal-name').placeholder = '⚠️ Nama wajib diisi';
+        return;
+      }
+      // Save lead to Supabase
+      await db.from('download_leads').insert({ name, email: email || null, kit_name: currentDownloadTitle });
+
+      // Redirect to WA with download request
+      const waMsg = encodeURIComponent(
+        `Halo Admin Bali Top Holiday! Saya ${name} ingin mengunduh "${currentDownloadTitle}" dari website Bali Little Explorer. Bisa dikirimkan link-nya? Terima kasih! 🙏`
+      );
+      window.open(`https://wa.me/6281234567890?text=${waMsg}`, '_blank');
+      closeDownloadModal();
+    }
+
+    // ---- Reservation Form ----
+    document.getElementById('reservation-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const name    = document.getElementById('form-name').value.trim();
+      const phone   = document.getElementById('form-phone').value.trim();
+      const kids    = document.getElementById('form-kids').value;
+      const age     = document.getElementById('form-age').value.trim();
+      const pkg     = document.getElementById('form-package').value;
+      const date    = document.getElementById('form-date').value;
+      const message = document.getElementById('form-message').value.trim();
+
+      if (!name || !phone) {
+        alert('Mohon isi nama dan nomor WhatsApp terlebih dahulu.');
+        return;
+      }
+
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      submitBtn.textContent = '⏳ Mengirim...';
+      submitBtn.disabled = true;
+
+      // Save to Supabase
+      const { error } = await db.from('reservations').insert({
+        name,
+        phone,
+        kids_count: kids,
+        kids_age:   age   || null,
+        package:    pkg,
+        trip_date:  date  || null,
+        message:    message || null,
+      });
+
+      if (error) console.error('Supabase error:', error);
+
+      // Send to WA
+      const waMsg = encodeURIComponent(
+`Halo Admin Bali Top Holiday! 👋
+
+*FORM RESERVASI BALI LITTLE EXPLORER*
+
+👤 Nama: ${name}
+📱 WhatsApp: ${phone}
+👶 Jumlah Anak: ${kids}
+🎂 Usia Anak: ${age || '-'}
+🗺️ Paket: ${pkg}
+📅 Tanggal: ${date || '-'}
+💬 Pesan: ${message || '-'}
+
+Mohon info lebih lanjut mengenai paket tersebut. Terima kasih! 🙏`
+      );
+      window.open(`https://wa.me/6281234567890?text=${waMsg}`, '_blank');
+
+      submitBtn.textContent = '✅ Terkirim! Terima kasih';
+      setTimeout(() => {
+        e.target.reset();
+        submitBtn.textContent = '📤 Kirim via WhatsApp Admin';
+        submitBtn.disabled = false;
+      }, 3000);
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDownloadModal();
+    });
+  </script>
+
+</body>
+</html>
