@@ -70,7 +70,7 @@
         </button>
       </form>
       <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-        <span>PIN Default: <code class="text-slate-600 font-mono bg-slate-100 px-1 py-0.5 rounded">admin123</code></span>
+        <span>Sistem Keamanan Terenkripsi 🔒</span>
         <a href="index.html" class="hover:text-primary transition">← Kembali ke Web</a>
       </div>
     </div>
@@ -408,6 +408,12 @@
         </div>
 
         <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">URL Foto Header Paket (Unsplash / Link Foto)</label>
+          <input type="url" id="pkg-img" placeholder="https://images.unsplash.com/photo-..."
+                 class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-primary focus:outline-none" />
+        </div>
+
+        <div>
           <div class="flex items-center justify-between mb-1.5">
             <label class="block text-xs font-bold text-slate-700">Daftar Destinasi / Stops (Itinerary)</label>
             <button type="button" onclick="addStopRow()" class="text-[11px] text-primary font-bold hover:underline">+ Tambah Titik</button>
@@ -468,6 +474,11 @@
           </div>
         </div>
         <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">URL Foto Thumbnail Kit (Unsplash / Gambar)</label>
+          <input type="url" id="kit-img" placeholder="https://images.unsplash.com/..."
+                 class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-teal focus:outline-none" />
+        </div>
+        <div>
           <label class="block text-xs font-bold text-slate-700 mb-1">Link File Unduhan (Google Drive / PDF URL)</label>
           <input type="url" id="kit-file-url" placeholder="https://drive.google.com/..."
                  class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-teal focus:outline-none" />
@@ -501,6 +512,11 @@
             <input type="text" id="tip-icon" placeholder="😴"
                    class="w-full text-center px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-600 focus:outline-none" />
           </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">URL Foto Header Tips</label>
+          <input type="url" id="tip-img" placeholder="https://images.unsplash.com/..."
+                 class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-600 focus:outline-none" />
         </div>
         <div>
           <label class="block text-xs font-bold text-slate-700 mb-1">Warna Tema Slider</label>
@@ -552,27 +568,43 @@
       const { data } = await db.from('site_settings').select('*').eq('id', 'general').single();
       if (data) currentSettings = data;
 
+      const validPin = currentSettings.admin_pin || 'admin123';
       const sessionPin = sessionStorage.getItem('ble_admin_session');
-      if (sessionPin === currentSettings.admin_pin || sessionPin === 'admin123') {
+      if (sessionPin && sessionPin === validPin) {
         document.getElementById('login-modal').classList.add('hidden');
         initDashboard();
       } else {
+        sessionStorage.removeItem('ble_admin_session');
         document.getElementById('login-modal').classList.remove('hidden');
       }
     }
 
-    document.getElementById('pin-form').addEventListener('submit', (e) => {
+    document.getElementById('pin-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const enteredPin = document.getElementById('admin-pin-input').value.trim();
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const origText = submitBtn.textContent;
+      submitBtn.textContent = 'Memverifikasi...';
+      submitBtn.disabled = true;
+
+      // Always fetch fresh PIN directly from database
+      const { data } = await db.from('site_settings').select('admin_pin').eq('id', 'general').single();
+      if (data && data.admin_pin) {
+        currentSettings.admin_pin = data.admin_pin;
+      }
       const validPin = currentSettings.admin_pin || 'admin123';
-      if (enteredPin === validPin || enteredPin === 'admin123') {
+
+      if (enteredPin === validPin) {
         sessionStorage.setItem('ble_admin_session', enteredPin);
         document.getElementById('login-modal').classList.add('hidden');
         document.getElementById('pin-error').classList.add('hidden');
         initDashboard();
       } else {
+        document.getElementById('pin-error').textContent = 'PIN salah! Silakan masukkan PIN yang benar.';
         document.getElementById('pin-error').classList.remove('hidden');
       }
+      submitBtn.textContent = origText;
+      submitBtn.disabled = false;
     });
 
     function handleLogout() {
@@ -774,12 +806,25 @@
       container.innerHTML = packagesData.map(p => `
         <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition">
           <div>
-            <div class="bg-gradient-to-br ${p.gradient || 'from-orange-400 to-orange-600'} p-6 text-white text-center relative">
-              <div class="text-5xl mb-2">${p.icon || '🏝️'}</div>
-              <h4 class="font-baloo font-bold text-xl">${p.title}</h4>
-              <p class="text-xs text-white/80 mt-1">${p.duration || 'Full Day'}</p>
-              ${p.badge ? `<span class="absolute top-3 right-3 bg-white/20 backdrop-blur-sm text-[10px] font-bold px-2 py-0.5 rounded-lg">${p.badge}</span>` : ''}
-            </div>
+            ${p.image_url ? `
+              <div class="h-36 relative overflow-hidden">
+                <img src="${p.image_url}" alt="${p.title}" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-4">
+                  <div>
+                    <h4 class="font-baloo font-bold text-lg text-white leading-tight">${p.title}</h4>
+                    <p class="text-xs text-white/80">${p.duration || 'Full Day'}</p>
+                  </div>
+                </div>
+                ${p.badge ? `<span class="absolute top-3 right-3 bg-white/90 text-slate-800 text-[10px] font-bold px-2 py-0.5 rounded-lg shadow-sm">${p.badge}</span>` : ''}
+              </div>
+            ` : `
+              <div class="bg-gradient-to-br ${p.gradient || 'from-orange-400 to-orange-600'} p-6 text-white text-center relative">
+                <div class="text-5xl mb-2">${p.icon || '🏝️'}</div>
+                <h4 class="font-baloo font-bold text-xl">${p.title}</h4>
+                <p class="text-xs text-white/80 mt-1">${p.duration || 'Full Day'}</p>
+                ${p.badge ? `<span class="absolute top-3 right-3 bg-white/20 backdrop-blur-sm text-[10px] font-bold px-2 py-0.5 rounded-lg">${p.badge}</span>` : ''}
+              </div>
+            `}
             <div class="p-5">
               <p class="text-xs font-bold text-slate-400 mb-2">Destinasi & Stops:</p>
               <div class="space-y-1.5 mb-4 text-xs text-slate-600">
@@ -819,6 +864,7 @@
         document.getElementById('pkg-badge').value = p.badge || '';
         document.getElementById('pkg-gradient').value = p.gradient || 'from-orange-400 to-orange-600';
         document.getElementById('pkg-includes').value = p.includes || '';
+        document.getElementById('pkg-img').value = p.image_url || '';
 
         const stops = Array.isArray(p.stops) ? p.stops : [];
         stops.forEach(s => addStopRow(s.place, s.desc, s.icon));
@@ -826,6 +872,7 @@
         document.getElementById('modal-package-title').textContent = 'Tambah Paket Baru';
         document.getElementById('form-package-edit').reset();
         document.getElementById('pkg-id').value = '';
+        document.getElementById('pkg-img').value = '';
         addStopRow('Destinasi 1', 'Aktivitas pengenalan...', '📍');
         addStopRow('Jeda Istirahat', 'Snack & bermain ramah balita', '☕');
       }
@@ -869,6 +916,7 @@
       const badge = document.getElementById('pkg-badge').value.trim();
       const gradient = document.getElementById('pkg-gradient').value;
       const includes = document.getElementById('pkg-includes').value.trim();
+      const image_url = document.getElementById('pkg-img').value.trim();
 
       const stopElements = document.querySelectorAll('.stop-row');
       const stops = Array.from(stopElements).map(row => ({
@@ -877,7 +925,7 @@
         desc: row.querySelector('.stop-desc').value.trim(),
       })).filter(s => s.place);
 
-      const payload = { title, icon, duration, badge, gradient, includes, stops };
+      const payload = { title, icon, duration, badge, gradient, includes, image_url, stops };
 
       if (id) {
         await db.from('packages').update(payload).eq('id', id);
@@ -899,7 +947,13 @@
       container.innerHTML = kitsData.map(k => `
         <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-5 text-center flex flex-col justify-between hover:shadow-md transition">
           <div>
-            <div class="text-4xl mb-3">${k.icon || '🎨'}</div>
+            ${k.image_url ? `
+              <div class="w-20 h-20 mx-auto mb-3 rounded-2xl overflow-hidden shadow-sm border border-slate-100">
+                <img src="${k.image_url}" alt="${k.title}" class="w-full h-full object-cover" />
+              </div>
+            ` : `
+              <div class="text-4xl mb-3">${k.icon || '🎨'}</div>
+            `}
             <h4 class="font-baloo font-bold text-slate-800 text-base mb-1">${k.title}</h4>
             <p class="text-xs text-slate-500 mb-3">${k.description || '-'}</p>
             <span class="text-xs bg-slate-100 text-slate-700 font-bold px-2.5 py-1 rounded-full inline-block">
@@ -926,11 +980,13 @@
         document.getElementById('kit-desc').value = k.description || '';
         document.getElementById('kit-sheets').value = k.sheet_count || '';
         document.getElementById('kit-badge-color').value = k.badge_color || 'orange';
+        document.getElementById('kit-img').value = k.image_url || '';
         document.getElementById('kit-file-url').value = k.file_url || '';
       } else {
         document.getElementById('modal-kit-title').textContent = 'Tambah Activity Kit';
         document.getElementById('form-kit-edit').reset();
         document.getElementById('kit-id').value = '';
+        document.getElementById('kit-img').value = '';
       }
     }
 
@@ -958,9 +1014,10 @@
       const description = document.getElementById('kit-desc').value.trim();
       const sheet_count = document.getElementById('kit-sheets').value.trim();
       const badge_color = document.getElementById('kit-badge-color').value;
+      const image_url = document.getElementById('kit-img').value.trim();
       const file_url = document.getElementById('kit-file-url').value.trim();
 
-      const payload = { title, icon, description, sheet_count, badge_color, file_url };
+      const payload = { title, icon, description, sheet_count, badge_color, image_url, file_url };
 
       if (id) {
         await db.from('activity_kits').update(payload).eq('id', id);
@@ -980,17 +1037,29 @@
       container.innerHTML = tipsData.map(t => {
         const tips = Array.isArray(t.tips) ? t.tips : [];
         return `
-          <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 flex flex-col justify-between">
+          <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col justify-between">
             <div>
-              <div class="flex items-center gap-3 mb-4">
-                <span class="text-3xl">${t.icon || '💡'}</span>
-                <h4 class="font-baloo font-bold text-lg text-slate-800">${t.title}</h4>
+              ${t.image_url ? `
+                <div class="h-32 w-full overflow-hidden relative">
+                  <img src="${t.image_url}" alt="${t.title}" class="w-full h-full object-cover" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <div class="absolute bottom-3 left-4 right-4 text-white font-baloo font-bold text-base leading-tight">${t.title}</div>
+                </div>
+              ` : `
+                <div class="p-6 pb-2">
+                  <div class="flex items-center gap-3 mb-2">
+                    <span class="text-3xl">${t.icon || '💡'}</span>
+                    <h4 class="font-baloo font-bold text-lg text-slate-800">${t.title}</h4>
+                  </div>
+                </div>
+              `}
+              <div class="p-5">
+                <ul class="space-y-2 text-xs text-slate-600 mb-2">
+                  ${tips.map((p, idx) => `<li class="flex items-start gap-2"><span class="bg-slate-100 text-slate-700 font-bold w-4 h-4 rounded-full flex items-center justify-center shrink-0 text-[10px]">${idx+1}</span><span>${p}</span></li>`).join('')}
+                </ul>
               </div>
-              <ul class="space-y-2 text-xs text-slate-600 mb-4">
-                ${tips.map((p, idx) => `<li class="flex items-start gap-2"><span class="bg-slate-100 text-slate-700 font-bold w-4 h-4 rounded-full flex items-center justify-center shrink-0 text-[10px]">${idx+1}</span><span>${p}</span></li>`).join('')}
-              </ul>
             </div>
-            <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-2">
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-end gap-2">
               <button onclick="editTip(${t.id})" class="text-xs bg-slate-100 hover:bg-slate-200 font-bold px-3 py-1 rounded-lg">Edit ✏️</button>
               <button onclick="deleteTip(${t.id})" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold px-2.5 py-1 rounded-lg">Hapus</button>
             </div>
@@ -1008,6 +1077,7 @@
         document.getElementById('tip-title').value = t.title;
         document.getElementById('tip-icon').value = t.icon || '💡';
         document.getElementById('tip-color').value = t.theme_color || 'purple';
+        document.getElementById('tip-img').value = t.image_url || '';
         const list = Array.isArray(t.tips) ? t.tips : [];
         document.getElementById('tip-point-1').value = list[0] || '';
         document.getElementById('tip-point-2').value = list[1] || '';
@@ -1016,6 +1086,7 @@
         document.getElementById('modal-tip-title').textContent = 'Tambah Parenting Tips';
         document.getElementById('form-tip-edit').reset();
         document.getElementById('tip-id').value = '';
+        document.getElementById('tip-img').value = '';
       }
     }
 
@@ -1041,13 +1112,14 @@
       const title = document.getElementById('tip-title').value.trim();
       const icon = document.getElementById('tip-icon').value.trim() || '💡';
       const theme_color = document.getElementById('tip-color').value;
+      const image_url = document.getElementById('tip-img').value.trim();
       const tips = [
         document.getElementById('tip-point-1').value.trim(),
         document.getElementById('tip-point-2').value.trim(),
         document.getElementById('tip-point-3').value.trim(),
       ].filter(Boolean);
 
-      const payload = { title, icon, theme_color, tips };
+      const payload = { title, icon, theme_color, image_url, tips };
 
       if (id) {
         await db.from('parenting_tips').update(payload).eq('id', id);
@@ -1092,7 +1164,9 @@
 
       if (newPin) {
         updateData.admin_pin = newPin;
+        currentSettings.admin_pin = newPin;
         sessionStorage.setItem('ble_admin_session', newPin);
+        document.getElementById('set-pin').value = '';
       }
 
       const { error } = await db.from('site_settings').upsert({ id: 'general', ...updateData });
