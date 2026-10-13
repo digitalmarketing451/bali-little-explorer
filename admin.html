@@ -257,9 +257,16 @@
           <h3 class="font-baloo font-bold text-2xl text-slate-900">Katalog Paket Wisata</h3>
           <p class="text-xs text-slate-500">Kelola rute, durasi, dan fasilitas paket ramah anak di website.</p>
         </div>
-        <button onclick="openPackageModal()" class="bg-primary hover:bg-primary-dark text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-1.5">
-          <span>+ Tambah Paket Baru</span>
-        </button>
+        <div class="flex items-center gap-2">
+          <a href="paket.html" target="_blank"
+             class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3.5 py-2.5 rounded-xl shadow-sm transition flex items-center gap-1.5">
+            <span>👁️ Buka Halaman Paket</span>
+            <span>↗</span>
+          </a>
+          <button onclick="openPackageModal()" class="bg-primary hover:bg-primary-dark text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-1.5">
+            <span>+ Tambah Paket Baru</span>
+          </button>
+        </div>
       </div>
 
       <div id="packages-grid" class="grid md:grid-cols-3 gap-6">
