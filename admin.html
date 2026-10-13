@@ -353,12 +353,9 @@
               <!-- Inputs -->
               <div class="md:col-span-7 space-y-4">
                 <div>
-                  <label class="block text-xs font-bold text-slate-700 mb-1">URL Foto Kartu Hero *</label>
-                  <div class="flex gap-2">
-                    <input type="url" id="home-hero-img" placeholder="https://images.unsplash.com/photo-..." required
-                           class="flex-1 px-3.5 py-2.5 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-primary focus:outline-none" />
-                    <button type="button" onclick="updatePreview('home-hero-img', 'prev-home-hero-img')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">Cek</button>
-                  </div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Foto Kartu Hero *</label>
+                  <input type="hidden" id="home-hero-img" />
+                  <div id="upload-widget-home-hero-img"></div>
                 </div>
 
                 <div>
@@ -403,9 +400,9 @@
                   <div class="w-20 h-20 mx-auto rounded-2xl overflow-hidden mb-3 border-2 border-orange-200 shadow-sm bg-white">
                     <img id="prev-home-f1-img" src="" alt="F1" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=300&q=80'" />
                   </div>
-                  <label class="block text-[11px] font-bold text-slate-700 mb-1">URL Foto Kartu 1:</label>
-                  <input type="url" id="home-f1-img" placeholder="https://..."
-                         class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-primary focus:outline-none mb-2" />
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Foto Kartu 1:</label>
+                  <input type="hidden" id="home-f1-img" />
+                  <div id="upload-widget-home-f1-img" class="mb-2"></div>
                   <label class="block text-[11px] font-bold text-slate-700 mb-1">Judul:</label>
                   <input type="text" id="home-f1-title" placeholder="Rute Wisata Terstruktur"
                          class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-primary focus:outline-none mb-2" />
@@ -425,9 +422,9 @@
                   <div class="w-20 h-20 mx-auto rounded-2xl overflow-hidden mb-3 border-2 border-teal/30 shadow-sm bg-white">
                     <img id="prev-home-f2-img" src="" alt="F2" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=300&q=80'" />
                   </div>
-                  <label class="block text-[11px] font-bold text-slate-700 mb-1">URL Foto Kartu 2:</label>
-                  <input type="url" id="home-f2-img" placeholder="https://..."
-                         class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-teal focus:outline-none mb-2" />
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Foto Kartu 2:</label>
+                  <input type="hidden" id="home-f2-img" />
+                  <div id="upload-widget-home-f2-img" class="mb-2"></div>
                   <label class="block text-[11px] font-bold text-slate-700 mb-1">Judul:</label>
                   <input type="text" id="home-f2-title" placeholder="Activity Kit Edukatif"
                          class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-teal focus:outline-none mb-2" />
@@ -447,9 +444,9 @@
                   <div class="w-20 h-20 mx-auto rounded-2xl overflow-hidden mb-3 border-2 border-indigo-200 shadow-sm bg-white">
                     <img id="prev-home-f3-img" src="" alt="F3" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=300&q=80'" />
                   </div>
-                  <label class="block text-[11px] font-bold text-slate-700 mb-1">URL Foto Kartu 3:</label>
-                  <input type="url" id="home-f3-img" placeholder="https://..."
-                         class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-indigo focus:outline-none mb-2" />
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Foto Kartu 3:</label>
+                  <input type="hidden" id="home-f3-img" />
+                  <div id="upload-widget-home-f3-img" class="mb-2"></div>
                   <label class="block text-[11px] font-bold text-slate-700 mb-1">Judul:</label>
                   <input type="text" id="home-f3-title" placeholder="Reservasi Mudah & Cepat"
                          class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-indigo focus:outline-none mb-2" />
@@ -478,9 +475,9 @@
                   <img id="prev-home-story-img" src="" alt="Story" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&w=400&q=80'" />
                 </div>
                 <div class="flex-1">
-                  <label class="block text-[11px] font-bold text-slate-700 mb-1">URL Foto Banner:</label>
-                  <input type="url" id="home-story-img" placeholder="https://..."
-                         class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-indigo focus:outline-none" />
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Foto Banner Storytelling:</label>
+                  <input type="hidden" id="home-story-img" />
+                  <div id="upload-widget-home-story-img"></div>
                 </div>
               </div>
 
@@ -513,9 +510,9 @@
                   <img id="prev-home-cta-img" src="" alt="CTA" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=300&q=80'" />
                 </div>
                 <div class="flex-1">
-                  <label class="block text-[11px] font-bold text-slate-700 mb-1">URL Foto Bundle Unduhan:</label>
-                  <input type="url" id="home-cta-img" placeholder="https://..."
-                         class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-600 focus:outline-none" />
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Foto Bundle Unduhan:</label>
+                  <input type="hidden" id="home-cta-img" />
+                  <div id="upload-widget-home-cta-img"></div>
                 </div>
               </div>
 
@@ -675,9 +672,9 @@
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">URL Foto Header Paket (Unsplash / Link Foto)</label>
-          <input type="url" id="pkg-img" placeholder="https://images.unsplash.com/photo-..."
-                 class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-primary focus:outline-none" />
+          <label class="block text-xs font-bold text-slate-700 mb-1">Foto Header Paket</label>
+          <input type="hidden" id="pkg-img" />
+          <div id="upload-widget-pkg-img"></div>
         </div>
 
         <div>
@@ -741,9 +738,9 @@
           </div>
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">URL Foto Thumbnail Kit (Unsplash / Gambar)</label>
-          <input type="url" id="kit-img" placeholder="https://images.unsplash.com/..."
-                 class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-teal focus:outline-none" />
+          <label class="block text-xs font-bold text-slate-700 mb-1">Foto Thumbnail Kit</label>
+          <input type="hidden" id="kit-img" />
+          <div id="upload-widget-kit-img"></div>
         </div>
         <div>
           <label class="block text-xs font-bold text-slate-700 mb-1">Link File Unduhan (Google Drive / PDF URL)</label>
@@ -781,9 +778,9 @@
           </div>
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">URL Foto Header Tips</label>
-          <input type="url" id="tip-img" placeholder="https://images.unsplash.com/..."
-                 class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-600 focus:outline-none" />
+          <label class="block text-xs font-bold text-slate-700 mb-1">Foto Header Tips</label>
+          <input type="hidden" id="tip-img" />
+          <div id="upload-widget-tip-img"></div>
         </div>
         <div>
           <label class="block text-xs font-bold text-slate-700 mb-1">Warna Tema Slider</label>
@@ -828,6 +825,212 @@
     let packagesData = [];
     let kitsData = [];
     let tipsData = [];
+
+    // ==================== SUPABASE STORAGE & UPLOAD SYSTEM ====================
+    const STORAGE_BUCKET = 'site-images';
+    const uploadWidgetRegistry = {};
+
+    async function uploadImageFile(file, folder = 'uploads') {
+      const allowed = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+      if (!allowed.includes(file.type)) {
+        throw new Error('Format file harus JPG, PNG, WEBP, atau GIF.');
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        throw new Error('Ukuran foto maksimal 5 MB.');
+      }
+
+      const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+      const fileName = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+
+      const res = await fetch(`${SUPABASE_URL}/storage/v1/object/${STORAGE_BUCKET}/${fileName}`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON,
+          'Authorization': `Bearer ${SUPABASE_ANON}`,
+          'Content-Type': file.type,
+          'x-upsert': 'true'
+        },
+        body: file
+      });
+
+      if (!res.ok) {
+        let errMsg = 'Gagal mengunggah foto.';
+        try {
+          const errData = await res.json();
+          if (errData && errData.message) errMsg = errData.message;
+        } catch (_) {}
+        throw new Error(errMsg);
+      }
+
+      return `${SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${fileName}`;
+    }
+
+    function createUploadWidget({ containerId, inputId, previewImgId = null, folder = 'uploads' }) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      const widgetId = 'uw-' + inputId;
+      container.innerHTML = `
+        <div id="${widgetId}" class="bg-slate-50 border border-slate-200/90 rounded-2xl p-2.5 space-y-2">
+          <input type="file" id="${widgetId}-file" accept="image/jpeg,image/png,image/webp,image/gif" class="hidden" />
+          
+          <div class="flex items-center gap-1.5">
+            <button type="button" id="${widgetId}-btn"
+                    class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-white hover:bg-orange-50 border border-slate-200 hover:border-primary text-slate-700 hover:text-primary font-bold text-xs rounded-xl shadow-sm transition duration-150">
+              <span class="text-sm">📤</span>
+              <span class="btn-text">Upload Foto Baru</span>
+            </button>
+            <button type="button" id="${widgetId}-toggle-url" title="Atau tempel link URL foto langsung"
+                    class="px-2.5 py-2 bg-white hover:bg-slate-100 border border-slate-200 text-slate-500 rounded-xl text-xs font-bold transition">
+              🔗 URL
+            </button>
+          </div>
+
+          <div id="${widgetId}-status" class="hidden text-[11px] font-bold px-2.5 py-1.5 rounded-lg flex items-center justify-between">
+            <span class="status-msg"></span>
+            <span class="status-spinner hidden">⏳</span>
+          </div>
+
+          <div id="${widgetId}-preview" class="hidden items-center gap-2.5 p-2 bg-white rounded-xl border border-slate-200">
+            <div class="w-10 h-10 rounded-lg overflow-hidden shrink-0 border border-slate-200 bg-slate-100">
+              <img id="${widgetId}-thumb" src="" alt="Thumbnail" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <p id="${widgetId}-name" class="text-[11px] font-bold text-slate-700 truncate">Foto Terpasang</p>
+              <a id="${widgetId}-link" href="#" target="_blank" class="text-[10px] text-primary hover:underline truncate block">Lihat Gambar ↗</a>
+            </div>
+            <button type="button" id="${widgetId}-remove" title="Hapus Foto" class="text-xs text-rose-500 hover:text-rose-700 p-1 font-bold">
+              ✕
+            </button>
+          </div>
+
+          <div id="${widgetId}-url-box" class="hidden space-y-1">
+            <label class="block text-[10px] font-bold text-slate-500">Atau Tempel URL Gambar:</label>
+            <input type="url" id="${widgetId}-url-input" placeholder="https://images.unsplash.com/..."
+                   class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:ring-1 focus:ring-primary focus:outline-none" />
+          </div>
+        </div>
+      `;
+
+      const fileInput = document.getElementById(`${widgetId}-file`);
+      const btn = document.getElementById(`${widgetId}-btn`);
+      const toggleUrlBtn = document.getElementById(`${widgetId}-toggle-url`);
+      const statusBox = document.getElementById(`${widgetId}-status`);
+      const statusMsg = statusBox.querySelector('.status-msg');
+      const statusSpinner = statusBox.querySelector('.status-spinner');
+      const previewBox = document.getElementById(`${widgetId}-preview`);
+      const thumb = document.getElementById(`${widgetId}-thumb`);
+      const nameEl = document.getElementById(`${widgetId}-name`);
+      const linkEl = document.getElementById(`${widgetId}-link`);
+      const removeBtn = document.getElementById(`${widgetId}-remove`);
+      const urlBox = document.getElementById(`${widgetId}-url-box`);
+      const urlInput = document.getElementById(`${widgetId}-url-input`);
+      const mainInput = document.getElementById(inputId);
+
+      btn.addEventListener('click', () => fileInput.click());
+
+      toggleUrlBtn.addEventListener('click', () => {
+        urlBox.classList.toggle('hidden');
+        if (!urlBox.classList.contains('hidden')) {
+          urlInput.focus();
+        }
+      });
+
+      urlInput.addEventListener('input', () => {
+        const val = urlInput.value.trim();
+        mainInput.value = val;
+        syncWidgetState(val);
+        if (previewImgId) updatePreview(inputId, previewImgId);
+      });
+
+      fileInput.addEventListener('change', async (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+
+        btn.disabled = true;
+        btn.querySelector('.btn-text').textContent = 'Mengunggah...';
+        statusBox.className = 'text-[11px] font-bold px-2.5 py-1.5 rounded-lg flex items-center justify-between bg-amber-50 text-amber-700 border border-amber-200';
+        statusBox.classList.remove('hidden');
+        statusMsg.textContent = `Mengunggah "${file.name}"...`;
+        statusSpinner.classList.remove('hidden');
+
+        try {
+          const publicUrl = await uploadImageFile(file, folder);
+          mainInput.value = publicUrl;
+          urlInput.value = publicUrl;
+          syncWidgetState(publicUrl, file.name);
+
+          statusBox.className = 'text-[11px] font-bold px-2.5 py-1.5 rounded-lg flex items-center justify-between bg-emerald-50 text-emerald-700 border border-emerald-200';
+          statusMsg.textContent = '✅ Berhasil diunggah ke Supabase!';
+          statusSpinner.classList.add('hidden');
+
+          if (previewImgId) updatePreview(inputId, previewImgId);
+
+          setTimeout(() => {
+            statusBox.classList.add('hidden');
+          }, 3500);
+        } catch (err) {
+          statusBox.className = 'text-[11px] font-bold px-2.5 py-1.5 rounded-lg flex items-center justify-between bg-rose-50 text-rose-700 border border-rose-200';
+          statusMsg.textContent = '❌ ' + err.message;
+          statusSpinner.classList.add('hidden');
+        } finally {
+          btn.disabled = false;
+          btn.querySelector('.btn-text').textContent = 'Ganti / Upload Foto';
+          fileInput.value = '';
+        }
+      });
+
+      removeBtn.addEventListener('click', () => {
+        mainInput.value = '';
+        urlInput.value = '';
+        syncWidgetState('');
+        if (previewImgId) updatePreview(inputId, previewImgId);
+      });
+
+      function syncWidgetState(url, filename = '') {
+        if (url) {
+          previewBox.classList.remove('hidden');
+          previewBox.classList.add('flex');
+          thumb.src = url;
+          linkEl.href = url;
+          nameEl.textContent = filename || url.split('/').pop().split('?')[0] || 'Foto Aktif';
+          urlInput.value = url;
+          btn.querySelector('.btn-text').textContent = 'Ganti / Upload Foto';
+        } else {
+          previewBox.classList.add('hidden');
+          previewBox.classList.remove('flex');
+          thumb.src = '';
+          linkEl.href = '#';
+          urlInput.value = '';
+          btn.querySelector('.btn-text').textContent = 'Upload Foto Baru';
+        }
+      }
+
+      uploadWidgetRegistry[inputId] = {
+        sync: syncWidgetState
+      };
+    }
+
+    function syncUploadWidget(inputId, url) {
+      if (uploadWidgetRegistry[inputId]) {
+        uploadWidgetRegistry[inputId].sync(url);
+      }
+    }
+
+    function initAllUploadWidgets() {
+      // Homepage widgets
+      createUploadWidget({ containerId: 'upload-widget-home-hero-img', inputId: 'home-hero-img', previewImgId: 'prev-home-hero-img', folder: 'hero' });
+      createUploadWidget({ containerId: 'upload-widget-home-f1-img', inputId: 'home-f1-img', previewImgId: 'prev-home-f1-img', folder: 'features' });
+      createUploadWidget({ containerId: 'upload-widget-home-f2-img', inputId: 'home-f2-img', previewImgId: 'prev-home-f2-img', folder: 'features' });
+      createUploadWidget({ containerId: 'upload-widget-home-f3-img', inputId: 'home-f3-img', previewImgId: 'prev-home-f3-img', folder: 'features' });
+      createUploadWidget({ containerId: 'upload-widget-home-story-img', inputId: 'home-story-img', previewImgId: 'prev-home-story-img', folder: 'story' });
+      createUploadWidget({ containerId: 'upload-widget-home-cta-img', inputId: 'home-cta-img', previewImgId: 'prev-home-cta-img', folder: 'cta' });
+
+      // Modal widgets
+      createUploadWidget({ containerId: 'upload-widget-pkg-img', inputId: 'pkg-img', folder: 'packages' });
+      createUploadWidget({ containerId: 'upload-widget-kit-img', inputId: 'kit-img', folder: 'kits' });
+      createUploadWidget({ containerId: 'upload-widget-tip-img', inputId: 'tip-img', folder: 'tips' });
+    }
 
     // --- Authentication ---
     async function checkAuth() {
@@ -889,6 +1092,7 @@
 
     // --- Initialize Dashboard ---
     async function initDashboard() {
+      initAllUploadWidgets();
       await Promise.all([
         loadReservations(),
         loadLeads(),
@@ -1133,6 +1337,7 @@
         document.getElementById('pkg-gradient').value = p.gradient || 'from-orange-400 to-orange-600';
         document.getElementById('pkg-includes').value = p.includes || '';
         document.getElementById('pkg-img').value = p.image_url || '';
+        syncUploadWidget('pkg-img', p.image_url || '');
 
         const stops = Array.isArray(p.stops) ? p.stops : [];
         stops.forEach(s => addStopRow(s.place, s.desc, s.icon));
@@ -1141,6 +1346,7 @@
         document.getElementById('form-package-edit').reset();
         document.getElementById('pkg-id').value = '';
         document.getElementById('pkg-img').value = '';
+        syncUploadWidget('pkg-img', '');
         addStopRow('Destinasi 1', 'Aktivitas pengenalan...', '📍');
         addStopRow('Jeda Istirahat', 'Snack & bermain ramah balita', '☕');
       }
@@ -1249,12 +1455,14 @@
         document.getElementById('kit-sheets').value = k.sheet_count || '';
         document.getElementById('kit-badge-color').value = k.badge_color || 'orange';
         document.getElementById('kit-img').value = k.image_url || '';
+        syncUploadWidget('kit-img', k.image_url || '');
         document.getElementById('kit-file-url').value = k.file_url || '';
       } else {
         document.getElementById('modal-kit-title').textContent = 'Tambah Activity Kit';
         document.getElementById('form-kit-edit').reset();
         document.getElementById('kit-id').value = '';
         document.getElementById('kit-img').value = '';
+        syncUploadWidget('kit-img', '');
       }
     }
 
@@ -1346,6 +1554,7 @@
         document.getElementById('tip-icon').value = t.icon || '💡';
         document.getElementById('tip-color').value = t.theme_color || 'purple';
         document.getElementById('tip-img').value = t.image_url || '';
+        syncUploadWidget('tip-img', t.image_url || '');
         const list = Array.isArray(t.tips) ? t.tips : [];
         document.getElementById('tip-point-1').value = list[0] || '';
         document.getElementById('tip-point-2').value = list[1] || '';
@@ -1355,6 +1564,7 @@
         document.getElementById('form-tip-edit').reset();
         document.getElementById('tip-id').value = '';
         document.getElementById('tip-img').value = '';
+        syncUploadWidget('tip-img', '');
       }
     }
 
@@ -1504,30 +1714,42 @@
       if (data) {
         currentSettings = { ...currentSettings, ...data };
         // Hero
-        setVal('home-hero-img', data.hero_image_url || 'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=800&q=80');
+        const heroImg = data.hero_image_url || 'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=800&q=80';
+        setVal('home-hero-img', heroImg);
+        syncUploadWidget('home-hero-img', heroImg);
         setVal('home-hero-badge', data.hero_badge || 'Edu-Tourism Ramah Anak Usia 3–7 Tahun');
         setVal('home-hero-title', data.hero_title || 'Liburan Bali Seru & Edukatif untuk Si Kecil! 🌺');
         setVal('home-hero-subtitle', data.hero_subtitle || 'Paket wisata Bali Little Explorer dirancang khusus untuk keluarga dengan balita & anak usia dini — rute ramah anak, Activity Kit gratis, dan panduan parenting perjalanan.');
 
         // Keunggulan
-        setVal('home-f1-img', data.feature_1_image_url || 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=300&q=80');
+        const f1Img = data.feature_1_image_url || 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=300&q=80';
+        setVal('home-f1-img', f1Img);
+        syncUploadWidget('home-f1-img', f1Img);
         setVal('home-f1-title', data.feature_1_title || 'Rute Wisata Terstruktur');
         setVal('home-f1-desc', data.feature_1_desc || 'Itinerary ramah anak dengan estimasi waktu, jarak, dan jeda istirahat yang telah dirancang oleh tim pariwisata profesional.');
 
-        setVal('home-f2-img', data.feature_2_image_url || 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=300&q=80');
+        const f2Img = data.feature_2_image_url || 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=300&q=80';
+        setVal('home-f2-img', f2Img);
+        syncUploadWidget('home-f2-img', f2Img);
         setVal('home-f2-title', data.feature_2_title || 'Activity Kit Edukatif');
         setVal('home-f2-desc', data.feature_2_desc || '15+ lembar mewarnai, teka-teki visual, dan latihan motorik halus berbasis budaya Bali untuk menjaga anak tetap aktif & gembira.');
 
-        setVal('home-f3-img', data.feature_3_image_url || 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=300&q=80');
+        const f3Img = data.feature_3_image_url || 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=300&q=80';
+        setVal('home-f3-img', f3Img);
+        syncUploadWidget('home-f3-img', f3Img);
         setVal('home-f3-title', data.feature_3_title || 'Reservasi Mudah & Cepat');
         setVal('home-f3-desc', data.feature_3_desc || 'Platform digital mobile-first yang terhubung langsung ke admin Bali Top Holiday via WhatsApp & formulir online kapanpun Anda butuhkan.');
 
         // Banners
-        setVal('home-story-img', data.story_banner_image_url || 'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&w=400&q=80');
+        const storyImg = data.story_banner_image_url || 'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&w=400&q=80';
+        setVal('home-story-img', storyImg);
+        syncUploadWidget('home-story-img', storyImg);
         setVal('home-story-title', data.story_banner_title || 'Storytelling Budaya Bali 🌺');
         setVal('home-story-desc', data.story_banner_desc || 'Setiap rute dilengkapi dengan cerita edukasi budaya Bali yang bisa dibacakan orang tua atau pemandu selama kunjungan — dari pengenalan tari Kecak, flora endemik, hingga cerita rakyat Bali yang menarik untuk anak.');
 
-        setVal('home-cta-img', data.cta_banner_image_url || 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=300&q=80');
+        const ctaImg = data.cta_banner_image_url || 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=300&q=80';
+        setVal('home-cta-img', ctaImg);
+        syncUploadWidget('home-cta-img', ctaImg);
         setVal('home-cta-title', data.cta_banner_title || 'Unduh Semua Activity Kit + Family Travel Guide');
         setVal('home-cta-desc', data.cta_banner_desc || 'Gratis! Dapatkan 15+ lembar aktivitas anak (PDF siap cetak) + e-book Family Travel Guide Bali sekarang juga.');
 
@@ -1584,6 +1806,7 @@
         const inputEl = document.getElementById(item.input);
         if (inputEl) {
           inputEl.value = url;
+          syncUploadWidget(item.input, url);
           updatePreview(item.input, item.prev);
           inputEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
           inputEl.classList.add('ring-4', 'ring-primary/40');
