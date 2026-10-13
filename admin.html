@@ -154,6 +154,9 @@
       <button class="tab-btn px-4 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition flex items-center gap-2 shrink-0" onclick="switchTab('tab-tips', this)">
         <span>💡 Parenting Tips</span>
       </button>
+      <button class="tab-btn px-4 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition flex items-center gap-2 shrink-0" onclick="switchTab('tab-homepage', this)">
+        <span>🖼️ Foto & Tampilan Beranda</span>
+      </button>
       <button class="tab-btn px-4 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition flex items-center gap-2 shrink-0" onclick="switchTab('tab-settings', this)">
         <span>⚙️ Kontak & Pengaturan</span>
       </button>
@@ -295,6 +298,270 @@
 
       <div id="tips-grid" class="grid md:grid-cols-2 gap-6">
         <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- ==================== TAB: FOTO & TAMPILAN BERANDA ==================== -->
+    <section id="tab-homepage" class="tab-content hidden">
+      <div class="space-y-6">
+        <!-- Header Info -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 bg-primary/10 text-primary font-bold text-xs px-3 py-1 rounded-full mb-2">
+              <span>🖼️ CMS Halaman Utama</span>
+            </div>
+            <h3 class="font-baloo font-bold text-2xl text-slate-900">Kelola Foto & Tampilan Beranda</h3>
+            <p class="text-xs text-slate-500 mt-1 max-w-xl">
+              Ganti foto utama, 3 kartu keunggulan, serta banner edukasi halaman depan. Setiap pembaruan langsung tampil secara live di website utama.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <a href="index.html" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-1.5 shadow-sm">
+              <span>👁️ Buka Halaman Depan</span>
+              <span>↗</span>
+            </a>
+            <button type="button" onclick="submitHomepageForm()" class="bg-primary hover:bg-primary-dark text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow flex items-center gap-1.5">
+              <span>💾 Simpan Beranda</span>
+            </button>
+          </div>
+        </div>
+
+        <form id="homepage-form" class="space-y-6">
+          <!-- 1. HERO SECTION -->
+          <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 md:p-8">
+            <div class="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
+              <span class="text-2xl p-2 bg-orange-100 text-orange-600 rounded-2xl">🌅</span>
+              <div>
+                <h4 class="font-baloo font-bold text-lg text-slate-900">1. Foto Utama & Teks Hero (Bagian Paling Atas)</h4>
+                <p class="text-xs text-slate-400">Foto kartu keluarga di sisi kanan hero dan teks pengantar utama.</p>
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-12 gap-6">
+              <!-- Live Preview Card -->
+              <div class="md:col-span-5 flex flex-col">
+                <label class="block text-xs font-bold text-slate-700 mb-2">Pratinjau Foto Hero:</label>
+                <div class="relative rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 shadow-sm aspect-[4/3] group">
+                  <img id="prev-home-hero-img" src="" alt="Pratinjau Hero" class="w-full h-full object-cover transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=800&q=80'" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+                    <span class="text-white text-[11px] font-bold bg-white/20 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/30">🌺 Kartu Hero Beranda</span>
+                  </div>
+                </div>
+                <p class="text-[11px] text-slate-400 mt-2">Rasio ideal: Landscape (4:3 / 16:9). Tempel URL gambar dari Unsplash atau link web.</p>
+              </div>
+
+              <!-- Inputs -->
+              <div class="md:col-span-7 space-y-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">URL Foto Kartu Hero *</label>
+                  <div class="flex gap-2">
+                    <input type="url" id="home-hero-img" placeholder="https://images.unsplash.com/photo-..." required
+                           class="flex-1 px-3.5 py-2.5 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-primary focus:outline-none" />
+                    <button type="button" onclick="updatePreview('home-hero-img', 'prev-home-hero-img')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">Cek</button>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Badge Teks Kecil (Pill atas judul)</label>
+                  <input type="text" id="home-hero-badge" placeholder="Edu-Tourism Ramah Anak Usia 3–7 Tahun"
+                         class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-primary focus:outline-none" />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Judul Utama Hero (Mendukung Enter)</label>
+                  <textarea id="home-hero-title" rows="2" placeholder="Liburan Bali Seru & Edukatif untuk Si Kecil! 🌺"
+                            class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-primary focus:outline-none"></textarea>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Deskripsi Singkat Hero</label>
+                  <textarea id="home-hero-subtitle" rows="2" placeholder="Paket wisata Bali Little Explorer dirancang khusus untuk keluarga..."
+                            class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-primary focus:outline-none"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. KEUNGGULAN SECTION (3 CARDS) -->
+          <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 md:p-8">
+            <div class="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
+              <span class="text-2xl p-2 bg-teal/10 text-teal rounded-2xl">🌟</span>
+              <div>
+                <h4 class="font-baloo font-bold text-lg text-slate-900">2. Foto 3 Keunggulan (Section "Mengapa Bali Little Explorer?")</h4>
+                <p class="text-xs text-slate-400">Atur 3 foto ikonik dan penjelasannya pada section tentang program.</p>
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <!-- Keunggulan 1 -->
+              <div class="p-4 rounded-2xl border border-orange-100 bg-orange-50/40 flex flex-col justify-between space-y-3">
+                <div>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-orange-700">Kartu 1 (Rute Wisata)</span>
+                    <span class="text-[10px] bg-orange-100 text-orange-800 font-bold px-2 py-0.5 rounded-full">Kiri</span>
+                  </div>
+                  <div class="w-20 h-20 mx-auto rounded-2xl overflow-hidden mb-3 border-2 border-orange-200 shadow-sm bg-white">
+                    <img id="prev-home-f1-img" src="" alt="F1" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=300&q=80'" />
+                  </div>
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">URL Foto Kartu 1:</label>
+                  <input type="url" id="home-f1-img" placeholder="https://..."
+                         class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-primary focus:outline-none mb-2" />
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Judul:</label>
+                  <input type="text" id="home-f1-title" placeholder="Rute Wisata Terstruktur"
+                         class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-primary focus:outline-none mb-2" />
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Deskripsi:</label>
+                  <textarea id="home-f1-desc" rows="3" placeholder="Itinerary ramah anak..."
+                            class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-primary focus:outline-none"></textarea>
+                </div>
+              </div>
+
+              <!-- Keunggulan 2 -->
+              <div class="p-4 rounded-2xl border border-teal-100 bg-teal-50/40 flex flex-col justify-between space-y-3">
+                <div>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-teal-dark">Kartu 2 (Activity Kit)</span>
+                    <span class="text-[10px] bg-teal/20 text-teal-dark font-bold px-2 py-0.5 rounded-full">Tengah</span>
+                  </div>
+                  <div class="w-20 h-20 mx-auto rounded-2xl overflow-hidden mb-3 border-2 border-teal/30 shadow-sm bg-white">
+                    <img id="prev-home-f2-img" src="" alt="F2" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=300&q=80'" />
+                  </div>
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">URL Foto Kartu 2:</label>
+                  <input type="url" id="home-f2-img" placeholder="https://..."
+                         class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-teal focus:outline-none mb-2" />
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Judul:</label>
+                  <input type="text" id="home-f2-title" placeholder="Activity Kit Edukatif"
+                         class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-teal focus:outline-none mb-2" />
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Deskripsi:</label>
+                  <textarea id="home-f2-desc" rows="3" placeholder="15+ lembar mewarnai..."
+                            class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-teal focus:outline-none"></textarea>
+                </div>
+              </div>
+
+              <!-- Keunggulan 3 -->
+              <div class="p-4 rounded-2xl border border-indigo-100 bg-indigo-50/40 flex flex-col justify-between space-y-3">
+                <div>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-indigo">Kartu 3 (Reservasi WA)</span>
+                    <span class="text-[10px] bg-indigo-100 text-indigo font-bold px-2 py-0.5 rounded-full">Kanan</span>
+                  </div>
+                  <div class="w-20 h-20 mx-auto rounded-2xl overflow-hidden mb-3 border-2 border-indigo-200 shadow-sm bg-white">
+                    <img id="prev-home-f3-img" src="" alt="F3" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=300&q=80'" />
+                  </div>
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">URL Foto Kartu 3:</label>
+                  <input type="url" id="home-f3-img" placeholder="https://..."
+                         class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-indigo focus:outline-none mb-2" />
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Judul:</label>
+                  <input type="text" id="home-f3-title" placeholder="Reservasi Mudah & Cepat"
+                         class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-indigo focus:outline-none mb-2" />
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Deskripsi:</label>
+                  <textarea id="home-f3-desc" rows="3" placeholder="Platform digital mobile-first..."
+                            class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-indigo focus:outline-none"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. STORYTELLING & CTA BANNERS -->
+          <div class="grid md:grid-cols-2 gap-6">
+            <!-- Storytelling Banner -->
+            <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6">
+              <div class="flex items-center gap-3 pb-4 mb-4 border-b border-slate-100">
+                <span class="text-2xl p-2 bg-indigo-100 text-indigo rounded-2xl">📖</span>
+                <div>
+                  <h4 class="font-baloo font-bold text-base text-slate-900">3. Banner Storytelling Budaya</h4>
+                  <p class="text-[11px] text-slate-400">Banner di bawah katalog paket wisata.</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4 mb-4">
+                <div class="w-24 h-24 rounded-2xl overflow-hidden shrink-0 border border-slate-200 shadow-sm bg-slate-50">
+                  <img id="prev-home-story-img" src="" alt="Story" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&w=400&q=80'" />
+                </div>
+                <div class="flex-1">
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">URL Foto Banner:</label>
+                  <input type="url" id="home-story-img" placeholder="https://..."
+                         class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-indigo focus:outline-none" />
+                </div>
+              </div>
+
+              <div class="space-y-3">
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Judul Banner:</label>
+                  <input type="text" id="home-story-title" placeholder="Storytelling Budaya Bali 🌺"
+                         class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-indigo focus:outline-none" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Deskripsi Banner:</label>
+                  <textarea id="home-story-desc" rows="3" placeholder="Setiap rute dilengkapi cerita edukasi..."
+                            class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-indigo focus:outline-none"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- CTA Download Banner -->
+            <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6">
+              <div class="flex items-center gap-3 pb-4 mb-4 border-b border-slate-100">
+                <span class="text-2xl p-2 bg-emerald-100 text-emerald-600 rounded-2xl">🎁</span>
+                <div>
+                  <h4 class="font-baloo font-bold text-base text-slate-900">4. Banner Unduh Kit & Guide</h4>
+                  <p class="text-[11px] text-slate-400">Banner ajakan unduh di bawah koleksi kit.</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4 mb-4">
+                <div class="w-24 h-24 rounded-2xl overflow-hidden shrink-0 border border-slate-200 shadow-sm bg-slate-50">
+                  <img id="prev-home-cta-img" src="" alt="CTA" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=300&q=80'" />
+                </div>
+                <div class="flex-1">
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">URL Foto Bundle Unduhan:</label>
+                  <input type="url" id="home-cta-img" placeholder="https://..."
+                         class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-600 focus:outline-none" />
+                </div>
+              </div>
+
+              <div class="space-y-3">
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Judul Banner:</label>
+                  <input type="text" id="home-cta-title" placeholder="Unduh Semua Activity Kit..."
+                         class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-600 focus:outline-none" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Deskripsi Banner:</label>
+                  <textarea id="home-cta-desc" rows="3" placeholder="Gratis! Dapatkan 15+ lembar aktivitas..."
+                            class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-600 focus:outline-none"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUBMIT ACTION BAR -->
+          <div class="bg-slate-900 rounded-3xl p-6 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">✨</span>
+              <div>
+                <p class="font-bold text-sm">Simpan Semua Pengaturan Foto & Beranda</p>
+                <p class="text-xs text-slate-400">Perubahan akan langsung tersimpan dan aktif di beranda.</p>
+              </div>
+            </div>
+            <button type="submit" class="bg-primary hover:bg-primary-dark text-white font-bold px-8 py-3 rounded-2xl shadow-lg transition duration-200 text-sm w-full sm:w-auto">
+              💾 Simpan Perubahan Beranda
+            </button>
+          </div>
+        </form>
+
+        <!-- 5. GALERI REKOMENDASI FOTO CEPAT (QUICK PRESET PICKER) -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 md:p-8">
+          <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-100">
+            <div>
+              <h4 class="font-baloo font-bold text-lg text-slate-900">✨ Galeri Rekomendasi Foto Wisata Bali & Anak</h4>
+              <p class="text-xs text-slate-400">Pilih salah satu foto di bawah, lalu klik menu cepat untuk langsung memasangnya ke bagian beranda tanpa perlu mencari URL manual.</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4" id="preset-photos-grid">
+            <!-- Dynamic presets rendered by JS -->
+          </div>
+        </div>
       </div>
     </section>
 
@@ -628,6 +895,7 @@
         loadPackages(),
         loadKits(),
         loadTips(),
+        loadHomepageSettings(),
         loadSettingsForm(),
       ]);
     }
@@ -1129,6 +1397,249 @@
 
       closeTipModal();
       loadTips();
+    });
+
+    // ==================== HOMEPAGE & PHOTO SETTINGS ====================
+    const PHOTO_PRESETS = [
+      {
+        title: "Keluarga Happy Bali",
+        category: "Keluarga & Liburan",
+        url: "https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "Pura & Budaya Ubud",
+        category: "Budaya Bali",
+        url: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "Satwa & Alam Tropis",
+        category: "Fauna & Flora",
+        url: "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "Pantai Sunset Bali",
+        category: "Pesisir & Pantai",
+        url: "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "Anak Mewarnai Gambar",
+        category: "Kreativitas Edukasi",
+        url: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "Membaca Buku Cerita",
+        category: "Storytelling Anak",
+        url: "https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "Motorik & Sensorik Halus",
+        category: "Belajar & Bermain",
+        url: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "Teka-Teki & Puzzle",
+        category: "Asah Otak",
+        url: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "Konsultasi WhatsApp Cepat",
+        category: "Layanan Pelanggan",
+        url: "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "Sawah Terasering Hijau",
+        category: "Eksplorasi Alam",
+        url: "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "Labirin & Balita Belajar",
+        category: "Edukasi Balita",
+        url: "https://images.unsplash.com/photo-1560785496-3c9d27877182?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "Keluarga & Pantai Tropis",
+        category: "Wisata Bahari",
+        url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+      }
+    ];
+
+    function updatePreview(inputId, imgId) {
+      const input = document.getElementById(inputId);
+      const img = document.getElementById(imgId);
+      if (input && img) {
+        img.src = input.value.trim() || 'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=800&q=80';
+      }
+    }
+
+    function setupPreviewListeners() {
+      const pairs = [
+        ['home-hero-img', 'prev-home-hero-img'],
+        ['home-f1-img', 'prev-home-f1-img'],
+        ['home-f2-img', 'prev-home-f2-img'],
+        ['home-f3-img', 'prev-home-f3-img'],
+        ['home-story-img', 'prev-home-story-img'],
+        ['home-cta-img', 'prev-home-cta-img'],
+      ];
+      pairs.forEach(([inputId, imgId]) => {
+        const input = document.getElementById(inputId);
+        if (input) {
+          input.addEventListener('input', () => updatePreview(inputId, imgId));
+          input.addEventListener('change', () => updatePreview(inputId, imgId));
+        }
+      });
+    }
+
+    function setVal(id, val) {
+      const el = document.getElementById(id);
+      if (el) el.value = val;
+    }
+
+    async function loadHomepageSettings() {
+      setupPreviewListeners();
+      renderPhotoPresets();
+
+      const { data, error } = await db.from('site_settings').select('*').eq('id', 'general').single();
+      if (error) return console.error('Gagal memuat setting homepage:', error);
+
+      if (data) {
+        currentSettings = { ...currentSettings, ...data };
+        // Hero
+        setVal('home-hero-img', data.hero_image_url || 'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=800&q=80');
+        setVal('home-hero-badge', data.hero_badge || 'Edu-Tourism Ramah Anak Usia 3–7 Tahun');
+        setVal('home-hero-title', data.hero_title || 'Liburan Bali Seru & Edukatif untuk Si Kecil! 🌺');
+        setVal('home-hero-subtitle', data.hero_subtitle || 'Paket wisata Bali Little Explorer dirancang khusus untuk keluarga dengan balita & anak usia dini — rute ramah anak, Activity Kit gratis, dan panduan parenting perjalanan.');
+
+        // Keunggulan
+        setVal('home-f1-img', data.feature_1_image_url || 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=300&q=80');
+        setVal('home-f1-title', data.feature_1_title || 'Rute Wisata Terstruktur');
+        setVal('home-f1-desc', data.feature_1_desc || 'Itinerary ramah anak dengan estimasi waktu, jarak, dan jeda istirahat yang telah dirancang oleh tim pariwisata profesional.');
+
+        setVal('home-f2-img', data.feature_2_image_url || 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=300&q=80');
+        setVal('home-f2-title', data.feature_2_title || 'Activity Kit Edukatif');
+        setVal('home-f2-desc', data.feature_2_desc || '15+ lembar mewarnai, teka-teki visual, dan latihan motorik halus berbasis budaya Bali untuk menjaga anak tetap aktif & gembira.');
+
+        setVal('home-f3-img', data.feature_3_image_url || 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=300&q=80');
+        setVal('home-f3-title', data.feature_3_title || 'Reservasi Mudah & Cepat');
+        setVal('home-f3-desc', data.feature_3_desc || 'Platform digital mobile-first yang terhubung langsung ke admin Bali Top Holiday via WhatsApp & formulir online kapanpun Anda butuhkan.');
+
+        // Banners
+        setVal('home-story-img', data.story_banner_image_url || 'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&w=400&q=80');
+        setVal('home-story-title', data.story_banner_title || 'Storytelling Budaya Bali 🌺');
+        setVal('home-story-desc', data.story_banner_desc || 'Setiap rute dilengkapi dengan cerita edukasi budaya Bali yang bisa dibacakan orang tua atau pemandu selama kunjungan — dari pengenalan tari Kecak, flora endemik, hingga cerita rakyat Bali yang menarik untuk anak.');
+
+        setVal('home-cta-img', data.cta_banner_image_url || 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=300&q=80');
+        setVal('home-cta-title', data.cta_banner_title || 'Unduh Semua Activity Kit + Family Travel Guide');
+        setVal('home-cta-desc', data.cta_banner_desc || 'Gratis! Dapatkan 15+ lembar aktivitas anak (PDF siap cetak) + e-book Family Travel Guide Bali sekarang juga.');
+
+        // Update all previews
+        updatePreview('home-hero-img', 'prev-home-hero-img');
+        updatePreview('home-f1-img', 'prev-home-f1-img');
+        updatePreview('home-f2-img', 'prev-home-f2-img');
+        updatePreview('home-f3-img', 'prev-home-f3-img');
+        updatePreview('home-story-img', 'prev-home-story-img');
+        updatePreview('home-cta-img', 'prev-home-cta-img');
+      }
+    }
+
+    function renderPhotoPresets() {
+      const grid = document.getElementById('preset-photos-grid');
+      if (!grid) return;
+      grid.innerHTML = PHOTO_PRESETS.map((p) => `
+        <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-2.5 flex flex-col justify-between hover:shadow-md transition">
+          <div class="aspect-[4/3] rounded-xl overflow-hidden mb-2 shadow-inner">
+            <img src="${p.url}" alt="${p.title}" class="w-full h-full object-cover hover:scale-105 transition duration-300" />
+          </div>
+          <div class="mb-2">
+            <p class="font-bold text-[11px] text-slate-800 truncate" title="${p.title}">${p.title}</p>
+            <p class="text-[9px] text-slate-400">${p.category}</p>
+          </div>
+          <div>
+            <select onchange="applyPresetToTarget(this.value, '${p.url}'); this.value='';" class="w-full text-[10px] font-bold bg-white border border-slate-200 rounded-lg px-2 py-1 text-slate-700 focus:outline-none">
+              <option value="">Pasang ke... ▾</option>
+              <option value="hero">🌅 Foto Hero</option>
+              <option value="f1">🌟 Keunggulan 1</option>
+              <option value="f2">🌟 Keunggulan 2</option>
+              <option value="f3">🌟 Keunggulan 3</option>
+              <option value="story">📖 Storytelling</option>
+              <option value="cta">🎁 Banner Unduh</option>
+            </select>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function applyPresetToTarget(target, url) {
+      if (!target) return;
+      const targetMap = {
+        hero: { input: 'home-hero-img', prev: 'prev-home-hero-img', label: 'Foto Hero Utama' },
+        f1: { input: 'home-f1-img', prev: 'prev-home-f1-img', label: 'Keunggulan 1' },
+        f2: { input: 'home-f2-img', prev: 'prev-home-f2-img', label: 'Keunggulan 2' },
+        f3: { input: 'home-f3-img', prev: 'prev-home-f3-img', label: 'Keunggulan 3' },
+        story: { input: 'home-story-img', prev: 'prev-home-story-img', label: 'Banner Storytelling' },
+        cta: { input: 'home-cta-img', prev: 'prev-home-cta-img', label: 'Banner Unduh Kit' },
+      };
+
+      const item = targetMap[target];
+      if (item) {
+        const inputEl = document.getElementById(item.input);
+        if (inputEl) {
+          inputEl.value = url;
+          updatePreview(item.input, item.prev);
+          inputEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          inputEl.classList.add('ring-4', 'ring-primary/40');
+          setTimeout(() => inputEl.classList.remove('ring-4', 'ring-primary/40'), 1500);
+        }
+      }
+    }
+
+    function submitHomepageForm() {
+      document.getElementById('homepage-form').requestSubmit();
+    }
+
+    document.getElementById('homepage-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = e.target.querySelector('button[type="submit"]') || document.querySelector('button[onclick="submitHomepageForm()"]');
+      const origText = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) {
+        submitBtn.innerHTML = 'Menyimpan... ⏳';
+        submitBtn.disabled = true;
+      }
+
+      const payload = {
+        hero_image_url: document.getElementById('home-hero-img').value.trim(),
+        hero_badge: document.getElementById('home-hero-badge').value.trim(),
+        hero_title: document.getElementById('home-hero-title').value.trim(),
+        hero_subtitle: document.getElementById('home-hero-subtitle').value.trim(),
+        feature_1_image_url: document.getElementById('home-f1-img').value.trim(),
+        feature_1_title: document.getElementById('home-f1-title').value.trim(),
+        feature_1_desc: document.getElementById('home-f1-desc').value.trim(),
+        feature_2_image_url: document.getElementById('home-f2-img').value.trim(),
+        feature_2_title: document.getElementById('home-f2-title').value.trim(),
+        feature_2_desc: document.getElementById('home-f2-desc').value.trim(),
+        feature_3_image_url: document.getElementById('home-f3-img').value.trim(),
+        feature_3_title: document.getElementById('home-f3-title').value.trim(),
+        feature_3_desc: document.getElementById('home-f3-desc').value.trim(),
+        story_banner_image_url: document.getElementById('home-story-img').value.trim(),
+        story_banner_title: document.getElementById('home-story-title').value.trim(),
+        story_banner_desc: document.getElementById('home-story-desc').value.trim(),
+        cta_banner_image_url: document.getElementById('home-cta-img').value.trim(),
+        cta_banner_title: document.getElementById('home-cta-title').value.trim(),
+        cta_banner_desc: document.getElementById('home-cta-desc').value.trim(),
+        updated_at: new Date().toISOString()
+      };
+
+      const { error } = await db.from('site_settings').upsert({ id: 'general', ...payload });
+      if (error) {
+        alert('Gagal menyimpan foto & tampilan beranda: ' + error.message);
+      } else {
+        alert('✅ Foto & tampilan beranda berhasil diperbarui! Silakan cek halaman depan website.');
+        loadHomepageSettings();
+      }
+
+      if (submitBtn) {
+        submitBtn.innerHTML = origText;
+        submitBtn.disabled = false;
+      }
     });
 
     // ==================== SETTINGS ====================
