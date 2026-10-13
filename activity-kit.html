@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Digital Kids Activity Kit Bali Little Explorer – Lembar mewarnai ikon budaya Bali, teka-teki visual flora fauna, dan latihan motorik halus anak usia 3-7 tahun (PDF siap cetak gratis)." />
+  <meta name="keywords" content="activity kit anak bali, lembar mewarnai bali, lembar kerja paud bali, games edukasi anak liburan bali, bali little explorer" />
+  <title>Digital Kids Activity Kit 🎨 – Lembar Aktivitas Anak | Bali Little Explorer</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <!-- Supabase JS Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary:   { DEFAULT: '#FF6B35', light: '#FF8C5A', dark: '#E05020' },
+            secondary: { DEFAULT: '#FFD166', light: '#FFE499' },
+            teal:      { DEFAULT: '#06D6A0', dark: '#04B882' },
+            indigo:    { DEFAULT: '#4361EE' },
+            cream:     { DEFAULT: '#FFF8F0' },
+            dark:      { DEFAULT: '#1E293B', card: '#0F172A' },
+          },
+          fontFamily: {
+            nunito: ['Nunito', 'sans-serif'],
+            baloo:  ['Baloo 2', 'cursive'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    * { font-family: 'Nunito', sans-serif; }
+    h1, h2, h3, h4, .font-baloo { font-family: 'Baloo 2', cursive; }
+
+    /* === Hero Gradient === */
+    .hero-kit-gradient {
+      background: linear-gradient(135deg, #06D6A0 0%, #04B882 35%, #FFD166 80%, #FF6B35 100%);
+    }
+
+    /* === Pattern Background === */
+    .bg-pattern {
+      background-color: #FFF8F0;
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2306D6A0' fill-opacity='0.04'%3E%3Ccircle cx='20' cy='20' r='4'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* === Floating WA Button === */
+    #wa-float {
+      position: fixed; bottom: 24px; right: 24px;
+      z-index: 9999;
+      animation: bounce-wa 2.2s infinite;
+    }
+    @keyframes bounce-wa {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-8px); }
+    }
+
+    /* === Card Hover Glow === */
+    .kit-card {
+      transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .kit-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px -10px rgba(6, 214, 160, 0.25);
+    }
+
+    /* === Modal Transition === */
+    .modal-backdrop {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(6px);
+      animation: fadeIn .2s ease-out;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #f8fafc; }
+    ::-webkit-scrollbar-thumb { background: #06D6A0; border-radius: 4px; }
+  </style>
+</head>
+<body class="bg-white text-slate-800 antialiased overflow-x-hidden min-h-screen flex flex-col justify-between">
+
+  <!-- ====================== NAVBAR ====================== -->
+  <header class="bg-white/95 backdrop-blur-md border-b border-slate-100 sticky top-0 z-40 transition-all shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-2.5 group">
+        <span class="text-3xl group-hover:scale-110 transition duration-300">🌴</span>
+        <div>
+          <span class="font-baloo font-extrabold text-xl text-slate-900 leading-tight block">Bali Little Explorer</span>
+          <span class="text-xs font-semibold text-teal-dark block leading-none">by Bali Top Holiday</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-bold text-slate-600">
+        <a href="index.html" class="hover:text-primary transition flex items-center gap-1.5">
+          <span>← Beranda Utama</span>
+        </a>
+        <a href="paket.html" class="hover:text-primary transition">🗺️ Paket Wisata</a>
+        <a href="activity-kit.html" class="text-teal-dark font-extrabold flex items-center gap-1">
+          <span>🎨 Activity Kit</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-teal inline-block"></span>
+        </a>
+        <a href="parenting-tips.html" class="hover:text-primary transition">💡 Tips Parenting</a>
+        <a href="reservasi.html" class="hover:text-primary transition">📅 Reservasi</a>
+      </nav>
+
+      <!-- Right Action -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a id="nav-wa-btn" href="https://wa.me/6281234567890" target="_blank"
+           class="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs px-4 py-2.5 rounded-full shadow-lg shadow-emerald-500/20 transition duration-200">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          <span>Minta via WA</span>
+        </a>
+      </div>
+
+      <!-- Mobile Button -->
+      <button id="mobile-toggle" class="md:hidden text-2xl text-slate-700 p-2 focus:outline-none">☰</button>
+    </div>
+
+    <!-- Mobile Nav Menu -->
+    <div id="mobile-dropdown" class="hidden md:hidden bg-white border-b border-slate-200 px-6 py-5 space-y-3 font-bold text-sm">
+      <a href="index.html" class="block py-2 text-slate-700 hover:text-primary">← Kembali ke Beranda</a>
+      <a href="paket.html" class="block py-2 text-slate-700 hover:text-primary">🗺️ Katalog Paket Wisata</a>
+      <a href="activity-kit.html" class="block py-2 text-teal-dark">🎨 Digital Activity Kit</a>
+      <a href="parenting-tips.html" class="block py-2 text-slate-700 hover:text-primary">💡 Panduan Parenting</a>
+      <a href="reservasi.html" class="block py-2 text-slate-700 hover:text-primary">📅 Reservasi Online</a>
+      <a id="mobile-wa-btn" href="https://wa.me/6281234567890" target="_blank"
+         class="block w-full text-center bg-emerald-500 text-white py-3 rounded-2xl shadow mt-2">
+        💬 Chat WhatsApp Admin
+      </a>
+    </div>
+  </header>
+
+  <!-- ====================== HERO HEADER ====================== -->
+  <section class="hero-kit-gradient text-white py-16 md:py-24 relative overflow-hidden">
+    <div class="absolute -top-12 -right-12 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-16 -left-16 w-80 h-80 bg-black/10 rounded-full blur-2xl pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-6 relative z-10 text-center">
+      <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider mb-5 border border-white/30" data-aos="fade-down">
+        <span>🎨 Digital Printable Materials (PDF A4)</span>
+      </div>
+
+      <h1 class="font-baloo font-extrabold text-4xl sm:text-5xl md:text-6xl leading-tight mb-5 drop-shadow-md" data-aos="fade-up" data-aos-delay="100">
+        Koleksi <span class="text-secondary drop-shadow">Kids Activity Kit</span> Bali Gratis
+      </h1>
+
+      <p class="text-white/95 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-8 drop-shadow-sm" data-aos="fade-up" data-aos-delay="200">
+        15+ lembar aktivitas kreatif ramah anak usia 3–7 tahun. Dirancang berbasis ikon budaya Bali, pengenalan satwa tropis, dan latihan motorik halus agar si kecil tetap gembira & fokus selama liburan.
+      </p>
+
+      <!-- Key Badges -->
+      <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm font-bold text-white/95" data-aos="fade-up" data-aos-delay="300">
+        <span class="inline-flex items-center gap-1.5 bg-black/15 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/20">
+          📥 100% Gratis Diunduh
+        </span>
+        <span class="inline-flex items-center gap-1.5 bg-black/15 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/20">
+          📄 Format Siap Cetak (A4 PDF)
+        </span>
+        <span class="inline-flex items-center gap-1.5 bg-black/15 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/20">
+          👶 Ramah Balita & PAUD (3–7 Thn)
+        </span>
+        <span class="inline-flex items-center gap-1.5 bg-black/15 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/20">
+          🚗 Solusi Anti-Bosan di Mobil
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== MAIN CONTENT: KITS CATALOG ====================== -->
+  <main class="py-12 md:py-16 bg-pattern flex-1">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- SEARCH & FILTER BAR -->
+      <div class="bg-white rounded-3xl p-5 md:p-6 shadow-sm border border-slate-200/80 mb-10 -mt-8 relative z-20" data-aos="fade-up">
+        <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+          <!-- Search box -->
+          <div class="relative flex-1">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 text-lg">🔍</span>
+            <input type="text" id="kit-search-input" placeholder="Cari materi kit (cth: Mewarnai, Pura, Tari Barong, Teka-Teki, Motorik)..."
+                   class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-2xl text-sm focus:ring-2 focus:ring-teal focus:outline-none transition" />
+          </div>
+
+          <!-- Counter and bundle button -->
+          <div class="flex items-center justify-between md:justify-end gap-3">
+            <span id="kits-count" class="text-xs font-bold text-slate-500">Memuat koleksi kit...</span>
+            <button onclick="openBundleDownloadModal()"
+                    class="bg-primary hover:bg-primary-dark text-white text-xs font-bold px-4 py-3 rounded-2xl shadow transition flex items-center gap-1.5">
+              <span>🎁 Unduh Semua Kit (Bundle)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- KITS GRID -->
+      <div id="kits-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <!-- Dynamically rendered by JavaScript -->
+        <div class="col-span-full text-center py-16">
+          <div class="w-12 h-12 border-4 border-teal border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p class="text-sm font-bold text-slate-500">Memuat berkas Kids Activity Kit...</p>
+        </div>
+      </div>
+
+      <!-- ====================== HOW TO USE / PRINTING GUIDE ====================== -->
+      <section class="bg-white rounded-3xl p-8 md:p-12 border border-slate-200/80 shadow-sm mb-16" data-aos="fade-up">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <span class="bg-teal/10 text-teal-dark font-bold text-xs px-3.5 py-1 rounded-full uppercase tracking-wider">Tips Bagi Orang Tua</span>
+          <h2 class="font-baloo font-bold text-3xl text-slate-900 mt-2">Cara Terbaik Memakai Activity Kit Saat Liburan</h2>
+          <p class="text-sm text-slate-500 mt-2">Maksimalkan pengalaman bermain & belajar si kecil dengan 4 langkah sederhana berikut:</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="p-5 rounded-2xl bg-teal-50/60 border border-teal-100 flex flex-col items-center text-center">
+            <span class="w-14 h-14 bg-white shadow-sm rounded-2xl flex items-center justify-center text-3xl mb-4">🖨️</span>
+            <h4 class="font-baloo font-bold text-base text-slate-800 mb-1">1. Cetak Sebelum Berangkat</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">Cetak di kertas HVS 80–100 gsm ukuran A4. Lebih tebal lebih baik agar spidol/krayon tidak mudah tembus.</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-orange-50/60 border border-orange-100 flex flex-col items-center text-center">
+            <span class="w-14 h-14 bg-white shadow-sm rounded-2xl flex items-center justify-center text-3xl mb-4">🖍️</span>
+            <h4 class="font-baloo font-bold text-base text-slate-800 mb-1">2. Siapkan Krayon Khusus</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">Gunakan krayon segitiga atau pensil warna non-toxic yang mudah digenggam dan tidak mudah menggelinding di mobil.</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-indigo-50/60 border border-indigo-100 flex flex-col items-center text-center">
+            <span class="w-14 h-14 bg-white shadow-sm rounded-2xl flex items-center justify-center text-3xl mb-4">🚗</span>
+            <h4 class="font-baloo font-bold text-base text-slate-800 mb-1">3. Bagikan Bertahap di Mobil</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">Jangan berikan semua lembar sekaligus. Berikan 1–2 lembar baru tiap kali mobil melaju ke destinasi berikutnya.</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-amber-50/60 border border-amber-100 flex flex-col items-center text-center">
+            <span class="w-14 h-14 bg-white shadow-sm rounded-2xl flex items-center justify-center text-3xl mb-4">💬</span>
+            <h4 class="font-baloo font-bold text-base text-slate-800 mb-1">4. Dampingi Sambil Mendongeng</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">Bacakan cerita pengantar yang ada di lembar. Tanyakan pada si kecil warna apa yang ingin ia berikan untuk pura atau barong.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================== CTA TRAVEL GUIDE ====================== -->
+      <section class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white rounded-3xl p-8 md:p-12 shadow-xl mb-16 relative overflow-hidden" data-aos="fade-up">
+        <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div class="max-w-xl text-center lg:text-left">
+            <span class="bg-white/20 text-white border border-white/30 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider inline-block mb-3">E-Book Gratis</span>
+            <h3 class="font-baloo font-bold text-3xl sm:text-4xl leading-tight">Dapatkan Juga E-Book "Family Travel Guide Bali"</h3>
+            <p class="text-white/90 text-sm mt-3 leading-relaxed">
+              Panduan lengkap persiapan liburan keluarga ke Bali: daftar perlengkapan penting balita, rekomendasi restoran dengan high chair & baby friendly, serta nomor kontak darurat dokter anak di Bali.
+            </p>
+          </div>
+          <div class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
+            <button onclick="openDownloadModal('Family Travel Guide Bali E-Book', 'Panduan lengkap travel parenting dan persiapan liburan anak ke Bali.', 'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&w=400&q=80', '')"
+                    class="w-full sm:w-auto bg-white hover:bg-slate-100 text-teal-dark font-extrabold px-7 py-3.5 rounded-2xl shadow-lg transition duration-200 text-sm text-center">
+              📥 Unduh E-Book Gratis
+            </button>
+            <a href="paket.html"
+               class="w-full sm:w-auto bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold px-6 py-3.5 rounded-2xl transition duration-200 text-sm text-center">
+              🗺️ Lihat Paket Wisata Kami
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ====================== FOOTER ====================== -->
+  <footer class="bg-slate-900 text-white pt-16 pb-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+        <div class="md:col-span-2 space-y-4">
+          <div class="flex items-center gap-2.5">
+            <span class="text-3xl">🌴</span>
+            <div>
+              <span class="font-baloo font-extrabold text-2xl text-white block">Bali Little Explorer</span>
+              <span class="text-xs text-teal font-bold block">Edu-Tourism Hub by Bali Top Holiday</span>
+            </div>
+          </div>
+          <p class="text-slate-400 text-xs sm:text-sm max-w-md leading-relaxed">
+            Menyediakan materi edukasi ramah anak siap cetak gratis untuk mendukung liburan keluarga yang bermakna, tenang, dan menyenangkan di Pulau Dewata Bali.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-baloo font-bold text-base text-white mb-4">Navigasi Halaman</h4>
+          <ul class="space-y-2.5 text-xs text-slate-400">
+            <li><a href="index.html" class="hover:text-primary transition">Beranda Utama</a></li>
+            <li><a href="paket.html" class="hover:text-primary transition">Katalog Paket Wisata</a></li>
+            <li><a href="activity-kit.html" class="text-teal font-bold">Digital Activity Kit</a></li>
+            <li><a href="parenting-tips.html" class="hover:text-primary transition">Panduan Parenting Tour</a></li>
+            <li><a href="reservasi.html" class="hover:text-primary transition">Pusat Reservasi Online</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-baloo font-bold text-base text-white mb-4">Bantuan & Kontak</h4>
+          <p class="text-xs text-slate-400 mb-4 leading-relaxed">Kendala saat mengunduh berkas atau butuh file dalam format tertentu? Tim kami siap membantu:</p>
+          <a id="footer-wa-btn" href="https://wa.me/6281234567890" target="_blank"
+             class="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition duration-200">
+            <span>💬 Chat Admin Bali Top Holiday</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <p>© 2026 Bali Little Explorer · Bali Top Holiday. All Rights Reserved.</p>
+        <p>Digital Activity Kit Gratis untuk Pendidikan Anak Usia Dini (PAUD)</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====================== FLOATING WA BUTTON ====================== -->
+  <a id="wa-float"
+     href="https://wa.me/6281234567890?text=Halo%20Bali%20Top%20Holiday%2C%20saya%20ingin%20minta%20file%20Digital%20Kids%20Activity%20Kit%20PDF%20untuk%20anak%20saya%20%F0%9F%8E%A8"
+     target="_blank"
+     class="bg-emerald-500 text-white w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shadow-2xl hover:bg-emerald-600 hover:scale-110 transition-all duration-300">
+    <svg class="w-7 h-7 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
+
+  <!-- ====================== DOWNLOAD MODAL ====================== -->
+  <div id="modal-download" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative text-center" data-aos="zoom-in">
+      <div class="w-20 h-20 rounded-2xl overflow-hidden mx-auto mb-4 border-2 border-teal/20 shadow-sm bg-slate-50">
+        <img id="modal-dl-img" src="" alt="Thumbnail" class="w-full h-full object-cover" />
+      </div>
+
+      <h3 class="font-baloo font-bold text-2xl text-slate-800 mb-1" id="modal-dl-title">Unduh Activity Kit</h3>
+      <p class="text-xs text-slate-500 mb-5 leading-relaxed" id="modal-dl-desc">Materi siap cetak PDF A4.</p>
+
+      <form id="form-download-lead" class="space-y-3.5 text-left mb-5">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Nama Ayah / Bunda *</label>
+          <input type="text" id="lead-name" required placeholder="Contoh: Bunda Sarah"
+                 class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-teal focus:outline-none" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Alamat Email (Opsional)</label>
+          <input type="email" id="lead-email" placeholder="email@contoh.com"
+                 class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-teal focus:outline-none" />
+        </div>
+
+        <button type="submit" id="btn-submit-download"
+                class="w-full bg-teal hover:bg-teal-dark text-white font-bold text-sm py-3.5 rounded-2xl shadow-lg transition duration-200 flex items-center justify-center gap-2">
+          <span>📥 Unduh Berkas Sekarang (Gratis)</span>
+        </button>
+      </form>
+
+      <button type="button" onclick="closeDownloadModal()" class="text-xs font-bold text-slate-400 hover:text-slate-600 transition">
+        Batal
+      </button>
+    </div>
+  </div>
+
+  <!-- ====================== SCRIPTS ====================== -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    // Supabase Setup
+    const SUPABASE_URL  = 'https://kbyjkhmgjkuqgmcakvqp.supabase.co';
+    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtieWpraG1namt1cWdtY2FrdnFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3NTc5ODUsImV4cCI6MjEwNzMzMzk4NX0.hCGw_JOF7FfYXqxwIGAllonTC1wwBoolhX9y_IFJn2M';
+    const { createClient } = supabase;
+    const db = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+    let allKits = [];
+    let currentWA = '6281234567890';
+    let currentSelectedKit = null;
+
+    const DEFAULT_KITS = [
+      {
+        id: 1,
+        title: "Lembar Mewarnai Ikon Bali",
+        icon: "🎨",
+        description: "Pura Ulun Danu, Tari Barong, Bunga Jepun, dan Pakaian Adat Bali.",
+        sheet_count: "5 Lembar PDF",
+        badge_color: "orange",
+        image_url: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=400&q=80",
+        file_url: ""
+      },
+      {
+        id: 2,
+        title: "Teka-Teki Visual Flora & Fauna",
+        icon: "🧩",
+        description: "Mencari jejak Burung Jalak Bali, Gajah Sumatra, dan Daun Tropis.",
+        sheet_count: "4 Lembar PDF",
+        badge_color: "teal",
+        image_url: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=400&q=80",
+        file_url: ""
+      },
+      {
+        id: 3,
+        title: "Latihan Motorik Halus & Pola",
+        icon: "✂️",
+        description: "Menghubungkan garis canang sari, pola kain poleng, dan mewarnai.",
+        sheet_count: "4 Lembar PDF",
+        badge_color: "purple",
+        image_url: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=400&q=80",
+        file_url: ""
+      },
+      {
+        id: 4,
+        title: "Labirin & Tebak Kata Balita",
+        icon: "🗺️",
+        description: "Bantu si monyet kembali ke Hutan Ubud dan teka-teki visual simpel.",
+        sheet_count: "3 Lembar PDF",
+        badge_color: "yellow",
+        image_url: "https://images.unsplash.com/photo-1560785496-3c9d27877182?auto=format&fit=crop&w=400&q=80",
+        file_url: ""
+      }
+    ];
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      AOS.init({ duration: 700, once: true, offset: 60 });
+      setupNavigation();
+      setupSearch();
+      setupDownloadForm();
+      await fetchSiteSettings();
+      await fetchKits();
+    });
+
+    function setupNavigation() {
+      const toggle = document.getElementById('mobile-toggle');
+      const menu = document.getElementById('mobile-dropdown');
+      if (toggle && menu) {
+        toggle.addEventListener('click', () => menu.classList.toggle('hidden'));
+      }
+    }
+
+    async function fetchSiteSettings() {
+      try {
+        const { data } = await db.from('site_settings').select('*').eq('id', 'general').single();
+        if (data && data.whatsapp_number) {
+          currentWA = data.whatsapp_number.replace(/[^0-9]/g, '');
+          updateWALinks(currentWA);
+        }
+      } catch (e) {
+        console.warn('Gagal memuat setting:', e);
+      }
+    }
+
+    function updateWALinks(wa) {
+      document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+        try {
+          const url = new URL(link.href);
+          const text = url.searchParams.get('text') || '';
+          link.href = `https://wa.me/${wa}${text ? '?text=' + encodeURIComponent(text) : ''}`;
+        } catch (_) {}
+      });
+    }
+
+    async function fetchKits() {
+      try {
+        const { data, error } = await db.from('activity_kits').select('*').order('order_index', { ascending: true });
+        if (!error && data && data.length > 0) {
+          allKits = data;
+        } else {
+          allKits = DEFAULT_KITS;
+        }
+      } catch (_) {
+        allKits = DEFAULT_KITS;
+      }
+      renderKits(allKits);
+    }
+
+    function setupSearch() {
+      const input = document.getElementById('kit-search-input');
+      if (!input) return;
+      input.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        const filtered = allKits.filter(k => {
+          return (k.title || '').toLowerCase().includes(query) ||
+                 (k.description || '').toLowerCase().includes(query);
+        });
+        renderKits(filtered);
+      });
+    }
+
+    function renderKits(list) {
+      const container = document.getElementById('kits-grid');
+      const countEl = document.getElementById('kits-count');
+      if (!container) return;
+
+      if (countEl) {
+        countEl.textContent = `Menampilkan ${list.length} materi kit`;
+      }
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full bg-white rounded-3xl p-12 text-center border border-slate-200">
+            <span class="text-4xl mb-3 block">🎨</span>
+            <h4 class="font-baloo font-bold text-xl text-slate-800">Tidak ada materi kit yang sesuai</h4>
+            <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">Coba gunakan kata kunci lain untuk mencari materi mewarnai atau teka-teki anak.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = list.map((k, idx) => {
+        const bgGrad = k.badge_color === 'teal' ? 'from-teal-50 to-teal-100/60 border-teal-200/80' :
+                       k.badge_color === 'purple' ? 'from-purple-50 to-purple-100/60 border-purple-200/80' :
+                       k.badge_color === 'yellow' ? 'from-amber-50 to-amber-100/60 border-amber-200/80' :
+                       'from-orange-50 to-orange-100/60 border-orange-200/80';
+        
+        const badgeColor = k.badge_color === 'teal' ? 'bg-teal/20 text-teal-dark' :
+                           k.badge_color === 'purple' ? 'bg-purple-200 text-purple-800' :
+                           k.badge_color === 'yellow' ? 'bg-amber-200 text-amber-800' :
+                           'bg-orange-200 text-orange-800';
+
+        const coverImg = k.image_url || 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=400&q=80';
+        const waMsg = encodeURIComponent(`Halo Bali Top Holiday, saya ingin minta berkas PDF "${k.title}" untuk anak saya. Terima kasih! 😊`);
+
+        return `
+          <div class="kit-card bg-gradient-to-br ${bgGrad} rounded-3xl p-6 border flex flex-col justify-between text-center" data-aos="fade-up" data-aos-delay="${(idx % 4) * 100}">
+            <div>
+              <div class="w-24 h-24 mx-auto mb-4 rounded-2xl overflow-hidden shadow-md border-2 border-white bg-white">
+                <img src="${coverImg}" alt="${k.title}" class="w-full h-full object-cover" />
+              </div>
+              <div class="mb-2">
+                <span class="${badgeColor} text-[10px] font-extrabold px-2.5 py-0.5 rounded-full inline-block">
+                  📄 ${k.sheet_count || 'PDF Ready'}
+                </span>
+              </div>
+              <h4 class="font-baloo font-bold text-slate-800 text-lg mb-2 leading-snug">${k.title}</h4>
+              <p class="text-xs text-slate-600 mb-4 leading-relaxed">${k.description || 'Materi edukasi anak usia dini.'}</p>
+            </div>
+
+            <div class="space-y-2 pt-2 border-t border-black/5">
+              <button onclick="openDownloadModal('${k.title.replace(/'/g, "\\'")}', '${(k.description || '').replace(/'/g, "\\'")}', '${coverImg}', '${k.file_url || ''}')"
+                      class="w-full bg-teal hover:bg-teal-dark text-white font-bold text-xs py-2.5 rounded-xl shadow transition flex items-center justify-center gap-1.5">
+                <span>📥 Unduh Lembar Ini</span>
+              </button>
+              <a href="https://wa.me/${currentWA}?text=${waMsg}" target="_blank"
+                 class="w-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs py-2 rounded-xl transition flex items-center justify-center gap-1">
+                <span>💬 Minta via WA</span>
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openDownloadModal(title, desc, img, fileUrl) {
+      currentSelectedKit = { title, desc, img, fileUrl };
+      document.getElementById('modal-dl-title').textContent = title;
+      document.getElementById('modal-dl-desc').textContent = desc || 'Format PDF A4 siap cetak.';
+      document.getElementById('modal-dl-img').src = img || 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=400&q=80';
+
+      document.getElementById('modal-download').classList.remove('hidden');
+      document.getElementById('modal-download').classList.add('flex');
+    }
+
+    function openBundleDownloadModal() {
+      openDownloadModal(
+        'Bundle Lengkap Semua Activity Kit (15+ Lembar PDF)',
+        'Paket komplit mewarnai ikon Bali, teka-teki visual flora fauna, latihan motorik halus, dan games balita.',
+        'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=400&q=80',
+        ''
+      );
+    }
+
+    function closeDownloadModal() {
+      document.getElementById('modal-download').classList.add('hidden');
+      document.getElementById('modal-download').classList.remove('flex');
+    }
+
+    function setupDownloadForm() {
+      const form = document.getElementById('form-download-lead');
+      if (!form) return;
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('btn-submit-download');
+        const origText = submitBtn.innerHTML;
+        submitBtn.innerHTML = 'Memproses... ⏳';
+        submitBtn.disabled = true;
+
+        const name = document.getElementById('lead-name').value.trim();
+        const email = document.getElementById('lead-email').value.trim();
+        const kitTitle = currentSelectedKit ? currentSelectedKit.title : 'Activity Kit';
+        const fileUrl = currentSelectedKit ? currentSelectedKit.fileUrl : '';
+
+        try {
+          // Save lead to Supabase
+          await db.from('download_leads').insert([
+            { name, email: email || null, kit_name: kitTitle, created_at: new Date().toISOString() }
+          ]);
+        } catch (err) {
+          console.warn('Lead logging error:', err);
+        }
+
+        closeDownloadModal();
+        form.reset();
+        submitBtn.innerHTML = origText;
+        submitBtn.disabled = false;
+
+        if (fileUrl && fileUrl.startsWith('http')) {
+          alert(`✅ Terima kasih Bunda/Ayah ${name}! File ${kitTitle} akan terbuka otomatis.`);
+          window.open(fileUrl, '_blank');
+        } else {
+          alert(`✅ Terima kasih Bunda/Ayah ${name}! Anda akan diarahkan ke WhatsApp admin untuk menerima file PDF resolusi tinggi langsung di chat.`);
+          const waMsg = encodeURIComponent(`Halo Bali Top Holiday, saya ${name} baru saja meminta file PDF "${kitTitle}" dari website Bali Little Explorer. Mohon dikirimkan filenya ya kak. Terima kasih! 😊`);
+          window.open(`https://wa.me/${currentWA}?text=${waMsg}`, '_blank');
+        }
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDownloadModal();
+    });
+  </script>
+</body>
+</html>

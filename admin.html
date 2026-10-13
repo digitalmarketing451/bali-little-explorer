@@ -178,6 +178,9 @@
               <option value="confirmed">Terkonfirmasi</option>
               <option value="cancelled">Batal</option>
             </select>
+            <a href="reservasi.html" target="_blank" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3 py-2 rounded-xl transition flex items-center gap-1">
+              <span>👁️ Buka Reservasi ↗</span>
+            </a>
             <button onclick="exportReservationsCSV()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3 py-2 rounded-xl transition flex items-center gap-1">
               <span>📥 Ekspor CSV</span>
             </button>
@@ -281,9 +284,16 @@
           <h3 class="font-baloo font-bold text-2xl text-slate-900">Digital Kids Activity Kit</h3>
           <p class="text-xs text-slate-500">Lembar aktivitas edukatif siap cetak (PDF) untuk anak usia 3–7 tahun.</p>
         </div>
-        <button onclick="openKitModal()" class="bg-teal hover:bg-teal-dark text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-1.5">
-          <span>+ Tambah Kit Baru</span>
-        </button>
+        <div class="flex items-center gap-2">
+          <a href="activity-kit.html" target="_blank"
+             class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3.5 py-2.5 rounded-xl shadow-sm transition flex items-center gap-1.5">
+            <span>👁️ Buka Halaman Kit</span>
+            <span>↗</span>
+          </a>
+          <button onclick="openKitModal()" class="bg-teal hover:bg-teal-dark text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-1.5">
+            <span>+ Tambah Kit Baru</span>
+          </button>
+        </div>
       </div>
 
       <div id="kits-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -298,9 +308,16 @@
           <h3 class="font-baloo font-bold text-2xl text-slate-900">Panduan & Tips Parenting</h3>
           <p class="text-xs text-slate-500">Tips psikologis perjalanan ramah anak yang tampil di slider carousel.</p>
         </div>
-        <button onclick="openTipModal()" class="bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-1.5">
-          <span>+ Tambah Tips Baru</span>
-        </button>
+        <div class="flex items-center gap-2">
+          <a href="parenting-tips.html" target="_blank"
+             class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3.5 py-2.5 rounded-xl shadow-sm transition flex items-center gap-1.5">
+            <span>👁️ Buka Halaman Tips</span>
+            <span>↗</span>
+          </a>
+          <button onclick="openTipModal()" class="bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-1.5">
+            <span>+ Tambah Tips Baru</span>
+          </button>
+        </div>
       </div>
 
       <div id="tips-grid" class="grid md:grid-cols-2 gap-6">
