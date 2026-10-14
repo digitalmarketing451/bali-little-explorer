@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "adminlittlebth.jinztech.cloud"
+        }
+      ],
+      "destination": "/admin.html"
+    }
+  ]
+}
