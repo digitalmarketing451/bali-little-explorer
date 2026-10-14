@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentasi Pitch Deck – Bali Little Explorer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF6B35',
+            secondary: '#FFD166',
+            teal: '#06D6A0',
+            indigo: '#4361EE',
+            dark: '#0F172A'
+          },
+          fontFamily: {
+            nunito: ['Nunito', 'sans-serif'],
+            baloo: ['Baloo 2', 'cursive']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { font-family: 'Nunito', sans-serif; }
+    h1, h2, h3, h4, .font-baloo { font-family: 'Baloo 2', cursive; }
+    .slide { display: none; }
+    .slide.active { display: flex; animation: fadeIn .3s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body class="bg-slate-950 text-white min-h-screen flex flex-col justify-between select-none">
+
+  <!-- TOP BAR -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <img src="logo.png" onerror="this.src='https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=100&q=80'" alt="Logo" class="w-8 h-8 rounded-full object-cover" />
+      <div>
+        <span class="font-baloo font-bold text-base text-white block leading-tight">Bali Little Explorer</span>
+        <span class="text-[11px] text-primary font-semibold block leading-none">Client Pitch & Presentation Deck</span>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <button onclick="toggleNotes()" id="btn-notes" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 border border-slate-700">
+        <span>🎙️ Panduan Bicara</span>
+      </button>
+      <span class="text-xs text-slate-400 font-bold bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60" id="slide-counter">Slide 1 / 6</span>
+    </div>
+  </header>
+
+  <!-- MAIN SLIDES CONTAINER -->
+  <main class="flex-1 flex items-center justify-center p-4 md:p-8 max-w-6xl mx-auto w-full">
+
+    <!-- SLIDE 1: COVER & OVERVIEW -->
+    <section class="slide active flex-col text-center items-center justify-center max-w-3xl mx-auto space-y-6">
+      <div class="inline-flex items-center gap-2 bg-primary/20 text-primary border border-primary/40 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+        ✨ Serah Terima & Demo Project
+      </div>
+      <h1 class="font-baloo font-extrabold text-4xl md:text-5xl text-white leading-tight">
+        Website Platform Wisata Edukasi Keluarga <span class="text-primary">Bali Little Explorer</span>
+      </h1>
+      <p class="text-slate-300 text-base md:text-lg leading-relaxed max-w-2xl">
+        Bukan sekadar website brosur biasa, melainkan <strong>ekosistem digital lengkap</strong> untuk mendatangkan tamu keluarga, mengumpulkan data leads, dan mengelola paket tour dengan mudah.
+      </p>
+      <div class="grid grid-cols-3 gap-4 pt-4 w-full">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+          <p class="text-2xl mb-1">🗺️</p>
+          <p class="text-xs font-bold text-slate-200">Katalog Khusus</p>
+          <p class="text-[11px] text-slate-400">4 Halaman Terpisah</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+          <p class="text-2xl mb-1">⚡</p>
+          <p class="text-xs font-bold text-slate-200">Database Realtime</p>
+          <p class="text-[11px] text-slate-400">Supabase Cloud</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+          <p class="text-2xl mb-1">🔐</p>
+          <p class="text-xs font-bold text-slate-200">Panel CMS Mandiri</p>
+          <p class="text-[11px] text-slate-400">Update Tanpa Koding</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: THE PROBLEM & OUR SOLUTION -->
+    <section class="slide flex-col max-w-4xl mx-auto space-y-6">
+      <div class="text-center mb-2">
+        <span class="text-xs font-bold text-secondary uppercase tracking-widest bg-secondary/10 px-3 py-1 rounded-full">Nilai Jual & Strategi</span>
+        <h2 class="font-baloo font-bold text-3xl md:text-4xl text-white mt-2">Mengapa Website Ini Membantu Penjualan?</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-rose-950/30 border border-rose-900/40 rounded-3xl p-6">
+          <div class="flex items-center gap-2 text-rose-400 font-bold text-sm mb-3">
+            <span>⚠️</span> Masalah Orang Tua Saat Liburan
+          </div>
+          <ul class="space-y-3 text-xs md:text-sm text-slate-300">
+            <li class="flex items-start gap-2">❌ Takut rute terlalu padat dan anak rewel / tantrum.</li>
+            <li class="flex items-start gap-2">❌ Bingung mencari destinasi yang aman untuk balita (3–7 tahun).</li>
+            <li class="flex items-start gap-2">❌ Banyak agen tour hanya fokus tur dewasa yang melelahkan.</li>
+          </ul>
+        </div>
+        <div class="bg-emerald-950/30 border border-emerald-900/40 rounded-3xl p-6">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm mb-3">
+            <span>✅</span> Solusi yang Diberikan Website Ini
+          </div>
+          <ul class="space-y-3 text-xs md:text-sm text-slate-300">
+            <li class="flex items-start gap-2">✔️ Menampilkan rute santai dengan estimasi jeda tidur siang & snack.</li>
+            <li class="flex items-start gap-2">✔️ Memberikan Activity Kit gratis agar anak tenang di kendaraan.</li>
+            <li class="flex items-start gap-2">✔️ Membangun kepercayaan tinggi (trust) sehingga orang tua langsung booking via WhatsApp.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: 4 DEDICATED PAGES -->
+    <section class="slide flex-col max-w-4xl mx-auto space-y-6">
+      <div class="text-center mb-2">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">Struktur Konten</span>
+        <h2 class="font-baloo font-bold text-3xl md:text-4xl text-white mt-2">4 Halaman Khusus Siap Pakai</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-primary/50 transition">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-xl">🗺️</span>
+            <h3 class="font-baloo font-bold text-base text-white">1. Katalog Paket Wisata</h3>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Menampilkan paket Half-Day & Full-Day dengan filter durasi, detail itinerary per jam, serta tombol reservasi instan.
+          </p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-teal/50 transition">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-xl">🎨</span>
+            <h3 class="font-baloo font-bold text-base text-white">2. Kids Activity Kit Hub</h3>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Pusat download lembar mewarnai & teka-teki edukatif yang berfungsi sebagai magnet untuk mengumpulkan database kontak tamu.
+          </p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-indigo/50 transition">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-xl">💡</span>
+            <h3 class="font-baloo font-bold text-base text-white">3. Parenting Tips & Checklist</h3>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Panduan mengatasi anak rewel di mobil plus checklist interaktif barang bawaan balita yang sangat disukai orang tua.
+          </p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-secondary/50 transition">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-xl">📅</span>
+            <h3 class="font-baloo font-bold text-base text-white">4. Pusat Reservasi Online</h3>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Form booking privat 2 kolom. Data tersimpan di server dan otomatis memformat pesan WhatsApp lengkap saat dikirim.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: ADMIN PANEL CMS -->
+    <section class="slide flex-col max-w-4xl mx-auto space-y-6">
+      <div class="text-center mb-2">
+        <span class="text-xs font-bold text-primary uppercase tracking-widest bg-primary/10 px-3 py-1 rounded-full">Kemudahan Pengelolaan</span>
+        <h2 class="font-baloo font-bold text-3xl md:text-4xl text-white mt-2">Panel Admin CMS Mandiri (admin.html)</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-5">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 text-center">
+          <div class="w-12 h-12 rounded-xl bg-orange-500/20 text-primary flex items-center justify-center mx-auto text-2xl mb-3">
+            ✏️
+          </div>
+          <h4 class="font-baloo font-bold text-sm text-white mb-1.5">Kelola Konten Bebas</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Tambah atau edit paket tour, ganti foto hero beranda, upload banner baru kapan saja tanpa perlu bantuan programmer.
+          </p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 text-center">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto text-2xl mb-3">
+            📊
+          </div>
+          <h4 class="font-baloo font-bold text-sm text-white mb-1.5">Database Tamu & Ekspor CSV</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Semua orang tua yang booking atau download kit otomatis terdata rapi dan bisa di-download ke Excel hanya dengan 1 klik.
+          </p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 text-center">
+          <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center mx-auto text-2xl mb-3">
+            🔒
+          </div>
+          <h4 class="font-baloo font-bold text-sm text-white mb-1.5">Ganti WA & PIN Mudah</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Admin bisa mengubah nomor WhatsApp penerima konsultasi dan mengganti password/PIN admin langsung dari dashboard.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: TECH STACK & RELIABILITY -->
+    <section class="slide flex-col max-w-4xl mx-auto space-y-6">
+      <div class="text-center mb-2">
+        <span class="text-xs font-bold text-indigo uppercase tracking-widest bg-indigo/10 px-3 py-1 rounded-full">Performa & Keamanan</span>
+        <h2 class="font-baloo font-bold text-3xl md:text-4xl text-white mt-2">Ditenagai Teknologi Modern</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6">
+          <span class="text-xs font-bold text-emerald-400 bg-emerald-950 px-2.5 py-1 rounded-full">Database Cloud</span>
+          <h3 class="font-baloo font-bold text-xl text-white mt-3 mb-1">Supabase</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Penyimpanan data cloud kelas enterprise. Data reservasi dan kontak tamu aman terenkripsi dan tidak akan hilang.
+          </p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6">
+          <span class="text-xs font-bold text-cyan-400 bg-cyan-950 px-2.5 py-1 rounded-full">Hosting Cepat</span>
+          <h3 class="font-baloo font-bold text-xl text-white mt-3 mb-1">Vercel Global CDN</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Loading website di bawah 1 detik dari manapun. Tahan lonjakan traffic ribuan pengunjung sekaligus tanpa down.
+          </p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6">
+          <span class="text-xs font-bold text-amber-400 bg-amber-950 px-2.5 py-1 rounded-full">Kustom Domain</span>
+          <h3 class="font-baloo font-bold text-xl text-white mt-3 mb-1">Rumahweb Ready</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            DNS sudah siap diarahkan ke domain pribadi klien lengkap dengan sertifikat SSL (gembok hijau HTTPS) gratis selamanya.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: HANDOVER & LIVE DEMO -->
+    <section class="slide flex-col max-w-3xl mx-auto text-center space-y-6">
+      <div class="w-16 h-16 rounded-3xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto text-3xl">
+        🎉
+      </div>
+      <h2 class="font-baloo font-extrabold text-3xl md:text-4xl text-white">Project Siap Digunakan &amp; Dipromosikan!</h2>
+      <p class="text-slate-300 text-sm md:text-base leading-relaxed max-w-xl mx-auto">
+        Klien Anda dapat langsung mulai membagikan link website ini untuk promosi Instagram, TikTok, Facebook Ads, maupun WhatsApp Marketing.
+      </p>
+
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-left max-w-md mx-auto space-y-3 w-full">
+        <div class="flex items-center justify-between text-xs border-b border-slate-800 pb-2">
+          <span class="text-slate-400">Website Utama:</span>
+          <a href="index.html" target="_blank" class="text-primary font-bold hover:underline">Buka Beranda ↗</a>
+        </div>
+        <div class="flex items-center justify-between text-xs border-b border-slate-800 pb-2">
+          <span class="text-slate-400">Katalog Paket:</span>
+          <a href="paket.html" target="_blank" class="text-primary font-bold hover:underline">Buka Paket ↗</a>
+        </div>
+        <div class="flex items-center justify-between text-xs border-b border-slate-800 pb-2">
+          <span class="text-slate-400">Pusat Reservasi:</span>
+          <a href="reservasi.html" target="_blank" class="text-primary font-bold hover:underline">Buka Form ↗</a>
+        </div>
+        <div class="flex items-center justify-between text-xs pt-1">
+          <span class="text-slate-400">Panel Admin:</span>
+          <a href="admin.html" target="_blank" class="text-emerald-400 font-bold hover:underline">Masuk Admin (PIN: ilham123) ↗</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SPEAKER NOTES DRAWER -->
+  <div id="speaker-notes" class="hidden bg-slate-900 border-t border-slate-800 p-5 max-w-4xl mx-auto w-full text-slate-300 text-xs md:text-sm">
+    <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-800">
+      <span class="font-bold text-amber-400 flex items-center gap-1.5">🎙️ PANDUAN BICARA UNTUK ANDA (Apa yang harus dikatakan ke pembeli):</span>
+      <button onclick="toggleNotes()" class="text-slate-500 hover:text-white">✕ Tutup</button>
+    </div>
+    <p id="notes-content" class="leading-relaxed"></p>
+  </div>
+
+  <!-- NAVIGATION CONTROLS -->
+  <footer class="border-t border-slate-800 bg-slate-900/90 px-6 py-4 flex items-center justify-between">
+    <button onclick="prevSlide()" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-5 py-2.5 rounded-xl border border-slate-700 transition flex items-center gap-2">
+      <span>← Slide Sebelumnya</span>
+    </button>
+    <div class="flex items-center gap-1.5" id="dots-container">
+      <!-- Dots rendered by JS -->
+    </div>
+    <button onclick="nextSlide()" class="bg-primary hover:bg-primary-dark text-white text-xs font-bold px-6 py-2.5 rounded-xl transition shadow-lg shadow-orange-500/20 flex items-center gap-2">
+      <span>Slide Berikutnya →</span>
+    </button>
+  </footer>
+
+  <script>
+    const speakerNotes = [
+      // Slide 1
+      `"Halo Bapak/Ibu, hari ini saya ingin mendemokan website 'Bali Little Explorer' yang telah selesai kami bangun. Website ini kami rancang secara khusus untuk menyasar segmen wisata keluarga dengan anak usia 3-7 tahun, yang pasarnya sangat besar namun jarang digarap dengan serius oleh agen tour lain."`,
+      // Slide 2
+      `"Kelemahan tour biasa adalah orang tua sering takut anaknya rewel atau kecapekan di jalan. Nah, website ini langsung menjawab ketakutan itu: kita tampilkan bahwa rute kita santai, driver terlatih ramah anak, dan ada gratis Activity Kit agar anak senang selama perjalanan. Ini yang membuat orang tua cepat yakin untuk memesan."`,
+      // Slide 3
+      `"Website ini memiliki 4 halaman khusus yang saling terhubung: halaman Paket Wisata dengan detail jadwal per jam, halaman Activity Kit tempat orang tua bisa download lembar mewarnai gratis, halaman Tips Parenting, dan halaman Reservasi Online. Tampilannya sangat rapi baik di HP maupun di laptop."`,
+      // Slide 4
+      `"Bapak/Ibu tidak perlu khawatir soal cara mengelolanya. Kami sudah membuatkan Panel Admin khusus di mana Bapak/Ibu bisa mengganti foto-foto, mengubah rute paket, melihat siapa saja yang booking, dan mendownload nomor WhatsApp calon tamu ke file Excel dengan satu klik tanpa perlu koding sama sekali."`,
+      // Slide 5
+      `"Dari sisi teknologi, website ini menggunakan database Supabase yang sangat aman dan hosting Vercel yang super cepat. Jadi kalau link website ini diiklankan di Instagram atau TikTok dan dibuka ribuan orang sekaligus, websitenya dijamin tetap cepat dan tidak akan lambat."`,
+      // Slide 6
+      `"Semua sistem sudah aktif, termasuk login admin dan integrasi ke WhatsApp. Sekarang saya siap mendemokan langsung cara pemakaiannya, atau jika ada penyesuaian nomor WhatsApp dan harga paket, bisa langsung kita set hari ini juga."`
+    ];
+
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const counter = document.getElementById('slide-counter');
+    const notesContent = document.getElementById('notes-content');
+    const dotsContainer = document.getElementById('dots-container');
+
+    // Build dots
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('button');
+      dot.className = `w-2.5 h-2.5 rounded-full transition-all ${i === 0 ? 'bg-primary w-6' : 'bg-slate-700'}`;
+      dot.onclick = () => goToSlide(i);
+      dotsContainer.appendChild(dot);
+    }
+
+    function updateSlide() {
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === currentSlide);
+      });
+      counter.innerText = `Slide ${currentSlide + 1} / ${totalSlides}`;
+      notesContent.innerText = speakerNotes[currentSlide];
+
+      // Update dots
+      const dots = dotsContainer.querySelectorAll('button');
+      dots.forEach((d, idx) => {
+        if (idx === currentSlide) {
+          d.className = 'w-6 h-2.5 rounded-full bg-primary transition-all';
+        } else {
+          d.className = 'w-2.5 h-2.5 rounded-full bg-slate-700 hover:bg-slate-500 transition-all';
+        }
+      });
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    function goToSlide(idx) {
+      currentSlide = idx;
+      updateSlide();
+    }
+
+    function toggleNotes() {
+      const drawer = document.getElementById('speaker-notes');
+      drawer.classList.toggle('hidden');
+    }
+
+    // Keyboard navigation
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    // Init
+    updateSlide();
+  </script>
+</body>
+</html>
