@@ -902,11 +902,24 @@
         </div>
 
         <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">File Gambar Outline (PNG/JPG/WEBP)</label>
+          <input type="hidden" id="coloring-img-url" />
+          <div id="upload-widget-coloring-img"></div>
+          <p class="text-[11px] text-slate-400 mt-1">Upload gambar garis hitam-putih untuk diwarnai oleh anak-anak.</p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Atau URL Gambar Outline</label>
+          <input type="url" id="coloring-custom-url" placeholder="https://..."
+                 class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-primary focus:outline-none" />
+        </div>
+
+        <div>
           <div class="flex items-center justify-between mb-1">
-            <label class="block text-xs font-bold text-slate-700">Kode SVG Outline *</label>
-            <span class="text-[11px] text-slate-400">Gunakan class="colorable" pada bagian path</span>
+            <label class="block text-xs font-bold text-slate-700">Opsional: Kode SVG Outline</label>
+            <span class="text-[11px] text-slate-400">Jika menggunakan format vektor</span>
           </div>
-          <textarea id="coloring-svg-data" rows="5" required placeholder="<svg viewBox='0 0 500 400'> ... </svg>"
+          <textarea id="coloring-svg-data" rows="3" placeholder="<svg viewBox='0 0 500 400'> ... </svg>"
                     oninput="previewModalSvg()"
                     class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs font-mono text-slate-700 focus:ring-2 focus:ring-primary focus:outline-none"></textarea>
         </div>
@@ -914,11 +927,11 @@
         <!-- Live Preview inside modal -->
         <div>
           <div class="flex items-center justify-between mb-1">
-            <span class="text-xs font-bold text-slate-600">Pratinjau Garis:</span>
+            <span class="text-xs font-bold text-slate-600">Pratinjau Gambar:</span>
             <button type="button" onclick="previewModalSvg()" class="text-xs font-bold text-primary hover:underline">Perbarui Pratinjau 🔄</button>
           </div>
           <div id="modal-svg-preview" class="h-28 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center p-2 overflow-hidden">
-            <span class="text-xs text-slate-400">Masukkan kode &lt;svg&gt; untuk melihat pratinjau</span>
+            <span class="text-xs text-slate-400">Pratinjau gambar outline akan muncul di sini</span>
           </div>
         </div>
 
@@ -1205,6 +1218,7 @@
       createUploadWidget({ containerId: 'upload-widget-pkg-img', inputId: 'pkg-img', folder: 'packages' });
       createUploadWidget({ containerId: 'upload-widget-kit-img', inputId: 'kit-img', folder: 'kits' });
       createUploadWidget({ containerId: 'upload-widget-tip-img', inputId: 'tip-img', folder: 'tips' });
+      createUploadWidget({ containerId: 'upload-widget-coloring-img', inputId: 'coloring-img-url', folder: 'coloring' });
     }
 
     // --- Authentication ---
@@ -1733,10 +1747,10 @@
       container.innerHTML = coloringData.map(c => `
         <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col justify-between hover:border-primary/50 transition">
           <div>
-            <!-- Thumbnail SVG preview -->
+            <!-- Thumbnail preview -->
             <div class="h-44 bg-amber-50/40 p-4 border-b border-slate-100 flex items-center justify-center relative overflow-hidden group">
               <div class="w-full h-full flex items-center justify-center pointer-events-none scale-90 group-hover:scale-95 transition">
-                ${c.svg_data || '<span class="text-3xl text-slate-400">🎨</span>'}
+                ${c.image_url ? `<img src="${c.image_url}" alt="${c.title}" class="max-h-full max-w-full object-contain" />` : (c.svg_data || '<span class="text-3xl text-slate-400">🎨</span>')}
               </div>
               <span class="absolute top-3 left-3 text-[10px] font-bold px-2 py-0.5 rounded-full ${c.is_active ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-600'}">
                 ${c.is_active ? '● Aktif' : '○ Non-aktif'}
@@ -1783,11 +1797,14 @@
         document.getElementById('modal-coloring-title').textContent = 'Edit Lembar Mewarnai';
         document.getElementById('coloring-id').value = c.id;
         document.getElementById('coloring-title').value = c.title || '';
-        document.getElementById('coloring-category').value = c.category || 'Hewan Laut';
+        document.getElementById('coloring-category').value = c.category || 'Fauna Lucu';
         document.getElementById('coloring-difficulty').value = c.difficulty || 'Mudah (3–5 thn)';
         document.getElementById('coloring-desc').value = c.description || '';
         document.getElementById('coloring-order').value = c.order_index || 1;
         document.getElementById('coloring-is-active').checked = !!c.is_active;
+        document.getElementById('coloring-img-url').value = c.image_url || '';
+        document.getElementById('coloring-custom-url').value = c.image_url || '';
+        syncUploadWidget('coloring-img-url', c.image_url || '');
         document.getElementById('coloring-svg-data').value = c.svg_data || '';
       } else {
         document.getElementById('modal-coloring-title').textContent = 'Tambah Lembar Mewarnai';
@@ -1795,6 +1812,9 @@
         document.getElementById('coloring-id').value = '';
         document.getElementById('coloring-order').value = coloringData.length + 1;
         document.getElementById('coloring-is-active').checked = true;
+        document.getElementById('coloring-img-url').value = '';
+        document.getElementById('coloring-custom-url').value = '';
+        syncUploadWidget('coloring-img-url', '');
         document.getElementById('coloring-svg-data').value = '';
       }
       previewModalSvg();
@@ -1806,12 +1826,16 @@
     }
 
     function previewModalSvg() {
-      const svgText = document.getElementById('coloring-svg-data').value.trim();
       const previewBox = document.getElementById('modal-svg-preview');
-      if (svgText.startsWith('<svg')) {
+      const imgUrl = document.getElementById('coloring-img-url').value.trim() || document.getElementById('coloring-custom-url').value.trim();
+      const svgText = document.getElementById('coloring-svg-data').value.trim();
+
+      if (imgUrl) {
+        previewBox.innerHTML = `<img src="${imgUrl}" alt="Preview" class="max-h-full max-w-full object-contain" />`;
+      } else if (svgText.startsWith('<svg')) {
         previewBox.innerHTML = `<div class="w-full h-full flex items-center justify-center scale-90">${svgText}</div>`;
       } else {
-        previewBox.innerHTML = `<span class="text-xs text-slate-400">Masukkan kode &lt;svg&gt; valid untuk melihat pratinjau</span>`;
+        previewBox.innerHTML = `<span class="text-xs text-slate-400">Pilih upload file gambar atau masukkan URL gambar</span>`;
       }
     }
 
@@ -1848,9 +1872,10 @@
       const description = document.getElementById('coloring-desc').value.trim();
       const order_index = parseInt(document.getElementById('coloring-order').value) || 1;
       const is_active = document.getElementById('coloring-is-active').checked;
+      const image_url = document.getElementById('coloring-img-url').value.trim() || document.getElementById('coloring-custom-url').value.trim();
       const svg_data = document.getElementById('coloring-svg-data').value.trim();
 
-      const payload = { title, category, difficulty, description, order_index, is_active, svg_data };
+      const payload = { title, category, difficulty, description, order_index, is_active, image_url, svg_data };
 
       if (id) {
         const { error } = await db.from('coloring_sheets').update(payload).eq('id', id);
