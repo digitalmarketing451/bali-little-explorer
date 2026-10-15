@@ -1942,6 +1942,13 @@
       }
     });
 
+    // If accessed via admin subdomain, direct "Back to Web" links to main domain
+    if (window.location.hostname === 'adminlittlebth.jinztech.cloud') {
+      document.querySelectorAll('a[href="index.html"]').forEach(a => {
+        a.href = 'https://explorerbth.jinztech.cloud';
+      });
+    }
+
     // Start
     checkAuth();
   </script>
