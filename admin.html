@@ -157,6 +157,10 @@
       <button class="tab-btn px-4 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition flex items-center gap-2 shrink-0" onclick="switchTab('tab-kits', this)">
         <span>🎨 Kelola Activity Kit</span>
       </button>
+      <button class="tab-btn px-4 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition flex items-center gap-2 shrink-0" onclick="switchTab('tab-coloring', this)">
+        <span>🖍️ Lembar Mewarnai</span>
+        <span id="badge-coloring-count" class="bg-primary/20 text-primary text-xs px-2 py-0.5 rounded-full font-black">0</span>
+      </button>
       <button class="tab-btn px-4 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition flex items-center gap-2 shrink-0" onclick="switchTab('tab-tips', this)">
         <span>💡 Parenting Tips</span>
       </button>
@@ -303,6 +307,54 @@
       </div>
 
       <div id="kits-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- ==================== TAB: KELOLA LEMBAR MEWARNAI DIGITAL ==================== -->
+    <section id="tab-coloring" class="tab-content hidden">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <div class="inline-flex items-center gap-2 bg-primary/10 text-primary font-bold text-xs px-3 py-1 rounded-full mb-1">
+            <span>🖍️ Fitur Anak & Balita</span>
+          </div>
+          <h3 class="font-baloo font-bold text-2xl text-slate-900">Kelola Studio Mewarnai Digital</h3>
+          <p class="text-xs text-slate-500">Kelola gambar outline vektor (SVG), tingkat kesulitan, cerita edukasi, dan status aktif lembar mewarnai.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="mewarnai.html" target="_blank"
+             class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3.5 py-2.5 rounded-xl shadow-sm transition flex items-center gap-1.5">
+            <span>👁️ Buka Studio Mewarnai</span>
+            <span>↗</span>
+          </a>
+          <button onclick="openColoringModal()" class="bg-primary hover:bg-primary-dark text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-1.5">
+            <span>+ Tambah Lembar Mewarnai</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Summary Stats -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
+          <span class="text-xs text-slate-400 font-bold block">Total Lembar</span>
+          <span id="stat-coloring-total" class="font-baloo font-black text-2xl text-slate-800">0</span>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
+          <span class="text-xs text-slate-400 font-bold block">Status Aktif</span>
+          <span id="stat-coloring-active" class="font-baloo font-black text-2xl text-emerald-600">0</span>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
+          <span class="text-xs text-slate-400 font-bold block">Kategori Unik</span>
+          <span id="stat-coloring-categories" class="font-baloo font-black text-2xl text-indigo-600">0</span>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
+          <span class="text-xs text-slate-400 font-bold block">Format Studio</span>
+          <span class="font-baloo font-black text-xl text-amber-500">SVG & Canvas</span>
+        </div>
+      </div>
+
+      <!-- Coloring Grid -->
+      <div id="coloring-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Rendered by JS -->
       </div>
     </section>
@@ -786,6 +838,98 @@
     </div>
   </div>
 
+  <!-- ====================== MODAL FORM COLORING SHEET ====================== -->
+  <div id="modal-coloring" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-7 shadow-2xl relative my-8 max-h-[92vh] flex flex-col">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4 shrink-0">
+        <div>
+          <h4 class="font-baloo font-bold text-xl text-slate-900" id="modal-coloring-title">Tambah Lembar Mewarnai</h4>
+          <p class="text-xs text-slate-400">Atur template outline SVG dan cerita edukasi untuk studio mewarnai anak</p>
+        </div>
+        <button onclick="closeColoringModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-sm font-bold">✕</button>
+      </div>
+
+      <form id="form-coloring-edit" class="space-y-4 overflow-y-auto pr-1">
+        <input type="hidden" id="coloring-id" />
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="sm:col-span-2">
+            <label class="block text-xs font-bold text-slate-700 mb-1">Judul Gambar Mewarnai *</label>
+            <input type="text" id="coloring-title" required placeholder="Contoh: Lumba-Lumba Ceria Lovina"
+                   class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-primary focus:outline-none" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Kategori *</label>
+            <select id="coloring-category" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-primary focus:outline-none bg-white">
+              <option value="Hewan Laut">Hewan Laut 🐬</option>
+              <option value="Fauna Safari">Fauna Safari 🐘</option>
+              <option value="Fauna Langka">Fauna Langka 🦜</option>
+              <option value="Fauna Lucu">Fauna Lucu 🐵</option>
+              <option value="Budaya & Alam">Budaya & Alam 🏯</option>
+              <option value="Landmark Bali">Landmark Bali 🌴</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Tingkat Kesulitan *</label>
+            <select id="coloring-difficulty" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-primary focus:outline-none bg-white">
+              <option value="Sangat Mudah (2–4 thn)">Sangat Mudah (2–4 thn)</option>
+              <option value="Mudah (3–5 thn)" selected>Mudah (3–5 thn)</option>
+              <option value="Sedang (4–7 thn)">Sedang (4–7 thn)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Cerita / Fakta Edukasi untuk Anak</label>
+          <textarea id="coloring-desc" rows="2" placeholder="Fakta unik tentang hewan/tempat ini yang dapat dibacakan orang tua saat anak mewarnai..."
+                    class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-primary focus:outline-none"></textarea>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Urutan Tampilan</label>
+            <input type="number" id="coloring-order" min="1" value="1"
+                   class="w-full px-3 py-2.5 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-primary focus:outline-none" />
+          </div>
+          <div class="flex items-center pt-5">
+            <label class="flex items-center gap-2 text-xs font-bold text-slate-700 cursor-pointer">
+              <input type="checkbox" id="coloring-is-active" checked class="w-4 h-4 rounded text-primary focus:ring-primary" />
+              <span>Aktifkan di Studio Web</span>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-xs font-bold text-slate-700">Kode SVG Outline *</label>
+            <span class="text-[11px] text-slate-400">Gunakan class="colorable" pada bagian path</span>
+          </div>
+          <textarea id="coloring-svg-data" rows="5" required placeholder="<svg viewBox='0 0 500 400'> ... </svg>"
+                    oninput="previewModalSvg()"
+                    class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs font-mono text-slate-700 focus:ring-2 focus:ring-primary focus:outline-none"></textarea>
+        </div>
+
+        <!-- Live Preview inside modal -->
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-bold text-slate-600">Pratinjau Garis:</span>
+            <button type="button" onclick="previewModalSvg()" class="text-xs font-bold text-primary hover:underline">Perbarui Pratinjau 🔄</button>
+          </div>
+          <div id="modal-svg-preview" class="h-28 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center p-2 overflow-hidden">
+            <span class="text-xs text-slate-400">Masukkan kode &lt;svg&gt; untuk melihat pratinjau</span>
+          </div>
+        </div>
+
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-2 shrink-0">
+          <button type="button" onclick="closeColoringModal()" class="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 text-xs font-bold transition">Batal</button>
+          <button type="submit" class="px-5 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold transition shadow-md">Simpan Lembar Mewarnai 💾</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- ====================== MODAL FORM TIPS ====================== -->
   <div id="modal-tip" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop">
     <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
@@ -855,6 +999,7 @@
     let packagesData = [];
     let kitsData = [];
     let tipsData = [];
+    let coloringData = [];
 
     // ==================== SUPABASE STORAGE & UPLOAD SYSTEM ====================
     const STORAGE_BUCKET = 'site-images';
@@ -1128,6 +1273,7 @@
         loadLeads(),
         loadPackages(),
         loadKits(),
+        loadColoringSheets(),
         loadTips(),
         loadHomepageSettings(),
         loadSettingsForm(),
@@ -1533,6 +1679,189 @@
 
       closeKitModal();
       loadKits();
+    });
+
+    // ==================== COLORING SHEETS CMS ====================
+    async function loadColoringSheets() {
+      try {
+        const { data, error } = await db
+          .from('coloring_sheets')
+          .select('*')
+          .order('order_index', { ascending: true });
+
+        coloringData = data || [];
+
+        // Update badges & stats
+        const total = coloringData.length;
+        const active = coloringData.filter(c => c.is_active).length;
+        const categories = new Set(coloringData.map(c => c.category)).size;
+
+        const badgeCount = document.getElementById('badge-coloring-count');
+        if (badgeCount) badgeCount.textContent = total;
+
+        const statTotal = document.getElementById('stat-coloring-total');
+        if (statTotal) statTotal.textContent = total;
+
+        const statActive = document.getElementById('stat-coloring-active');
+        if (statActive) statActive.textContent = active;
+
+        const statCat = document.getElementById('stat-coloring-categories');
+        if (statCat) statCat.textContent = categories;
+
+        renderColoringSheets();
+      } catch (e) {
+        console.error('Error loading coloring sheets:', e);
+      }
+    }
+
+    function renderColoringSheets() {
+      const container = document.getElementById('coloring-grid');
+      if (!container) return;
+
+      if (coloringData.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full bg-white rounded-3xl p-12 text-center border border-slate-200">
+            <span class="text-4xl block mb-2">🎨</span>
+            <h4 class="font-baloo font-bold text-slate-800 text-lg">Belum ada lembar mewarnai</h4>
+            <p class="text-xs text-slate-500 mb-4">Tambahkan gambar outline pertama untuk studio anak.</p>
+            <button onclick="openColoringModal()" class="bg-primary text-white font-bold text-xs px-4 py-2 rounded-xl">Tambah Sekarang</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = coloringData.map(c => `
+        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col justify-between hover:border-primary/50 transition">
+          <div>
+            <!-- Thumbnail SVG preview -->
+            <div class="h-44 bg-amber-50/40 p-4 border-b border-slate-100 flex items-center justify-center relative overflow-hidden group">
+              <div class="w-full h-full flex items-center justify-center pointer-events-none scale-90 group-hover:scale-95 transition">
+                ${c.svg_data || '<span class="text-3xl text-slate-400">🎨</span>'}
+              </div>
+              <span class="absolute top-3 left-3 text-[10px] font-bold px-2 py-0.5 rounded-full ${c.is_active ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-600'}">
+                ${c.is_active ? '● Aktif' : '○ Non-aktif'}
+              </span>
+              <span class="absolute top-3 right-3 text-[10px] bg-white/90 backdrop-blur-xs font-bold text-slate-600 px-2 py-0.5 rounded-md shadow-xs border border-slate-200">
+                #${c.order_index || 1}
+              </span>
+            </div>
+
+            <!-- Content Details -->
+            <div class="p-5">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-[11px] bg-primary/10 text-primary font-bold px-2.5 py-0.5 rounded-full">${c.category || 'Bali'}</span>
+                <span class="text-[11px] text-slate-400 font-semibold">${c.difficulty || 'Mudah'}</span>
+              </div>
+              <h4 class="font-baloo font-bold text-base text-slate-900 mb-1 leading-snug">${c.title}</h4>
+              <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-3">${c.description || 'Tidak ada deskripsi cerita.'}</p>
+            </div>
+          </div>
+
+          <!-- Bottom Actions -->
+          <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between gap-2">
+            <button onclick="toggleColoringActive(${c.id}, ${!c.is_active})" class="text-xs font-bold ${c.is_active ? 'text-amber-600 hover:text-amber-700' : 'text-emerald-600 hover:text-emerald-700'}">
+              ${c.is_active ? 'Nonaktifkan' : 'Aktifkan'}
+            </button>
+            <div class="flex items-center gap-1.5">
+              <button onclick="editColoring(${c.id})" class="text-xs bg-white hover:bg-slate-100 font-bold px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs">
+                Edit ✏️
+              </button>
+              <button onclick="deleteColoring(${c.id})" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold px-2.5 py-1.5 rounded-xl border border-rose-100">
+                Hapus
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openColoringModal(c = null) {
+      document.getElementById('modal-coloring').classList.remove('hidden');
+      document.getElementById('modal-coloring').classList.add('flex');
+
+      if (c) {
+        document.getElementById('modal-coloring-title').textContent = 'Edit Lembar Mewarnai';
+        document.getElementById('coloring-id').value = c.id;
+        document.getElementById('coloring-title').value = c.title || '';
+        document.getElementById('coloring-category').value = c.category || 'Hewan Laut';
+        document.getElementById('coloring-difficulty').value = c.difficulty || 'Mudah (3–5 thn)';
+        document.getElementById('coloring-desc').value = c.description || '';
+        document.getElementById('coloring-order').value = c.order_index || 1;
+        document.getElementById('coloring-is-active').checked = !!c.is_active;
+        document.getElementById('coloring-svg-data').value = c.svg_data || '';
+      } else {
+        document.getElementById('modal-coloring-title').textContent = 'Tambah Lembar Mewarnai';
+        document.getElementById('form-coloring-edit').reset();
+        document.getElementById('coloring-id').value = '';
+        document.getElementById('coloring-order').value = coloringData.length + 1;
+        document.getElementById('coloring-is-active').checked = true;
+        document.getElementById('coloring-svg-data').value = '';
+      }
+      previewModalSvg();
+    }
+
+    function closeColoringModal() {
+      document.getElementById('modal-coloring').classList.add('hidden');
+      document.getElementById('modal-coloring').classList.remove('flex');
+    }
+
+    function previewModalSvg() {
+      const svgText = document.getElementById('coloring-svg-data').value.trim();
+      const previewBox = document.getElementById('modal-svg-preview');
+      if (svgText.startsWith('<svg')) {
+        previewBox.innerHTML = `<div class="w-full h-full flex items-center justify-center scale-90">${svgText}</div>`;
+      } else {
+        previewBox.innerHTML = `<span class="text-xs text-slate-400">Masukkan kode &lt;svg&gt; valid untuk melihat pratinjau</span>`;
+      }
+    }
+
+    function editColoring(id) {
+      const c = coloringData.find(item => item.id === id);
+      if (c) openColoringModal(c);
+    }
+
+    async function toggleColoringActive(id, newStatus) {
+      const { error } = await db.from('coloring_sheets').update({ is_active: newStatus }).eq('id', id);
+      if (error) {
+        alert('Gagal mengubah status: ' + error.message);
+        return;
+      }
+      loadColoringSheets();
+    }
+
+    async function deleteColoring(id) {
+      if (!confirm('Hapus lembar mewarnai ini secara permanen?')) return;
+      const { error } = await db.from('coloring_sheets').delete().eq('id', id);
+      if (error) {
+        alert('Gagal menghapus: ' + error.message);
+        return;
+      }
+      loadColoringSheets();
+    }
+
+    document.getElementById('form-coloring-edit').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('coloring-id').value;
+      const title = document.getElementById('coloring-title').value.trim();
+      const category = document.getElementById('coloring-category').value;
+      const difficulty = document.getElementById('coloring-difficulty').value;
+      const description = document.getElementById('coloring-desc').value.trim();
+      const order_index = parseInt(document.getElementById('coloring-order').value) || 1;
+      const is_active = document.getElementById('coloring-is-active').checked;
+      const svg_data = document.getElementById('coloring-svg-data').value.trim();
+
+      const payload = { title, category, difficulty, description, order_index, is_active, svg_data };
+
+      if (id) {
+        const { error } = await db.from('coloring_sheets').update(payload).eq('id', id);
+        if (error) return alert('Gagal mengupdate lembar mewarnai: ' + error.message);
+      } else {
+        const { error } = await db.from('coloring_sheets').insert(payload);
+        if (error) return alert('Gagal menambahkan lembar mewarnai: ' + error.message);
+      }
+
+      closeColoringModal();
+      loadColoringSheets();
     });
 
     // ==================== PARENTING TIPS ====================

@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Studio Mewarnai Digital Anak – Bali Little Explorer. Fitur mewarnai interaktif ramah balita usia 3–7 tahun bertema hewan dan budaya Bali." />
+  <title>Mewarnai Digital 🎨 – Bali Little Explorer | Bali Top Holiday</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="shortcut icon" href="favicon.ico" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@500;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Supabase JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary:   { DEFAULT: '#FF6B35', light: '#FF8C5A', dark: '#E05020' },
+            secondary: { DEFAULT: '#FFD166', light: '#FFE499' },
+            teal:      { DEFAULT: '#06D6A0', dark: '#04B882' },
+            indigo:    { DEFAULT: '#4361EE' },
+            dark:      { DEFAULT: '#1E293B', card: '#0F172A' },
+            cream:     { DEFAULT: '#FFFDF9' }
+          },
+          fontFamily: {
+            nunito: ['Nunito', 'sans-serif'],
+            baloo:  ['Baloo 2', 'cursive'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    * { font-family: 'Nunito', sans-serif; -webkit-tap-highlight-color: transparent; }
+    h1, h2, h3, h4, .font-baloo { font-family: 'Baloo 2', cursive; }
+
+    /* Canvas / SVG Container */
+    #coloring-stage {
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .coloring-svg path.colorable,
+    .coloring-svg circle.colorable,
+    .coloring-svg ellipse.colorable,
+    .coloring-svg polygon.colorable,
+    .coloring-svg rect.colorable {
+      cursor: pointer;
+      transition: fill 0.15s ease, filter 0.15s ease;
+    }
+
+    /* Hover effect in bucket fill mode */
+    body.mode-bucket .coloring-svg .colorable:hover {
+      filter: brightness(0.92) drop-shadow(0 0 4px rgba(255, 107, 53, 0.5));
+    }
+
+    .color-btn {
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .color-btn:hover {
+      transform: scale(1.15);
+    }
+    .color-btn.active {
+      transform: scale(1.22);
+      box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px #FF6B35, 0 6px 14px rgba(0,0,0,0.18);
+    }
+
+    .tool-btn {
+      transition: all 0.2s ease;
+    }
+    .tool-btn.active {
+      background-color: #FF6B35;
+      color: #FFFFFF;
+      box-shadow: 0 6px 18px rgba(255, 107, 53, 0.35);
+      border-color: #FF6B35;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { height: 6px; width: 6px; }
+    ::-webkit-scrollbar-track { background: #F1F5F9; border-radius: 999px; }
+    ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+    @keyframes pulse-fun {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .pulse-fun {
+      animation: pulse-fun 2.5s infinite;
+    }
+  </style>
+</head>
+<body class="bg-amber-50/40 text-slate-800 antialiased min-h-screen flex flex-col justify-between mode-bucket">
+
+  <!-- ====================== NAVBAR ====================== -->
+  <header class="bg-white/95 backdrop-blur-md border-b border-amber-100/80 sticky top-0 z-40 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-2.5 group">
+        <img src="logo.png" alt="Bali Little Explorer" class="w-10 h-10 object-contain group-hover:scale-105 transition duration-300" />
+        <div>
+          <span class="font-baloo font-extrabold text-xl text-slate-900 leading-tight block">Bali Little Explorer</span>
+          <span class="text-xs font-semibold text-primary block leading-none">by Bali Top Holiday</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-bold text-slate-600">
+        <a href="index.html" class="hover:text-primary transition">Beranda</a>
+        <a href="paket.html" class="hover:text-primary transition">🗺️ Paket Wisata</a>
+        <a href="activity-kit.html" class="hover:text-primary transition">🎨 Activity Kit</a>
+        <a href="mewarnai.html" class="text-primary font-extrabold flex items-center gap-1.5 bg-primary/10 px-3.5 py-1.5 rounded-full">
+          <span>🖍️ Mewarnai Digital</span>
+          <span class="w-2 h-2 rounded-full bg-primary inline-block animate-ping"></span>
+        </a>
+        <a href="parenting-tips.html" class="hover:text-primary transition">💡 Tips Parenting</a>
+        <a href="reservasi.html" class="hover:text-primary transition">📅 Reservasi</a>
+      </nav>
+
+      <!-- Right Action -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="activity-kit.html" class="inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-500 text-slate-900 font-extrabold text-xs px-4 py-2.5 rounded-full shadow-md transition duration-200">
+          <span>📥 Unduh Versi Cetak (PDF)</span>
+        </a>
+      </div>
+
+      <!-- Mobile Button -->
+      <button id="mobile-toggle" class="md:hidden text-2xl text-slate-700 p-2 focus:outline-none">☰</button>
+    </div>
+
+    <!-- Mobile Nav Menu -->
+    <div id="mobile-dropdown" class="hidden md:hidden bg-white border-b border-slate-200 px-6 py-5 space-y-3 font-bold text-sm">
+      <a href="index.html" class="block py-2 text-slate-700 hover:text-primary">← Kembali ke Beranda</a>
+      <a href="paket.html" class="block py-2 text-slate-700 hover:text-primary">🗺️ Katalog Paket Wisata</a>
+      <a href="activity-kit.html" class="block py-2 text-slate-700 hover:text-primary">🎨 Activity Kit PDF</a>
+      <a href="mewarnai.html" class="block py-2 text-primary font-black">🖍️ Studio Mewarnai Digital ⭐</a>
+      <a href="parenting-tips.html" class="block py-2 text-slate-700 hover:text-primary">💡 Tips Parenting Liburan</a>
+      <a href="reservasi.html" class="block py-2 text-slate-700 hover:text-primary">📅 Reservasi Tur Edukasi</a>
+    </div>
+  </header>
+
+  <!-- ====================== MAIN CONTENT STUDIO ====================== -->
+  <main class="flex-grow py-6 sm:py-8 px-3 sm:px-6 max-w-7xl mx-auto w-full">
+
+    <!-- Top Info Bar & Sheet Title -->
+    <div class="bg-white rounded-3xl p-4 sm:p-6 shadow-sm border border-amber-100 mb-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div class="flex items-center gap-3 sm:gap-4">
+        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-amber-400 to-orange-400 flex items-center justify-center text-2xl sm:text-3xl shadow-md shrink-0">
+          🎨
+        </div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span id="sheet-category-badge" class="bg-primary/10 text-primary font-bold text-[11px] sm:text-xs px-2.5 py-0.5 rounded-full">
+              Hewan Laut
+            </span>
+            <span id="sheet-difficulty-badge" class="bg-emerald-50 text-emerald-700 font-bold text-[11px] sm:text-xs px-2.5 py-0.5 rounded-full">
+              Mudah (3–5 thn)
+            </span>
+          </div>
+          <h1 id="sheet-title-heading" class="font-baloo font-black text-xl sm:text-2xl text-slate-900 leading-tight mt-0.5">
+            Lumba-Lumba Ceria Lovina
+          </h1>
+          <p id="sheet-desc-text" class="text-xs sm:text-sm text-slate-500 line-clamp-1 max-w-xl">
+            Lumba-lumba ramah yang sedang melompat gembira di perairan pantai Lovina, Bali Utara.
+          </p>
+        </div>
+      </div>
+
+      <!-- Change Template Button & Quick Actions -->
+      <div class="flex items-center gap-2 w-full md:w-auto justify-between md:justify-end">
+        <button onclick="openGalleryModal()" class="inline-flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-2xl transition border border-indigo-200">
+          <span>🖼️ Ganti Gambar</span>
+          <span class="bg-indigo-600 text-white text-[10px] px-1.5 py-0.5 rounded-full" id="sheets-total-badge">6</span>
+        </button>
+
+        <button onclick="printSheet()" title="Cetak Lembar Mewarnai ke Kertas" class="inline-flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm px-3.5 py-2.5 rounded-2xl transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+          <span class="hidden sm:inline">Cetak</span>
+        </button>
+
+        <button onclick="saveColoringArt()" class="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-dark text-white font-extrabold text-xs sm:text-sm px-4 py-2.5 rounded-2xl shadow-lg shadow-primary/25 transition">
+          <span>💾 Simpan Karya</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- STUDIO WORKSPACE GRID -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- LEFT: TOOLBOX & COLOR PALETTE (lg:col-span-4) -->
+      <div class="lg:col-span-4 space-y-4 order-2 lg:order-1">
+
+        <!-- Tools Card -->
+        <div class="bg-white rounded-3xl p-5 shadow-sm border border-amber-100">
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-baloo font-bold text-slate-800 text-sm uppercase tracking-wide">Alat Mewarnai</span>
+            <span class="text-[11px] font-semibold text-slate-400">Pilih mode kreasi</span>
+          </div>
+
+          <!-- Mode Buttons -->
+          <div class="grid grid-cols-3 gap-2 mb-4">
+            <button id="tool-bucket" onclick="setMode('bucket')" class="tool-btn active flex flex-col items-center justify-center p-3 rounded-2xl border border-slate-200 bg-slate-50 text-slate-700 text-xs font-bold gap-1">
+              <span class="text-2xl">🪣</span>
+              <span>Ember Cat</span>
+              <span class="text-[10px] font-normal opacity-80">(Ketuk Isi)</span>
+            </button>
+            <button id="tool-brush" onclick="setMode('brush')" class="tool-btn flex flex-col items-center justify-center p-3 rounded-2xl border border-slate-200 bg-slate-50 text-slate-700 text-xs font-bold gap-1">
+              <span class="text-2xl">🖌️</span>
+              <span>Kuas Krayon</span>
+              <span class="text-[10px] font-normal opacity-80">(Gores Bebas)</span>
+            </button>
+            <button id="tool-eraser" onclick="setMode('eraser')" class="tool-btn flex flex-col items-center justify-center p-3 rounded-2xl border border-slate-200 bg-slate-50 text-slate-700 text-xs font-bold gap-1">
+              <span class="text-2xl">🧼</span>
+              <span>Penghapus</span>
+              <span class="text-[10px] font-normal opacity-80">(Hapus Gores)</span>
+            </button>
+          </div>
+
+          <!-- Brush Size Control (visible in brush/eraser mode) -->
+          <div id="brush-size-box" class="pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
+            <span class="text-xs font-bold text-slate-600">Ukuran Kuas:</span>
+            <div class="flex items-center gap-3">
+              <button onclick="setBrushSize(8, this)" class="size-btn w-8 h-8 rounded-full border-2 border-slate-200 flex items-center justify-center hover:border-primary transition">
+                <span class="w-2 h-2 rounded-full bg-slate-700"></span>
+              </button>
+              <button onclick="setBrushSize(18, this)" class="size-btn active w-9 h-9 rounded-full border-2 border-primary flex items-center justify-center bg-primary/10 transition">
+                <span class="w-3.5 h-3.5 rounded-full bg-primary"></span>
+              </button>
+              <button onclick="setBrushSize(32, this)" class="size-btn w-10 h-10 rounded-full border-2 border-slate-200 flex items-center justify-center hover:border-primary transition">
+                <span class="w-5 h-5 rounded-full bg-slate-700"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Color Palette Card -->
+        <div class="bg-white rounded-3xl p-5 shadow-sm border border-amber-100">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <span class="font-baloo font-bold text-slate-800 text-sm uppercase tracking-wide">Pilihan Warna Ceria</span>
+              <span id="active-color-preview" class="w-4 h-4 rounded-full border border-slate-300 shadow-inner" style="background-color: #FF6B35;"></span>
+            </div>
+            <!-- Custom Color Picker -->
+            <label class="cursor-pointer inline-flex items-center gap-1 text-xs font-bold text-primary hover:underline">
+              <span>Warna Lain</span>
+              <input type="color" id="custom-color-picker" value="#FF6B35" onchange="pickCustomColor(this.value)" class="sr-only" />
+              <span class="w-5 h-5 rounded-lg border border-slate-200 shadow-sm flex items-center justify-center text-xs bg-gradient-to-r from-red-400 via-green-400 to-blue-500 text-white font-bold">+</span>
+            </label>
+          </div>
+
+          <!-- Color Grid -->
+          <div class="grid grid-cols-6 sm:grid-cols-6 gap-2.5 sm:gap-3 py-1" id="color-palette-container">
+            <!-- Populated via JavaScript for crisp child-friendly colors -->
+          </div>
+        </div>
+
+        <!-- Actions: Undo, Redo, Reset -->
+        <div class="bg-white rounded-3xl p-4 shadow-sm border border-amber-100 flex items-center justify-between gap-2">
+          <button onclick="undo()" id="btn-undo" class="flex-1 inline-flex items-center justify-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2.5 rounded-2xl transition disabled:opacity-40">
+            <span>↩️ Batal (Undo)</span>
+          </button>
+          <button onclick="redo()" id="btn-redo" class="flex-1 inline-flex items-center justify-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2.5 rounded-2xl transition disabled:opacity-40">
+            <span>↪️ Ulangi (Redo)</span>
+          </button>
+          <button onclick="confirmReset()" class="inline-flex items-center justify-center gap-1 bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold px-3 py-2.5 rounded-2xl transition" title="Bersihkan & Mulai Ulang">
+            <span>🧹 Bersihkan</span>
+          </button>
+        </div>
+
+        <!-- Mini Educational Story Card -->
+        <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl p-5 border border-amber-200/60">
+          <div class="flex items-center gap-2 mb-2 text-primary font-bold text-xs uppercase tracking-wider">
+            <span>📖 Cerita Seru untuk Si Kecil</span>
+          </div>
+          <h4 id="story-title" class="font-baloo font-bold text-base text-slate-900 mb-1">
+            Tahukah Kamu?
+          </h4>
+          <p id="story-body" class="text-xs text-slate-600 leading-relaxed">
+            Lumba-lumba di pantai Lovina suka berenang berkelompok di pagi hari menyapa perahu petualang cilik. Mereka bernapas menggunakan lubang di atas kepalanya!
+          </p>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: MAIN COLORING CANVAS STAGE (lg:col-span-8) -->
+      <div class="lg:col-span-8 order-1 lg:order-2">
+        <div class="bg-white rounded-3xl p-4 sm:p-6 shadow-md border-2 border-amber-100 relative overflow-hidden flex flex-col items-center">
+
+          <!-- Canvas / SVG Area -->
+          <div id="coloring-stage" class="relative w-full max-w-[560px] aspect-[5/4] sm:aspect-[5/4] bg-white rounded-2xl border-2 border-slate-200/80 shadow-inner overflow-hidden flex items-center justify-center">
+            
+            <!-- SVG Template Container (Layer 1: Click to fill) -->
+            <div id="svg-container" class="absolute inset-0 w-full h-full flex items-center justify-center p-3 sm:p-6">
+              <!-- Dynamically injected SVG -->
+            </div>
+
+            <!-- Freehand Drawing Canvas (Layer 2: Brush/Crayon over/under) -->
+            <canvas id="brush-canvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+
+            <!-- Loading overlay -->
+            <div id="stage-loading" class="absolute inset-0 bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center gap-2 z-20">
+              <div class="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+              <span class="text-xs font-bold text-slate-600">Menyiapkan Lembar Mewarnai... 🎨</span>
+            </div>
+          </div>
+
+          <!-- Bottom Stage Hint -->
+          <div class="mt-4 flex flex-wrap items-center justify-between w-full text-xs text-slate-500 px-2 gap-2">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span id="hint-text">Mode Ember Cat: Ketuk bagian gambar untuk mengisi warna langsung! 🌟</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-slate-400">Tips: Gunakan tablet atau layar sentuh untuk pengalaman seru!</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Sheet Selector Carousel Strip -->
+        <div class="mt-6 bg-white rounded-3xl p-4 sm:p-5 shadow-sm border border-amber-100">
+          <div class="flex items-center justify-between mb-3 px-1">
+            <span class="font-baloo font-bold text-slate-900 text-sm sm:text-base">Pilih Karakter & Gambar Bali Lainnya</span>
+            <button onclick="openGalleryModal()" class="text-xs font-bold text-primary hover:underline">Lihat Semua →</button>
+          </div>
+          <div id="sheets-thumbnail-strip" class="flex items-center gap-3 overflow-x-auto pb-2 pt-1 scroll-smooth">
+            <!-- Injected thumbnails via JS -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ====================== WHY DIGITAL COLORING SECTION ====================== -->
+    <section class="mt-12 bg-white rounded-3xl p-6 sm:p-8 border border-amber-100 shadow-sm">
+      <div class="max-w-3xl mx-auto text-center mb-8">
+        <span class="bg-amber-100 text-amber-800 text-xs font-extrabold px-3.5 py-1 rounded-full uppercase tracking-wider">
+          Edu-Tourism Corner
+        </span>
+        <h2 class="font-baloo font-black text-2xl sm:text-3xl text-slate-900 mt-2">
+          Manfaat Mewarnai untuk Petualang Cilik (Usia 3–7 Tahun)
+        </h2>
+        <p class="text-slate-600 text-xs sm:text-sm mt-1">
+          Aktivitas mewarnai merangsang koordinasi tangan-mata, memicu pengenalan fauna budaya Bali, serta menjaga konsentrasi anak selama perjalanan wisata.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-amber-50/60 rounded-2xl p-5 border border-amber-100">
+          <div class="text-3xl mb-2">✍️</div>
+          <h3 class="font-baloo font-bold text-base text-slate-900 mb-1">Motorik Halus</h3>
+          <p class="text-xs text-slate-600">Melatih kekuatan jemari dan genggaman presisi untuk persiapan pra-menulis anak usia prasekolah.</p>
+        </div>
+        <div class="bg-teal/10 rounded-2xl p-5 border border-teal/20">
+          <div class="text-3xl mb-2">🌺</div>
+          <h3 class="font-baloo font-bold text-base text-slate-900 mb-1">Mengenal Budaya Bali</h3>
+          <p class="text-xs text-slate-600">Memperkenalkan fauna endemik (Jalak Bali, Lumba-lumba Lovina) dan pura bersejarah dengan cara visual yang mengasyikkan.</p>
+        </div>
+        <div class="bg-indigo-50 rounded-2xl p-5 border border-indigo-100">
+          <div class="text-3xl mb-2">🧠</div>
+          <h3 class="font-baloo font-bold text-base text-slate-900 mb-1">Regulasi Emosi & Sabar</h3>
+          <p class="text-xs text-slate-600">Aktivitas relaksasi terbaik untuk mencegah tantrum saat jeda perjalanan wisata di dalam mobil.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================== MODAL GALLERY ALL SHEETS ====================== -->
+  <div id="gallery-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-100 overflow-hidden animate-fadeIn">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+        <div>
+          <h3 class="font-baloo font-bold text-xl text-slate-900">Koleksi Lembar Mewarnai Bali</h3>
+          <p class="text-xs text-slate-500">Pilih gambar favorit untuk mulai mewarnai bersama si kecil</p>
+        </div>
+        <button onclick="closeGalleryModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-sm font-bold">✕</button>
+      </div>
+
+      <div id="gallery-modal-grid" class="p-5 grid grid-cols-2 sm:grid-cols-3 gap-4 overflow-y-auto">
+        <!-- Populated via JS -->
+      </div>
+
+      <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+        <span>Ingin versi cetak buku fisik?</span>
+        <a href="activity-kit.html" class="font-bold text-primary hover:underline">Unduh PDF Activity Kit →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================== FOOTER ====================== -->
+  <footer class="bg-white border-t border-amber-100 py-8 px-4 sm:px-6 mt-12 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <img src="logo.png" alt="Bali Little Explorer" class="w-7 h-7 object-contain" />
+        <span class="font-baloo font-bold text-slate-900 text-sm">Bali Little Explorer</span>
+        <span>• Studio Edukasi Ramah Balita</span>
+      </div>
+      <div>
+        <span>© 2026 Bali Top Holiday. Hak cipta dilindungi undang-undang.</span>
+      </div>
+      <div class="flex items-center gap-4 font-bold text-slate-600">
+        <a href="index.html" class="hover:text-primary">Beranda</a>
+        <a href="paket.html" class="hover:text-primary">Paket Wisata</a>
+        <a href="activity-kit.html" class="hover:text-primary">Activity Kit</a>
+        <a href="admin.html" class="text-slate-400 hover:text-slate-600">Admin CMS 🔒</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====================== JAVASCRIPT STUDIO ENGINE ====================== -->
+  <script>
+    // Supabase config
+    const SUPABASE_URL  = 'https://kbyjkhmgjkuqgmcakvqp.supabase.co';
+    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtieWpraG1namt1cWdtY2FrdnFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3NTc5ODUsImV4cCI6MjEwNzMzMzk4NX0.hCGw_JOF7FfYXqxwIGAllonTC1wwBoolhX9y_IFJn2M';
+    const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+    // Sound Synthesizer via Web Audio API (No external sound files required)
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+
+    function playTone(freq = 520, type = 'sine', duration = 0.12) {
+      try {
+        if (!audioCtx) audioCtx = new AudioCtx();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        // Audio muted / blocked by browser policy
+      }
+    }
+
+    function playSuccessChime() {
+      const notes = [440, 554, 659, 880];
+      notes.forEach((freq, i) => {
+        setTimeout(() => playTone(freq, 'triangle', 0.2), i * 90);
+      });
+    }
+
+    // Palette Colors (18 vibrant kid-friendly shades)
+    const PALETTE_COLORS = [
+      '#EF4444', // Merah Ceri
+      '#FF6B35', // Oranye Bali
+      '#F59E0B', // Kuning Emas
+      '#FFD166', // Kuning Cerah
+      '#84CC16', // Hijau Limau
+      '#10B981', // Hijau Zamrud
+      '#06D6A0', // Toska Bali
+      '#06B6D4', // Sian Laut
+      '#0EA5E9', // Biru Langit
+      '#4361EE', // Biru Indigo
+      '#8B5CF6', // Ungu Anggur
+      '#D946EF', // Magenta Ceria
+      '#EC4899', // Pink Kamboja
+      '#F472B6', // Pink Pastel
+      '#854D0E', // Cokelat Kayu
+      '#D97706', // Cokelat Terang
+      '#94A3B8', // Abu-Abu
+      '#1E293B'  // Hitam Garis
+    ];
+
+    // State
+    let coloringSheets = [];
+    let currentSheet = null;
+    let currentColor = '#FF6B35';
+    let currentMode = 'bucket'; // 'bucket' | 'brush' | 'eraser'
+    let brushSize = 18;
+    let isDrawing = false;
+    let lastX = 0, lastY = 0;
+
+    // Undo / Redo stacks
+    const undoStack = [];
+    const redoStack = [];
+
+    // DOM Elements
+    const svgContainer = document.getElementById('svg-container');
+    const brushCanvas  = document.getElementById('brush-canvas');
+    const ctx = brushCanvas.getContext('2d', { willReadFrequently: true });
+
+    // Initialize Palette Buttons
+    function initPalette() {
+      const container = document.getElementById('color-palette-container');
+      container.innerHTML = '';
+      PALETTE_COLORS.forEach((color, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `color-btn w-9 h-9 sm:w-10 sm:h-10 rounded-2xl shadow-sm border-2 border-white/80 focus:outline-none ${color === currentColor ? 'active' : ''}`;
+        btn.style.backgroundColor = color;
+        btn.title = `Pilih warna ${color}`;
+        btn.onclick = () => selectColor(color, btn);
+        container.appendChild(btn);
+      });
+    }
+
+    function selectColor(color, btnEl = null) {
+      currentColor = color;
+      document.getElementById('active-color-preview').style.backgroundColor = color;
+      document.getElementById('custom-color-picker').value = color;
+
+      document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+      if (btnEl) {
+        btnEl.classList.add('active');
+      }
+      playTone(660, 'sine', 0.08);
+
+      // If in eraser mode, switch back to bucket or brush
+      if (currentMode === 'eraser') {
+        setMode('brush');
+      }
+    }
+
+    function pickCustomColor(color) {
+      selectColor(color);
+    }
+
+    // Set Tool Mode
+    function setMode(mode) {
+      currentMode = mode;
+      document.body.className = document.body.className.replace(/mode-\w+/g, '') + ` mode-${mode}`;
+
+      document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`tool-${mode}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const sizeBox = document.getElementById('brush-size-box');
+      const hint = document.getElementById('hint-text');
+
+      if (mode === 'bucket') {
+        brushCanvas.classList.add('pointer-events-none');
+        hint.textContent = 'Mode Ember Cat: Ketuk bagian gambar untuk mengisi warna langsung! 🌟';
+        playTone(480, 'sine', 0.1);
+      } else if (mode === 'brush') {
+        brushCanvas.classList.remove('pointer-events-none');
+        hint.textContent = 'Mode Kuas Krayon: Sentuh & gerakkan jari untuk menggambar bebas di atas kanvas! 🖌️';
+        playTone(580, 'triangle', 0.1);
+      } else if (mode === 'eraser') {
+        brushCanvas.classList.remove('pointer-events-none');
+        hint.textContent = 'Mode Penghapus: Hapus coretan krayon yang ingin diperbaiki! 🧼';
+        playTone(320, 'sine', 0.1);
+      }
+    }
+
+    function setBrushSize(size, el) {
+      brushSize = size;
+      document.querySelectorAll('.size-btn').forEach(b => {
+        b.classList.remove('active', 'border-primary', 'bg-primary/10');
+        b.classList.add('border-slate-200');
+      });
+      el.classList.add('active', 'border-primary', 'bg-primary/10');
+      el.classList.remove('border-slate-200');
+      playTone(520, 'sine', 0.08);
+    }
+
+    // Load Sheets from Supabase
+    async function loadSheets() {
+      document.getElementById('stage-loading').classList.remove('hidden');
+
+      try {
+        const { data, error } = await db
+          .from('coloring_sheets')
+          .select('*')
+          .eq('is_active', true)
+          .order('order_index', { ascending: true });
+
+        if (error || !data || data.length === 0) {
+          throw new Error('Fallback to local');
+        }
+        coloringSheets = data;
+      } catch (e) {
+        console.warn('Using offline backup templates', e);
+        // Built-in emergency backup
+        coloringSheets = [
+          {
+            id: 1,
+            title: 'Lumba-Lumba Ceria Lovina',
+            category: 'Hewan Laut',
+            difficulty: 'Mudah (3–5 thn)',
+            description: 'Lumba-lumba ramah yang sedang melompat gembira di perairan pantai Lovina, Bali Utara.',
+            svg_data: `<svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" class="coloring-svg w-full h-auto">
+              <circle class="colorable" data-name="Matahari" cx="400" cy="90" r="45" fill="#FFFFFF" stroke="#1E293B" stroke-width="4"/>
+              <path class="colorable" data-name="Tubuh Lumba-lumba" d="M120 230 C120 140 230 110 320 150 C370 170 410 200 420 220 C400 220 370 210 330 220 C270 240 210 280 180 290 C150 295 125 275 120 230 Z" fill="#FFFFFF" stroke="#1E293B" stroke-width="4"/>
+              <path class="colorable" data-name="Perut Lumba-lumba" d="M180 290 C220 270 280 245 330 235 C370 230 400 235 410 238 C380 255 330 275 270 290 C220 300 190 295 180 290 Z" fill="#FFFFFF" stroke="#1E293B" stroke-width="3"/>
+              <circle cx="380" cy="195" r="7" fill="#1E293B"/>
+              <circle cx="382" cy="193" r="2.5" fill="#FFFFFF"/>
+              <path class="colorable" data-name="Ombak Depan" d="M30 320 Q80 280 130 320 T230 320 T330 320 T430 320 T500 320 L500 390 L0 390 L0 320 Z" fill="#FFFFFF" stroke="#1E293B" stroke-width="4"/>
+            </svg>`
+          }
+        ];
+      }
+
+      document.getElementById('sheets-total-badge').textContent = coloringSheets.length;
+      renderThumbnails();
+      renderModalGallery();
+
+      // Select first sheet or query param
+      const urlParams = new URLSearchParams(window.location.search);
+      const sheetId = urlParams.get('sheet');
+      const target = coloringSheets.find(s => s.id == sheetId) || coloringSheets[0];
+      selectSheet(target);
+    }
+
+    // Select Active Sheet
+    function selectSheet(sheet) {
+      currentSheet = sheet;
+
+      // Update text
+      document.getElementById('sheet-title-heading').textContent = sheet.title;
+      document.getElementById('sheet-desc-text').textContent = sheet.description || 'Mari warnai dengan ceria!';
+      document.getElementById('sheet-category-badge').textContent = sheet.category || 'Bali Little Explorer';
+      document.getElementById('sheet-difficulty-badge').textContent = sheet.difficulty || 'Semua Umur';
+      document.getElementById('story-title').textContent = sheet.title;
+      document.getElementById('story-body').textContent = sheet.description || 'Aktivitas mewarnai merangsang motorik halus dan daya imajinasi si kecil.';
+
+      // Reset Undo/Redo & Canvas
+      undoStack.length = 0;
+      redoStack.length = 0;
+      updateUndoRedoBtns();
+
+      // Render SVG
+      svgContainer.innerHTML = sheet.svg_data || `<div class="p-8 text-center text-slate-400">Template belum memuat data outline</div>`;
+
+      // Attach bucket click handlers to colorable elements
+      attachColorableHandlers();
+
+      // Resize canvas to match container
+      resizeCanvas();
+
+      // Hide loader
+      setTimeout(() => {
+        document.getElementById('stage-loading').classList.add('hidden');
+      }, 150);
+
+      // Save initial state for undo
+      saveState();
+    }
+
+    function attachColorableHandlers() {
+      const colorables = svgContainer.querySelectorAll('.colorable');
+      colorables.forEach((elem, index) => {
+        elem.onclick = (e) => {
+          if (currentMode !== 'bucket') return;
+          e.stopPropagation();
+
+          const prevFill = elem.getAttribute('fill') || '#FFFFFF';
+          if (prevFill.toLowerCase() === currentColor.toLowerCase()) return;
+
+          // Record Undo Action
+          saveState();
+
+          elem.setAttribute('fill', currentColor);
+          playTone(600 + (index % 6) * 60, 'sine', 0.15);
+
+          // Subtle bounce effect
+          elem.style.transform = 'scale(1.02)';
+          setTimeout(() => { elem.style.transform = ''; }, 120);
+        };
+      });
+    }
+
+    // Canvas Freehand Drawing Engine
+    function resizeCanvas() {
+      const rect = brushCanvas.parentElement.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      brushCanvas.width = rect.width * dpr;
+      brushCanvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+    }
+    window.addEventListener('resize', () => {
+      // Keep drawn content on resize if needed
+      const tempImg = ctx.getImageData(0, 0, brushCanvas.width, brushCanvas.height);
+      resizeCanvas();
+    });
+
+    function getCanvasCoords(e) {
+      const rect = brushCanvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    }
+
+    function startDraw(e) {
+      if (currentMode === 'bucket') return;
+      isDrawing = true;
+      const { x, y } = getCanvasCoords(e);
+      lastX = x;
+      lastY = y;
+      saveState();
+
+      // Draw initial dot
+      ctx.beginPath();
+      ctx.arc(x, y, brushSize / 2, 0, Math.PI * 2);
+      if (currentMode === 'eraser') {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.fill();
+      } else {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.fillStyle = currentColor;
+        ctx.fill();
+      }
+    }
+
+    function drawMove(e) {
+      if (!isDrawing || currentMode === 'bucket') return;
+      e.preventDefault();
+      const { x, y } = getCanvasCoords(e);
+
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(x, y);
+
+      if (currentMode === 'eraser') {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.lineWidth = brushSize * 1.5;
+      } else {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.strokeStyle = currentColor;
+        ctx.lineWidth = brushSize;
+      }
+      ctx.stroke();
+
+      lastX = x;
+      lastY = y;
+    }
+
+    function stopDraw() {
+      if (isDrawing) {
+        isDrawing = false;
+        playTone(350, 'triangle', 0.05);
+      }
+    }
+
+    brushCanvas.addEventListener('mousedown', startDraw);
+    brushCanvas.addEventListener('mousemove', drawMove);
+    window.addEventListener('mouseup', stopDraw);
+
+    brushCanvas.addEventListener('touchstart', startDraw, { passive: false });
+    brushCanvas.addEventListener('touchmove', drawMove, { passive: false });
+    window.addEventListener('touchend', stopDraw);
+
+    // Undo / Redo Mechanism
+    function saveState() {
+      const svgState = [];
+      svgContainer.querySelectorAll('.colorable').forEach((elem, idx) => {
+        svgState.push({ idx, fill: elem.getAttribute('fill') || '#FFFFFF' });
+      });
+
+      const canvasData = ctx.getImageData(0, 0, brushCanvas.width, brushCanvas.height);
+      undoStack.push({ svgState, canvasData });
+
+      if (undoStack.length > 25) undoStack.shift();
+      redoStack.length = 0; // Clear redo
+      updateUndoRedoBtns();
+    }
+
+    function undo() {
+      if (undoStack.length <= 1) return;
+      const current = undoStack.pop();
+      redoStack.push(current);
+
+      const previous = undoStack[undoStack.length - 1];
+      restoreState(previous);
+      playTone(400, 'sine', 0.08);
+      updateUndoRedoBtns();
+    }
+
+    function redo() {
+      if (redoStack.length === 0) return;
+      const next = redoStack.pop();
+      undoStack.push(next);
+      restoreState(next);
+      playTone(500, 'sine', 0.08);
+      updateUndoRedoBtns();
+    }
+
+    function restoreState(state) {
+      if (!state) return;
+      const colorables = svgContainer.querySelectorAll('.colorable');
+      state.svgState.forEach(item => {
+        if (colorables[item.idx]) {
+          colorables[item.idx].setAttribute('fill', item.fill);
+        }
+      });
+      ctx.putImageData(state.canvasData, 0, 0);
+    }
+
+    function updateUndoRedoBtns() {
+      document.getElementById('btn-undo').disabled = undoStack.length <= 1;
+      document.getElementById('btn-redo').disabled = redoStack.length === 0;
+    }
+
+    function confirmReset() {
+      if (confirm('Bersihkan semua warna dan mulai mewarnai dari awal? ✨')) {
+        saveState();
+        svgContainer.querySelectorAll('.colorable').forEach(elem => {
+          elem.setAttribute('fill', '#FFFFFF');
+        });
+        ctx.clearRect(0, 0, brushCanvas.width, brushCanvas.height);
+        playTone(300, 'sine', 0.2);
+      }
+    }
+
+    // Render Thumbnails Carousel & Modal Grid
+    function renderThumbnails() {
+      const strip = document.getElementById('sheets-thumbnail-strip');
+      strip.innerHTML = '';
+
+      coloringSheets.forEach(sheet => {
+        const item = document.createElement('button');
+        item.type = 'button';
+        item.className = 'flex flex-col items-center gap-1 p-2 rounded-2xl bg-amber-50/50 hover:bg-amber-100/70 border border-amber-200/80 shrink-0 transition text-center w-28 group focus:outline-none';
+        item.onclick = () => selectSheet(sheet);
+
+        item.innerHTML = `
+          <div class="w-20 h-16 bg-white rounded-xl border border-slate-200 overflow-hidden flex items-center justify-center p-1 group-hover:scale-105 transition shadow-xs">
+            <div class="w-full h-full pointer-events-none opacity-85 scale-90">
+              ${sheet.svg_data || '🎨'}
+            </div>
+          </div>
+          <span class="text-[11px] font-bold text-slate-700 truncate w-full group-hover:text-primary transition">${sheet.title}</span>
+        `;
+        strip.appendChild(item);
+      });
+    }
+
+    function renderModalGallery() {
+      const grid = document.getElementById('gallery-modal-grid');
+      grid.innerHTML = '';
+
+      coloringSheets.forEach(sheet => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-2xl p-3 border border-slate-200 hover:border-primary hover:shadow-lg transition cursor-pointer flex flex-col group';
+        card.onclick = () => {
+          selectSheet(sheet);
+          closeGalleryModal();
+        };
+
+        card.innerHTML = `
+          <div class="aspect-[4/3] bg-amber-50/30 rounded-xl border border-slate-100 p-2 flex items-center justify-center overflow-hidden mb-2">
+            <div class="w-full h-full pointer-events-none group-hover:scale-105 transition">
+              ${sheet.svg_data || '🎨'}
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5 mb-1">
+            <span class="text-[10px] bg-primary/10 text-primary font-bold px-2 py-0.5 rounded-full">${sheet.category || 'Bali'}</span>
+            <span class="text-[10px] text-slate-400 font-semibold">${sheet.difficulty || ''}</span>
+          </div>
+          <h4 class="font-baloo font-bold text-xs text-slate-800 leading-tight group-hover:text-primary transition line-clamp-1">${sheet.title}</h4>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function openGalleryModal() {
+      document.getElementById('gallery-modal').classList.remove('hidden');
+    }
+    function closeGalleryModal() {
+      document.getElementById('gallery-modal').classList.add('hidden');
+    }
+
+    // Save Artwork as High-Res PNG with Polaroid Watermark & Confetti
+    async function saveColoringArt() {
+      playSuccessChime();
+
+      // Confetti burst
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+
+      const offscreen = document.createElement('canvas');
+      const oCtx = offscreen.getContext('2d');
+      const width = 1200;
+      const height = 1000;
+      offscreen.width = width;
+      offscreen.height = height;
+
+      // Draw background polaroid card
+      oCtx.fillStyle = '#FFFDF9';
+      oCtx.fillRect(0, 0, width, height);
+
+      // Top Header in art
+      oCtx.fillStyle = '#1E293B';
+      oCtx.font = 'bold 36px "Baloo 2", cursive, sans-serif';
+      oCtx.textAlign = 'center';
+      oCtx.fillText(`🌴 ${currentSheet ? currentSheet.title : 'Karya Petualang Cilik'} 🌴`, width / 2, 70);
+
+      oCtx.fillStyle = '#64748B';
+      oCtx.font = '600 20px "Nunito", sans-serif';
+      oCtx.fillText('Studio Mewarnai Digital – Bali Little Explorer by Bali Top Holiday', width / 2, 105);
+
+      // Convert SVG to Image
+      const svgEl = svgContainer.querySelector('svg');
+      if (svgEl) {
+        const svgClone = svgEl.cloneNode(true);
+        svgClone.setAttribute('width', '1000');
+        svgClone.setAttribute('height', '700');
+        const svgString = new XMLSerializer().serializeToString(svgClone);
+        const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+        const URL = window.URL || window.webkitURL || window;
+        const blobURL = URL.createObjectURL(svgBlob);
+
+        const img = new Image();
+        img.onload = () => {
+          // Draw white canvas frame
+          oCtx.fillStyle = '#FFFFFF';
+          oCtx.strokeStyle = '#E2E8F0';
+          oCtx.lineWidth = 4;
+          oCtx.beginPath();
+          oCtx.roundRect(100, 130, 1000, 720, 24);
+          oCtx.fill();
+          oCtx.stroke();
+
+          // Draw SVG
+          oCtx.drawImage(img, 100, 130, 1000, 720);
+
+          // Draw Overlay Freehand Canvas
+          oCtx.drawImage(brushCanvas, 100, 130, 1000, 720);
+
+          // Watermark footer
+          oCtx.fillStyle = '#FF6B35';
+          oCtx.font = 'bold 24px "Baloo 2", cursive, sans-serif';
+          oCtx.textAlign = 'left';
+          oCtx.fillText('🌟 Dibuat oleh Petualang Cilik Bali', 110, 900);
+
+          const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+          oCtx.fillStyle = '#94A3B8';
+          oCtx.font = '18px "Nunito", sans-serif';
+          oCtx.textAlign = 'right';
+          oCtx.fillText(`Tanggal: ${today} | explorerbth.jinztech.cloud`, width - 110, 900);
+
+          // Trigger download
+          const link = document.createElement('a');
+          const safeName = (currentSheet ? currentSheet.title : 'mewarnai-bali').toLowerCase().replace(/\s+/g, '-');
+          link.download = `karya-bali-little-explorer-${safeName}.png`;
+          link.href = offscreen.toDataURL('image/png');
+          link.click();
+          URL.revokeObjectURL(blobURL);
+        };
+        img.src = blobURL;
+      }
+    }
+
+    // Print B&W Outline on Paper
+    function printSheet() {
+      const svgEl = svgContainer.querySelector('svg');
+      if (!svgEl) return;
+
+      const printWindow = window.open('', '_blank');
+      const svgClone = svgEl.cloneNode(true);
+      // Remove fills for true printable outline
+      svgClone.querySelectorAll('.colorable').forEach(el => el.setAttribute('fill', '#FFFFFF'));
+
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Cetak Lembar Mewarnai – ${currentSheet ? currentSheet.title : 'Bali Little Explorer'}</title>
+          <style>
+            @page { size: A4 landscape; margin: 15mm; }
+            body { font-family: sans-serif; text-align: center; margin: 0; padding: 20px; }
+            .header { margin-bottom: 20px; }
+            .header h1 { margin: 0; font-size: 24px; color: #1e293b; }
+            .header p { margin: 4px 0 0; font-size: 14px; color: #64748b; }
+            svg { max-width: 90%; height: auto; border: 1px dashed #cbd5e1; border-radius: 12px; }
+            .footer { margin-top: 15px; font-size: 12px; color: #94a3b8; }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <h1>🌴 Bali Little Explorer – ${currentSheet ? currentSheet.title : 'Lembar Mewarnai'} 🎨</h1>
+            <p>${currentSheet ? currentSheet.description : 'Aktivitas Mewarnai Edukasi Anak Ramah Balita'} | Bali Top Holiday</p>
+          </div>
+          <div>${svgClone.outerHTML}</div>
+          <div class="footer">
+            Nama Petualang Cilik: ____________________ &nbsp;&nbsp;&nbsp;&nbsp; Usia: _____ Tahun
+          </div>
+          ' + '<scr' + 'ipt>window.onload = function() { window.print(); }<' + '/scr' + 'ipt>' + '
+        </body>
+        </html>
+      `);
+      printWindow.document.close();
+    }
+
+    // Mobile Navigation Toggle
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileDropdown = document.getElementById('mobile-dropdown');
+    if (mobileToggle && mobileDropdown) {
+      mobileToggle.addEventListener('click', () => {
+        mobileDropdown.classList.toggle('hidden');
+      });
+    }
+
+    // Startup
+    initPalette();
+    loadSheets();
+  </script>
+</body>
+</html>
