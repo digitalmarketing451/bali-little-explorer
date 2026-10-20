@@ -136,7 +136,7 @@
       <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex items-center gap-4">
         <div class="w-12 h-12 rounded-xl bg-indigo/10 text-indigo flex items-center justify-center text-2xl shrink-0">🎨</div>
         <div>
-          <p class="text-xs font-semibold text-slate-400">Activity Kit PDF</p>
+          <p class="text-xs font-semibold text-slate-400">Kids Activity &amp; Mewarnai</p>
           <p class="text-2xl font-black text-slate-800 font-baloo" id="stat-kits">0</p>
         </div>
       </div>
@@ -155,11 +155,8 @@
         <span>🗺️ Kelola Paket Wisata</span>
       </button>
       <button class="tab-btn px-4 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition flex items-center gap-2 shrink-0" onclick="switchTab('tab-kits', this)">
-        <span>🎨 Kelola Activity Kit</span>
-      </button>
-      <button class="tab-btn px-4 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition flex items-center gap-2 shrink-0" onclick="switchTab('tab-coloring', this)">
-        <span>🖍️ Lembar Mewarnai</span>
-        <span id="badge-coloring-count" class="bg-primary/20 text-primary text-xs px-2 py-0.5 rounded-full font-black">0</span>
+        <span>🎨 Kids Activity & Mewarnai</span>
+        <span id="badge-kids-activity-count" class="bg-primary/20 text-primary text-xs px-2 py-0.5 rounded-full font-black">0</span>
       </button>
       <button class="tab-btn px-4 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition flex items-center gap-2 shrink-0" onclick="switchTab('tab-tips', this)">
         <span>💡 Parenting Tips</span>
@@ -287,46 +284,26 @@
       </div>
     </section>
 
-    <!-- ==================== TAB 4: KELOLA ACTIVITY KITS ==================== -->
+    <!-- ==================== TAB: KELOLA KIDS ACTIVITY & MEWARNAI DIGITAL ==================== -->
     <section id="tab-kits" class="tab-content hidden">
-      <div class="flex items-center justify-between mb-6">
-        <div>
-          <h3 class="font-baloo font-bold text-2xl text-slate-900">Digital Kids Activity Kit</h3>
-          <p class="text-xs text-slate-500">Lembar aktivitas edukatif siap cetak (PDF) untuk anak usia 3–7 tahun.</p>
-        </div>
-        <div class="flex items-center gap-2">
-          <a href="activity-kit.html" target="_blank"
-             class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3.5 py-2.5 rounded-xl shadow-sm transition flex items-center gap-1.5">
-            <span>👁️ Buka Halaman Kit</span>
-            <span>↗</span>
-          </a>
-          <button onclick="openKitModal()" class="bg-teal hover:bg-teal-dark text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-1.5">
-            <span>+ Tambah Kit Baru</span>
-          </button>
-        </div>
-      </div>
-
-      <div id="kits-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Rendered by JS -->
-      </div>
-    </section>
-
-    <!-- ==================== TAB: KELOLA LEMBAR MEWARNAI DIGITAL ==================== -->
-    <section id="tab-coloring" class="tab-content hidden">
+      <!-- Main Header -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
           <div class="inline-flex items-center gap-2 bg-primary/10 text-primary font-bold text-xs px-3 py-1 rounded-full mb-1">
-            <span>🖍️ Fitur Anak & Balita</span>
+            <span>🎨 Modul Kreativitas &amp; Edukasi Anak</span>
           </div>
-          <h3 class="font-baloo font-bold text-2xl text-slate-900">Kelola Studio Mewarnai Digital</h3>
-          <p class="text-xs text-slate-500">Kelola gambar outline vektor (SVG), tingkat kesulitan, cerita edukasi, dan status aktif lembar mewarnai.</p>
+          <h3 class="font-baloo font-bold text-2xl text-slate-900">Kids Activity &amp; Studio Mewarnai Digital</h3>
+          <p class="text-xs text-slate-500">Kelola bundel lembar aktivitas edukatif siap cetak (PDF) dan template interaktif Studio Mewarnai Digital.</p>
         </div>
-        <div class="flex items-center gap-2">
-          <a href="mewarnai.html" target="_blank"
+        <div class="flex flex-wrap items-center gap-2">
+          <a href="activity-kit.html" target="_blank"
              class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3.5 py-2.5 rounded-xl shadow-sm transition flex items-center gap-1.5">
-            <span>👁️ Buka Studio Mewarnai</span>
+            <span>👁️ Buka Laman Activity Kit</span>
             <span>↗</span>
           </a>
+          <button onclick="openKitModal()" class="bg-teal hover:bg-teal-dark text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-1.5">
+            <span>+ Tambah Kit PDF</span>
+          </button>
           <button onclick="openColoringModal()" class="bg-primary hover:bg-primary-dark text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-1.5">
             <span>+ Tambah Lembar Mewarnai</span>
           </button>
@@ -334,28 +311,60 @@
       </div>
 
       <!-- Quick Summary Stats -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
-          <span class="text-xs text-slate-400 font-bold block">Total Lembar</span>
+          <span class="text-xs text-slate-400 font-bold block">Bundel Kit PDF</span>
+          <span id="stat-kits-count-sub" class="font-baloo font-black text-2xl text-teal-dark">0</span>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
+          <span class="text-xs text-slate-400 font-bold block">Total Lembar Mewarnai</span>
           <span id="stat-coloring-total" class="font-baloo font-black text-2xl text-slate-800">0</span>
         </div>
         <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
-          <span class="text-xs text-slate-400 font-bold block">Status Aktif</span>
+          <span class="text-xs text-slate-400 font-bold block">Mewarnai Aktif</span>
           <span id="stat-coloring-active" class="font-baloo font-black text-2xl text-emerald-600">0</span>
         </div>
         <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
           <span class="text-xs text-slate-400 font-bold block">Kategori Unik</span>
           <span id="stat-coloring-categories" class="font-baloo font-black text-2xl text-indigo-600">0</span>
         </div>
-        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
-          <span class="text-xs text-slate-400 font-bold block">Format Studio</span>
-          <span class="font-baloo font-black text-xl text-amber-500">SVG & Canvas</span>
+      </div>
+
+      <!-- SUB-SECTION 1: BUNDEL ACTIVITY KIT (PDF SIAP CETAK) -->
+      <div class="mb-10">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200">
+          <div>
+            <h4 class="font-baloo font-bold text-lg text-slate-800 flex items-center gap-2">
+              <span>📄 Bundel Lembar Aktivitas Cetak (PDF)</span>
+            </h4>
+            <p class="text-xs text-slate-400">Lembar aktivitas teka-teki, maze, tracing motorik untuk usia 3–7 tahun.</p>
+          </div>
+          <button onclick="openKitModal()" class="text-xs text-teal-dark hover:underline font-bold">
+            + Tambah Kit
+          </button>
+        </div>
+        <div id="kits-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Rendered by JS -->
         </div>
       </div>
 
-      <!-- Coloring Grid -->
-      <div id="coloring-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Rendered by JS -->
+      <!-- SUB-SECTION 2: TEMPLATE STUDIO MEWARNAI DIGITAL -->
+      <div class="pt-4">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200">
+          <div>
+            <h4 class="font-baloo font-bold text-lg text-slate-800 flex items-center gap-2">
+              <span>🖍️ Template Studio Mewarnai Digital Interaktif</span>
+            </h4>
+            <p class="text-xs text-slate-400">Karakter dan ikon budaya Bali dengan outline SVG untuk diwarnai langsung di layar HP/tablet.</p>
+          </div>
+          <button onclick="openColoringModal()" class="text-xs text-primary hover:underline font-bold">
+            + Tambah Template
+          </button>
+        </div>
+        <!-- Coloring Grid -->
+        <div id="coloring-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Rendered by JS -->
+        </div>
       </div>
     </section>
 
@@ -1606,6 +1615,9 @@
       const { data } = await db.from('activity_kits').select('*').order('order_index', { ascending: true });
       kitsData = data || [];
       document.getElementById('stat-kits').textContent = kitsData.length;
+      const subKits = document.getElementById('stat-kits-count-sub');
+      if (subKits) subKits.textContent = kitsData.length;
+      updateKidsActivityBadge();
 
       const container = document.getElementById('kits-grid');
       container.innerHTML = kitsData.map(k => `
@@ -1722,9 +1734,18 @@
         const statCat = document.getElementById('stat-coloring-categories');
         if (statCat) statCat.textContent = categories;
 
+        updateKidsActivityBadge();
         renderColoringSheets();
       } catch (e) {
         console.error('Error loading coloring sheets:', e);
+      }
+    }
+
+    function updateKidsActivityBadge() {
+      const badge = document.getElementById('badge-kids-activity-count');
+      if (badge) {
+        const total = (kitsData ? kitsData.length : 0) + (coloringData ? coloringData.length : 0);
+        badge.textContent = total;
       }
     }
 
