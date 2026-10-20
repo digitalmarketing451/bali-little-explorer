@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <meta name="description" content="Digital Kids Activity Kit Bali Little Explorer – Lembar mewarnai ikon budaya Bali, teka-teki visual flora fauna, dan latihan motorik halus anak usia 3-7 tahun (PDF siap cetak gratis)." />
-  <meta name="keywords" content="activity kit anak bali, lembar mewarnai bali, lembar kerja paud bali, games edukasi anak liburan bali, bali little explorer" />
-  <title>Digital Kids Activity Kit 🎨 – Lembar Aktivitas Anak | Bali Little Explorer</title>
+  <title>Digital Kids Activity Kit &amp; Studio Mewarnai – Bali Little Explorer</title>
+  <meta name="description" content="15+ lembar aktivitas anak PDF siap cetak bertema budaya dan alam Bali untuk liburan keluarga. Dilengkapi Studio Mewarnai Digital interaktif dan Family Travel Guide gratis." />
+  <meta name="keywords" content="activity kit anak bali, lembar mewarnai bali, digital activity kit balita, coloring pages bali, family travel guide bali, bali little explorer" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
@@ -13,12 +13,13 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="shortcut icon" href="favicon.ico" />
 
-  <!-- Material Symbols Outlined -->
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-  <!-- Google Font: Plus Jakarta Sans -->
+  <!-- Fonts: Plus Jakarta Sans -->
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -28,37 +29,107 @@
       theme: {
         extend: {
           "colors": {
-            "on-surface": "#261814",
-            "on-surface-variant": "#594139",
-            "surface-variant": "#f7ddd5",
-            "secondary": "#006a61",
-            "palm-green": "#16A34A",
-            "border-subtle": "#F1EDE6",
-            "primary": "#ab3500",
-            "primary-container": "#ff6b35",
-            "tertiary": "#00677e",
-            "tertiary-container": "#00a7cb",
-            "neutral-slate-muted": "#64748B",
             "neutral-slate-dark": "#1E293B",
-            "cream-bg": "#FFFDF9",
-            "coral-soft": "#FFEDD5",
-            "card-surface": "#FFFFFF",
-            "ocean-teal-soft": "#CCFBF1",
-            "palm-soft": "#DCFCE7",
-            "sun-amber": "#FFB703",
-            "surface-container-low": "#fff1ed",
+            "inverse-on-surface": "#ffede8",
+            "on-tertiary-fixed-variant": "#004e60",
+            "palm-green": "#16A34A",
+            "surface-container-highest": "#f7ddd5",
+            "on-tertiary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
             "surface-container": "#ffe9e3",
-            "background": "#fff8f6"
+            "tertiary-fixed": "#b5ebff",
+            "on-primary-fixed": "#390c00",
+            "outline-variant": "#e1bfb5",
+            "tertiary-fixed-dim": "#59d5fb",
+            "coral-soft": "#FFEDD5",
+            "primary": "#ab3500",
+            "inverse-primary": "#ffb59d",
+            "primary-container": "#ff6b35",
+            "surface-container-high": "#fde3db",
+            "on-tertiary-container": "#003744",
+            "secondary-fixed": "#89f5e7",
+            "on-secondary-fixed": "#00201d",
+            "on-secondary-fixed-variant": "#005049",
+            "surface-variant": "#f7ddd5",
+            "border-subtle": "#F1EDE6",
+            "secondary": "#006a61",
+            "on-primary-container": "#5f1900",
+            "neutral-slate-muted": "#64748B",
+            "background": "#fff8f6",
+            "palm-soft": "#DCFCE7",
+            "on-primary-fixed-variant": "#832600",
+            "outline": "#8d7168",
+            "secondary-container": "#86f2e4",
+            "on-surface-variant": "#594139",
+            "surface": "#fff8f6",
+            "cream-bg": "#FFFDF9",
+            "error": "#ba1a1a",
+            "surface-dim": "#eed5cd",
+            "secondary-fixed-dim": "#6bd8cb",
+            "surface-tint": "#ab3500",
+            "on-tertiary-fixed": "#001f28",
+            "primary-fixed-dim": "#ffb59d",
+            "on-secondary": "#ffffff",
+            "on-background": "#261814",
+            "on-secondary-container": "#006f66",
+            "on-surface": "#261814",
+            "inverse-surface": "#3c2d28",
+            "ocean-teal-soft": "#CCFBF1",
+            "tertiary-container": "#00a7cb",
+            "card-surface": "#FFFFFF",
+            "surface-bright": "#fff8f6",
+            "sun-amber": "#FFB703",
+            "error-container": "#ffdad6",
+            "on-primary": "#ffffff",
+            "on-error": "#ffffff",
+            "tertiary": "#00677e",
+            "primary-fixed": "#ffdbd0",
+            "surface-container-low": "#fff1ed",
+            "on-error-container": "#93000a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "gutter-mobile": "0.75rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "margin": "2rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2.5rem",
+            "space-2xl": "4rem",
+            "space-md": "1rem",
+            "gutter": "1.25rem"
           },
           "fontFamily": {
-            "body-lg": ["Plus Jakarta Sans", "sans-serif"],
-            "headline-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-lg-mobile": ["Plus Jakarta Sans", "sans-serif"],
             "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
-            "body-md": ["Plus Jakarta Sans", "sans-serif"],
-            "label-sm": ["Plus Jakarta Sans", "sans-serif"],
-            "headline-md": ["Plus Jakarta Sans", "sans-serif"],
             "label-md": ["Plus Jakarta Sans", "sans-serif"],
-            "display": ["Plus Jakarta Sans", "sans-serif"]
+            "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+            "body-md": ["Plus Jakarta Sans", "sans-serif"],
+            "display": ["Plus Jakarta Sans", "sans-serif"],
+            "title-md": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "label-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "display-mobile": ["Plus Jakarta Sans", "sans-serif"],
+            "body-lg": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          "fontSize": {
+            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "headline-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "display": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "title-md": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "display-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "800" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }]
           }
         }
       }
@@ -66,81 +137,58 @@
   </script>
   <style>
     .material-symbols-outlined {
-      font-family: 'Material Symbols Outlined';
-      font-size: 20px;
-      line-height: 1;
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
       display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
     }
-    .custom-shadow-soft {
+    .custom-card-shadow {
       box-shadow: 0px 4px 20px -2px rgba(100, 116, 139, 0.08);
     }
-    .custom-shadow-hover {
-      box-shadow: 0px 14px 30px -4px rgba(255, 107, 53, 0.18);
-    }
-    .kit-card {
-      transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
-    .kit-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0px 16px 32px -4px rgba(0, 106, 97, 0.15);
-    }
-    .modal-backdrop {
-      background: rgba(30, 41, 59, 0.6);
-      backdrop-filter: blur(6px);
+    .custom-card-shadow:hover {
+      box-shadow: 0px 14px 30px -4px rgba(255, 107, 53, 0.16);
+      transform: translateY(-3px);
     }
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #FFF8F6; }
     ::-webkit-scrollbar-thumb { background: #FF6B35; border-radius: 9999px; }
   </style>
 </head>
-<body class="bg-cream-bg text-on-surface font-body-md antialiased selection:bg-coral-soft selection:text-primary min-h-screen flex flex-col justify-between">
+<body class="bg-cream-bg text-on-surface antialiased font-body-md text-body-md selection:bg-coral-soft selection:text-primary min-h-screen flex flex-col justify-between">
 
   <!-- ==================== TOP NAVIGATION BAR ==================== -->
-  <header class="docked full-width top-0 sticky z-50 bg-card-surface/95 backdrop-blur-md border-b border-border-subtle shadow-sm transition-all duration-200">
-    <div class="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-20 w-full">
-      <!-- Brand & Mascot Logo -->
+  <header class="bg-card-surface/95 backdrop-blur-md docked full-width top-0 sticky z-50 shadow-sm border-b border-border-subtle transition-all duration-200">
+    <div class="max-w-7xl mx-auto px-margin flex items-center justify-between h-20 w-full">
+      <!-- Brand Logo & Mascot -->
       <a class="flex items-center gap-3 group" href="index.html">
-        <div class="relative w-11 h-11 rounded-full overflow-hidden bg-surface-container flex items-center justify-center p-0.5 border-2 border-primary-container shadow-sm group-hover:scale-105 transition-all duration-200">
-          <img alt="Bali Little Explorer logo" class="w-full h-full object-contain" src="logo.png" onerror="this.src='https://lh3.googleusercontent.com/aida/AEtjO1UN1SX2L9vMmogFBwg7lxlBZtGE1GuZsFmE8-CHWw-fzpGwLTYLma8SHczTAxWSiC_b3EOpSFcc8JF4uuygBc8GYxRXVs69qlEJ0Hcsd1FhdNoQvSpmN67waPNEl6sH6tsheq0nwd40IRujxyT4P-QgMY0aUBwM69Fs5BnVwea2lG27HSAaFS9JLduf8ieS575QlpErhgx-GclQMbF1QMr6plbl0QNUxTWUGXgJZnShPpez56XlGtW8hgKn'"/>
+        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-container p-0.5 bg-cream-bg shadow-sm group-hover:scale-105 transition-all duration-200">
+          <img alt="Bali Little Explorer kid mascot logo with sunhat" class="w-full h-full object-cover rounded-full" src="logo.png" onerror="this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuCDnh9Pjq7DgpAKleRxoMjHrDn6PdKwnC5lG20T_WiukpWrtE_TOpwx1TWTX96k4FgQ3wiMoPZmCFkRddbk-PNV8ASqOARYa9pApuxESjn-U0GBWNwH1lwmBTnERxXHokL_OhGmeUS6tnZGykkBUATrmlM01YyUHU4-nmu_QP76fC5_tHozCHKkMg4kTJ2ccoEbqG9sMVmmkDzbzWCWnwX6zqb9K7lNY_FUCX6Bskmtd0n3xrpobpnDlg'"/>
         </div>
         <div class="flex flex-col">
-          <span class="text-headline-sm font-headline-sm font-bold text-on-surface tracking-tight leading-tight group-hover:text-primary transition-colors duration-200">
-            Bali Little Explorer
-          </span>
-          <span class="text-label-sm font-label-sm text-neutral-slate-muted uppercase tracking-wider">
-            by Bali Top Holiday
-          </span>
+          <span class="text-headline-sm font-headline-sm font-bold text-on-surface tracking-tight group-hover:text-primary transition-colors">Bali Little Explorer</span>
+          <span class="text-label-sm font-label-sm text-neutral-slate-muted">by Bali Top Holiday</span>
         </div>
       </a>
 
       <!-- Desktop Navigation Links -->
-      <nav class="hidden md:flex items-center space-x-8">
-        <a class="text-neutral-slate-muted font-label-md hover:text-primary transition-colors duration-200" href="index.html">
-          Beranda
+      <nav class="hidden md:flex items-center gap-8">
+        <a class="text-neutral-slate-muted font-label-md text-label-md hover:text-primary transition-colors duration-200" href="index.html">Beranda</a>
+        <a class="text-neutral-slate-muted font-label-md text-label-md hover:text-primary transition-colors duration-200" href="paket.html">Paket Wisata</a>
+        <!-- Active Nav: Activity Kit -->
+        <a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md transition-all duration-200" href="activity-kit.html">Activity Kit</a>
+        <a class="text-neutral-slate-muted font-label-md text-label-md hover:text-primary transition-colors duration-200 flex items-center gap-1.5" href="mewarnai.html">
+          <span class="w-2 h-2 rounded-full bg-sun-amber animate-ping"></span>
+          <span>Mewarnai Digital</span>
         </a>
-        <a class="text-neutral-slate-muted font-label-md hover:text-primary transition-colors duration-200" href="paket.html">
-          Paket Wisata
-        </a>
-        <a class="text-primary font-bold border-b-2 border-primary pb-1 transition-colors duration-200" href="activity-kit.html">
-          Activity Kit
-        </a>
-        <a class="text-neutral-slate-muted font-label-md hover:text-primary transition-colors duration-200 flex items-center gap-1.5" href="mewarnai.html">
-          <span class="w-2 h-2 rounded-full bg-sun-amber animate-pulse"></span>
-          Mewarnai Digital
-        </a>
-        <a class="text-neutral-slate-muted font-label-md hover:text-primary transition-colors duration-200" href="parenting-tips.html">
-          Parenting Tips
-        </a>
-        <a class="text-neutral-slate-muted font-label-md hover:text-primary transition-colors duration-200" href="reservasi.html">
-          Reservasi
-        </a>
+        <a class="text-neutral-slate-muted font-label-md text-label-md hover:text-primary transition-colors duration-200" href="parenting-tips.html">Parenting Tips</a>
+        <a class="text-neutral-slate-muted font-label-md text-label-md hover:text-primary transition-colors duration-200" href="reservasi.html">Reservasi</a>
       </nav>
 
       <!-- Trailing Action -->
       <div class="flex items-center gap-3">
-        <a id="nav-wa-btn" class="inline-flex items-center justify-center gap-2 bg-palm-green text-white px-5 py-2.5 rounded-full font-headline-sm text-label-md hover:bg-palm-green/90 shadow-sm transition-all duration-200 active:scale-95" href="https://wa.me/6281234567890?text=Halo%20Admin%20Bali%20Top%20Holiday%2C%20saya%20ingin%20minta%20Kids%20Activity%20Kit%20PDF%20untuk%20anak%20saya!" target="_blank">
+        <a id="nav-wa-btn" class="bg-palm-green text-on-primary font-label-md text-label-md px-5 py-2.5 rounded-full flex items-center gap-2 hover:bg-palm-green/90 transition-all duration-200 active:scale-95 shadow-sm" href="https://wa.me/6281234567890?text=Halo%2C%20saya%20ingin%20tanya%20activity%20kit%20Bali%20Little%20Explorer!" target="_blank">
           <span class="material-symbols-outlined text-lg" data-icon="chat">chat</span>
-          <span>Minta via WA</span>
+          <span>Tanya Via WA</span>
         </a>
         <button id="mobile-toggle" class="md:hidden p-2 text-on-surface rounded-xl hover:bg-surface-container transition-colors focus:outline-none" aria-label="Menu">
           <span class="material-symbols-outlined text-2xl">menu</span>
@@ -149,294 +197,684 @@
     </div>
 
     <!-- Mobile Navigation Drawer -->
-    <div id="mobile-dropdown" class="hidden md:hidden bg-card-surface border-t border-border-subtle px-6 py-5 space-y-4 shadow-xl">
-      <div class="flex flex-col space-y-3 font-semibold text-body-md">
-        <a class="text-on-surface hover:text-primary flex items-center justify-between py-2 border-b border-border-subtle" href="index.html">
-          <span>← Kembali ke Beranda</span>
-          <span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
-        </a>
-        <a class="text-on-surface hover:text-primary flex items-center justify-between py-2 border-b border-border-subtle" href="paket.html">
-          <span>🗺️ Katalog Paket Wisata</span>
-          <span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
-        </a>
-        <a class="text-primary font-bold flex items-center justify-between py-2 border-b border-border-subtle" href="activity-kit.html">
-          <span>🎨 Digital Activity Kit (PDF)</span>
-          <span class="material-symbols-outlined text-sm">check</span>
-        </a>
-        <a class="text-primary font-bold flex items-center justify-between py-2 border-b border-border-subtle" href="mewarnai.html">
-          <span class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-sun-amber animate-pulse"></span>
-            🖍️ Studio Mewarnai Digital
-          </span>
-          <span class="text-label-sm bg-coral-soft text-primary px-2 py-0.5 rounded-full font-bold">Baru ⭐</span>
-        </a>
-        <a class="text-on-surface hover:text-primary flex items-center justify-between py-2 border-b border-border-subtle" href="parenting-tips.html">
-          <span>💡 Parenting Tips</span>
-          <span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
-        </a>
-        <a class="text-on-surface hover:text-primary flex items-center justify-between py-2" href="reservasi.html">
-          <span>📋 Formulir Reservasi</span>
-          <span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
-        </a>
-      </div>
+    <div id="mobile-dropdown" class="hidden md:hidden bg-card-surface border-t border-border-subtle px-6 py-5 space-y-3 shadow-xl">
+      <a class="block py-2 text-on-surface hover:text-primary border-b border-border-subtle" href="index.html">← Kembali ke Beranda</a>
+      <a class="block py-2 text-on-surface hover:text-primary border-b border-border-subtle" href="paket.html">🗺️ Katalog Paket Wisata</a>
+      <a class="block py-2 text-primary font-bold border-b border-border-subtle" href="activity-kit.html">🎨 Digital Activity Kit (PDF)</a>
+      <a class="block py-2 text-primary font-bold border-b border-border-subtle flex items-center gap-2" href="mewarnai.html">
+        <span class="w-2 h-2 rounded-full bg-sun-amber animate-pulse"></span>
+        <span>🖍️ Studio Mewarnai Digital</span>
+      </a>
+      <a class="block py-2 text-on-surface hover:text-primary border-b border-border-subtle" href="parenting-tips.html">💡 Parenting Tips</a>
+      <a class="block py-2 text-on-surface hover:text-primary" href="reservasi.html">📋 Reservasi Online</a>
     </div>
   </header>
 
-  <!-- ==================== HERO HEADER ==================== -->
-  <section class="relative pt-space-lg pb-space-2xl overflow-hidden bg-gradient-to-b from-surface-container-low/70 via-background to-cream-bg text-center">
-    <div class="absolute -top-24 -right-24 w-96 h-96 bg-ocean-teal-soft/60 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute top-1/2 -left-20 w-80 h-80 bg-coral-soft/50 rounded-full blur-3xl pointer-events-none"></div>
-
-    <div class="max-w-5xl mx-auto px-4 md:px-8 relative z-10">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-ocean-teal-soft text-tertiary font-label-sm uppercase tracking-wide border border-tertiary/10 mb-4">
-        <span class="material-symbols-outlined text-sm" data-icon="palette">palette</span>
-        <span>Digital Printable Materials (PDF A4)</span>
-      </div>
-
-      <h1 class="text-display font-display text-on-surface tracking-tight leading-tight mb-4">
-        Koleksi <span class="text-primary">Kids Activity Kit</span> Bali Gratis 🎨
-      </h1>
-
-      <p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed mb-6">
-        15+ lembar aktivitas kreatif ramah anak usia 3–7 tahun. Ikon budaya Bali, satwa tropis, dan latihan motorik halus agar si kecil tetap gembira & fokus selama liburan.
-      </p>
-
-      <!-- Key Badges -->
-      <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-label-sm font-semibold text-on-surface">
-        <span class="inline-flex items-center gap-1.5 bg-card-surface/90 px-3.5 py-1.5 rounded-full border border-border-subtle shadow-xs">
-          <span class="text-palm-green font-bold">✓</span> 100% Gratis Diunduh
-        </span>
-        <span class="inline-flex items-center gap-1.5 bg-card-surface/90 px-3.5 py-1.5 rounded-full border border-border-subtle shadow-xs">
-          <span class="text-palm-green font-bold">✓</span> Format Siap Cetak (A4 PDF)
-        </span>
-        <span class="inline-flex items-center gap-1.5 bg-card-surface/90 px-3.5 py-1.5 rounded-full border border-border-subtle shadow-xs">
-          <span class="text-palm-green font-bold">✓</span> Ramah Balita & PAUD (3–7 Thn)
-        </span>
-        <span class="inline-flex items-center gap-1.5 bg-card-surface/90 px-3.5 py-1.5 rounded-full border border-border-subtle shadow-xs">
-          <span class="text-palm-green font-bold">✓</span> Solusi Anti-Bosan di Mobil
-        </span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== MAIN CONTENT: KITS CATALOG ==================== -->
-  <main class="py-10 md:py-14 max-w-7xl mx-auto px-4 md:px-8 w-full flex-1">
-
-    <!-- Search & Bundle Action Bar -->
-    <div class="bg-card-surface rounded-3xl p-5 md:p-6 custom-shadow-soft border border-border-subtle mb-10 -mt-12 relative z-20">
-      <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
-        <!-- Search box -->
-        <div class="relative flex-1">
-          <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-neutral-slate-muted">
-            <span class="material-symbols-outlined text-lg">search</span>
-          </span>
-          <input type="text" id="kit-search-input" placeholder="Cari materi kit (cth: Mewarnai, Pura, Tari Barong, Teka-Teki, Motorik)..."
-                 class="w-full pl-10 pr-4 py-3 bg-[#FAFAF8] border border-[#E5E5E0] rounded-2xl text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all" />
-        </div>
-
-        <!-- Counter and bundle button -->
-        <div class="flex items-center justify-between md:justify-end gap-3">
-          <span id="kits-count" class="text-label-sm font-semibold text-neutral-slate-muted">Memuat koleksi kit...</span>
-          <button onclick="openBundleDownloadModal()"
-                  class="bg-primary-container hover:bg-primary text-white text-label-md font-bold px-5 py-3 rounded-full shadow-md transition-all flex items-center gap-1.5">
-            <span>🎁 Unduh Semua Kit (Bundle)</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- KITS GRID -->
-    <div id="kits-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-      <div class="col-span-full text-center py-16">
-        <div class="w-10 h-10 border-4 border-primary-container border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-        <p class="text-label-md font-semibold text-neutral-slate-muted">Memuat berkas Kids Activity Kit...</p>
-      </div>
-    </div>
-
-    <!-- HOW TO USE / PRINTING GUIDE SECTION -->
-    <section class="bg-card-surface rounded-3xl p-8 md:p-12 border border-border-subtle custom-shadow-soft mb-16">
-      <div class="text-center max-w-2xl mx-auto mb-10">
-        <span class="bg-ocean-teal-soft text-tertiary font-bold text-label-sm px-3.5 py-1 rounded-full uppercase tracking-wider">Tips Bagi Orang Tua</span>
-        <h2 class="text-headline-lg font-headline-lg text-on-surface mt-3">Cara Terbaik Memakai Activity Kit Saat Liburan</h2>
-        <p class="text-body-md text-on-surface-variant mt-2">Maksimalkan pengalaman bermain & belajar si kecil dengan 4 langkah sederhana berikut:</p>
-      </div>
-
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="p-5 rounded-2xl bg-cream-bg border border-border-subtle flex flex-col items-center text-center">
-          <div class="w-12 h-12 bg-ocean-teal-soft rounded-2xl flex items-center justify-center text-tertiary text-2xl mb-4">
-            <span class="material-symbols-outlined text-2xl">print</span>
+  <main class="flex-1">
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="relative pt-12 pb-16 md:pt-20 md:pb-24 overflow-hidden bg-gradient-to-b from-surface-container-high/40 via-surface to-cream-bg">
+      <div class="max-w-7xl mx-auto px-margin">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-7 flex flex-col items-start gap-5">
+            <!-- Pill Tag -->
+            <div class="inline-flex items-center gap-2 bg-coral-soft text-primary px-3.5 py-1.5 rounded-full border border-primary-container/20">
+              <span class="material-symbols-outlined text-base" data-icon="auto_awesome">auto_awesome</span>
+              <span class="text-label-sm font-label-sm tracking-wider uppercase font-bold">100% Edukasi Anak Usia 3–7 Tahun</span>
+            </div>
+            <h1 class="text-display-mobile md:text-display font-display-mobile md:font-display text-on-surface tracking-tight leading-tight">
+              🎨 Digital Kids Activity Kit Hub
+            </h1>
+            <p class="text-body-lg font-body-lg text-neutral-slate-muted max-w-2xl leading-relaxed">
+              15+ lembar aktivitas PDF gratis siap cetak bertema budaya dan alam Bali untuk menemani si kecil selama perjalanan liburan. Mengembangkan motorik halus, kognitif, dan kreativitas si kecil tanpa rasa bosan di perjalanan!
+            </p>
+            <!-- Quick Stats Ticker -->
+            <div class="grid grid-cols-3 gap-3 md:gap-6 w-full max-w-lg pt-3">
+              <div class="bg-card-surface p-4 rounded-2xl border border-border-subtle shadow-sm flex flex-col">
+                <span class="text-headline-md font-headline-md text-primary font-bold">15+</span>
+                <span class="text-label-sm font-label-sm text-neutral-slate-muted">Lembar PDF Siap Cetak</span>
+              </div>
+              <div class="bg-card-surface p-4 rounded-2xl border border-border-subtle shadow-sm flex flex-col">
+                <span class="text-headline-md font-headline-md text-palm-green font-bold">Gratis</span>
+                <span class="text-label-sm font-label-sm text-neutral-slate-muted">Unduh Tanpa Biaya</span>
+              </div>
+              <div class="bg-card-surface p-4 rounded-2xl border border-border-subtle shadow-sm flex flex-col">
+                <span class="text-headline-md font-headline-md text-tertiary font-bold">3-7 Th</span>
+                <span class="text-label-sm font-label-sm text-neutral-slate-muted">Kurikulum Ramah Balita</span>
+              </div>
+            </div>
+            <!-- Primary CTAs -->
+            <div class="flex flex-wrap items-center gap-4 pt-4">
+              <a class="bg-primary-container text-on-primary font-label-md text-label-md px-7 py-3.5 rounded-full shadow-md hover:bg-primary transition-all duration-200 active:scale-95 flex items-center gap-2" href="#kategori-download">
+                <span class="material-symbols-outlined text-xl" data-icon="download">download</span>
+                <span>Pilih &amp; Unduh Lembar PDF</span>
+              </a>
+              <a class="bg-coral-soft text-primary font-label-md text-label-md px-6 py-3.5 rounded-full border border-primary-container/30 hover:bg-primary-container/20 transition-all duration-200 flex items-center gap-2" href="#digital-studio">
+                <span class="material-symbols-outlined text-xl" data-icon="palette">palette</span>
+                <span>Coba Mewarnai Online</span>
+              </a>
+            </div>
           </div>
-          <h4 class="font-bold text-headline-sm text-on-surface mb-1">1. Cetak Sebelum Berangkat</h4>
-          <p class="text-xs text-neutral-slate-muted leading-relaxed">Cetak di kertas HVS 80–100 gsm ukuran A4. Kertas agak tebal mencegah spidol/krayon tembus.</p>
-        </div>
 
-        <div class="p-5 rounded-2xl bg-cream-bg border border-border-subtle flex flex-col items-center text-center">
-          <div class="w-12 h-12 bg-coral-soft rounded-2xl flex items-center justify-center text-primary text-2xl mb-4">
-            <span class="material-symbols-outlined text-2xl">brush</span>
+          <!-- Hero Illustration Showcase -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative mx-auto max-w-md bg-card-surface p-4 rounded-3xl border border-border-subtle shadow-lg">
+              <div class="relative aspect-square rounded-2xl overflow-hidden bg-cream-bg">
+                <img alt="Lembar aktivitas Bali Little Explorer" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADIALymKWRdWbdHXhB_R7tuy7jsKp_ZMkGx1gRHacZaN5YaZla8bcr5qqaQjYMVQ1lHpSrfbwSMr9smmHX1-xMqOIXctn_JwMOCxhqUqFeRka3C97cgJQY5TRVo3AEYZ2ctpNnnStkfiC0o10YxAMKdoQc1vR58m5ZclP4JXOE0NqHBwZ3ha673tJ0YeArlAxrJBM7nwgOLosPjN46Lt5xIX4AfOgdKDBXVP_hBnOBn0R1QWCRrzk7lg"/>
+                <div class="absolute bottom-4 left-4 right-4 bg-card-surface/90 backdrop-blur-md p-3.5 rounded-xl border border-border-subtle flex items-center justify-between">
+                  <div>
+                    <p class="text-title-md font-title-md font-bold text-on-surface">Paket Bundle Edukasi</p>
+                    <p class="text-label-sm font-label-sm text-neutral-slate-muted">Tersedia versi PDF &amp; Digital Studio</p>
+                  </div>
+                  <span class="px-3 py-1 bg-palm-soft text-palm-green text-label-sm font-label-sm font-bold rounded-full">Siap Cetak</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <h4 class="font-bold text-headline-sm text-on-surface mb-1">2. Siapkan Krayon Khusus</h4>
-          <p class="text-xs text-neutral-slate-muted leading-relaxed">Gunakan krayon segitiga atau pensil warna non-toxic yang mudah digenggam dan tidak menggelinding di mobil.</p>
-        </div>
-
-        <div class="p-5 rounded-2xl bg-cream-bg border border-border-subtle flex flex-col items-center text-center">
-          <div class="w-12 h-12 bg-palm-soft rounded-2xl flex items-center justify-center text-palm-green text-2xl mb-4">
-            <span class="material-symbols-outlined text-2xl">directions_car</span>
-          </div>
-          <h4 class="font-bold text-headline-sm text-on-surface mb-1">3. Bagikan Bertahap di Mobil</h4>
-          <p class="text-xs text-neutral-slate-muted leading-relaxed">Jangan berikan semua sekaligus. Berikan 1–2 lembar baru tiap kali mobil melaju ke destinasi berikutnya.</p>
-        </div>
-
-        <div class="p-5 rounded-2xl bg-cream-bg border border-border-subtle flex flex-col items-center text-center">
-          <div class="w-12 h-12 bg-surface-container rounded-2xl flex items-center justify-center text-primary-container text-2xl mb-4">
-            <span class="material-symbols-outlined text-2xl">record_voice_over</span>
-          </div>
-          <h4 class="font-bold text-headline-sm text-on-surface mb-1">4. Dampingi Sambil Mendongeng</h4>
-          <p class="text-xs text-neutral-slate-muted leading-relaxed">Bacakan cerita pengantar yang ada di lembar. Tanyakan pada si kecil warna apa yang ingin ia berikan.</p>
         </div>
       </div>
     </section>
 
-    <!-- CTA TRAVEL GUIDE -->
-    <section class="bg-secondary text-white rounded-3xl p-8 md:p-12 shadow-xl mb-16 relative overflow-hidden">
-      <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
-        <div class="max-w-xl text-center lg:text-left">
-          <span class="bg-card-surface/20 text-white font-bold text-label-sm px-3.5 py-1 rounded-full uppercase tracking-wider inline-block mb-3">E-Book Gratis</span>
-          <h3 class="text-headline-lg font-bold leading-tight">Dapatkan Juga E-Book "Family Travel Guide Bali"</h3>
-          <p class="text-secondary-fixed text-body-md mt-3 leading-relaxed">
-            Panduan lengkap persiapan liburan keluarga ke Bali: daftar perlengkapan penting balita, rekomendasi restoran ramah anak, serta nomor kontak darurat dokter anak di Bali.
+    <!-- ==================== SECTION 3: FEATURE SHOWCASE - STUDIO MEWARNAI DIGITAL ONLINE ==================== -->
+    <section class="py-space-2xl bg-card-surface border-y border-border-subtle relative overflow-hidden" id="digital-studio">
+      <div class="max-w-7xl mx-auto px-margin">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 bg-ocean-teal-soft text-secondary px-3.5 py-1 rounded-full mb-3">
+              <span class="material-symbols-outlined text-sm" data-icon="star">star</span>
+              <span class="text-label-sm font-label-sm uppercase font-bold">Fitur Baru Interaktif</span>
+            </div>
+            <h2 class="text-headline-md md:text-headline-lg font-headline-md md:font-headline-lg text-on-surface">
+              Studio Mewarnai Digital Anak Online
+            </h2>
+            <p class="text-body-md font-body-md text-neutral-slate-muted mt-2 max-w-2xl leading-relaxed">
+              Si kecil bisa langsung mewarnai lumba-lumba Lovina, penyu Serangan, gajah Taro, &amp; pura Bali di layar HP atau tablet tanpa perlu instal aplikasi!
+            </p>
+          </div>
+          <div class="flex items-center gap-2 text-label-md font-label-md text-neutral-slate-muted">
+            <span class="material-symbols-outlined text-palm-green" data-icon="check_circle">check_circle</span>
+            <span>Aman untuk Balita · Bebas Iklan</span>
+          </div>
+        </div>
+
+        <!-- Interactive Canvas Playground Component -->
+        <div class="bg-cream-bg rounded-3xl border border-border-subtle p-6 md:p-8 shadow-sm">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <!-- Controls & Characters Selector -->
+            <div class="lg:col-span-4 flex flex-col gap-5">
+              <span class="text-label-md font-label-md uppercase text-neutral-slate-muted tracking-wider font-bold">1. Pilih Karakter Fauna &amp; Budaya</span>
+              <div class="grid grid-cols-2 gap-3" id="character-selector">
+                <button class="char-btn active p-3 bg-card-surface rounded-2xl border-2 border-primary text-left flex items-center gap-3 transition-all hover:bg-surface-container" onclick="selectTemplate('dolphin', this)">
+                  <span class="text-2xl">🐬</span>
+                  <div>
+                    <p class="text-label-md font-label-md font-bold text-on-surface">Lumba-Lumba</p>
+                    <p class="text-label-sm font-label-sm text-neutral-slate-muted">Pantai Lovina</p>
+                  </div>
+                </button>
+                <button class="char-btn p-3 bg-card-surface rounded-2xl border border-border-subtle text-left flex items-center gap-3 transition-all hover:bg-surface-container" onclick="selectTemplate('turtle', this)">
+                  <span class="text-2xl">🐢</span>
+                  <div>
+                    <p class="text-label-md font-label-md font-bold text-on-surface">Penyu Hijau</p>
+                    <p class="text-label-sm font-label-sm text-neutral-slate-muted">Pulau Serangan</p>
+                  </div>
+                </button>
+                <button class="char-btn p-3 bg-card-surface rounded-2xl border border-border-subtle text-left flex items-center gap-3 transition-all hover:bg-surface-container" onclick="selectTemplate('elephant', this)">
+                  <span class="text-2xl">🐘</span>
+                  <div>
+                    <p class="text-label-md font-label-md font-bold text-on-surface">Gajah Jinak</p>
+                    <p class="text-label-sm font-label-sm text-neutral-slate-muted">Desa Taro Gianyar</p>
+                  </div>
+                </button>
+                <button class="char-btn p-3 bg-card-surface rounded-2xl border border-border-subtle text-left flex items-center gap-3 transition-all hover:bg-surface-container" onclick="selectTemplate('temple', this)">
+                  <span class="text-2xl">🛕</span>
+                  <div>
+                    <p class="text-label-md font-label-md font-bold text-on-surface">Pura Ulun Danu</p>
+                    <p class="text-label-sm font-label-sm text-neutral-slate-muted">Danau Beratan</p>
+                  </div>
+                </button>
+              </div>
+
+              <!-- Color Palette -->
+              <span class="text-label-md font-label-md uppercase text-neutral-slate-muted tracking-wider pt-2 font-bold">2. Pilih Warna Tropis</span>
+              <div class="flex items-center gap-3 flex-wrap">
+                <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md ring-2 ring-primary-container" onclick="setColor('#ff6b35')" style="background-color: #ff6b35;"></button>
+                <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md" onclick="setColor('#FFB703')" style="background-color: #FFB703;"></button>
+                <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md" onclick="setColor('#16A34A')" style="background-color: #16A34A;"></button>
+                <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md" onclick="setColor('#00a7cb')" style="background-color: #00a7cb;"></button>
+                <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md" onclick="setColor('#ab3500')" style="background-color: #ab3500;"></button>
+                <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md" onclick="setColor('#89f5e7')" style="background-color: #89f5e7;"></button>
+                <button class="palette-swatch w-10 h-10 rounded-full border-2 border-outline-variant shadow-md" onclick="setColor('#FFFFFF')" style="background-color: #FFFFFF;"></button>
+              </div>
+
+              <!-- Interactive Buttons -->
+              <div class="flex items-center gap-3 pt-3">
+                <button class="px-4 py-2.5 rounded-full border border-border-subtle bg-card-surface text-neutral-slate-muted hover:text-error text-label-md font-label-md flex items-center gap-1.5 transition-colors" onclick="clearCanvas()">
+                  <span class="material-symbols-outlined text-lg" data-icon="refresh">refresh</span>
+                  <span>Ulangi Warna</span>
+                </button>
+                <button class="px-5 py-2.5 rounded-full bg-palm-green text-on-primary text-label-md font-label-md flex items-center gap-1.5 hover:bg-palm-green/90 transition-all shadow-sm active:scale-95" onclick="saveArt()">
+                  <span class="material-symbols-outlined text-lg" data-icon="save">save</span>
+                  <span>Simpan Gambar</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Canvas Interactive Preview -->
+            <div class="lg:col-span-8 flex flex-col items-center justify-center">
+              <div class="w-full bg-card-surface rounded-2xl border-2 border-dashed border-primary-container/40 p-4 flex flex-col items-center justify-center relative shadow-sm">
+                <div class="w-full flex items-center justify-between pb-3 px-2 border-b border-border-subtle text-label-sm font-label-sm text-neutral-slate-muted">
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-palm-green"></span>
+                    Canvas Interaktif: Sentuh bidang untuk mewarnai
+                  </span>
+                  <span class="font-bold text-primary" id="active-template-title">Lumba-Lumba Lovina</span>
+                </div>
+                <div class="relative w-full max-w-xl h-80 md:h-96 flex items-center justify-center overflow-hidden my-2" id="canvas-container">
+                  <!-- SVG Coloring Template -->
+                  <svg class="w-full h-full max-h-80 drop-shadow-sm select-none cursor-pointer" id="coloring-svg" viewbox="0 0 500 400">
+                    <!-- Background Sun -->
+                    <circle cx="410" cy="90" fill="#FFFDF9" id="part-sun" onclick="colorPart(this)" r="45" stroke="#1E293B" stroke-dasharray="2 1" stroke-width="4"></circle>
+                    <!-- Ocean Waves -->
+                    <path d="M10,320 Q120,290 250,330 T490,320 L490,390 L10,390 Z" fill="#FFFDF9" id="part-sea1" onclick="colorPart(this)" stroke="#1E293B" stroke-width="4"></path>
+                    <path d="M20,350 Q140,320 260,355 T480,350 L480,390 L20,390 Z" fill="#FFFDF9" id="part-sea2" onclick="colorPart(this)" stroke="#1E293B" stroke-width="3"></path>
+                    <!-- Dolphin Body -->
+                    <path d="M110,230 C130,130 250,90 340,140 C370,160 410,185 430,195 C410,205 380,215 350,215 C280,215 210,270 140,265 C120,265 110,250 110,230 Z" fill="#FFFDF9" id="part-dolphin-body" onclick="colorPart(this)" stroke="#1E293B" stroke-width="5"></path>
+                    <!-- Dolphin Snout -->
+                    <path d="M410,185 C435,188 450,195 440,202 C420,210 400,205 400,205 Z" fill="#FFFDF9" id="part-dolphin-snout" onclick="colorPart(this)" stroke="#1E293B" stroke-width="4"></path>
+                    <!-- Fin / Sirip -->
+                    <path d="M250,180 C270,140 290,135 285,160 C280,180 260,210 240,215 Z" fill="#FFFDF9" id="part-dolphin-fin" onclick="colorPart(this)" stroke="#1E293B" stroke-width="4"></path>
+                    <!-- Tail -->
+                    <path d="M120,240 C90,215 60,200 45,210 C70,230 75,250 50,270 C70,270 95,255 120,245 Z" fill="#FFFDF9" id="part-dolphin-tail" onclick="colorPart(this)" stroke="#1E293B" stroke-width="4"></path>
+                    <!-- Belly White Patch -->
+                    <path d="M180,245 C230,230 310,210 370,210 C340,225 280,255 200,258 Z" fill="#FFFDF9" id="part-dolphin-belly" onclick="colorPart(this)" stroke="#1E293B" stroke-width="3"></path>
+                    <!-- Cute Eye -->
+                    <circle cx="360" cy="165" fill="#1E293B" r="7"></circle>
+                    <circle cx="362" cy="163" fill="#FFFFFF" r="2.5"></circle>
+                    <!-- Water Droplets -->
+                    <ellipse cx="300" cy="90" fill="#FFFDF9" id="part-drop1" onclick="colorPart(this)" rx="8" ry="12" stroke="#1E293B" stroke-width="3"></ellipse>
+                    <ellipse cx="325" cy="70" fill="#FFFDF9" id="part-drop2" onclick="colorPart(this)" rx="6" ry="9" stroke="#1E293B" stroke-width="3"></ellipse>
+                  </svg>
+                </div>
+                <div class="w-full flex items-center justify-between text-label-sm font-label-sm text-neutral-slate-muted pt-2 border-t border-border-subtle">
+                  <span>🎨 Warna Aktif Terpilih: <strong class="text-primary" id="selected-color-name">Coral Orange</strong></span>
+                  <a class="text-primary hover:underline font-bold flex items-center gap-1" href="mewarnai.html">
+                    Buka Mode Layar Penuh →
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 4: GRID KATEGORI ACTIVITY KIT DOWNLOAD ==================== -->
+    <section class="py-space-2xl max-w-7xl mx-auto px-margin" id="kategori-download">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-flex items-center gap-2 bg-palm-soft text-palm-green px-3.5 py-1.5 rounded-full mb-3">
+          <span class="material-symbols-outlined text-base" data-icon="menu_book">menu_book</span>
+          <span class="text-label-sm font-label-sm uppercase font-bold">Koleksi Siap Cetak (A4 PDF)</span>
+        </div>
+        <h2 class="text-headline-md md:text-headline-lg font-headline-md md:font-headline-lg text-on-surface">
+          Pilih Lembar Aktivitas Sesuai Minat Si Kecil
+        </h2>
+        <p class="text-body-lg font-body-lg text-neutral-slate-muted mt-3 leading-relaxed">
+          Dirancang praktis untuk dicetak pada kertas A4 standar. Sempurna menemani si kecil di mobil, restoran, maupun waktu istirahat di hotel.
+        </p>
+      </div>
+
+      <!-- Category Bento Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- CARD 1: LEMBAR MEWARNAI IKON BALI -->
+        <div class="bg-card-surface rounded-2xl border border-border-subtle p-5 flex flex-col justify-between transition-all duration-200 custom-card-shadow">
+          <div>
+            <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-coral-soft/40">
+              <img alt="Lembar Mewarnai Ikon Bali" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBntNYcr-3JF67XZS4LBxwrC6esGPNHvRrD8SJrhKwrbq7tb1hX6SorH5PERX-fY1aLmaqhq5cgKNezdmgPHgtlmktJXANhmFYigPE-3zHe8WtKDpeIKlqryiEud6HK5VqHJWjf2NnaIFTp3rzqIoPvaZJ9NyucnVWPfakT1Ue2tS0-36E-EKIKmHlbHlWwhLFvhggl_J4kY_QX8lKOhqLkUVuCy3rfSw2N3Ajv6VvfnO9JSJ4L2n1bDw"/>
+              <span class="absolute top-3 left-3 bg-card-surface/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-label-sm font-label-sm text-primary font-bold shadow-sm">
+                📄 5 Lembar PDF
+              </span>
+              <span class="absolute top-3 right-3 bg-palm-soft text-palm-green px-2 py-0.5 rounded-full text-label-sm font-label-sm font-bold">
+                Usia 3-7
+              </span>
+            </div>
+            <h3 class="text-title-md font-title-md text-on-surface font-bold">Lembar Mewarnai Ikon Bali</h3>
+            <p class="text-body-md font-body-md text-neutral-slate-muted mt-2">
+              Pengenalan visual Pura Ulun Danu, Penari Tari Kecak, Barong cilik yang lucu, dan Bunga Jepun tropis.
+            </p>
+            <ul class="mt-4 space-y-2 text-label-md font-label-md text-neutral-slate-muted">
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-base" data-icon="check">check</span>
+                Garis luar tebal ramah krayon
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-base" data-icon="check">check</span>
+                Kosakata budaya dwibahasa (ID/EN)
+              </li>
+            </ul>
+          </div>
+          <div class="pt-6 border-t border-border-subtle mt-5 flex flex-col gap-2">
+            <button class="w-full py-2.5 rounded-full bg-cream-bg text-on-surface border border-border-subtle hover:bg-surface-container font-label-md text-label-md flex items-center justify-center gap-1.5 transition-colors" onclick="openPreviewModal('Mewarnai Ikon Bali', '5 Lembar PDF Berisi: Pura Ulun Danu, Tari Kecak, Barong Cilik, Janur &amp; Canang Sari, serta Bunga Jepun Bali.')">
+              <span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+              <span>Preview Lembar</span>
+            </button>
+            <a class="w-full py-2.5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md text-center hover:bg-primary transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95" href="#download-bundle-form">
+              <span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+              <span>Unduh Lembar PDF Gratis</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- CARD 2: TEKA-TEKI VISUAL & FLORA-FAUNA -->
+        <div class="bg-card-surface rounded-2xl border border-border-subtle p-5 flex flex-col justify-between transition-all duration-200 custom-card-shadow">
+          <div>
+            <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-palm-soft/50">
+              <img alt="Teka-Teki Visual &amp; Flora-Fauna Bali" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzva7NkDtr-hMYb5lsWj1CAygcgxchFczPk2xpv0DQyreOCE_CWWHNre9Yb9K3Zk-Id_SDFe1sMrUSQ4dwtFKGRCX7F8ZIQ_3GHZUHjZ4XDJ513wzaK24Hw8BJ04QxK2ppyoKDZyBOG_nblwdrW-JyL79YkvpazGYaFlK4WOg3W2dbLwLEXIZ93pZXbzsV1SojOU1t7Rrb6dCRt4TpcZn4-pTxJ23rgHJmHvWEgny2Tq87dQ2zQDK9Yw"/>
+              <span class="absolute top-3 left-3 bg-card-surface/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-label-sm font-label-sm text-palm-green font-bold shadow-sm">
+                📄 4 Lembar PDF
+              </span>
+              <span class="absolute top-3 right-3 bg-palm-soft text-palm-green px-2 py-0.5 rounded-full text-label-sm font-label-sm font-bold">
+                Fokus &amp; Logika
+              </span>
+            </div>
+            <h3 class="text-title-md font-title-md text-on-surface font-bold">Teka-Teki Visual Flora &amp; Fauna</h3>
+            <p class="text-body-md font-body-md text-neutral-slate-muted mt-2">
+              Permainan 'Cari Perbedaan', menghitung burung Jalak Bali, dan mencocokkan jejak kaki hewan tropis.
+            </p>
+            <ul class="mt-4 space-y-2 text-label-md font-label-md text-neutral-slate-muted">
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-palm-green text-base" data-icon="check">check</span>
+                Melatih konsentrasi selama di mobil
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-palm-green text-base" data-icon="check">check</span>
+                Fakta singkat fauna endemik Bali
+              </li>
+            </ul>
+          </div>
+          <div class="pt-6 border-t border-border-subtle mt-5 flex flex-col gap-2">
+            <button class="w-full py-2.5 rounded-full bg-cream-bg text-on-surface border border-border-subtle hover:bg-surface-container font-label-md text-label-md flex items-center justify-center gap-1.5 transition-colors" onclick="openPreviewModal('Teka-Teki Visual &amp; Flora-Fauna', '4 Lembar PDF Berisi: Hitung Burung Jalak Bali, Cari 5 Perbedaan Pura Tanah Lot, Pasangkan Jejak Kaki Satwa, &amp; Teka-teki Warna Daun Tropis.')">
+              <span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+              <span>Preview Lembar</span>
+            </button>
+            <a class="w-full py-2.5 rounded-full bg-palm-green text-on-primary font-label-md text-label-md text-center hover:bg-palm-green/90 transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95" href="#download-bundle-form">
+              <span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+              <span>Unduh Lembar PDF Gratis</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- CARD 3: SENSORIK & MOTORIK HALUS -->
+        <div class="bg-card-surface rounded-2xl border border-border-subtle p-5 flex flex-col justify-between transition-all duration-200 custom-card-shadow">
+          <div>
+            <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-ocean-teal-soft/50">
+              <img alt="Latihan Sensorik &amp; Motorik Halus" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBADl_GrW8JkLjuWB2UPcaB-asXeaeOvAxyx8lYgFnoBlnVdTiMMRLdjmLO3ZRbEhxRi0_6Ynvu9LocsJGD_jAQJ9XGq-CIvri2Jpe8XMTocOxJodevllIUzkwtKhzkXgHZkS3DstnyEpE4T7a6Yn7fVUZta-kDWiboh52r2CYargs8iTm6DUTLCcYWMt2JnNpT7sfo2UNHYlPdDEVQL0e8q1TvuUfsv4_hrNcZDeEebkTzn593hcLPPg"/>
+              <span class="absolute top-3 left-3 bg-card-surface/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-label-sm font-label-sm text-secondary font-bold shadow-sm">
+                📄 3 Lembar PDF
+              </span>
+              <span class="absolute top-3 right-3 bg-ocean-teal-soft text-secondary px-2 py-0.5 rounded-full text-label-sm font-label-sm font-bold">
+                Motorik
+              </span>
+            </div>
+            <h3 class="text-title-md font-title-md text-on-surface font-bold">Latihan Sensorik &amp; Motorik Halus</h3>
+            <p class="text-body-md font-body-md text-neutral-slate-muted mt-2">
+              Panduan menggunting aman, menempel ornamen payung Tedung Bali, serta tracing garis pola ombak laut.
+            </p>
+            <ul class="mt-4 space-y-2 text-label-md font-label-md text-neutral-slate-muted">
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary text-base" data-icon="check">check</span>
+                Garis panduan guntingan ergonomis
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary text-base" data-icon="check">check</span>
+                Stimulasi koordinasi tangan &amp; mata
+              </li>
+            </ul>
+          </div>
+          <div class="pt-6 border-t border-border-subtle mt-5 flex flex-col gap-2">
+            <button class="w-full py-2.5 rounded-full bg-cream-bg text-on-surface border border-border-subtle hover:bg-surface-container font-label-md text-label-md flex items-center justify-center gap-1.5 transition-colors" onclick="openPreviewModal('Latihan Sensorik &amp; Motorik Halus', '3 Lembar PDF Berisi: Tracing Jalur Ombak Pantai Kuta, Gunting &amp; Tempel Payung Tradisional Tedung, serta Hubungkan Titik Angka 1-20.')">
+              <span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+              <span>Preview Lembar</span>
+            </button>
+            <a class="w-full py-2.5 rounded-full bg-tertiary text-on-primary font-label-md text-label-md text-center hover:bg-tertiary/90 transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95" href="#download-bundle-form">
+              <span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+              <span>Unduh Lembar PDF Gratis</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- CARD 4: LABIRIN & MAZE PETUALANGAN -->
+        <div class="bg-card-surface rounded-2xl border border-border-subtle p-5 flex flex-col justify-between transition-all duration-200 custom-card-shadow">
+          <div>
+            <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-surface-container">
+              <img alt="Labirin &amp; Maze Petualangan Bali" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAA74yrF6bZuBSoRyv35naqS50XYIOa381Uhzaa3OP9M-wl0DbOWvWoUDuqZMXwxmDPNvSmesCGdV2EfGLeIB6QGyrXfYKiC17YLNmo77ESvYbXBSWO1aD_f-PouhETmo2zL1sDA-n3oS8Lf0gehCZXHtpm_eyAnh9HPWgVw8Gz_eDMo1zR_M4mlzv0Oe3h6uaUE7DEsnSuf8766c9ptuqkWdpS1A-L0MNWDj_7jh_cZ32lY58ZT_NiQQ"/>
+              <span class="absolute top-3 left-3 bg-card-surface/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-label-sm font-label-sm text-primary font-bold shadow-sm">
+                📄 3 Lembar PDF
+              </span>
+              <span class="absolute top-3 right-3 bg-coral-soft text-primary font-bold px-2 py-0.5 rounded-full text-label-sm font-label-sm">
+                Petualangan
+              </span>
+            </div>
+            <h3 class="text-title-md font-title-md text-on-surface font-bold">Labirin &amp; Maze Petualangan Bali</h3>
+            <p class="text-body-md font-body-md text-neutral-slate-muted mt-2">
+              Bantu si penyu kecil berenang ke pantai Serangan &amp; pandu mobil safari melewati sawah berundak Jatiluwih.
+            </p>
+            <ul class="mt-4 space-y-2 text-label-md font-label-md text-neutral-slate-muted">
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-base" data-icon="check">check</span>
+                Tingkat kesulitan bertahap untuk balita
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-base" data-icon="check">check</span>
+                Karakter maskot ramah anak
+              </li>
+            </ul>
+          </div>
+          <div class="pt-6 border-t border-border-subtle mt-5 flex flex-col gap-2">
+            <button class="w-full py-2.5 rounded-full bg-cream-bg text-on-surface border border-border-subtle hover:bg-surface-container font-label-md text-label-md flex items-center justify-center gap-1.5 transition-colors" onclick="openPreviewModal('Labirin &amp; Maze Petualangan Bali', '3 Lembar PDF Berisi: Maze Perjalanan Mobil Safari ke Danau Beratan, Menyelamatkan Tukik ke Laut Biru, dan Jejak Menuju Istana Ujung Karangasem.')">
+              <span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+              <span>Preview Lembar</span>
+            </button>
+            <a class="w-full py-2.5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md text-center hover:bg-primary transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95" href="#download-bundle-form">
+              <span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+              <span>Unduh Lembar PDF Gratis</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 5: E-BOOK BONUS - FAMILY TRAVEL GUIDE BALI ==================== -->
+    <section class="py-space-2xl bg-surface-container-low border-y border-border-subtle">
+      <div class="max-w-7xl mx-auto px-margin">
+        <div class="bg-card-surface rounded-3xl border border-border-subtle p-8 md:p-12 shadow-sm">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div class="lg:col-span-5 flex justify-center">
+              <div class="relative w-64 md:w-80 shadow-2xl rounded-2xl overflow-hidden border-4 border-card-surface rotate-[-2deg] transition-transform hover:rotate-0 duration-300">
+                <img alt="E-Book Bonus Family Travel Guide Bali" class="w-full h-auto object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXQp3yJYISQNjl64jAVspTIH9BDeAyZL9XQNlw-5eYBw4JnVWPQyGy0_lQwYcUj0o3HAoKnC5_O5tTsqjf8kb_1fmhUYl0M7eSVZPub18JfeiBaUPEapZVYNBSEJYWLs87Q_fGaME74urDb4XCR8i6sr66e2eOQLlix4Q5AJMMbu3OMVfMxKBnDDnHh6hqyIWKJfLUp1eWU1pIiq1c6dll6OXFsFiM-AgCm3ieTCqDGlhaD1LTggLUSw"/>
+                <div class="absolute top-4 right-4 bg-sun-amber text-neutral-slate-dark font-bold text-label-sm font-label-sm px-3 py-1 rounded-full shadow">
+                  E-BOOK GRATIS
+                </div>
+              </div>
+            </div>
+            <div class="lg:col-span-7 flex flex-col items-start gap-4">
+              <span class="px-3.5 py-1 rounded-full bg-coral-soft text-primary font-label-sm font-label-sm font-bold uppercase">
+                🎁 Bonus Spesial Orang Tua
+              </span>
+              <h2 class="text-headline-md md:text-headline-lg font-headline-md md:font-headline-lg text-on-surface">
+                Family Travel Guide Bali (Edisi Balita &amp; Anak)
+              </h2>
+              <p class="text-body-lg font-body-lg text-neutral-slate-muted leading-relaxed">
+                Buku panduan digital komprehensif 28 halaman yang disusun oleh travel mom &amp; tim Bali Top Holiday untuk memastikan liburan keluarga Anda di Bali berlangsung tenang, nyaman, dan ramah popok!
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full pt-2">
+                <div class="flex items-start gap-3">
+                  <div class="p-2 rounded-xl bg-palm-soft text-palm-green shrink-0">
+                    <span class="material-symbols-outlined" data-icon="baby_changing_station">baby_changing_station</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-on-surface text-label-md font-label-md">Daftar Nursery Room Terbersih</h4>
+                    <p class="text-label-sm font-label-sm text-neutral-slate-muted">Lokasi ruang menyusui &amp; ganti popok di sekeliling Bali.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="p-2 rounded-xl bg-coral-soft text-primary shrink-0">
+                    <span class="material-symbols-outlined" data-icon="stroller">stroller</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-on-surface text-label-md font-label-md">Rute Ramah Stroller &amp; Kursi Bayi</h4>
+                    <p class="text-label-sm font-label-sm text-neutral-slate-muted">Destinasi tanpa tangga curam yang aman untuk kereta dorong.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="p-2 rounded-xl bg-ocean-teal-soft text-secondary shrink-0">
+                    <span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-on-surface text-label-md font-label-md">Restoran Ramah Anak &amp; Menu Balita</h4>
+                    <p class="text-label-sm font-label-sm text-neutral-slate-muted">Tempat makan higienis dengan high-chair dan play area.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="p-2 rounded-xl bg-surface-container text-on-surface-variant shrink-0">
+                    <span class="material-symbols-outlined" data-icon="medical_services">medical_services</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-on-surface text-label-md font-label-md">Kontak Darurat Dokter Anak</h4>
+                    <p class="text-label-sm font-label-sm text-neutral-slate-muted">Nomor darurat RS &amp; klinik internasional 24 jam di Bali.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="pt-4 flex items-center gap-3">
+                <a class="bg-primary text-on-primary px-6 py-3 rounded-full text-label-md font-label-md font-bold hover:bg-primary/90 transition-all flex items-center gap-2 shadow-sm active:scale-95" href="#download-bundle-form">
+                  <span class="material-symbols-outlined text-lg" data-icon="menu_book">menu_book</span>
+                  <span>Unduh E-Book Bersama Activity Kit</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 6: FORM UNDUH SEKALIGUS (DOWNLOAD BUNDLE ALL-IN-ONE) ==================== -->
+    <section class="py-space-2xl max-w-7xl mx-auto px-margin" id="download-bundle-form">
+      <div class="bg-gradient-to-br from-surface to-surface-container rounded-3xl border border-primary-container/20 p-8 md:p-14 shadow-lg relative overflow-hidden">
+        <!-- Background Accents -->
+        <div class="absolute -top-16 -right-16 w-64 h-64 bg-sun-amber/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-16 -left-16 w-64 h-64 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="max-w-2xl mx-auto text-center relative z-10">
+          <div class="inline-flex items-center gap-2 bg-coral-soft text-primary px-4 py-1.5 rounded-full mb-4">
+            <span class="material-symbols-outlined text-base" data-icon="forward_to_inbox">forward_to_inbox</span>
+            <span class="text-label-sm font-label-sm uppercase font-bold">Bundle All-In-One Gratis</span>
+          </div>
+          <h2 class="text-headline-md md:text-headline-lg font-headline-md md:font-headline-lg text-on-surface">
+            Unduh Semua 15+ Lembar Kit &amp; Family Guide Sekaligus
+          </h2>
+          <p class="text-body-lg font-body-lg text-neutral-slate-muted mt-2 leading-relaxed">
+            Cukup masukkan nama &amp; nomor WhatsApp Anda. Berkas PDF kualitas tinggi (A4 High Resolution) akan langsung dapat diunduh dalam hitungan detik.
           </p>
-        </div>
-        <div class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
-          <button onclick="openDownloadModal('Family Travel Guide Bali E-Book', 'Panduan lengkap travel parenting dan persiapan liburan anak ke Bali.', 'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&w=400&q=80', '')"
-                  class="w-full sm:w-auto bg-primary-container hover:bg-primary text-white font-bold px-7 py-3.5 rounded-full shadow-lg transition duration-200 text-label-md text-center">
-            📥 Unduh E-Book Gratis
-          </button>
-          <a href="paket.html"
-             class="w-full sm:w-auto bg-card-surface text-secondary hover:bg-cream-bg font-bold px-6 py-3.5 rounded-full transition duration-200 text-label-md text-center">
-            🗺️ Lihat Paket Wisata Kami
-          </a>
+
+          <!-- The Download Form -->
+          <form id="form-download-bundle" class="mt-8 text-left bg-card-surface p-6 md:p-8 rounded-2xl border border-border-subtle shadow-md flex flex-col gap-5" onsubmit="handleBundleDownload(event)">
+            <div>
+              <label class="block text-label-md font-label-md text-on-surface mb-1.5" for="parent-name">
+                Nama Lengkap Orang Tua *
+              </label>
+              <div class="relative">
+                <span class="material-symbols-outlined absolute left-3.5 top-3 text-neutral-slate-muted text-xl" data-icon="person">person</span>
+                <input class="w-full pl-11 pr-4 py-2.5 rounded-xl border border-[#E5E5E0] bg-[#FAFAF8] text-body-md font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container focus:border-transparent transition-all" id="parent-name" placeholder="Contoh: Bunda Sarah" required="" type="text"/>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-label-md font-label-md text-on-surface mb-1.5" for="parent-phone">
+                  No. WhatsApp Aktif *
+                </label>
+                <div class="relative">
+                  <span class="material-symbols-outlined absolute left-3.5 top-3 text-neutral-slate-muted text-xl" data-icon="phone">phone</span>
+                  <input class="w-full pl-11 pr-4 py-2.5 rounded-xl border border-[#E5E5E0] bg-[#FAFAF8] text-body-md font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container focus:border-transparent transition-all" id="parent-phone" placeholder="081234567890" required="" type="tel"/>
+                </div>
+              </div>
+              <div>
+                <label class="block text-label-md font-label-md text-on-surface mb-1.5" for="child-age">
+                  Usia Si Kecil
+                </label>
+                <div class="relative">
+                  <span class="material-symbols-outlined absolute left-3.5 top-3 text-neutral-slate-muted text-xl" data-icon="child_care">child_care</span>
+                  <select class="w-full pl-11 pr-4 py-2.5 rounded-xl border border-[#E5E5E0] bg-[#FAFAF8] text-body-md font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container focus:border-transparent transition-all" id="child-age">
+                    <option value="3-4">3 - 4 Tahun (Toddler)</option>
+                    <option value="5-6">5 - 6 Tahun (Preschool)</option>
+                    <option value="7+">7 Tahun ke atas</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-label-md font-label-md text-on-surface mb-1.5" for="parent-email">
+                Alamat Email (Opsional untuk backup file PDF)
+              </label>
+              <div class="relative">
+                <span class="material-symbols-outlined absolute left-3.5 top-3 text-neutral-slate-muted text-xl" data-icon="mail">mail</span>
+                <input class="w-full pl-11 pr-4 py-2.5 rounded-xl border border-[#E5E5E0] bg-[#FAFAF8] text-body-md font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container focus:border-transparent transition-all" id="parent-email" placeholder="bunda@email.com" type="email"/>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <button id="btn-bundle-submit" class="w-full py-4 rounded-full bg-primary-container text-on-primary font-bold text-headline-sm font-headline-sm flex items-center justify-center gap-2 hover:bg-primary transition-all duration-200 active:scale-[0.99] shadow-lg" type="submit">
+                <span class="material-symbols-outlined text-2xl" data-icon="cloud_download">cloud_download</span>
+                <span>Unduh Bundle Lengkap Sekarang (Gratis)</span>
+              </button>
+              <p class="text-center text-label-sm font-label-sm text-neutral-slate-muted mt-3 flex items-center justify-center gap-1">
+                <span class="material-symbols-outlined text-sm text-palm-green" data-icon="lock">lock</span>
+                Privasi terjaga. Kami tidak mengirimkan spam yang mengganggu.
+              </p>
+            </div>
+          </form>
+
+          <!-- Success Alert Placeholder (Dynamic via JS) -->
+          <div class="hidden mt-6 p-5 rounded-2xl bg-palm-soft text-palm-green border border-palm-green/30 text-center animate-fade-in" id="download-success-msg">
+            <p class="font-bold text-title-md font-title-md">🎉 Terima kasih! Berkas siap diunduh.</p>
+            <p class="text-body-md font-body-md mt-1 text-on-surface">Paket 15+ PDF Activity Kit dan Family Travel Guide sedang diunduh ke perangkat Anda.</p>
+            <a id="btn-manual-dl" class="inline-block mt-3 px-6 py-2 bg-palm-green text-on-primary rounded-full text-label-md font-label-md font-bold shadow-sm" href="coloring-assets/kelinci-ceria.png" download="Bali-Little-Explorer-Activity-Kit.png">
+              Klik Disini Jika Unduhan Tidak Otomatis Mulai
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- ==================== SECTION 7: TESTIMONIAL PREVIEW SECTION ==================== -->
+    <section class="py-space-xl max-w-7xl mx-auto px-margin border-t border-border-subtle">
+      <div class="text-center mb-10">
+        <h3 class="text-headline-sm font-headline-sm text-on-surface font-bold">Cerita Orang Tua Pengguna Activity Kit</h3>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-card-surface p-6 rounded-2xl border border-border-subtle shadow-sm flex flex-col justify-between custom-card-shadow">
+          <p class="text-body-md font-body-md text-on-surface-variant italic leading-relaxed">
+            "Anak saya yang 4 tahun biasanya susah diajak jalan jauh. Tapi dengan Activity Kit dari Bali Little Explorer, dia anteng banget di mobil! Mewarnai terus sepanjang jalan."
+          </p>
+          <div class="mt-4 pt-4 border-t border-border-subtle flex items-center justify-between">
+            <div>
+              <p class="text-label-md font-label-md font-bold text-on-surface">Dewi R.</p>
+              <p class="text-label-sm font-label-sm text-neutral-slate-muted">Jakarta</p>
+            </div>
+            <div class="text-sun-amber flex text-sm">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+        <div class="bg-card-surface p-6 rounded-2xl border border-border-subtle shadow-sm flex flex-col justify-between custom-card-shadow">
+          <p class="text-body-md font-body-md text-on-surface-variant italic leading-relaxed">
+            "Fitur studio mewarnai online di HP kepake banget pas lagi antre makan siang di restoran Ubud. Nggak perlu bawa alat gambar repot-repot, anak tetap happy!"
+          </p>
+          <div class="mt-4 pt-4 border-t border-border-subtle flex items-center justify-between">
+            <div>
+              <p class="text-label-md font-label-md font-bold text-on-surface">Andi S.</p>
+              <p class="text-label-sm font-label-sm text-neutral-slate-muted">Surabaya</p>
+            </div>
+            <div class="text-sun-amber flex text-sm">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+        <div class="bg-card-surface p-6 rounded-2xl border border-border-subtle shadow-sm flex flex-col justify-between custom-card-shadow">
+          <p class="text-body-md font-body-md text-on-surface-variant italic leading-relaxed">
+            "Family Travel Guide-nya sangat membantu! Saya jadi tahu fasilitas apa yang tersedia di setiap destinasi dan nursery room terdekat. Recommended banget!"
+          </p>
+          <div class="mt-4 pt-4 border-t border-border-subtle flex items-center justify-between">
+            <div>
+              <p class="text-label-md font-label-md font-bold text-on-surface">Sari M.</p>
+              <p class="text-label-sm font-label-sm text-neutral-slate-muted">Bandung</p>
+            </div>
+            <div class="text-sun-amber flex text-sm">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- ==================== DOWNLOAD MODAL ==================== -->
-  <div id="modal-download" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop">
-    <div class="bg-card-surface rounded-3xl p-6 sm:p-8 max-w-md w-full custom-shadow-hover border border-border-subtle relative text-center">
-      <div class="w-16 h-16 rounded-2xl overflow-hidden mx-auto mb-4 bg-coral-soft text-primary flex items-center justify-center shadow-xs">
-        <img id="modal-dl-img" src="" alt="Thumbnail" class="w-full h-full object-cover hidden" />
-        <span id="modal-dl-icon" class="material-symbols-outlined text-3xl">download</span>
-      </div>
-
-      <h3 class="font-bold text-2xl text-on-surface mb-1" id="modal-dl-title">Unduh Activity Kit</h3>
-      <p class="text-xs text-neutral-slate-muted mb-5 leading-relaxed" id="modal-dl-desc">Materi siap cetak PDF A4.</p>
-
-      <form id="form-download-lead" class="space-y-3.5 text-left mb-5">
-        <div>
-          <label class="block text-label-sm font-semibold text-on-surface mb-1">Nama Ayah / Bunda *</label>
-          <input type="text" id="lead-name" required placeholder="Contoh: Bunda Sarah"
-                 class="w-full px-4 py-2.5 bg-[#FAFAF8] border border-[#E5E5E0] rounded-xl text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20" />
-        </div>
-        <div>
-          <label class="block text-label-sm font-semibold text-on-surface mb-1">Alamat Email (Opsional)</label>
-          <input type="email" id="lead-email" placeholder="email@contoh.com"
-                 class="w-full px-4 py-2.5 bg-[#FAFAF8] border border-[#E5E5E0] rounded-xl text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20" />
-        </div>
-
-        <button type="submit" id="btn-submit-download"
-                class="w-full bg-primary-container hover:bg-primary text-white font-bold text-label-md py-3.5 rounded-full shadow-md transition duration-200 flex items-center justify-center gap-2">
-          <span>📥 Unduh Berkas Sekarang (Gratis)</span>
-        </button>
-      </form>
-
-      <button type="button" onclick="closeDownloadModal()" class="text-xs font-semibold text-neutral-slate-muted hover:text-on-surface transition">
-        Batal
+  <!-- ==================== QUICK PREVIEW MODAL ==================== -->
+  <div class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-neutral-slate-dark/50 backdrop-blur-sm" id="preview-modal">
+    <div class="bg-card-surface rounded-3xl max-w-lg w-full p-6 md:p-8 border border-border-subtle shadow-2xl relative">
+      <button class="absolute top-5 right-5 text-neutral-slate-muted hover:text-on-surface p-1 rounded-full transition-colors" onclick="closePreviewModal()">
+        <span class="material-symbols-outlined text-2xl" data-icon="close">close</span>
       </button>
+      <div class="flex items-center gap-2 text-primary text-label-sm font-label-sm uppercase font-bold mb-2">
+        <span class="material-symbols-outlined text-base" data-icon="search">search</span>
+        <span>Preview Kit Edukasi</span>
+      </div>
+      <h3 class="text-headline-sm font-headline-sm text-on-surface mb-2 font-bold" id="modal-title">Judul Lembar</h3>
+      <p class="text-body-md font-body-md text-neutral-slate-muted mb-6 leading-relaxed" id="modal-desc">Deskripsi lembar aktivitas PDF.</p>
+      
+      <!-- Mock Preview Visual -->
+      <div class="aspect-[4/3] bg-cream-bg rounded-xl border border-dashed border-primary-container/40 flex flex-col items-center justify-center p-6 text-center mb-6">
+        <span class="material-symbols-outlined text-5xl text-primary mb-2" data-icon="picture_as_pdf">picture_as_pdf</span>
+        <p class="text-label-md font-label-md text-on-surface font-bold">Berkas Standar Cetak Kertas A4 (300 DPI)</p>
+        <p class="text-label-sm font-label-sm text-neutral-slate-muted mt-1 max-w-xs">Format siap print hitam-putih maupun berwarna ramah printer rumah.</p>
+      </div>
+      <div class="flex items-center justify-end gap-3">
+        <button class="px-5 py-2.5 rounded-full border border-border-subtle text-neutral-slate-muted hover:text-on-surface font-label-md text-label-md" onclick="closePreviewModal()">Tutup</button>
+        <a class="px-6 py-2.5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md font-bold hover:bg-primary transition-all shadow-sm" href="#download-bundle-form" onclick="closePreviewModal()">Unduh Sekarang</a>
+      </div>
     </div>
   </div>
 
   <!-- ==================== FOOTER ==================== -->
-  <footer class="docked full-width bottom bg-neutral-slate-dark border-t border-neutral-slate-muted/20 text-neutral-slate-muted">
-    <div class="w-full py-space-2xl px-4 md:px-8 max-w-7xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-neutral-slate-muted/20">
-        <!-- Col 1: Brand & Bio -->
-        <div class="md:col-span-5 space-y-4">
+  <footer class="bg-neutral-slate-dark docked full-width bottom border-t border-neutral-slate-muted/20 text-neutral-slate-muted">
+    <div class="w-full py-space-2xl px-margin max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-neutral-slate-muted/20">
+        <!-- Brand Info -->
+        <div class="md:col-span-5 flex flex-col gap-4">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full overflow-hidden bg-card-surface p-0.5 flex-shrink-0">
-              <img alt="Bali Little Explorer logo" class="w-full h-full object-contain" src="logo.png" onerror="this.src='https://lh3.googleusercontent.com/aida/AEtjO1UN1SX2L9vMmogFBwg7lxlBZtGE1GuZsFmE8-CHWw-fzpGwLTYLma8SHczTAxWSiC_b3EOpSFcc8JF4uuygBc8GYxRXVs69qlEJ0Hcsd1FhdNoQvSpmN67waPNEl6sH6tsheq0nwd40IRujxyT4P-QgMY0aUBwM69Fs5BnVwea2lG27HSAaFS9JLduf8ieS575QlpErhgx-GclQMbF1QMr6plbl0QNUxTWUGXgJZnShPpez56XlGtW8hgKn'"/>
+            <div class="w-9 h-9 rounded-full overflow-hidden border border-primary-container shrink-0 bg-card-surface p-0.5">
+              <img alt="Bali Little Explorer logo" class="w-full h-full object-contain" src="logo.png" onerror="this.src='https://lh3.googleusercontent.com/aida/AEtjO1Xri5ououwJH76f3tOh6Z8kQjC4Lki980K2jamTvixS5DFeZLC82TIF2JZS55X7_r1__CjsFKAQ9y4qI-gOVhHg-mLu9Q2daA8vgWFS8Do76BWICE25lliKwcCcC1ps52TdYttt2pGJXDDEKy-Lp5KLa3DSaKC_Alz9ExxvvKOArXxTCtTCXvdBDwJ3y0GgwEeVW7oW_8BfvUX9ddK3v_S-a0_LsWPj7M1oTZ3E3kTQUd6iXSIrbIxvB_Bo'"/>
             </div>
-            <div>
-              <span class="text-title-md font-bold text-card-surface block leading-tight">
-                Bali Little Explorer
-              </span>
-              <span class="text-label-sm font-label-sm text-neutral-slate-muted">
-                by Bali Top Holiday
-              </span>
-            </div>
+            <span class="text-title-md font-title-md font-extrabold text-card-surface">Bali Little Explorer</span>
           </div>
-          <p class="text-body-md text-card-surface/80 max-w-sm">
-            Menyediakan materi edukasi ramah anak siap cetak gratis untuk mendukung liburan keluarga yang bermakna di Bali.
+          <p class="text-neutral-slate-muted text-body-md font-body-md max-w-sm">
+            Platform Edu-Tourism ramah anak di Bali bersama Bali Top Holiday. Menghadirkan paket wisata aman, panduan parenting ramah balita, dan activity kit kreatif.
           </p>
           <div class="flex items-center gap-3 pt-2">
-            <a class="w-9 h-9 rounded-full bg-palm-green text-white flex items-center justify-center hover:opacity-90 transition-opacity" href="https://wa.me/6281234567890" target="_blank">
+            <a class="w-9 h-9 rounded-full bg-card-surface/10 text-card-surface hover:text-white transition-colors duration-200 flex items-center justify-center" href="https://wa.me/6281234567890" target="_blank">
               <span class="material-symbols-outlined text-lg" data-icon="chat">chat</span>
             </a>
           </div>
         </div>
 
-        <!-- Col 2: Navigation Links -->
-        <div class="md:col-span-3 space-y-3">
-          <h4 class="text-headline-sm font-headline-sm text-card-surface font-semibold">Navigasi Halaman</h4>
-          <ul class="space-y-2 text-label-sm font-label-sm">
-            <li><a class="hover:text-white transition-colors duration-200" href="index.html">🏠 Beranda Utama</a></li>
-            <li><a class="hover:text-white transition-colors duration-200" href="paket.html">🗺️ Paket Wisata</a></li>
-            <li><a class="text-primary font-bold" href="activity-kit.html">🎨 Activity Kit</a></li>
-            <li><a class="hover:text-white transition-colors duration-200" href="mewarnai.html">🖍️ Mewarnai Digital</a></li>
-            <li><a class="hover:text-white transition-colors duration-200" href="parenting-tips.html">💡 Tips Parenting</a></li>
-            <li><a class="hover:text-white transition-colors duration-200" href="reservasi.html">📋 Reservasi</a></li>
-          </ul>
+        <!-- Links Column 1 -->
+        <div class="md:col-span-3 flex flex-col gap-3">
+          <span class="text-card-surface font-semibold text-label-md font-label-md tracking-wider uppercase">Menu Utama</span>
+          <div class="flex flex-col gap-2.5">
+            <a class="text-neutral-slate-muted hover:text-white transition-colors duration-200 text-label-sm font-label-sm" href="index.html">Beranda</a>
+            <a class="text-neutral-slate-muted hover:text-white transition-colors duration-200 text-label-sm font-label-sm" href="paket.html">Paket Wisata</a>
+            <a class="text-primary font-bold text-label-sm font-label-sm" href="activity-kit.html">Activity Kit</a>
+            <a class="text-neutral-slate-muted hover:text-white transition-colors duration-200 text-label-sm font-label-sm" href="mewarnai.html">Mewarnai Digital</a>
+            <a class="text-neutral-slate-muted hover:text-white transition-colors duration-200 text-label-sm font-label-sm" href="parenting-tips.html">Parenting Tips</a>
+            <a class="text-neutral-slate-muted hover:text-white transition-colors duration-200 text-label-sm font-label-sm" href="reservasi.html">Reservasi</a>
+          </div>
         </div>
 
-        <!-- Col 3: Bantuan & Kontak -->
-        <div class="md:col-span-4 space-y-3">
-          <h4 class="text-headline-sm font-headline-sm text-card-surface font-semibold">Bantuan & Kontak</h4>
-          <p class="text-xs text-neutral-slate-muted leading-relaxed">Kendala saat mengunduh berkas atau butuh file dalam format tertentu? Tim kami siap membantu:</p>
-          <a id="footer-wa-btn" href="https://wa.me/6281234567890" target="_blank"
-             class="inline-flex items-center gap-2 bg-palm-green hover:bg-palm-green/90 text-white font-bold text-xs px-4 py-2.5 rounded-full transition shadow-sm">
-            <span>💬 Chat Admin Bali Top Holiday</span>
-          </a>
-          <div class="pt-2">
-            <a class="text-label-sm text-neutral-slate-muted hover:text-white transition-colors" href="admin.html" target="_blank">
-              🔐 Panel Admin
-            </a>
+        <!-- Links Column 2 -->
+        <div class="md:col-span-4 flex flex-col gap-3">
+          <span class="text-card-surface font-semibold text-label-md font-label-md tracking-wider uppercase">Koleksi Kit &amp; Panduan</span>
+          <div class="grid grid-cols-2 gap-2.5">
+            <a class="text-neutral-slate-muted hover:text-white transition-colors duration-200 text-label-sm font-label-sm" href="#kategori-download">Lembar Mewarnai</a>
+            <a class="text-neutral-slate-muted hover:text-white transition-colors duration-200 text-label-sm font-label-sm" href="#kategori-download">Teka-Teki Visual</a>
+            <a class="text-neutral-slate-muted hover:text-white transition-colors duration-200 text-label-sm font-label-sm" href="#kategori-download">Motorik Halus</a>
+            <a class="text-neutral-slate-muted hover:text-white transition-colors duration-200 text-label-sm font-label-sm" href="#download-bundle-form">Family Travel Guide</a>
+            <a class="text-neutral-slate-muted hover:text-white transition-colors duration-200 text-label-sm font-label-sm" href="admin.html">Portal Admin CMS</a>
           </div>
         </div>
       </div>
 
-      <!-- Copyright Notice -->
-      <div class="pt-8 flex flex-col md:flex-row items-center justify-between text-label-sm font-label-sm gap-4">
-        <div>
+      <!-- Copyright Bottom Bar -->
+      <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-neutral-slate-muted text-label-sm font-label-sm text-center md:text-left">
           © 2026 Bali Little Explorer by Bali Top Holiday. All rights reserved. Platform Edu-Tourism ramah anak di Bali.
-        </div>
-        <div class="flex items-center gap-6">
-          <a class="hover:text-white transition-colors duration-200" href="admin.html">Portal Admin</a>
-          <a class="hover:text-white transition-colors duration-200" href="https://adminlittlebth.jinztech.cloud">Domain Khusus Admin</a>
-        </div>
+        </p>
+        <span class="text-primary-container text-label-sm font-label-sm font-medium">
+          Dibuat dengan penuh cinta untuk senyum si kecil 🌺
+        </span>
       </div>
     </div>
   </footer>
-
-  <!-- ==================== FLOATING WHATSAPP CTA ==================== -->
-  <div class="fixed bottom-6 right-6 z-40">
-    <a id="wa-float"
-       href="https://wa.me/6281234567890?text=Halo%20Bali%20Top%20Holiday%2C%20saya%20ingin%20minta%20file%20Digital%20Kids%20Activity%20Kit%20PDF%20untuk%20anak%20saya%20%F0%9F%8E%A8"
-       target="_blank"
-       class="bg-palm-green text-white px-5 py-3 rounded-full flex items-center gap-2 shadow-2xl hover:bg-palm-green/90 hover:scale-105 transition-all duration-300">
-      <span class="material-symbols-outlined text-2xl" data-icon="chat">chat</span>
-      <span class="font-headline-sm text-label-md hidden sm:inline">Minta Kit via WA</span>
-    </a>
-  </div>
 
   <!-- ==================== SCRIPTS ==================== -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -446,59 +884,23 @@
     const { createClient } = supabase;
     const db = createClient(SUPABASE_URL, SUPABASE_ANON);
 
-    let allKits = [];
     let currentWA = '6281234567890';
-    let currentSelectedKit = null;
+    let currentColor = '#ff6b35';
+    let currentColorName = 'Coral Orange';
 
-    const DEFAULT_KITS = [
-      {
-        id: 1,
-        title: "Lembar Mewarnai Ikon Bali",
-        icon: "palette",
-        description: "Pura Ulun Danu, Tari Barong, Bunga Jepun, dan Pakaian Adat Bali.",
-        sheet_count: "5 Lembar PDF",
-        badge_color: "coral",
-        image_url: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=400&q=80",
-        file_url: ""
-      },
-      {
-        id: 2,
-        title: "Teka-Teki Visual Flora & Fauna",
-        icon: "psychology",
-        description: "Mencari jejak Burung Jalak Bali, Gajah Sumatra, dan Daun Tropis.",
-        sheet_count: "4 Lembar PDF",
-        badge_color: "teal",
-        image_url: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=400&q=80",
-        file_url: ""
-      },
-      {
-        id: 3,
-        title: "Latihan Motorik Halus & Pola",
-        icon: "content_cut",
-        description: "Menghubungkan garis canang sari, pola kain poleng, dan mewarnai.",
-        sheet_count: "4 Lembar PDF",
-        badge_color: "palm",
-        image_url: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=400&q=80",
-        file_url: ""
-      },
-      {
-        id: 4,
-        title: "Labirin & Tebak Kata Balita",
-        icon: "extension",
-        description: "Bantu si monyet kembali ke Hutan Ubud dan teka-teki visual simpel.",
-        sheet_count: "3 Lembar PDF",
-        badge_color: "amber",
-        image_url: "https://images.unsplash.com/photo-1560785496-3c9d27877182?auto=format&fit=crop&w=400&q=80",
-        file_url: ""
-      }
-    ];
+    const colorNames = {
+      '#ff6b35': 'Coral Orange',
+      '#FFB703': 'Matahari Amber',
+      '#16A34A': 'Palm Green',
+      '#00a7cb': 'Ocean Blue',
+      '#ab3500': 'Bata Merah Bali',
+      '#89f5e7': 'Pirus Tropis',
+      '#FFFFFF': 'Putih Bersih'
+    };
 
     document.addEventListener('DOMContentLoaded', async () => {
       setupNavigation();
-      setupSearch();
-      setupDownloadForm();
       await fetchSiteSettings();
-      await fetchKits();
     });
 
     function setupNavigation() {
@@ -533,166 +935,116 @@
       });
     }
 
-    async function fetchKits() {
+    // Coloring Playground Functions
+    function setColor(colorHex) {
+      currentColor = colorHex;
+      currentColorName = colorNames[colorHex] || colorHex;
+      const nameEl = document.getElementById('selected-color-name');
+      if (nameEl) {
+        nameEl.innerText = currentColorName;
+        nameEl.style.color = colorHex === '#FFFFFF' ? '#64748B' : colorHex;
+      }
+
+      document.querySelectorAll('.palette-swatch').forEach(el => {
+        el.classList.remove('ring-2', 'ring-primary-container');
+        if (el.getAttribute('style').includes(colorHex)) {
+          el.classList.add('ring-2', 'ring-primary-container');
+        }
+      });
+    }
+
+    function colorPart(element) {
+      element.setAttribute('fill', currentColor);
+      element.style.transition = 'fill 0.25s ease';
+    }
+
+    function clearCanvas() {
+      const parts = ['part-sun', 'part-sea1', 'part-sea2', 'part-dolphin-body', 'part-dolphin-snout', 'part-dolphin-fin', 'part-dolphin-tail', 'part-dolphin-belly', 'part-drop1', 'part-drop2'];
+      parts.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.setAttribute('fill', '#FFFDF9');
+      });
+    }
+
+    function saveArt() {
+      alert('🌟 Keren sekali! Hasil mewarnai si kecil berhasil disimpan.');
+    }
+
+    function selectTemplate(type, btnElement) {
+      document.querySelectorAll('.char-btn').forEach(btn => {
+        btn.classList.remove('border-2', 'border-primary', 'bg-surface-container');
+        btn.classList.add('border', 'border-border-subtle');
+      });
+      if (btnElement) {
+        btnElement.classList.add('border-2', 'border-primary', 'bg-surface-container');
+        btnElement.classList.remove('border-border-subtle');
+      }
+
+      const titles = {
+        'dolphin': 'Lumba-Lumba Lovina',
+        'turtle': 'Penyu Hijau Serangan',
+        'elephant': 'Gajah Jinak Taro',
+        'temple': 'Pura Ulun Danu Beratan'
+      };
+      document.getElementById('active-template-title').innerText = titles[type] || 'Template Mewarnai';
+      clearCanvas();
+    }
+
+    // Modal Preview Handlers
+    function openPreviewModal(title, desc) {
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('modal-desc').innerText = desc;
+      document.getElementById('preview-modal').classList.remove('hidden');
+    }
+
+    function closePreviewModal() {
+      document.getElementById('preview-modal').classList.add('hidden');
+    }
+
+    // Bundle Download Lead Handler
+    async function handleBundleDownload(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-bundle-submit');
+      const origText = btn.innerHTML;
+      btn.innerHTML = `<span class="material-symbols-outlined text-2xl animate-spin">progress_activity</span><span>Menyiapkan Berkas...</span>`;
+      btn.disabled = true;
+
+      const parentName = document.getElementById('parent-name').value.trim();
+      const parentPhone = document.getElementById('parent-phone').value.trim();
+      const childAge = document.getElementById('child-age').value;
+      const parentEmail = document.getElementById('parent-email').value.trim();
+
       try {
-        const { data, error } = await db.from('activity_kits').select('*').order('order_index', { ascending: true });
-        if (!error && data && data.length > 0) {
-          allKits = data;
-        } else {
-          allKits = DEFAULT_KITS;
-        }
+        await db.from('download_leads').insert([{
+          parent_name: parentName,
+          whatsapp_number: parentPhone,
+          child_age: childAge,
+          email: parentEmail || null,
+          kit_title: 'Bundle 15+ Kids Activity Kit & Family Guide Bali',
+          created_at: new Date().toISOString()
+        }]);
       } catch (err) {
-        allKits = DEFAULT_KITS;
-      }
-      renderKits(allKits);
-    }
-
-    function renderKits(kits) {
-      const grid = document.getElementById('kits-grid');
-      const countEl = document.getElementById('kits-count');
-      if (!grid) return;
-
-      if (countEl) {
-        countEl.textContent = `Tersedia ${kits.length} paket materi aktivitas`;
+        console.warn('Lead capture notification:', err);
       }
 
-      if (kits.length === 0) {
-        grid.innerHTML = `
-          <div class="col-span-full bg-card-surface rounded-3xl p-12 text-center border border-border-subtle custom-shadow-soft">
-            <span class="text-4xl mb-3 block">🎨</span>
-            <h4 class="font-bold text-xl text-on-surface">Materi tidak ditemukan</h4>
-            <p class="text-xs text-neutral-slate-muted mt-1 max-w-md mx-auto">Coba cari dengan kata kunci lain seperti "mewarnai", "puzzle", atau "flora".</p>
-          </div>
-        `;
-        return;
+      const successEl = document.getElementById('download-success-msg');
+      if (successEl) {
+        successEl.classList.remove('hidden');
+        successEl.scrollIntoView({ behavior: 'smooth' });
       }
 
-      grid.innerHTML = kits.map((k) => {
-        const coverImg = k.image_url || 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=400&q=80';
-        return `
-          <div class="kit-card bg-card-surface rounded-2xl border border-border-subtle p-5 flex flex-col justify-between custom-shadow-soft">
-            <div>
-              <div class="h-44 rounded-xl overflow-hidden mb-4 bg-surface-container relative">
-                <img src="${coverImg}" alt="${k.title}" class="w-full h-full object-cover transition duration-300 hover:scale-105" />
-                <span class="absolute top-3 left-3 bg-card-surface/90 backdrop-blur-md text-on-surface text-[11px] font-bold px-2.5 py-1 rounded-full border border-border-subtle shadow-xs">
-                  ${k.sheet_count || 'PDF Siap Cetak'}
-                </span>
-              </div>
-              <h4 class="font-bold text-headline-sm text-on-surface mb-2 leading-tight">${k.title}</h4>
-              <p class="text-body-md text-on-surface-variant text-xs mb-4 leading-relaxed line-clamp-2">${k.description || ''}</p>
-            </div>
-
-            <div class="pt-3 border-t border-border-subtle flex items-center justify-between gap-2">
-              <button onclick="openDownloadModal('${k.title.replace(/'/g, "\\'")}', '${(k.description || '').replace(/'/g, "\\'")}', '${coverImg}', '${k.file_url || ''}')"
-                      class="w-full inline-flex items-center justify-center gap-1.5 bg-primary-container hover:bg-primary text-white font-bold text-xs py-2.5 rounded-full transition shadow-xs">
-                <span class="material-symbols-outlined text-sm">download</span>
-                <span>Unduh PDF</span>
-              </button>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    function setupSearch() {
-      const searchInput = document.getElementById('kit-search-input');
-      if (!searchInput) return;
-
-      searchInput.addEventListener('input', (e) => {
-        const q = e.target.value.toLowerCase().trim();
-        if (!q) {
-          renderKits(allKits);
-          return;
-        }
-        const filtered = allKits.filter(k => {
-          return (k.title || '').toLowerCase().includes(q) || (k.description || '').toLowerCase().includes(q);
-        });
-        renderKits(filtered);
-      });
-    }
-
-    function openDownloadModal(title, desc, imgSrc = '', fileUrl = '') {
-      currentSelectedKit = { title, desc, imgSrc, fileUrl };
-      document.getElementById('modal-dl-title').textContent = title;
-      document.getElementById('modal-dl-desc').textContent = desc || 'Berkas digital PDF siap cetak.';
-      
-      const imgEl = document.getElementById('modal-dl-img');
-      const iconEl = document.getElementById('modal-dl-icon');
-      if (imgSrc) {
-        imgEl.src = imgSrc;
-        imgEl.classList.remove('hidden');
-        if (iconEl) iconEl.classList.add('hidden');
-      } else {
-        imgEl.classList.add('hidden');
-        if (iconEl) iconEl.classList.remove('hidden');
+      // Auto trigger sample download asset
+      const dlLink = document.getElementById('btn-manual-dl');
+      if (dlLink) {
+        dlLink.click();
       }
 
-      const modal = document.getElementById('modal-download');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
-
-    function openBundleDownloadModal() {
-      openDownloadModal(
-        'Bundle Lengkap 15+ Kids Activity Kit (Semua Lembar)',
-        'Paket komplit seluruh lembar mewarnai, teka-teki, labirin, dan puzzle edukatif Bali dalam 1 berkas.',
-        'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=400&q=80',
-        ''
-      );
-    }
-
-    function closeDownloadModal() {
-      const modal = document.getElementById('modal-download');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    }
-
-    function setupDownloadForm() {
-      const form = document.getElementById('form-download-lead');
-      if (!form) return;
-
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const submitBtn = document.getElementById('btn-submit-download');
-        const origText = submitBtn.textContent;
-        submitBtn.textContent = 'Memproses Unduhan... ⏳';
-        submitBtn.disabled = true;
-
-        const name = document.getElementById('lead-name').value.trim();
-        const email = document.getElementById('lead-email').value.trim();
-        const kitTitle = currentSelectedKit ? currentSelectedKit.title : 'Kids Activity Kit';
-
-        try {
-          await db.from('download_leads').insert([{
-            kit_name: kitTitle,
-            name: name,
-            email: email || null,
-            created_at: new Date().toISOString()
-          }]);
-
-          if (currentSelectedKit && currentSelectedKit.fileUrl) {
-            window.open(currentSelectedKit.fileUrl, '_blank');
-          } else {
-            const waMsg = encodeURIComponent(
-              `Halo Admin Bali Top Holiday, saya ${name} ingin meminta file PDF "${kitTitle}" untuk anak saya. Mohon link unduhannya ya. Terima kasih! 🙏`
-            );
-            window.open(`https://wa.me/${currentWA}?text=${waMsg}`, '_blank');
-          }
-
-          alert(`🎉 Terima kasih Ayah/Bunda ${name}! Berkas "${kitTitle}" siap diunduh.`);
-          closeDownloadModal();
-          form.reset();
-        } catch (err) {
-          alert('Kendala sistem: ' + err.message);
-        } finally {
-          submitBtn.textContent = origText;
-          submitBtn.disabled = false;
-        }
-      });
+      btn.innerHTML = origText;
+      btn.disabled = false;
     }
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeDownloadModal();
+      if (e.key === 'Escape') closePreviewModal();
     });
   </script>
 </body>
