@@ -156,6 +156,8 @@
       background: rgba(30, 41, 59, 0.65);
       backdrop-filter: blur(6px);
     }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #FFF8F6; }
     ::-webkit-scrollbar-thumb { background: #FF6B35; border-radius: 9999px; }
@@ -342,31 +344,99 @@
           </div>
         </div>
 
-        <!-- Filter & Search Toolbar -->
-        <div class="bg-card-surface rounded-2xl p-4 md:p-5 custom-shadow-resting border border-border-subtle mb-8">
-          <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
-            <!-- Search input -->
-            <div class="relative flex-1">
-              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-neutral-slate-muted pointer-events-none">
-                <span class="material-symbols-outlined text-lg">search</span>
-              </span>
-              <input type="text" id="search-input" placeholder="Cari nama paket, destinasi, atau rute (cth: Ubud, Safari, Pantai, Pura)..."
-                     class="w-full pl-10 pr-4 py-2.5 bg-cream-bg border border-border-subtle rounded-xl text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all placeholder:text-neutral-slate-muted/70" />
+        <!-- Filter & Search Toolbar (With Scroll Filter by Days) -->
+        <div class="bg-card-surface rounded-3xl p-5 md:p-6 custom-shadow-resting border border-border-subtle mb-8 space-y-4">
+          <!-- Top Row: Search Input -->
+          <div class="relative flex items-center">
+            <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-neutral-slate-muted pointer-events-none">
+              <span class="material-symbols-outlined text-xl text-primary-container">search</span>
+            </span>
+            <input type="text" id="search-input" placeholder="Cari nama paket wisata, destinasi, atau rute (cth: Ubud, Safari, Pantai, Pura)..."
+                   class="w-full pl-11 pr-10 py-3 bg-cream-bg border border-border-subtle rounded-2xl text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all placeholder:text-neutral-slate-muted/70" />
+            <button type="button" id="clear-search-btn" class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-neutral-slate-muted hover:text-on-surface" onclick="clearSearchInput()" title="Hapus pencarian">
+              <span class="material-symbols-outlined text-base">cancel</span>
+            </button>
+          </div>
+
+          <!-- Bottom Row: Filter Scroll Berdasarkan Hari Tour -->
+          <div class="pt-3 border-t border-border-subtle/80">
+            <div class="flex items-center justify-between mb-2.5 px-1">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary-container text-lg">calendar_view_day</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-on-surface">Cari Berdasarkan Jumlah Hari Tour:</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-[11px] text-neutral-slate-muted font-medium">
+                <span class="hidden sm:inline">Geser pilihan hari</span>
+                <span class="material-symbols-outlined text-sm text-primary-container animate-pulse">swipe</span>
+              </div>
             </div>
 
-            <!-- Duration Filter pills -->
-            <div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0" id="duration-filters">
-              <button class="filter-duration-btn active px-4 py-2 rounded-full text-label-md font-bold transition-all bg-primary-container text-white shadow-sm" data-duration="all">
-                Semua Durasi
+            <!-- Horizontal Scroll Wrapper with Arrows -->
+            <div class="relative flex items-center group/filter">
+              <!-- Left Scroll Arrow Button -->
+              <button type="button" onclick="scrollFilterHorizontal(-240)" id="scroll-filter-left"
+                      class="hidden sm:flex absolute -left-2 z-10 w-8 h-8 rounded-full bg-card-surface border border-border-subtle shadow-md items-center justify-center text-on-surface hover:text-primary hover:scale-105 active:scale-95 transition cursor-pointer"
+                      title="Geser ke kiri" aria-label="Geser ke kiri">
+                <span class="material-symbols-outlined text-base">chevron_left</span>
               </button>
-              <button class="filter-duration-btn px-4 py-2 rounded-full text-label-md font-semibold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface" data-duration="multi">
-                Paket Menginap (3D2N / 4D3N / dst) 🏨
-              </button>
-              <button class="filter-duration-btn px-4 py-2 rounded-full text-label-md font-semibold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface" data-duration="full">
-                Full Day (7–8 Jam)
-              </button>
-              <button class="filter-duration-btn px-4 py-2 rounded-full text-label-md font-semibold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface" data-duration="half">
-                Half Day (4–5 Jam)
+
+              <!-- Scrollable Track (no-scrollbar touch-pan-x) -->
+              <div id="duration-filters" class="w-full flex items-center gap-2.5 overflow-x-auto scroll-smooth py-1 px-1 no-scrollbar cursor-grab active:cursor-grabbing select-none">
+                <!-- All Days -->
+                <button class="filter-duration-btn active shrink-0 px-4 py-2.5 rounded-full text-xs font-bold transition-all bg-primary-container text-white shadow-sm flex items-center gap-2 border border-transparent" data-duration="all">
+                  <span>✨</span>
+                  <span>Semua Hari</span>
+                  <span class="filter-badge px-2 py-0.5 rounded-full bg-white/20 text-white text-[10px] font-bold" id="badge-count-all">0</span>
+                </button>
+
+                <!-- 1 Hari / Full Day -->
+                <button class="filter-duration-btn shrink-0 px-4 py-2.5 rounded-full text-xs font-bold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle flex items-center gap-2" data-duration="1day">
+                  <span>🌅</span>
+                  <span>1 Hari (Full Day)</span>
+                  <span class="filter-badge px-2 py-0.5 rounded-full bg-surface-container text-neutral-slate-muted text-[10px] font-bold" id="badge-count-1day">0</span>
+                </button>
+
+                <!-- 2 Hari 1 Malam -->
+                <button class="filter-duration-btn shrink-0 px-4 py-2.5 rounded-full text-xs font-bold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle flex items-center gap-2" data-duration="2day">
+                  <span>🌴</span>
+                  <span>2 Hari 1 Malam (2D1N)</span>
+                  <span class="filter-badge px-2 py-0.5 rounded-full bg-surface-container text-neutral-slate-muted text-[10px] font-bold" id="badge-count-2day">0</span>
+                </button>
+
+                <!-- 3 Hari 2 Malam -->
+                <button class="filter-duration-btn shrink-0 px-4 py-2.5 rounded-full text-xs font-bold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle flex items-center gap-2" data-duration="3day">
+                  <span>🌺</span>
+                  <span>3 Hari 2 Malam (3D2N)</span>
+                  <span class="filter-badge px-2 py-0.5 rounded-full bg-surface-container text-neutral-slate-muted text-[10px] font-bold" id="badge-count-3day">0</span>
+                </button>
+
+                <!-- 4 Hari 3 Malam -->
+                <button class="filter-duration-btn shrink-0 px-4 py-2.5 rounded-full text-xs font-bold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle flex items-center gap-2" data-duration="4day">
+                  <span>🏖️</span>
+                  <span>4 Hari 3 Malam (4D3N)</span>
+                  <span class="filter-badge px-2 py-0.5 rounded-full bg-surface-container text-neutral-slate-muted text-[10px] font-bold" id="badge-count-4day">0</span>
+                </button>
+
+                <!-- 5 Hari 4 Malam / Lebih -->
+                <button class="filter-duration-btn shrink-0 px-4 py-2.5 rounded-full text-xs font-bold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle flex items-center gap-2" data-duration="5day">
+                  <span>🐘</span>
+                  <span>5 Hari+ (Long Stay)</span>
+                  <span class="filter-badge px-2 py-0.5 rounded-full bg-surface-container text-neutral-slate-muted text-[10px] font-bold" id="badge-count-5day">0</span>
+                </button>
+
+                <!-- Setengah Hari -->
+                <button class="filter-duration-btn shrink-0 px-4 py-2.5 rounded-full text-xs font-bold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle flex items-center gap-2" data-duration="half">
+                  <span>⏱️</span>
+                  <span>Setengah Hari (Half Day)</span>
+                  <span class="filter-badge px-2 py-0.5 rounded-full bg-surface-container text-neutral-slate-muted text-[10px] font-bold" id="badge-count-half">0</span>
+                </button>
+              </div>
+
+              <!-- Right Scroll Arrow Button -->
+              <button type="button" onclick="scrollFilterHorizontal(240)" id="scroll-filter-right"
+                      class="hidden sm:flex absolute -right-2 z-10 w-8 h-8 rounded-full bg-card-surface border border-border-subtle shadow-md items-center justify-center text-on-surface hover:text-primary hover:scale-105 active:scale-95 transition cursor-pointer"
+                      title="Geser ke kanan" aria-label="Geser ke kanan">
+                <span class="material-symbols-outlined text-base">chevron_right</span>
               </button>
             </div>
           </div>
@@ -836,11 +906,125 @@
       renderFilteredPackages();
     }
 
+    function getPackageDayCount(p) {
+      const days = getPackageDays(p);
+      if (days.length > 1) {
+        return days.length;
+      }
+      
+      const text = ((p.duration || '') + ' ' + (p.title || '') + ' ' + (p.badge || '')).toLowerCase();
+      
+      if (text.includes('5d') || text.includes('5 hari') || text.includes('5 malam')) return 5;
+      if (text.includes('4d') || text.includes('4 hari') || text.includes('4 malam')) return 4;
+      if (text.includes('3d') || text.includes('3 hari') || text.includes('3 malam')) return 3;
+      if (text.includes('2d') || text.includes('2 hari') || text.includes('2 malam')) return 2;
+      if (text.includes('half') || text.includes('setengah') || text.includes('4–5') || text.includes('4-5')) return 0.5;
+      if (text.includes('full') || text.includes('1 hari') || text.includes('7–8') || text.includes('7-8')) return 1;
+
+      if (days.length === 1) return 1;
+      return 1;
+    }
+
+    function scrollFilterHorizontal(offset) {
+      const container = document.getElementById('duration-filters');
+      if (container) {
+        container.scrollBy({ left: offset, behavior: 'smooth' });
+      }
+    }
+
+    function clearSearchInput() {
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) {
+        searchInput.value = '';
+        searchQuery = '';
+        const clearBtn = document.getElementById('clear-search-btn');
+        if (clearBtn) clearBtn.classList.add('hidden');
+        renderFilteredPackages();
+      }
+    }
+
+    function updateFilterCounts() {
+      const counts = {
+        all: allPackages.length,
+        '1day': allPackages.filter(p => getPackageDayCount(p) === 1).length,
+        '2day': allPackages.filter(p => getPackageDayCount(p) === 2).length,
+        '3day': allPackages.filter(p => getPackageDayCount(p) === 3).length,
+        '4day': allPackages.filter(p => getPackageDayCount(p) === 4).length,
+        '5day': allPackages.filter(p => getPackageDayCount(p) >= 5).length,
+        'half': allPackages.filter(p => getPackageDayCount(p) === 0.5).length,
+      };
+
+      for (const [key, val] of Object.entries(counts)) {
+        const el = document.getElementById(`badge-count-${key}`);
+        if (el) el.textContent = val;
+      }
+    }
+
+    function updateScrollButtonsVisibility() {
+      const slider = document.getElementById('duration-filters');
+      const leftBtn = document.getElementById('scroll-filter-left');
+      const rightBtn = document.getElementById('scroll-filter-right');
+      if (!slider || !leftBtn || !rightBtn) return;
+
+      if (slider.scrollLeft <= 10) {
+        leftBtn.classList.add('opacity-0', 'pointer-events-none');
+        leftBtn.classList.remove('opacity-100', 'pointer-events-auto');
+      } else {
+        leftBtn.classList.remove('opacity-0', 'pointer-events-none');
+        leftBtn.classList.add('opacity-100', 'pointer-events-auto');
+      }
+
+      const maxScroll = slider.scrollWidth - slider.clientWidth - 10;
+      if (slider.scrollLeft >= maxScroll) {
+        rightBtn.classList.add('opacity-0', 'pointer-events-none');
+        rightBtn.classList.remove('opacity-100', 'pointer-events-auto');
+      } else {
+        rightBtn.classList.remove('opacity-0', 'pointer-events-none');
+        rightBtn.classList.add('opacity-100', 'pointer-events-auto');
+      }
+    }
+
+    function initFilterScrollDrag() {
+      const slider = document.getElementById('duration-filters');
+      if (!slider) return;
+
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+      });
+
+      slider.addEventListener('mouseleave', () => { isDown = false; });
+      slider.addEventListener('mouseup', () => { isDown = false; });
+
+      slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        slider.scrollLeft = scrollLeft - walk;
+      });
+
+      slider.addEventListener('scroll', updateScrollButtonsVisibility);
+      window.addEventListener('resize', updateScrollButtonsVisibility);
+      setTimeout(updateScrollButtonsVisibility, 100);
+    }
+
     function setupFilters() {
       const searchInput = document.getElementById('search-input');
+      const clearBtn = document.getElementById('clear-search-btn');
+
       if (searchInput) {
         searchInput.addEventListener('input', (e) => {
           searchQuery = e.target.value.toLowerCase().trim();
+          if (clearBtn) {
+            if (searchQuery.length > 0) clearBtn.classList.remove('hidden');
+            else clearBtn.classList.add('hidden');
+          }
           renderFilteredPackages();
         });
       }
@@ -849,16 +1033,32 @@
       buttons.forEach(btn => {
         btn.addEventListener('click', () => {
           buttons.forEach(b => {
-            b.classList.remove('active', 'bg-primary-container', 'text-white', 'shadow-sm');
-            b.classList.add('bg-surface-container-low', 'text-on-surface');
+            b.classList.remove('active', 'bg-primary-container', 'text-white', 'shadow-sm', 'border-transparent');
+            b.classList.add('bg-surface-container-low', 'text-on-surface', 'border-border-subtle');
+            const badge = b.querySelector('.filter-badge');
+            if (badge) {
+              badge.classList.remove('bg-white/20', 'text-white');
+              badge.classList.add('bg-surface-container', 'text-neutral-slate-muted');
+            }
           });
-          btn.classList.add('active', 'bg-primary-container', 'text-white', 'shadow-sm');
-          btn.classList.remove('bg-surface-container-low', 'text-on-surface');
+
+          btn.classList.add('active', 'bg-primary-container', 'text-white', 'shadow-sm', 'border-transparent');
+          btn.classList.remove('bg-surface-container-low', 'text-on-surface', 'border-border-subtle');
+          const activeBadge = btn.querySelector('.filter-badge');
+          if (activeBadge) {
+            activeBadge.classList.add('bg-white/20', 'text-white');
+            activeBadge.classList.remove('bg-surface-container', 'text-neutral-slate-muted');
+          }
 
           activeDurationFilter = btn.getAttribute('data-duration');
           renderFilteredPackages();
+
+          // Ensure clicked button is visible in scroll container
+          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         });
       });
+
+      initFilterScrollDrag();
     }
 
     function renderFilteredPackages() {
@@ -866,27 +1066,34 @@
       const countEl = document.getElementById('results-count');
       if (!grid) return;
 
+      updateFilterCounts();
+
       const filtered = allPackages.filter(p => {
-        const durationText = (p.duration || '').toLowerCase();
+        const dayCount = getPackageDayCount(p);
         let matchesDuration = true;
-        if (activeDurationFilter === 'multi') {
-          matchesDuration = durationText.includes('malam') || 
-                            durationText.includes('2n') || 
-                            durationText.includes('3n') || 
-                            durationText.includes('4n') || 
-                            (durationText.includes('hari') && !durationText.includes('half') && !durationText.includes('1 hari') && !durationText.includes('full day')) ||
-                            (Array.isArray(p.stops) && p.stops.length > 1 && p.stops[0].day_number !== undefined);
+
+        if (activeDurationFilter === '1day') {
+          matchesDuration = dayCount === 1;
+        } else if (activeDurationFilter === '2day') {
+          matchesDuration = dayCount === 2;
+        } else if (activeDurationFilter === '3day') {
+          matchesDuration = dayCount === 3;
+        } else if (activeDurationFilter === '4day') {
+          matchesDuration = dayCount === 4;
+        } else if (activeDurationFilter === '5day') {
+          matchesDuration = dayCount >= 5;
         } else if (activeDurationFilter === 'half') {
-          matchesDuration = durationText.includes('half') || durationText.includes('4') || durationText.includes('5');
-        } else if (activeDurationFilter === 'full') {
-          matchesDuration = (durationText.includes('full') || durationText.includes('1 hari') || durationText.includes('7') || durationText.includes('8')) && !durationText.includes('malam');
+          matchesDuration = dayCount === 0.5;
+        } else {
+          matchesDuration = true;
         }
 
         let matchesSearch = true;
         if (searchQuery) {
           const title = (p.title || '').toLowerCase();
           const inc = (p.includes || '').toLowerCase();
-          const stopsText = Array.isArray(p.stops) ? p.stops.map(s => (s.place || '') + ' ' + (s.desc || '')).join(' ').toLowerCase() : '';
+          const days = getPackageDays(p);
+          const stopsText = days.map(d => (d.day_title || '') + ' ' + (d.activities || []).map(a => (a.place || '') + ' ' + (a.desc || '')).join(' ')).join(' ').toLowerCase();
           matchesSearch = title.includes(searchQuery) || inc.includes(searchQuery) || stopsText.includes(searchQuery);
         }
 
@@ -902,8 +1109,8 @@
           <div class="col-span-full bg-card-surface rounded-3xl p-12 text-center border border-border-subtle custom-shadow-resting">
             <span class="text-4xl mb-3 block">🔍</span>
             <h4 class="font-bold text-xl text-on-surface">Tidak ada paket wisata yang cocok</h4>
-            <p class="text-xs text-neutral-slate-muted mt-1 max-w-md mx-auto">Coba gunakan kata kunci lain atau pilih filter "Semua Durasi". Anda juga bisa langsung berkonsultasi bersama konsultan kami.</p>
-            <button onclick="resetFilters()" class="mt-4 px-5 py-2 bg-primary-container hover:bg-primary text-white font-bold text-xs rounded-full transition">
+            <p class="text-xs text-neutral-slate-muted mt-1 max-w-md mx-auto">Coba gunakan kata kunci lain atau pilih filter "Semua Hari". Anda juga bisa langsung berkonsultasi bersama konsultan kami.</p>
+            <button onclick="resetFilters()" class="mt-4 px-5 py-2.5 bg-primary-container hover:bg-primary text-white font-bold text-xs rounded-full transition shadow-sm">
               Reset Semua Filter
             </button>
           </div>
@@ -919,6 +1126,36 @@
         const isMultiDay = days.length > 1;
         const waText = encodeURIComponent(`Halo, saya tertarik dengan paket "${p.title}" (${p.duration || 'Full Day'}). Bisakah saya konsultasikan jadwal dan ketersediaannya? 😊`);
         const coverImg = p.image_url || 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80';
+
+        let stopsPreviewHtml = '';
+        if (isMultiDay) {
+          stopsPreviewHtml = `
+            <div class="space-y-1.5 mb-4">
+              <span class="inline-flex items-center gap-1 text-[11px] font-bold text-primary-container bg-orange-50 px-2.5 py-0.5 rounded-full border border-orange-200/60 mb-1">
+                🗓️ Paket ${days.length} Hari Lengkap
+              </span>
+              ${days.slice(0, 3).map(d => `
+                <div class="flex items-center gap-2 text-xs text-on-surface">
+                  <span class="w-1.5 h-1.5 rounded-full bg-primary-container shrink-0"></span>
+                  <span class="font-bold text-[11px] truncate">${d.day_title || `Hari ${d.day_number}`}</span>
+                </div>
+              `).join('')}
+              ${days.length > 3 ? `<p class="text-[10px] text-neutral-slate-muted font-bold pl-3.5">+ ${days.length - 3} hari perjalanan lainnya</p>` : ''}
+            </div>
+          `;
+        } else {
+          const acts = (days[0] ? days[0].activities : []).slice(0, 3);
+          stopsPreviewHtml = `
+            <ul class="space-y-2 text-body-md text-neutral-slate-muted mb-4">
+              ${acts.map(s => `
+                <li class="flex items-start gap-2">
+                  <span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">${s.icon || 'location_on'}</span>
+                  <span class="text-xs"><strong>${s.place}</strong> — ${s.desc}</span>
+                </li>
+              `).join('')}
+            </ul>
+          `;
+        }
 
         return `
           <div class="bg-card-surface rounded-[20px] ${cardBorder} overflow-hidden custom-shadow-resting hover:custom-shadow-hover transition-all duration-200 flex flex-col justify-between group">
@@ -937,15 +1174,7 @@
 
               <div class="p-5">
                 <h3 class="text-headline-sm font-headline-sm text-on-surface mb-2 font-bold">${p.title}</h3>
-                
-                <ul class="space-y-2 text-body-md text-neutral-slate-muted mb-4">
-                  ${stops.map(s => `
-                    <li class="flex items-start gap-2">
-                      <span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">${s.icon || 'location_on'}</span>
-                      <span><strong>${s.place}</strong> — ${s.desc}</span>
-                    </li>
-                  `).join('')}
-                </ul>
+                ${stopsPreviewHtml}
               </div>
             </div>
 
@@ -971,14 +1200,27 @@
       activeDurationFilter = 'all';
       const searchInput = document.getElementById('search-input');
       if (searchInput) searchInput.value = '';
+      const clearBtn = document.getElementById('clear-search-btn');
+      if (clearBtn) clearBtn.classList.add('hidden');
+
       const buttons = document.querySelectorAll('.filter-duration-btn');
       buttons.forEach(b => {
         if (b.getAttribute('data-duration') === 'all') {
-          b.classList.add('active', 'bg-primary-container', 'text-white', 'shadow-sm');
-          b.classList.remove('bg-surface-container-low', 'text-on-surface');
+          b.classList.add('active', 'bg-primary-container', 'text-white', 'shadow-sm', 'border-transparent');
+          b.classList.remove('bg-surface-container-low', 'text-on-surface', 'border-border-subtle');
+          const badge = b.querySelector('.filter-badge');
+          if (badge) {
+            badge.classList.add('bg-white/20', 'text-white');
+            badge.classList.remove('bg-surface-container', 'text-neutral-slate-muted');
+          }
         } else {
-          b.classList.remove('active', 'bg-primary-container', 'text-white', 'shadow-sm');
-          b.classList.add('bg-surface-container-low', 'text-on-surface');
+          b.classList.remove('active', 'bg-primary-container', 'text-white', 'shadow-sm', 'border-transparent');
+          b.classList.add('bg-surface-container-low', 'text-on-surface', 'border-border-subtle');
+          const badge = b.querySelector('.filter-badge');
+          if (badge) {
+            badge.classList.remove('bg-white/20', 'text-white');
+            badge.classList.add('bg-surface-container', 'text-neutral-slate-muted');
+          }
         }
       });
       renderFilteredPackages();
