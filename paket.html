@@ -899,9 +899,47 @@
       renderFilteredPackages();
     }
 
-    function renderStopIcon(icon, defaultIcon = 'location_on') {
-      const i = icon || defaultIcon;
-      if (/[\u{1F300}-\u{1F9FF}]/u.test(i) || i.length <= 2) {
+    function iconToEmoji(icon) {
+      if (!icon) return '📍';
+      const clean = icon.trim();
+      const map = {
+        'beach_access': '🏖️',
+        'bakery_dining': '☕',
+        'coffee': '☕',
+        'cafe': '☕',
+        'temple_buddhist': '⛩️',
+        'temple_hindu': '⛩️',
+        'temple': '⛩️',
+        'restaurant': '🍱',
+        'dining': '🍽️',
+        'palette': '🎨',
+        'photo_camera': '📸',
+        'camera': '📸',
+        'pets': '🦁',
+        'zoo': '🦁',
+        'pool': '🌊',
+        'sailing': '⛵',
+        'shopping_bag': '🛍️',
+        'store': '🛍️',
+        'museum': '🏛️',
+        'park': '🌾',
+        'landscape': '🏞️',
+        'grass': '🌾',
+        'directions_car': '🚗',
+        'car': '🚗',
+        'bedtime': '🛌',
+        'hotel': '🏨',
+        'flight_takeoff': '✈️',
+        'flight_land': '✈️',
+        'location_on': '📍',
+        'pin': '📍'
+      };
+      return map[clean.toLowerCase()] || clean;
+    }
+
+    function renderStopIcon(icon, defaultIcon = '📍') {
+      const i = iconToEmoji(icon || defaultIcon);
+      if (/[\u{1F300}-\u{1F9FF}]/u.test(i) || i.length <= 4) {
         return `<span class="text-sm select-none">${i}</span>`;
       }
       return `<span class="material-symbols-outlined text-[18px] leading-none select-none text-primary-container">${i}</span>`;
