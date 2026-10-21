@@ -370,25 +370,227 @@
 
     <!-- ==================== TAB 5: PARENTING TIPS ==================== -->
     <section id="tab-tips" class="tab-content hidden">
-      <div class="flex items-center justify-between mb-6">
-        <div>
-          <h3 class="font-baloo font-bold text-2xl text-slate-900">Panduan & Tips Parenting</h3>
-          <p class="text-xs text-slate-500">Tips psikologis perjalanan ramah anak yang tampil di slider carousel.</p>
+      <div class="space-y-6">
+        <!-- Header Info Bar -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 bg-purple-100 text-purple-700 font-bold text-xs px-3 py-1 rounded-full mb-2">
+              <span>💡 CMS Laman Parenting Tips & Panduan Keluarga</span>
+            </div>
+            <h3 class="font-baloo font-bold text-2xl text-slate-900">Kelola Konten & Tips Parenting Perjalanan</h3>
+            <p class="text-xs text-slate-500 mt-1 max-w-xl">
+              Sesuaikan teks hero pengantar, foto kartu keluarga, kutipan tips cepat, 4 kartu tips psikologis (Bento Grid), checklist koper balita, serta testimoni keluarga yang tampil di laman parenting-tips.html.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <a href="parenting-tips.html" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-1.5 shadow-sm">
+              <span>👁️ Buka Laman Tips</span>
+              <span>↗</span>
+            </a>
+            <button type="button" onclick="submitParentingSettings()" class="bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow flex items-center gap-1.5">
+              <span>💾 Simpan Semua Pengaturan</span>
+            </button>
+          </div>
         </div>
-        <div class="flex items-center gap-2">
-          <a href="parenting-tips.html" target="_blank"
-             class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3.5 py-2.5 rounded-xl shadow-sm transition flex items-center gap-1.5">
-            <span>👁️ Buka Halaman Tips</span>
-            <span>↗</span>
-          </a>
-          <button onclick="openTipModal()" class="bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-1.5">
-            <span>+ Tambah Tips Baru</span>
+
+        <!-- 1. HERO SECTION & VISUAL BENTO CARD -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 md:p-8">
+          <div class="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
+            <span class="text-2xl p-2 bg-orange-100 text-orange-600 rounded-2xl">🌅</span>
+            <div>
+              <h4 class="font-baloo font-bold text-lg text-slate-900">1. Hero Header & Kartu Visual (Bagian Atas Laman)</h4>
+              <p class="text-xs text-slate-400">Judul utama, subjudul pengantar, foto kartu keluarga, dan kutipan "Tips Cepat Hari Ini".</p>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-12 gap-6">
+            <!-- Preview Card -->
+            <div class="md:col-span-5 flex flex-col">
+              <label class="block text-xs font-bold text-slate-700 mb-2">Pratinjau Kartu Visual Hero:</label>
+              <div class="relative rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 shadow-sm aspect-[4/3] group mb-3">
+                <img id="prev-parenting-hero-img" src="" alt="Pratinjau Hero Parenting" class="w-full h-full object-cover transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=800&q=80'" />
+                <div class="absolute bottom-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-slate-800 text-[11px] font-bold shadow-sm flex items-center gap-1">
+                  <span>⭐</span>
+                  <span id="prev-parenting-hero-badge">Rekomendasi Psikolog Anak</span>
+                </div>
+              </div>
+              <!-- Quote Preview -->
+              <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                <div class="flex items-center justify-between font-bold text-primary mb-1">
+                  <span id="prev-parenting-quick-title">Tips Cepat Hari Ini</span>
+                  <span id="prev-parenting-quick-duration" class="text-slate-400 font-normal">Durasi baca: 3 mnt</span>
+                </div>
+                <p id="prev-parenting-quick-quote" class="text-slate-600 italic">"Anak tidak selalu rewel karena lelah, seringkali karena minim stimulasi prediktif. Ceritakan apa yang akan mereka jumpai sebelum sampai."</p>
+              </div>
+            </div>
+
+            <!-- Inputs -->
+            <div class="md:col-span-7 space-y-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Judul Hero Laman Tips *</label>
+                <input type="text" id="parenting-hero-title" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-600 focus:outline-none" placeholder="Panduan Perjalanan Nyaman & Reservasi Liburan Keluarga" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Subjudul / Deskripsi Pengantar *</label>
+                <textarea id="parenting-hero-subtitle" rows="3" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-600 focus:outline-none" placeholder="Solusi praktis dan psikologis mendampingi si kecil usia 3–7 tahun menjelajahi keindahan Pulau Dewata..."></textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Foto Kartu Keluarga Hero</label>
+                <input type="hidden" id="parenting-hero-img" />
+                <div id="upload-widget-parenting-hero-img"></div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Badge Foto Hero</label>
+                  <input type="text" id="parenting-hero-badge" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-600 focus:outline-none" placeholder="Rekomendasi Psikolog Anak" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Estimasi Durasi Baca</label>
+                  <input type="text" id="parenting-quick-duration" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-600 focus:outline-none" placeholder="Durasi baca: 3 mnt" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Isi Kutipan "Tips Cepat Hari Ini"</label>
+                <textarea id="parenting-quick-quote" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-600 focus:outline-none" placeholder="Anak tidak selalu rewel karena lelah, seringkali karena minim stimulasi prediktif..."></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. BENTO GRID 4 SPECIALIZED TOPIC CARDS -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 md:p-8">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 mb-6 border-b border-slate-100">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl p-2 bg-purple-100 text-purple-600 rounded-2xl">🧠</span>
+              <div>
+                <h4 class="font-baloo font-bold text-lg text-slate-900">2. Katalog 4 Kartu Topik Tips Parenting (Bento Grid)</h4>
+                <p class="text-xs text-slate-400">Topik panduan psikologis di perjalanan dengan poin-poin solusi terstruktur.</p>
+              </div>
+            </div>
+            <button onclick="openTipModal()" class="bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-1.5 self-start sm:self-auto">
+              <span>+ Tambah Topik Tips Baru</span>
+            </button>
+          </div>
+
+          <div id="tips-grid" class="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+            <!-- Rendered by JS matching live Bento Grid style -->
+          </div>
+        </div>
+
+        <!-- 3. INTERACTIVE PACKING CHECKLIST BALITA -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 md:p-8">
+          <div class="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
+            <span class="text-2xl p-2 bg-emerald-100 text-emerald-600 rounded-2xl">🧳</span>
+            <div>
+              <h4 class="font-baloo font-bold text-lg text-slate-900">3. Checklist Persiapan Liburan Balita ke Bali</h4>
+              <p class="text-xs text-slate-400">Daftar barang bawaan yang dapat dicentang dan diunduh langsung dalam format PDF oleh wisatawan.</p>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-6">
+            <!-- Col 1: Outdoor & Pantai -->
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+              <div class="flex items-center gap-2 font-bold text-slate-800 text-sm mb-2">
+                <span>🏖️ Perlengkapan Outdoor & Pantai</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mb-2">Tuliskan 1 item per baris:</p>
+              <textarea id="parenting-checklist-outdoor" rows="7" class="w-full p-2.5 border border-slate-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-purple-600 focus:outline-none font-mono"></textarea>
+            </div>
+
+            <!-- Col 2: P3K & Obat -->
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+              <div class="flex items-center gap-2 font-bold text-slate-800 text-sm mb-2">
+                <span>🩹 P3K, Higienitas & Obat Balita</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mb-2">Tuliskan 1 item per baris:</p>
+              <textarea id="parenting-checklist-p3k" rows="7" class="w-full p-2.5 border border-slate-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-purple-600 focus:outline-none font-mono"></textarea>
+            </div>
+
+            <!-- Col 3: Kendaraan & Snack -->
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+              <div class="flex items-center gap-2 font-bold text-slate-800 text-sm mb-2">
+                <span>🚗 Kenyamanan Kendaraan & Snack</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mb-2">Tuliskan 1 item per baris:</p>
+              <textarea id="parenting-checklist-comfort" rows="7" class="w-full p-2.5 border border-slate-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-purple-600 focus:outline-none font-mono"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. TESTIMONI KELUARGA ("KATA KELUARGA KAMI ❤️") -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 md:p-8">
+          <div class="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
+            <span class="text-2xl p-2 bg-rose-100 text-rose-600 rounded-2xl">❤️</span>
+            <div>
+              <h4 class="font-baloo font-bold text-lg text-slate-900">4. Ulasan & Testimoni Keluarga ("Kata Keluarga Kami ❤️")</h4>
+              <p class="text-xs text-slate-400">Pengalaman nyata orang tua berlibur bersama si kecil di Bali yang tampil di bagian bawah laman tips.</p>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-6">
+            <!-- Review 1 -->
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
+              <span class="text-xs font-bold text-primary block">Testimoni 1 (Dewi R.)</span>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Nama Orang Tua</label>
+                <input type="text" id="parenting-testi-1-name" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs bg-white" placeholder="Dewi R." />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Kota & Keterangan Anak</label>
+                <input type="text" id="parenting-testi-1-sub" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs bg-white" placeholder="Jakarta · Ibu dari balita 4 thn" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Isi Ulasan</label>
+                <textarea id="parenting-testi-1-text" rows="3" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs bg-white"></textarea>
+              </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
+              <span class="text-xs font-bold text-secondary block">Testimoni 2 (Andi S.)</span>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Nama Orang Tua</label>
+                <input type="text" id="parenting-testi-2-name" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs bg-white" placeholder="Andi S." />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Kota & Keterangan Anak</label>
+                <input type="text" id="parenting-testi-2-sub" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs bg-white" placeholder="Surabaya · Ayah 2 balita" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Isi Ulasan</label>
+                <textarea id="parenting-testi-2-text" rows="3" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs bg-white"></textarea>
+              </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
+              <span class="text-xs font-bold text-palm-green block">Testimoni 3 (Sari M.)</span>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Nama Orang Tua</label>
+                <input type="text" id="parenting-testi-3-name" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs bg-white" placeholder="Sari M." />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Kota & Keterangan Anak</label>
+                <input type="text" id="parenting-testi-3-sub" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs bg-white" placeholder="Bandung · Ibu dari putri 3 thn" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Isi Ulasan</label>
+                <textarea id="parenting-testi-3-text" rows="3" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs bg-white"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Bottom Bar -->
+        <div class="flex items-center justify-end gap-3 pt-4">
+          <button type="button" onclick="submitParentingSettings()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold text-sm px-7 py-3 rounded-xl shadow-lg transition flex items-center gap-2">
+            <span>💾 Simpan Semua Pengaturan Laman Tips</span>
           </button>
         </div>
-      </div>
-
-      <div id="tips-grid" class="grid md:grid-cols-2 gap-6">
-        <!-- Rendered by JS -->
       </div>
     </section>
 
@@ -979,25 +1181,25 @@
           <div id="upload-widget-tip-img"></div>
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Warna Tema Slider</label>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Warna Tema Kartu</label>
           <select id="tip-color" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-600 focus:outline-none">
-            <option value="purple">Ungu Pastel</option>
-            <option value="orange">Orange Hangat</option>
-            <option value="teal">Teal Sejuk</option>
-            <option value="indigo">Indigo Santai</option>
+            <option value="orange">Orange / Coral (Di Dalam Kendaraan)</option>
+            <option value="teal">Teal Sejuk (Regulasi Emosi)</option>
+            <option value="palm">Hijau / Palm (Iklim Tropis Bali)</option>
+            <option value="purple">Ungu / Indigo (Daya Ingat & Belajar)</option>
           </select>
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Poin 1</label>
-          <textarea id="tip-point-1" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-600 focus:outline-none" placeholder="Langkah penanganan 1..."></textarea>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Poin Solusi 1</label>
+          <textarea id="tip-point-1" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-600 focus:outline-none" placeholder="Contoh: Buka Activity Kit Gratis: Lembar mewarnai & teka-teki visual efektif menenangkan 25–30 menit."></textarea>
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Poin 2</label>
-          <textarea id="tip-point-2" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-600 focus:outline-none" placeholder="Langkah penanganan 2..."></textarea>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Poin Solusi 2</label>
+          <textarea id="tip-point-2" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-600 focus:outline-none" placeholder="Contoh: Jeda Storytelling: Bacakan kisah pura atau hewan lokal dari Family Travel Guide."></textarea>
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Poin 3</label>
-          <textarea id="tip-point-3" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-600 focus:outline-none" placeholder="Langkah penanganan 3..."></textarea>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Poin Solusi 3</label>
+          <textarea id="tip-point-3" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-600 focus:outline-none" placeholder="Contoh: Jeda 15 Menit: Jangan ragu minta driver berhenti di rest area teduh untuk stretch otot."></textarea>
         </div>
         <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-2">
           <button type="button" onclick="closeTipModal()" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:bg-slate-100">Batal</button>
@@ -1223,6 +1425,9 @@
       createUploadWidget({ containerId: 'upload-widget-home-story-img', inputId: 'home-story-img', previewImgId: 'prev-home-story-img', folder: 'story' });
       createUploadWidget({ containerId: 'upload-widget-home-cta-img', inputId: 'home-cta-img', previewImgId: 'prev-home-cta-img', folder: 'cta' });
 
+      // Parenting widgets
+      createUploadWidget({ containerId: 'upload-widget-parenting-hero-img', inputId: 'parenting-hero-img', previewImgId: 'prev-parenting-hero-img', folder: 'parenting' });
+
       // Modal widgets
       createUploadWidget({ containerId: 'upload-widget-pkg-img', inputId: 'pkg-img', folder: 'packages' });
       createUploadWidget({ containerId: 'upload-widget-kit-img', inputId: 'kit-img', folder: 'kits' });
@@ -1298,6 +1503,7 @@
         loadKits(),
         loadColoringSheets(),
         loadTips(),
+        loadParentingSettings(),
         loadHomepageSettings(),
         loadSettingsForm(),
       ]);
@@ -1915,34 +2121,69 @@
       const { data } = await db.from('parenting_tips').select('*').order('order_index', { ascending: true });
       tipsData = data || [];
       const container = document.getElementById('tips-grid');
-      container.innerHTML = tipsData.map(t => {
+      
+      const themeConfig = {
+        orange: { box: 'bg-orange-100 text-orange-600', badge: 'bg-orange-100 text-orange-700', defTag: 'Di Dalam Kendaraan', defFoot: 'Tersedia di semua armada' },
+        teal: { box: 'bg-teal-100 text-teal-700', badge: 'bg-teal-100 text-teal-800', defTag: 'Regulasi Emosi', defFoot: 'Rute dirancang tidak terburu-buru' },
+        palm: { box: 'bg-emerald-100 text-emerald-700', badge: 'bg-emerald-100 text-emerald-800', defTag: 'Iklim Tropis Bali', defFoot: 'P3K Medis siap di mobil' },
+        purple: { box: 'bg-purple-100 text-purple-700', badge: 'bg-purple-100 text-purple-800', defTag: 'Daya Ingat & Belajar', defFoot: 'Free Journal Memory Template' }
+      };
+
+      container.innerHTML = tipsData.map((t) => {
+        const theme = themeConfig[t.theme_color] || themeConfig.orange;
         const tips = Array.isArray(t.tips) ? t.tips : [];
+        let iconHtml = '';
+        const rawIcon = t.icon || 'lightbulb';
+        if (/[\u{1F300}-\u{1F9FF}]/u.test(rawIcon) || rawIcon.length <= 2) {
+          iconHtml = `<span class="text-xl">${rawIcon}</span>`;
+        } else {
+          iconHtml = `<span class="material-symbols-outlined text-xl">${rawIcon}</span>`;
+        }
+
         return `
-          <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col justify-between">
+          <div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-5 flex flex-col justify-between hover:shadow-md transition">
             <div>
-              ${t.image_url ? `
-                <div class="h-32 w-full overflow-hidden relative">
-                  <img src="${t.image_url}" alt="${t.title}" class="w-full h-full object-cover" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                  <div class="absolute bottom-3 left-4 right-4 text-white font-baloo font-bold text-base leading-tight">${t.title}</div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="w-10 h-10 rounded-xl ${theme.box} flex items-center justify-center font-bold">
+                  ${iconHtml}
                 </div>
-              ` : `
-                <div class="p-6 pb-2">
-                  <div class="flex items-center gap-3 mb-2">
-                    <span class="text-3xl">${t.icon || '💡'}</span>
-                    <h4 class="font-baloo font-bold text-lg text-slate-800">${t.title}</h4>
-                  </div>
-                </div>
-              `}
-              <div class="p-5">
-                <ul class="space-y-2 text-xs text-slate-600 mb-2">
-                  ${tips.map((p, idx) => `<li class="flex items-start gap-2"><span class="bg-slate-100 text-slate-700 font-bold w-4 h-4 rounded-full flex items-center justify-center shrink-0 text-[10px]">${idx+1}</span><span>${p}</span></li>`).join('')}
-                </ul>
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${theme.badge}">
+                  ${theme.defTag}
+                </span>
               </div>
+              <h4 class="font-baloo font-bold text-base text-slate-900 mb-3">${t.title}</h4>
+              <ul class="space-y-2 text-xs text-slate-600 mb-4">
+                ${tips.map((p, pIdx) => {
+                  let strong = '';
+                  let rest = p;
+                  if (p.includes(':')) {
+                    const parts = p.split(':');
+                    strong = parts[0].trim() + ':';
+                    rest = parts.slice(1).join(':').trim();
+                  } else if (p.includes('—')) {
+                    const parts = p.split('—');
+                    strong = parts[0].trim() + ':';
+                    rest = parts.slice(1).join('—').trim();
+                  }
+                  return `
+                    <li class="flex items-start gap-2">
+                      <span class="w-4 h-4 rounded-full ${theme.box} font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">
+                        ${pIdx + 1}
+                      </span>
+                      <span>${strong ? `<strong>${strong}</strong> ` : ''}${rest}</span>
+                    </li>
+                  `;
+                }).join('')}
+              </ul>
             </div>
-            <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-end gap-2">
-              <button onclick="editTip(${t.id})" class="text-xs bg-slate-100 hover:bg-slate-200 font-bold px-3 py-1 rounded-lg">Edit ✏️</button>
-              <button onclick="deleteTip(${t.id})" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold px-2.5 py-1 rounded-lg">Hapus</button>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[11px] font-bold text-slate-400 flex items-center gap-1">
+                <span>✓</span> ${theme.defFoot}
+              </span>
+              <div class="flex items-center gap-1.5">
+                <button onclick="editTip(${t.id})" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3 py-1 rounded-lg transition">Edit ✏️</button>
+                <button onclick="deleteTip(${t.id})" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold px-2.5 py-1 rounded-lg transition">Hapus</button>
+              </div>
             </div>
           </div>
         `;
@@ -1956,8 +2197,8 @@
         document.getElementById('modal-tip-title').textContent = 'Edit Parenting Tips';
         document.getElementById('tip-id').value = t.id;
         document.getElementById('tip-title').value = t.title;
-        document.getElementById('tip-icon').value = t.icon || '💡';
-        document.getElementById('tip-color').value = t.theme_color || 'purple';
+        document.getElementById('tip-icon').value = t.icon || 'toys';
+        document.getElementById('tip-color').value = t.theme_color || 'orange';
         document.getElementById('tip-img').value = t.image_url || '';
         syncUploadWidget('tip-img', t.image_url || '');
         const list = Array.isArray(t.tips) ? t.tips : [];
@@ -1969,6 +2210,7 @@
         document.getElementById('form-tip-edit').reset();
         document.getElementById('tip-id').value = '';
         document.getElementById('tip-img').value = '';
+        document.getElementById('tip-color').value = 'orange';
         syncUploadWidget('tip-img', '');
       }
     }
@@ -1993,7 +2235,7 @@
       e.preventDefault();
       const id = document.getElementById('tip-id').value;
       const title = document.getElementById('tip-title').value.trim();
-      const icon = document.getElementById('tip-icon').value.trim() || '💡';
+      const icon = document.getElementById('tip-icon').value.trim() || 'toys';
       const theme_color = document.getElementById('tip-color').value;
       const image_url = document.getElementById('tip-img').value.trim();
       const tips = [
@@ -2013,6 +2255,203 @@
       closeTipModal();
       loadTips();
     });
+
+    // ==================== PARENTING CMS SETTINGS (HERO, CHECKLIST, TESTIMONI) ====================
+    async function loadParentingSettings() {
+      // Setup preview listener for parenting hero img
+      const imgInput = document.getElementById('parenting-hero-img');
+      const prevImg = document.getElementById('prev-parenting-hero-img');
+      if (imgInput && prevImg) {
+        imgInput.addEventListener('input', () => {
+          prevImg.src = imgInput.value.trim() || 'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=800&q=80';
+        });
+      }
+      // Live text preview listeners
+      ['parenting-hero-badge', 'parenting-quick-title', 'parenting-quick-duration', 'parenting-quick-quote'].forEach(id => {
+        const input = document.getElementById(id);
+        const prev = document.getElementById('prev-' + id);
+        if (input && prev) {
+          input.addEventListener('input', () => {
+            prev.textContent = input.value;
+          });
+        }
+      });
+
+      // Default values matching website
+      const defChecklistOutdoor = [
+        'Sunscreen Kid Safe SPF 50/50 Mineral',
+        'Topi Rimba / Sunhat bertali dagu',
+        'Baju renang lengan panjang (Rashguard)',
+        'Handuk ponco microfiber cepat kering',
+        'Kacamata hitam UV Protection anak'
+      ].join('\n');
+
+      const defChecklistP3K = [
+        'Termometer digital & fever patch/cool',
+        'Lotion anti nyamuk aman balita (DEET free / essential)',
+        'Oralit sachet & probiotik sachet',
+        'Tisu basah non-alkohol & hand sanitizer',
+        'Minyak telon / minyak kayu putih wangi'
+      ].join('\n');
+
+      const defChecklistComfort = [
+        'Activity Kit PDF Cetak + Krayon Putar',
+        'Botol minum sedotan anti-tumpah',
+        'Bantal leher anak & selimut tipis mobil',
+        'Container snack box: kismis & buah potong',
+        'Baju ganti cadangan (2 stel di tas jinjing)'
+      ].join('\n');
+
+      const defTesti1 = {
+        name: 'Dewi R.',
+        sub: 'Jakarta · Ibu dari balita 4 thn',
+        text: 'Anak saya yang 4 tahun biasanya susah diajak jalan jauh. Tapi dengan Activity Kit dari Bali Little Explorer, dia anteng banget di mobil! Mewarnai terus sepanjang jalan.'
+      };
+      const defTesti2 = {
+        name: 'Andi S.',
+        sub: 'Surabaya · Ayah 2 balita',
+        text: 'Driver-nya sabar banget sama anak-anak kami. Itinerary-nya pas, nggak terlalu capek tapi tetap banyak yang dikunjungi. Anak pulang bawa cerita banyak tentang Bali!'
+      };
+      const defTesti3 = {
+        name: 'Sari M.',
+        sub: 'Bandung · Ibu dari putri 3 thn',
+        text: 'Family Travel Guide-nya sangat membantu! Saya jadi tahu fasilitas apa yang tersedia di setiap destinasi. Anak saya yang 3 tahun bisa tidur siang di mobil dengan nyaman.'
+      };
+
+      try {
+        const { data } = await db.from('site_settings').select('*').eq('id', 'parenting').single();
+        if (data) {
+          setVal('parenting-hero-title', data.hero_title || 'Panduan Perjalanan Nyaman & Reservasi Liburan Keluarga');
+          setVal('parenting-hero-subtitle', data.hero_subtitle || 'Solusi praktis dan psikologis mendampingi si kecil usia 3–7 tahun menjelajahi keindahan Pulau Dewata dengan tenang, minim tantrum, dan penuh kenangan indah yang bermakna.');
+          
+          const heroImg = data.hero_image_url || 'https://lh3.googleusercontent.com/aida-public/AB6AXuBRMnuXFJriQSQo7rcuKRwa-vjueVPCFQPXGIB7834v_AG-R3JtB_QRQ0a33T70NiGa9jMfvgmtXoTffvxEqu_LFdB77kgV_upQVp2dS5rXrNBF4ACl3PVbmoiTcpT67O9YumelQODkHPSTkqC6VDwPQCysvmR_Wyx_PrASFIXPCIkQoXPpyxGJDJCUPsUGyA5Zy6HSSrxdC_ntm7W2VwxrPWIVwhUVVNqCjXx3vjXWlPnmhoeNqC0B0A';
+          setVal('parenting-hero-img', heroImg);
+          syncUploadWidget('parenting-hero-img', heroImg);
+          if (prevImg) prevImg.src = heroImg;
+
+          setVal('parenting-hero-badge', data.hero_badge || 'Rekomendasi Psikolog Anak');
+          setVal('parenting-quick-title', data.story_banner_title || 'Tips Cepat Hari Ini');
+          setVal('parenting-quick-duration', data.cta_banner_title || 'Durasi baca: 3 mnt');
+          setVal('parenting-quick-quote', data.story_banner_desc || 'Anak tidak selalu rewel karena lelah, seringkali karena minim stimulasi prediktif. Ceritakan apa yang akan mereka jumpai sebelum sampai.');
+
+          // Parse Checklist JSON
+          let clOutdoor = defChecklistOutdoor;
+          let clP3K = defChecklistP3K;
+          let clComfort = defChecklistComfort;
+          if (data.feature_1_desc) {
+            try {
+              const cl = JSON.parse(data.feature_1_desc);
+              if (cl.outdoor) clOutdoor = cl.outdoor.join('\n');
+              if (cl.p3k) clP3K = cl.p3k.join('\n');
+              if (cl.comfort) clComfort = cl.comfort.join('\n');
+            } catch (_) {}
+          }
+          setVal('parenting-checklist-outdoor', clOutdoor);
+          setVal('parenting-checklist-p3k', clP3K);
+          setVal('parenting-checklist-comfort', clComfort);
+
+          // Parse Testimonials JSON
+          let t1 = defTesti1, t2 = defTesti2, t3 = defTesti3;
+          if (data.feature_2_desc) {
+            try {
+              const tList = JSON.parse(data.feature_2_desc);
+              if (tList[0]) t1 = tList[0];
+              if (tList[1]) t2 = tList[1];
+              if (tList[2]) t3 = tList[2];
+            } catch (_) {}
+          }
+          setVal('parenting-testi-1-name', t1.name);
+          setVal('parenting-testi-1-sub', t1.sub);
+          setVal('parenting-testi-1-text', t1.text);
+
+          setVal('parenting-testi-2-name', t2.name);
+          setVal('parenting-testi-2-sub', t2.sub);
+          setVal('parenting-testi-2-text', t2.text);
+
+          setVal('parenting-testi-3-name', t3.name);
+          setVal('parenting-testi-3-sub', t3.sub);
+          setVal('parenting-testi-3-text', t3.text);
+        } else {
+          // Fill defaults
+          setVal('parenting-hero-title', 'Panduan Perjalanan Nyaman & Reservasi Liburan Keluarga');
+          setVal('parenting-hero-subtitle', 'Solusi praktis dan psikologis mendampingi si kecil usia 3–7 tahun menjelajahi keindahan Pulau Dewata dengan tenang, minim tantrum, dan penuh kenangan indah yang bermakna.');
+          setVal('parenting-hero-badge', 'Rekomendasi Psikolog Anak');
+          setVal('parenting-quick-title', 'Tips Cepat Hari Ini');
+          setVal('parenting-quick-duration', 'Durasi baca: 3 mnt');
+          setVal('parenting-quick-quote', 'Anak tidak selalu rewel karena lelah, seringkali karena minim stimulasi prediktif. Ceritakan apa yang akan mereka jumpai sebelum sampai.');
+          setVal('parenting-checklist-outdoor', defChecklistOutdoor);
+          setVal('parenting-checklist-p3k', defChecklistP3K);
+          setVal('parenting-checklist-comfort', defChecklistComfort);
+          setVal('parenting-testi-1-name', defTesti1.name);
+          setVal('parenting-testi-1-sub', defTesti1.sub);
+          setVal('parenting-testi-1-text', defTesti1.text);
+          setVal('parenting-testi-2-name', defTesti2.name);
+          setVal('parenting-testi-2-sub', defTesti2.sub);
+          setVal('parenting-testi-2-text', defTesti2.text);
+          setVal('parenting-testi-3-name', defTesti3.name);
+          setVal('parenting-testi-3-sub', defTesti3.sub);
+          setVal('parenting-testi-3-text', defTesti3.text);
+        }
+      } catch (e) {
+        console.warn('Error loadParentingSettings:', e);
+      }
+    }
+
+    async function submitParentingSettings() {
+      const hero_title = document.getElementById('parenting-hero-title').value.trim();
+      const hero_subtitle = document.getElementById('parenting-hero-subtitle').value.trim();
+      const hero_image_url = document.getElementById('parenting-hero-img').value.trim() || 'https://lh3.googleusercontent.com/aida-public/AB6AXuBRMnuXFJriQSQo7rcuKRwa-vjueVPCFQPXGIB7834v_AG-R3JtB_QRQ0a33T70NiGa9jMfvgmtXoTffvxEqu_LFdB77kgV_upQVp2dS5rXrNBF4ACl3PVbmoiTcpT67O9YumelQODkHPSTkqC6VDwPQCysvmR_Wyx_PrASFIXPCIkQoXPpyxGJDJCUPsUGyA5Zy6HSSrxdC_ntm7W2VwxrPWIVwhUVVNqCjXx3vjXWlPnmhoeNqC0B0A';
+      const hero_badge = document.getElementById('parenting-hero-badge').value.trim() || 'Rekomendasi Psikolog Anak';
+      const story_banner_title = document.getElementById('parenting-quick-title').value.trim() || 'Tips Cepat Hari Ini';
+      const cta_banner_title = document.getElementById('parenting-quick-duration').value.trim() || 'Durasi baca: 3 mnt';
+      const story_banner_desc = document.getElementById('parenting-quick-quote').value.trim();
+
+      const checklistObj = {
+        outdoor: document.getElementById('parenting-checklist-outdoor').value.split('\n').map(s => s.trim()).filter(Boolean),
+        p3k: document.getElementById('parenting-checklist-p3k').value.split('\n').map(s => s.trim()).filter(Boolean),
+        comfort: document.getElementById('parenting-checklist-comfort').value.split('\n').map(s => s.trim()).filter(Boolean)
+      };
+
+      const testiList = [
+        {
+          name: document.getElementById('parenting-testi-1-name').value.trim(),
+          sub: document.getElementById('parenting-testi-1-sub').value.trim(),
+          text: document.getElementById('parenting-testi-1-text').value.trim()
+        },
+        {
+          name: document.getElementById('parenting-testi-2-name').value.trim(),
+          sub: document.getElementById('parenting-testi-2-sub').value.trim(),
+          text: document.getElementById('parenting-testi-2-text').value.trim()
+        },
+        {
+          name: document.getElementById('parenting-testi-3-name').value.trim(),
+          sub: document.getElementById('parenting-testi-3-sub').value.trim(),
+          text: document.getElementById('parenting-testi-3-text').value.trim()
+        }
+      ];
+
+      const payload = {
+        id: 'parenting',
+        hero_title,
+        hero_subtitle,
+        hero_image_url,
+        hero_badge,
+        story_banner_title,
+        cta_banner_title,
+        story_banner_desc,
+        feature_1_desc: JSON.stringify(checklistObj),
+        feature_2_desc: JSON.stringify(testiList),
+        updated_at: new Date().toISOString()
+      };
+
+      try {
+        const { error } = await db.from('site_settings').upsert(payload, { onConflict: 'id' });
+        if (error) throw error;
+        alert('🎉 Pengaturan Laman Parenting Tips berhasil disimpan! Perubahan langsung aktif di website parenting-tips.html.');
+      } catch (err) {
+        alert('Gagal menyimpan pengaturan: ' + err.message);
+      }
+    }
 
     // ==================== HOMEPAGE & PHOTO SETTINGS ====================
     const PHOTO_PRESETS = [

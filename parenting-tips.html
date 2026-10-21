@@ -242,10 +242,10 @@
               <span class="material-symbols-outlined text-base">psychology</span>
               <span>PANDUAN &amp; PARENTING WISATA ANAK</span>
             </div>
-            <h1 class="font-display-mobile md:font-display text-display-mobile md:text-display text-on-surface tracking-tight leading-tight">
+            <h1 id="parenting-hero-title-el" class="font-display-mobile md:font-display text-display-mobile md:text-display text-on-surface tracking-tight leading-tight">
               Panduan Perjalanan Nyaman &amp; Reservasi Liburan Keluarga
             </h1>
-            <p class="font-body-lg text-body-lg text-neutral-slate-muted max-w-2xl leading-relaxed">
+            <p id="parenting-hero-subtitle-el" class="font-body-lg text-body-lg text-neutral-slate-muted max-w-2xl leading-relaxed">
               Solusi praktis dan psikologis mendampingi si kecil usia 3–7 tahun menjelajahi keindahan Pulau Dewata dengan tenang, minim tantrum, dan penuh kenangan indah yang bermakna.
             </p>
             <div class="flex flex-wrap items-center gap-4 pt-2">
@@ -279,18 +279,18 @@
           <div class="lg:col-span-5">
             <div class="relative bg-card-surface p-4 rounded-3xl border border-border-subtle shadow-xl">
               <div class="relative rounded-2xl overflow-hidden aspect-[4/3] mb-4 bg-surface-container">
-                <img alt="Keluarga bahagia berwisata di Bali dengan balita" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRMnuXFJriQSQo7rcuKRwa-vjueVPCFQPXGIB7834v_AG-R3JtB_QRQ0a33T70NiGa9jMfvgmtXoTffvxEqu_LFdB77kgV_upQVp2dS5rXrNBF4ACl3PVbmoiTcpT67O9YumelQODkHPSTkqC6VDwPQCysvmR_Wyx_PrASFIXPCIkQoXPpyxGJDJCUPsUGyA5Zy6HSSrxdC_ntm7W2VwxrPWIVwhUVVNqCjXx3vjXWlPnmhoeNqC0B0A" onerror="this.src='https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=800&q=80'"/>
+                <img id="parenting-hero-img-el" alt="Keluarga bahagia berwisata di Bali dengan balita" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRMnuXFJriQSQo7rcuKRwa-vjueVPCFQPXGIB7834v_AG-R3JtB_QRQ0a33T70NiGa9jMfvgmtXoTffvxEqu_LFdB77kgV_upQVp2dS5rXrNBF4ACl3PVbmoiTcpT67O9YumelQODkHPSTkqC6VDwPQCysvmR_Wyx_PrASFIXPCIkQoXPpyxGJDJCUPsUGyA5Zy6HSSrxdC_ntm7W2VwxrPWIVwhUVVNqCjXx3vjXWlPnmhoeNqC0B0A" onerror="this.src='https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=800&q=80'"/>
                 <div class="absolute bottom-3 left-3 bg-card-surface/90 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
                   <span class="material-symbols-outlined text-sun-amber text-sm">star</span>
-                  <span class="font-label-sm text-label-sm text-on-surface font-semibold">Rekomendasi Psikolog Anak</span>
+                  <span id="parenting-hero-badge-el" class="font-label-sm text-label-sm text-on-surface font-semibold">Rekomendasi Psikolog Anak</span>
                 </div>
               </div>
               <div class="px-2 pb-2">
                 <div class="flex items-center justify-between mb-1">
-                  <span class="font-label-md text-label-md font-bold text-primary">Tips Cepat Hari Ini</span>
-                  <span class="font-label-sm text-label-sm text-neutral-slate-muted">Durasi baca: 3 mnt</span>
+                  <span id="parenting-quick-title-el" class="font-label-md text-label-md font-bold text-primary">Tips Cepat Hari Ini</span>
+                  <span id="parenting-quick-duration-el" class="font-label-sm text-label-sm text-neutral-slate-muted">Durasi baca: 3 mnt</span>
                 </div>
-                <p class="text-body-md text-neutral-slate-dark leading-relaxed">
+                <p id="parenting-quick-quote-el" class="text-body-md text-neutral-slate-dark leading-relaxed">
                   "Anak tidak selalu rewel karena lelah, seringkali karena minim stimulasi prediktif. Ceritakan apa yang akan mereka jumpai sebelum sampai."
                 </p>
               </div>
@@ -670,7 +670,7 @@
           <h2 class="font-headline-md text-headline-md text-on-surface">Kata Keluarga Kami ❤️</h2>
           <p class="text-neutral-slate-muted text-body-md mt-1">Pengalaman nyata orang tua berlibur bersama si kecil di Bali</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <!-- Review 1 -->
           <div class="bg-card-surface p-6 rounded-2xl border border-border-subtle shadow-sm">
             <div class="flex text-sun-amber mb-3">
@@ -910,7 +910,7 @@
       }
     }
 
-    // Site Settings (WhatsApp & Operating Hours)
+    // Site Settings (WhatsApp, Operating Hours & Parenting CMS)
     async function fetchSiteSettings() {
       try {
         const { data } = await db.from('site_settings').select('*').eq('id', 'general').single();
@@ -928,6 +928,157 @@
       } catch (err) {
         console.warn('Gagal memuat setting situs:', err);
       }
+
+      // Fetch Parenting Specific Settings from Admin (Hero, Checklist, Testimonials)
+      try {
+        const { data: pData } = await db.from('site_settings').select('*').eq('id', 'parenting').single();
+        if (pData) {
+          if (pData.hero_title) {
+            const el = document.getElementById('parenting-hero-title-el');
+            if (el) el.textContent = pData.hero_title;
+          }
+          if (pData.hero_subtitle) {
+            const el = document.getElementById('parenting-hero-subtitle-el');
+            if (el) el.textContent = pData.hero_subtitle;
+          }
+          if (pData.hero_image_url) {
+            const el = document.getElementById('parenting-hero-img-el');
+            if (el) el.src = pData.hero_image_url;
+          }
+          if (pData.hero_badge) {
+            const el = document.getElementById('parenting-hero-badge-el');
+            if (el) el.textContent = pData.hero_badge;
+          }
+          if (pData.story_banner_title) {
+            const el = document.getElementById('parenting-quick-title-el');
+            if (el) el.textContent = pData.story_banner_title;
+          }
+          if (pData.cta_banner_title) {
+            const el = document.getElementById('parenting-quick-duration-el');
+            if (el) el.textContent = pData.cta_banner_title;
+          }
+          if (pData.story_banner_desc) {
+            const el = document.getElementById('parenting-quick-quote-el');
+            if (el) el.textContent = `"${pData.story_banner_desc.replace(/^"|"$/g, '')}"`;
+          }
+          if (pData.feature_1_desc) {
+            try {
+              const cl = JSON.parse(pData.feature_1_desc);
+              renderChecklistFromAdmin(cl);
+            } catch (_) {}
+          }
+          if (pData.feature_2_desc) {
+            try {
+              const testi = JSON.parse(pData.feature_2_desc);
+              renderTestimonialsFromAdmin(testi);
+            } catch (_) {}
+          }
+        }
+      } catch (err) {
+        console.warn('Gagal memuat parenting CMS:', err);
+      }
+    }
+
+    function renderChecklistFromAdmin(cl) {
+      if (!cl) return;
+      const container = document.getElementById('packing-columns');
+      if (!container) return;
+
+      const outdoorList = cl.outdoor || [];
+      const p3kList = cl.p3k || [];
+      const comfortList = cl.comfort || [];
+
+      if (!outdoorList.length && !p3kList.length && !comfortList.length) return;
+
+      container.innerHTML = `
+        <!-- Column 1: Outdoor & Pantai -->
+        <div class="bg-cream-bg/80 p-5 rounded-2xl border border-border-subtle/80">
+          <div class="flex items-center gap-2 font-headline-sm text-headline-sm text-on-surface mb-4">
+            <span class="material-symbols-outlined text-primary">beach_access</span>
+            <h4>Perlengkapan Outdoor &amp; Pantai</h4>
+          </div>
+          <div class="space-y-3">
+            ${outdoorList.map((item, idx) => `
+              <label class="flex items-start gap-3 cursor-pointer select-none">
+                <input ${idx < 2 ? 'checked' : ''} class="w-5 h-5 rounded text-primary focus:ring-primary-container border-outline-variant mt-0.5 pack-item" type="checkbox" onchange="updateChecklistProgress()"/>
+                <span class="text-body-md text-on-surface">${item}</span>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Column 2: P3K & Obat Balita -->
+        <div class="bg-cream-bg/80 p-5 rounded-2xl border border-border-subtle/80">
+          <div class="flex items-center gap-2 font-headline-sm text-headline-sm text-on-surface mb-4">
+            <span class="material-symbols-outlined text-secondary">sanitizer</span>
+            <h4>P3K, Higienitas &amp; Obat Balita</h4>
+          </div>
+          <div class="space-y-3">
+            ${p3kList.map((item, idx) => `
+              <label class="flex items-start gap-3 cursor-pointer select-none">
+                <input ${idx < 2 ? 'checked' : ''} class="w-5 h-5 rounded text-secondary focus:ring-secondary border-outline-variant mt-0.5 pack-item" type="checkbox" onchange="updateChecklistProgress()"/>
+                <span class="text-body-md text-on-surface">${item}</span>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Column 3: Kenyamanan Kendaraan & Snack -->
+        <div class="bg-cream-bg/80 p-5 rounded-2xl border border-border-subtle/80">
+          <div class="flex items-center gap-2 font-headline-sm text-headline-sm text-on-surface mb-4">
+            <span class="material-symbols-outlined text-palm-green">directions_car</span>
+            <h4>Kenyamanan Kendaraan &amp; Snack</h4>
+          </div>
+          <div class="space-y-3">
+            ${comfortList.map((item, idx) => `
+              <label class="flex items-start gap-3 cursor-pointer select-none">
+                <input ${idx < 1 ? 'checked' : ''} class="w-5 h-5 rounded text-palm-green focus:ring-palm-green border-outline-variant mt-0.5 pack-item" type="checkbox" onchange="updateChecklistProgress()"/>
+                <span class="text-body-md text-on-surface">${item}</span>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      updateChecklistProgress();
+    }
+
+    function renderTestimonialsFromAdmin(testiList) {
+      if (!Array.isArray(testiList) || !testiList.length) return;
+      const container = document.getElementById('testimonials-grid');
+      if (!container) return;
+
+      const colors = ['bg-coral-soft text-primary', 'bg-ocean-teal-soft text-secondary', 'bg-palm-soft text-palm-green'];
+
+      container.innerHTML = testiList.map((t, idx) => {
+        const initials = (t.name || 'Orang Tua').split(' ').map(s => s[0]).join('').slice(0, 2).toUpperCase() || 'OT';
+        const color = colors[idx % colors.length];
+
+        return `
+          <div class="bg-card-surface p-6 rounded-2xl border border-border-subtle shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex text-sun-amber mb-3">
+                <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+              </div>
+              <p class="text-body-md text-neutral-slate-dark italic mb-4 leading-relaxed">
+                "${t.text || ''}"
+              </p>
+            </div>
+            <div class="flex items-center gap-3 pt-2 border-t border-border-subtle/50">
+              <div class="w-10 h-10 rounded-full ${color} flex items-center justify-center font-bold text-sm shrink-0">
+                ${initials}
+              </div>
+              <div>
+                <p class="font-label-md text-label-md text-on-surface font-bold">${t.name}</p>
+                <p class="font-label-sm text-label-sm text-neutral-slate-muted">${t.sub}</p>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
     function updateWALinks(wa) {
