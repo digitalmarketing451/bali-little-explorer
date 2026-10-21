@@ -389,20 +389,6 @@
                   <span class="filter-badge px-2 py-0.5 rounded-full bg-white/20 text-white text-[10px] font-bold" id="badge-count-all">0</span>
                 </button>
 
-                <!-- 1 Hari / Full Day -->
-                <button class="filter-duration-btn shrink-0 px-4 py-2.5 rounded-full text-xs font-bold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle flex items-center gap-2" data-duration="1day">
-                  <span>🌅</span>
-                  <span>1 Hari (Full Day)</span>
-                  <span class="filter-badge px-2 py-0.5 rounded-full bg-surface-container text-neutral-slate-muted text-[10px] font-bold" id="badge-count-1day">0</span>
-                </button>
-
-                <!-- 2 Hari 1 Malam -->
-                <button class="filter-duration-btn shrink-0 px-4 py-2.5 rounded-full text-xs font-bold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle flex items-center gap-2" data-duration="2day">
-                  <span>🌴</span>
-                  <span>2 Hari 1 Malam (2D1N)</span>
-                  <span class="filter-badge px-2 py-0.5 rounded-full bg-surface-container text-neutral-slate-muted text-[10px] font-bold" id="badge-count-2day">0</span>
-                </button>
-
                 <!-- 3 Hari 2 Malam -->
                 <button class="filter-duration-btn shrink-0 px-4 py-2.5 rounded-full text-xs font-bold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle flex items-center gap-2" data-duration="3day">
                   <span>🌺</span>
@@ -417,18 +403,18 @@
                   <span class="filter-badge px-2 py-0.5 rounded-full bg-surface-container text-neutral-slate-muted text-[10px] font-bold" id="badge-count-4day">0</span>
                 </button>
 
-                <!-- 5 Hari 4 Malam / Lebih -->
+                <!-- 5 Hari 4 Malam -->
                 <button class="filter-duration-btn shrink-0 px-4 py-2.5 rounded-full text-xs font-bold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle flex items-center gap-2" data-duration="5day">
                   <span>🐘</span>
-                  <span>5 Hari+ (Long Stay)</span>
+                  <span>5 Hari 4 Malam (5D4N)</span>
                   <span class="filter-badge px-2 py-0.5 rounded-full bg-surface-container text-neutral-slate-muted text-[10px] font-bold" id="badge-count-5day">0</span>
                 </button>
 
-                <!-- Setengah Hari -->
-                <button class="filter-duration-btn shrink-0 px-4 py-2.5 rounded-full text-xs font-bold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle flex items-center gap-2" data-duration="half">
-                  <span>⏱️</span>
-                  <span>Setengah Hari (Half Day)</span>
-                  <span class="filter-badge px-2 py-0.5 rounded-full bg-surface-container text-neutral-slate-muted text-[10px] font-bold" id="badge-count-half">0</span>
+                <!-- 6 Hari + (Long Stay) -->
+                <button class="filter-duration-btn shrink-0 px-4 py-2.5 rounded-full text-xs font-bold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle flex items-center gap-2" data-duration="6day">
+                  <span>🏰</span>
+                  <span>6 Hari + (Long Stay)</span>
+                  <span class="filter-badge px-2 py-0.5 rounded-full bg-surface-container text-neutral-slate-muted text-[10px] font-bold" id="badge-count-6day">0</span>
                 </button>
               </div>
 
@@ -708,9 +694,9 @@
         <div>
           <label class="block text-xs font-bold text-on-surface mb-1">Pilihan Paket Wisata *</label>
           <select id="book-package" required class="w-full px-3.5 py-2.5 border border-border-subtle rounded-xl text-xs font-semibold focus:ring-1 focus:ring-primary focus:outline-none bg-surface-container-low/50">
-            <option value="Seni & Budaya Bali">Seni & Budaya Bali (Half Day)</option>
-            <option value="Alam & Flora Fauna">Alam & Flora Fauna (Full Day)</option>
-            <option value="Pantai & Spiritualitas">Pantai & Spiritualitas (Full Day)</option>
+            <option value="Seni & Budaya Bali (3D2N)">Seni & Budaya Bali (3 Hari 2 Malam)</option>
+            <option value="Alam & Flora Fauna (4D3N)">Alam & Flora Fauna (4 Hari 3 Malam)</option>
+            <option value="Pantai & Spiritualitas (5D4N)">Pantai & Spiritualitas (5 Hari 4 Malam)</option>
           </select>
         </div>
 
@@ -792,48 +778,51 @@
     let currentWA = '6281234567890';
     let selectedPackageForDetail = null;
 
-    // Fallback packages matching the exact source specifications
+    // Fallback packages matching the exact multi-day specifications
     const DEFAULT_FALLBACK_PACKAGES = [
       {
         id: 1,
-        title: "Seni & Budaya Bali",
+        title: "Seni & Budaya Bali (3D2N)",
         icon: "🎭",
-        duration: "Half Day · 4–5 Jam",
+        duration: "3 Hari 2 Malam (3D2N)",
         badge: "POPULER ⭐",
         image_url: "https://lh3.googleusercontent.com/aida-public/AB6AXuCZQJd2xxIZso4Ugvc2XA4xkSnpQN5UU-OYyHlEeVMdOTfSL1xZnyv6FimyT5hiFwZ8JJ4UW-ZCuA0Dkmv2q6oZhJL4tLQlIn9Wysa6WWvBMP4EOjXa_JOLmuislTE7lPr_MNxYH1-np0yNBGAHbHaEjippEw1Glj3qBU1jv5K8FgtlNkOsTvkwMaLNDTOYnNOXK0zsT9Aw6mdKqB2yYT1b7jI37aAdwYVjymZD1gVtCLwPp-vEnuDxmg",
         includes: "Activity Kit & Driver",
         stops: [
-          { icon: "location_on", place: "Ubud Art Village", desc: "Pengenalan seni ukir & tari" },
-          { icon: "coffee", place: "Jeda Snack", desc: "Istirahat & playground anak" },
-          { icon: "museum", place: "Museum Anak", desc: "Interaktif 3–7 tahun" }
+          { day_number: 1, day_title: "Hari 1: Kedatangan & Pengenalan Seni", activities: [{ icon: "location_on", place: "Ubud Art Village", desc: "Pengenalan seni ukir & tari" }] },
+          { day_number: 2, day_title: "Hari 2: Edukasi Interaktif & Budaya", activities: [{ icon: "museum", place: "Museum Anak", desc: "Interaktif 3–7 tahun" }, { icon: "temple_hindu", place: "Pura Saraswati Ubud", desc: "Taman kolam teratai tenang" }] },
+          { day_number: 3, day_title: "Hari 3: Pasar Seni & Kepulangan", activities: [{ icon: "shopping_bag", place: "Pasar Seni Sukawati", desc: "Belanja kerajinan anak" }] }
         ]
       },
       {
         id: 2,
-        title: "Alam & Flora Fauna",
+        title: "Alam & Flora Fauna (4D3N)",
         icon: "🦁",
-        duration: "Full Day · 7–8 Jam",
+        duration: "4 Hari 3 Malam (4D3N)",
         badge: "TERLARIS 🏆",
         image_url: "https://lh3.googleusercontent.com/aida-public/AB6AXuCa0q2H550XS5kxZqLgEHDT7jZGYPJWDrDjR8GsvtbB6fbIgTT6sSFjX1iF5kYrOYopTkuqfTv2HyMSJPjG5mASXvr6-zzXXl4F8w-Us1vBLWj0GszVYCmBiVGTo13CrWC8m-rnhKtScPx319lzrw5U0zMuLQy7h8uHURjiw3_OVSsd9soEKSh4vdnsaPPOO1ygzbRVBMRU7vwGv-lwF7fzyqFbgBsgvWKirVTgF6oGMMS7AlUu1v8svw",
         includes: "Lunch & Travel Guide",
         stops: [
-          { icon: "pets", place: "Bali Zoo / Bird Park", desc: "Mengenal fauna tropis" },
-          { icon: "restaurant", place: "Makan Siang", desc: "Restoran baby-friendly" },
-          { icon: "park", place: "Jatiluwih", desc: "Terasering sawah UNESCO" }
+          { day_number: 1, day_title: "Hari 1: Airport Pick Up & Check-in", activities: [{ icon: "flight_land", place: "Bandara Ngurah Rai", desc: "Penyambutan ramah anak" }] },
+          { day_number: 2, day_title: "Hari 2: Petualangan Satwa Ramah Balita", activities: [{ icon: "pets", place: "Bali Zoo / Bird Park", desc: "Mengenal fauna tropis" }, { icon: "restaurant", place: "Makan Siang", desc: "Restoran baby-friendly" }] },
+          { day_number: 3, day_title: "Hari 3: Udara Sejuk Pegunungan & Danau", activities: [{ icon: "park", place: "Bedugul Danau Beratan", desc: "Udara sejuk & taman bunga" }, { icon: "grass", place: "Jatiluwih", desc: "Terasering sawah UNESCO" }] },
+          { day_number: 4, day_title: "Hari 4: Oleh-Oleh & Kepulangan", activities: [{ icon: "shopping_bag", place: "Krisna Oleh-Oleh Bali", desc: "Belanja cinderamata khas" }] }
         ]
       },
       {
         id: 3,
-        title: "Pantai & Spiritualitas",
+        title: "Pantai & Spiritualitas (5D4N)",
         icon: "🌊",
-        duration: "Full Day · 7–8 Jam",
+        duration: "5 Hari 4 Malam (5D4N)",
         badge: "SERU 🌊",
         image_url: "https://lh3.googleusercontent.com/aida-public/AB6AXuAiLYyRG4_28bjhlUTLaDIgjAV2pjzwfTtew5AwZNsMHtcmEfSOH_V8eyIuQgamPeeJyl0gZJPuUDkCei080g4D57R93kB7oO6lEGDs34h0YlBR6ByFY5uwMs0vRIf8HaJTbNv3gaG4Y4BVRwfxODtFi4BU7TFXipDEDa2c-9vGb6MYhgLicza_cVg_9UcH1qSxubulr4bDSOLTGFOHs_L4yKtK03RokbfTfaSGIbny3rxXLIgaDs8PwA",
         includes: "Workshop & Activity Kit",
         stops: [
-          { icon: "temple_buddhist", place: "Tanah Lot Temple", desc: "Pura ikonik tepi laut" },
-          { icon: "beach_access", place: "Jeda Bermain Pasir", desc: "Pantai tenang Kedungu" },
-          { icon: "palette", place: "Desa Seni Singapadu", desc: "Workshop topeng anak" }
+          { day_number: 1, day_title: "Hari 1: Welcome to Paradise & Sunset Pantai", activities: [{ icon: "beach_access", place: "Pantai Kedungu", desc: "Bermain pasir sore hari" }] },
+          { day_number: 2, day_title: "Hari 2: Ikon Pura & Pemandangan Laut", activities: [{ icon: "temple_buddhist", place: "Tanah Lot Temple", desc: "Pura ikonik tepi laut" }] },
+          { day_number: 3, day_title: "Hari 3: Seni Tradisi & Workshop Balita", activities: [{ icon: "palette", place: "Desa Seni Singapadu", desc: "Workshop topeng anak" }] },
+          { day_number: 4, day_title: "Hari 4: Konservasi Penyu & Safari Bahari", activities: [{ icon: "sailing", place: "Pusat Konservasi Penyu Serangan", desc: "Lepas tukik & edukasi bahari" }] },
+          { day_number: 5, day_title: "Hari 5: Belanja Santai & Transfer Airport", activities: [{ icon: "flight_takeoff", place: "Bandara Ngurah Rai", desc: "Perjalanan pulang nyaman" }] }
         ]
       }
     ];
@@ -922,15 +911,13 @@
       
       const text = ((p.duration || '') + ' ' + (p.title || '') + ' ' + (p.badge || '')).toLowerCase();
       
+      if (text.includes('6d') || text.includes('6 hari') || text.includes('6 malam') || text.includes('7d') || text.includes('7 hari') || text.includes('8d')) return 6;
       if (text.includes('5d') || text.includes('5 hari') || text.includes('5 malam')) return 5;
       if (text.includes('4d') || text.includes('4 hari') || text.includes('4 malam')) return 4;
       if (text.includes('3d') || text.includes('3 hari') || text.includes('3 malam')) return 3;
-      if (text.includes('2d') || text.includes('2 hari') || text.includes('2 malam')) return 2;
-      if (text.includes('half') || text.includes('setengah') || text.includes('4–5') || text.includes('4-5')) return 0.5;
-      if (text.includes('full') || text.includes('1 hari') || text.includes('7–8') || text.includes('7-8')) return 1;
 
-      if (days.length === 1) return 1;
-      return 1;
+      if (days.length > 0) return days.length;
+      return 3;
     }
 
     function scrollFilterHorizontal(offset) {
@@ -954,12 +941,10 @@
     function updateFilterCounts() {
       const counts = {
         all: allPackages.length,
-        '1day': allPackages.filter(p => getPackageDayCount(p) === 1).length,
-        '2day': allPackages.filter(p => getPackageDayCount(p) === 2).length,
         '3day': allPackages.filter(p => getPackageDayCount(p) === 3).length,
         '4day': allPackages.filter(p => getPackageDayCount(p) === 4).length,
-        '5day': allPackages.filter(p => getPackageDayCount(p) >= 5).length,
-        'half': allPackages.filter(p => getPackageDayCount(p) === 0.5).length,
+        '5day': allPackages.filter(p => getPackageDayCount(p) === 5).length,
+        '6day': allPackages.filter(p => getPackageDayCount(p) >= 6).length,
       };
 
       for (const [key, val] of Object.entries(counts)) {
@@ -1080,18 +1065,14 @@
         const dayCount = getPackageDayCount(p);
         let matchesDuration = true;
 
-        if (activeDurationFilter === '1day') {
-          matchesDuration = dayCount === 1;
-        } else if (activeDurationFilter === '2day') {
-          matchesDuration = dayCount === 2;
-        } else if (activeDurationFilter === '3day') {
+        if (activeDurationFilter === '3day') {
           matchesDuration = dayCount === 3;
         } else if (activeDurationFilter === '4day') {
           matchesDuration = dayCount === 4;
         } else if (activeDurationFilter === '5day') {
-          matchesDuration = dayCount >= 5;
-        } else if (activeDurationFilter === 'half') {
-          matchesDuration = dayCount === 0.5;
+          matchesDuration = dayCount === 5;
+        } else if (activeDurationFilter === '6day') {
+          matchesDuration = dayCount >= 6;
         } else {
           matchesDuration = true;
         }

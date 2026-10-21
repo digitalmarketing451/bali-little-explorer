@@ -1037,14 +1037,13 @@
             </div>
             <input type="text" id="pkg-duration" required placeholder="Contoh: 3 Hari 2 Malam (3D2N)"
                    class="w-full px-3.5 py-2.5 bg-surface-container-low border border-border-subtle rounded-xl text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container focus:outline-none mb-2" />
-            <!-- Preset Pills -->
+            <!-- Preset Pills (Multi-Day 3D2N+) -->
             <div class="flex flex-wrap gap-1.5">
-              <button type="button" onclick="applyDurationPreset('3 Hari 2 Malam (3D2N)', 3)" class="text-[10px] font-bold bg-orange-50 hover:bg-orange-100 text-primary-container border border-orange-200/60 px-2.5 py-1 rounded-full transition">3 Hari 2 Malam (3D2N)</button>
-              <button type="button" onclick="applyDurationPreset('4 Hari 3 Malam (4D3N)', 4)" class="text-[10px] font-bold bg-orange-50 hover:bg-orange-100 text-primary-container border border-orange-200/60 px-2.5 py-1 rounded-full transition">4 Hari 3 Malam (4D3N)</button>
-              <button type="button" onclick="applyDurationPreset('2 Hari 1 Malam (2D1N)', 2)" class="text-[10px] font-bold bg-orange-50 hover:bg-orange-100 text-primary-container border border-orange-200/60 px-2.5 py-1 rounded-full transition">2 Hari 1 Malam (2D1N)</button>
-              <button type="button" onclick="applyDurationPreset('Full Day · 7–8 Jam', 1)" class="text-[10px] font-bold bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle px-2.5 py-1 rounded-full transition">Full Day</button>
-              <button type="button" onclick="applyDurationPreset('Half Day · 4–5 Jam', 1)" class="text-[10px] font-bold bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle px-2.5 py-1 rounded-full transition">Half Day</button>
-            </div>
+              <button type="button" onclick="applyDurationPreset('3 Hari 2 Malam (3D2N)', 3)" class="text-[10px] font-bold bg-orange-50 hover:bg-orange-100 text-primary-container border border-orange-200/60 px-3 py-1 rounded-full transition">3 Hari 2 Malam (3D2N)</button>
+              <button type="button" onclick="applyDurationPreset('4 Hari 3 Malam (4D3N)', 4)" class="text-[10px] font-bold bg-orange-50 hover:bg-orange-100 text-primary-container border border-orange-200/60 px-3 py-1 rounded-full transition">4 Hari 3 Malam (4D3N)</button>
+              <button type="button" onclick="applyDurationPreset('5 Hari 4 Malam (5D4N)', 5)" class="text-[10px] font-bold bg-orange-50 hover:bg-orange-100 text-primary-container border border-orange-200/60 px-3 py-1 rounded-full transition">5 Hari 4 Malam (5D4N)</button>
+              <button type="button" onclick="applyDurationPreset('6 Hari + (6D5N / Long Stay)', 6)" class="text-[10px] font-bold bg-orange-50 hover:bg-orange-100 text-primary-container border border-orange-200/60 px-3 py-1 rounded-full transition">6 Hari +</button>
+            </div></div>
           </div>
           <div>
             <label class="block text-xs font-bold text-on-surface mb-1.5">Badge Promo / Kategori (Opsional)</label>
@@ -1996,11 +1995,19 @@
     function applyDurationPreset(durationStr, targetDays) {
       document.getElementById('pkg-duration').value = durationStr;
       const container = document.getElementById('days-container');
-      const currentCards = container.querySelectorAll('.day-card').length;
+      const currentCards = container.querySelectorAll('.day-card');
+      const currentCount = currentCards.length;
       
-      if (targetDays && targetDays > currentCards) {
-        for (let i = currentCards; i < targetDays; i++) {
-          addDayCard(`Hari ${i + 1}: Eksplorasi Hari Ke-${i + 1}`);
+      if (targetDays) {
+        if (targetDays > currentCount) {
+          for (let i = currentCount; i < targetDays; i++) {
+            addDayCard(`Hari ${i + 1}: Eksplorasi Hari Ke-${i + 1}`);
+          }
+        } else if (targetDays < currentCount) {
+          for (let i = currentCount - 1; i >= targetDays; i--) {
+            currentCards[i].remove();
+          }
+          renumberDayCards();
         }
       }
     }
@@ -2016,7 +2023,7 @@
         document.getElementById('pkg-id').value = p.id;
         document.getElementById('pkg-title').value = p.title;
         document.getElementById('pkg-icon').value = p.icon || '🏝️';
-        document.getElementById('pkg-duration').value = p.duration || '';
+        document.getElementById('pkg-duration').value = p.duration || '3 Hari 2 Malam (3D2N)';
         document.getElementById('pkg-badge').value = p.badge || '';
         document.getElementById('pkg-gradient').value = p.gradient || 'from-orange-400 to-orange-600';
         document.getElementById('pkg-includes').value = p.includes || '';
@@ -2027,15 +2034,20 @@
         if (days.length > 0) {
           days.forEach(d => addDayCard(d.day_title, d.activities));
         } else {
-          addDayCard('Hari 1: Jadwal & Destinasi');
+          addDayCard('Hari 1: Kedatangan & Wisata Budaya');
+          addDayCard('Hari 2: Eksplorasi Alam & Edukasi');
+          addDayCard('Hari 3: Belanja Oleh-Oleh & Airport');
         }
       } else {
         document.getElementById('modal-package-title').textContent = 'Tambah Paket Baru';
         document.getElementById('form-package-edit').reset();
         document.getElementById('pkg-id').value = '';
+        document.getElementById('pkg-duration').value = '3 Hari 2 Malam (3D2N)';
         document.getElementById('pkg-img').value = '';
         syncUploadWidget('pkg-img', '');
         addDayCard('Hari 1: Kedatangan & Wisata Budaya');
+        addDayCard('Hari 2: Eksplorasi Alam & Edukasi');
+        addDayCard('Hari 3: Belanja Oleh-Oleh & Airport');
       }
     }
 
