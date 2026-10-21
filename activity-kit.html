@@ -425,7 +425,7 @@
       </div>
 
       <!-- Category Bento Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="activity-kits-bento-grid">
         <!-- CARD 1: LEMBAR MEWARNAI IKON BALI -->
         <div class="bg-card-surface rounded-2xl border border-border-subtle p-5 flex flex-col justify-between transition-all duration-200 custom-card-shadow">
           <div>
@@ -921,7 +921,70 @@
       initCanvases();
       await fetchSiteSettings();
       await loadColoringSheets();
+      await loadActivityKits();
     });
+
+    async function loadActivityKits() {
+      try {
+        const { data: kits, error } = await db
+          .from('activity_kits')
+          .select('*')
+          .order('order_index', { ascending: true });
+
+        if (kits && kits.length > 0) {
+          const container = document.getElementById('activity-kits-bento-grid');
+          if (container) {
+            container.innerHTML = kits.map((k, idx) => {
+              const bgColors = ['bg-coral-soft/40', 'bg-palm-soft/50', 'bg-tertiary-fixed/40', 'bg-surface-container'];
+              const badgeColors = ['text-primary', 'text-palm-green', 'text-tertiary', 'text-primary'];
+              const bgBadge = bgColors[idx % bgColors.length];
+              const textBadge = badgeColors[idx % badgeColors.length];
+              const safeTitle = k.title.replace(/'/g, "\\'");
+              const safeDesc = (k.description || '').replace(/'/g, "\\'");
+
+              return `
+                <div class="bg-card-surface rounded-2xl border border-border-subtle p-5 flex flex-col justify-between transition-all duration-200 custom-card-shadow">
+                  <div>
+                    <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4 ${bgBadge}">
+                      <img alt="${k.title}" class="w-full h-full object-cover" src="${k.image_url || 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=500&q=80'}" />
+                      <span class="absolute top-3 left-3 bg-card-surface/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-label-sm font-label-sm ${textBadge} font-bold shadow-sm">
+                        📄 ${k.sheet_count || 'PDF Siap Cetak'}
+                      </span>
+                      <span class="absolute top-3 right-3 bg-palm-soft text-palm-green px-2 py-0.5 rounded-full text-label-sm font-label-sm font-bold">
+                        Usia 3-7
+                      </span>
+                    </div>
+                    <h3 class="text-title-md font-title-md text-on-surface font-bold">${k.title}</h3>
+                    <p class="text-body-md font-body-md text-neutral-slate-muted mt-2">
+                      ${k.description || 'Aktivitas edukatif bertema kebudayaan dan alam Bali.'}
+                    </p>
+                  </div>
+                  <div class="pt-6 border-t border-border-subtle mt-5 flex flex-col gap-2">
+                    <button class="w-full py-2.5 rounded-full bg-cream-bg text-on-surface border border-border-subtle hover:bg-surface-container font-label-md text-label-md flex items-center justify-center gap-1.5 transition-colors font-semibold" onclick="openPreviewModal('${safeTitle}', '${safeDesc}')">
+                      <span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+                      <span>Preview Lembar</span>
+                    </button>
+                    ${k.file_url ? `
+                      <a class="w-full py-2.5 rounded-full bg-palm-green text-white font-label-md text-label-md text-center hover:bg-palm-green/90 transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95 font-bold" href="${k.file_url}" target="_blank">
+                        <span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+                        <span>Unduh PDF Langsung 📄</span>
+                      </a>
+                    ` : `
+                      <a class="w-full py-2.5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md text-center hover:bg-primary transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95 font-bold" href="#download-bundle-form">
+                        <span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+                        <span>Unduh Bundel PDF Gratis</span>
+                      </a>
+                    `}
+                  </div>
+                </div>
+              `;
+            }).join('');
+          }
+        }
+      } catch (e) {
+        console.warn('Notice loading activity kits in activity-kit.html:', e);
+      }
+    }
 
     function setupNavigation() {
       const toggle = document.getElementById('mobile-toggle');

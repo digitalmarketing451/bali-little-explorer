@@ -368,10 +368,11 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Feature 1 -->
         <div class="bg-cream-bg p-8 rounded-2xl border border-border-subtle custom-shadow-soft hover:custom-shadow-hover transition-all duration-300 flex flex-col group">
-          <div class="w-14 h-14 rounded-2xl bg-coral-soft flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform duration-200">
-            <span class="material-symbols-outlined text-3xl" data-icon="route">route</span>
+          <div class="w-14 h-14 rounded-2xl bg-coral-soft flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform duration-200 overflow-hidden">
+            <span id="feature-1-icon" class="material-symbols-outlined text-3xl" data-icon="route">route</span>
+            <img id="feature-1-img" src="" alt="Feature 1" class="hidden w-full h-full object-cover" />
           </div>
-          <h3 id="feature-1-title" class="text-headline-sm font-headline-sm text-on-surface mb-3">
+          <h3 id="feature-1-title" class="text-headline-sm font-headline-sm text-on-surface mb-3 font-bold">
             Rute Wisata Terstruktur
           </h3>
           <p id="feature-1-desc" class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
@@ -381,10 +382,11 @@
 
         <!-- Feature 2 -->
         <div class="bg-cream-bg p-8 rounded-2xl border border-border-subtle custom-shadow-soft hover:custom-shadow-hover transition-all duration-300 flex flex-col group">
-          <div class="w-14 h-14 rounded-2xl bg-ocean-teal-soft flex items-center justify-center text-tertiary mb-6 group-hover:scale-110 transition-transform duration-200">
-            <span class="material-symbols-outlined text-3xl" data-icon="draw">draw</span>
+          <div class="w-14 h-14 rounded-2xl bg-ocean-teal-soft flex items-center justify-center text-tertiary mb-6 group-hover:scale-110 transition-transform duration-200 overflow-hidden">
+            <span id="feature-2-icon" class="material-symbols-outlined text-3xl" data-icon="draw">draw</span>
+            <img id="feature-2-img" src="" alt="Feature 2" class="hidden w-full h-full object-cover" />
           </div>
-          <h3 id="feature-2-title" class="text-headline-sm font-headline-sm text-on-surface mb-3">
+          <h3 id="feature-2-title" class="text-headline-sm font-headline-sm text-on-surface mb-3 font-bold">
             Activity Kit Edukatif
           </h3>
           <p id="feature-2-desc" class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
@@ -394,10 +396,11 @@
 
         <!-- Feature 3 -->
         <div class="bg-cream-bg p-8 rounded-2xl border border-border-subtle custom-shadow-soft hover:custom-shadow-hover transition-all duration-300 flex flex-col group">
-          <div class="w-14 h-14 rounded-2xl bg-palm-soft flex items-center justify-center text-palm-green mb-6 group-hover:scale-110 transition-transform duration-200">
-            <span class="material-symbols-outlined text-3xl" data-icon="support_agent">support_agent</span>
+          <div class="w-14 h-14 rounded-2xl bg-palm-soft flex items-center justify-center text-palm-green mb-6 group-hover:scale-110 transition-transform duration-200 overflow-hidden">
+            <span id="feature-3-icon" class="material-symbols-outlined text-3xl" data-icon="support_agent">support_agent</span>
+            <img id="feature-3-img" src="" alt="Feature 3" class="hidden w-full h-full object-cover" />
           </div>
-          <h3 id="feature-3-title" class="text-headline-sm font-headline-sm text-on-surface mb-3">
+          <h3 id="feature-3-title" class="text-headline-sm font-headline-sm text-on-surface mb-3 font-bold">
             Reservasi Mudah &amp; Cepat
           </h3>
           <p id="feature-3-desc" class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
@@ -721,15 +724,15 @@
             <span class="inline-block px-3 py-1 bg-card-surface/20 rounded-full text-label-sm font-label-sm uppercase font-bold tracking-wider">
               🖍️ FITUR BARU INTERAKTIF ⭐
             </span>
-            <h3 class="text-headline-lg font-headline-lg text-on-primary leading-tight">
+            <h3 class="text-headline-lg font-headline-lg text-on-primary leading-tight font-bold">
               Studio Mewarnai Digital Anak Online
             </h3>
-            <p class="text-body-lg font-body-lg text-card-surface/90 max-w-2xl leading-relaxed">
-              Si kecil bisa langsung mewarnai kelinci ceria, rusa savana, dan putri cantik di layar HP/tablet tanpa perlu instal aplikasi!
+            <p id="mewarnai-banner-desc" class="text-body-lg font-body-lg text-card-surface/90 max-w-2xl leading-relaxed">
+              Si kecil bisa langsung mewarnai karakter lucu dan ikon wisata Bali di layar HP atau tablet tanpa perlu instal aplikasi!
             </p>
           </div>
           <div class="lg:col-span-4 flex lg:justify-end">
-            <a class="inline-flex items-center gap-2 px-6 py-4 rounded-full bg-card-surface text-primary font-headline-sm text-body-md hover:bg-cream-bg shadow-md transition-all duration-200 active:scale-95" href="activity-kit.html#digital-studio">
+            <a class="inline-flex items-center gap-2 px-6 py-4 rounded-full bg-card-surface text-primary font-headline-sm text-body-md hover:bg-cream-bg shadow-md transition-all duration-200 active:scale-95 font-bold" href="activity-kit.html#digital-studio">
               <span>🎨 Coba Mewarnai di Activity Kit →</span>
             </a>
           </div>
@@ -741,10 +744,10 @@
         <div class="w-16 h-16 rounded-full bg-card-surface/20 flex items-center justify-center mx-auto mb-4">
           <span class="material-symbols-outlined text-3xl" data-icon="cloud_download">cloud_download</span>
         </div>
-        <h3 class="text-headline-md font-headline-md text-on-secondary mb-2">
+        <h3 id="cta-banner-title" class="text-headline-md font-headline-md text-on-secondary mb-2 font-bold">
           Unduh Semua Activity Kit + Family Travel Guide
         </h3>
-        <p class="text-body-md font-body-md text-secondary-fixed max-w-xl mx-auto mb-6">
+        <p id="cta-banner-desc" class="text-body-md font-body-md text-secondary-fixed max-w-xl mx-auto mb-6">
           Gratis! Dapatkan 15+ lembar aktivitas anak (PDF siap cetak) + e-book Family Travel Guide Bali sekarang juga.
         </p>
         <div class="flex flex-wrap items-center justify-center gap-4">
@@ -968,7 +971,7 @@
       </div>
 
       <!-- 4 Practical Parenting Guidance Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+      <div id="home-parenting-tips-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
         <!-- Tip Card 1 -->
         <div class="bg-cream-bg p-8 rounded-3xl border border-border-subtle custom-shadow-soft">
           <div class="flex items-center gap-3 mb-6">
@@ -1431,10 +1434,11 @@
     // ---- Dynamic Settings & WhatsApp Sync ----
     async function loadDynamicContent() {
       try {
+        // 1. Site Settings (Hero, Features, Banners, WhatsApp)
         const { data: settings } = await db.from('site_settings').select('*').eq('id', 'general').single();
         if (settings) {
           if (settings.whatsapp_number) {
-            currentWA = settings.whatsapp_number;
+            currentWA = settings.whatsapp_number.replace(/[^0-9]/g, '');
             updateWALinks(currentWA);
           }
           if (settings.hero_title && document.getElementById('hero-title')) {
@@ -1449,9 +1453,207 @@
           if (settings.hero_image_url && document.getElementById('hero-img')) {
             document.getElementById('hero-img').src = settings.hero_image_url;
           }
+
+          // 3 Feature Cards (Mengapa Bali Little Explorer)
+          applyFeatureCard('feature-1', settings.feature_1_title, settings.feature_1_desc, settings.feature_1_image_url);
+          applyFeatureCard('feature-2', settings.feature_2_title, settings.feature_2_desc, settings.feature_2_image_url);
+          applyFeatureCard('feature-3', settings.feature_3_title, settings.feature_3_desc, settings.feature_3_image_url);
+
+          // Storytelling Banner
+          if (settings.story_banner_title && document.getElementById('story-banner-title')) {
+            document.getElementById('story-banner-title').textContent = settings.story_banner_title;
+          }
+          if (settings.story_banner_desc && document.getElementById('story-banner-desc')) {
+            document.getElementById('story-banner-desc').textContent = settings.story_banner_desc;
+          }
+
+          // CTA Banner
+          if (settings.cta_banner_title && document.getElementById('cta-banner-title')) {
+            document.getElementById('cta-banner-title').textContent = settings.cta_banner_title;
+          }
+          if (settings.cta_banner_desc && document.getElementById('cta-banner-desc')) {
+            document.getElementById('cta-banner-desc').textContent = settings.cta_banner_desc;
+          }
         }
+
+        // 2. Load Tour Packages dynamically from Supabase
+        await loadDynamicPackages();
+
+        // 3. Load Activity Kits dynamically from Supabase
+        await loadDynamicActivityKits();
+
+        // 4. Load Active Coloring Sheets to update studio banner
+        await loadDynamicColoringBanner();
+
+        // 5. Load Parenting Tips dynamically from Supabase
+        await loadDynamicParentingTips();
+
       } catch (err) {
         console.warn('Supabase sync notice:', err);
+      }
+    }
+
+    function applyFeatureCard(prefix, title, desc, imgUrl) {
+      if (title && document.getElementById(prefix + '-title')) {
+        document.getElementById(prefix + '-title').textContent = title;
+      }
+      if (desc && document.getElementById(prefix + '-desc')) {
+        document.getElementById(prefix + '-desc').textContent = desc;
+      }
+      if (imgUrl) {
+        const imgEl = document.getElementById(prefix + '-img');
+        const iconEl = document.getElementById(prefix + '-icon');
+        if (imgEl) {
+          imgEl.src = imgUrl;
+          imgEl.classList.remove('hidden');
+        }
+        if (iconEl) {
+          iconEl.classList.add('hidden');
+        }
+      }
+    }
+
+    async function loadDynamicPackages() {
+      try {
+        const { data: pkgs } = await db.from('packages').select('*').order('order_index', { ascending: true });
+        if (pkgs && pkgs.length > 0) {
+          // Render into packages-grid-container
+          const container = document.getElementById('packages-grid-container');
+          if (container) {
+            container.innerHTML = pkgs.map((p, idx) => {
+              const isBestSeller = idx === 1 || (p.badge && p.badge.includes('TERLARIS'));
+              const stops = Array.isArray(p.stops) ? p.stops : [];
+              const waText = encodeURIComponent(`Halo Admin Bali Top Holiday! Saya tertarik dengan paket "${p.title}" dari Bali Little Explorer untuk keluarga saya.`);
+              return `
+                <div class="bg-card-surface rounded-2xl ${isBestSeller ? 'border-2 border-primary-container shadow-lg scale-100 lg:-translate-y-2' : 'border border-border-subtle custom-shadow-soft'} overflow-hidden flex flex-col hover:custom-shadow-hover transition-all duration-300">
+                  <div class="relative h-48 bg-surface-container-high overflow-hidden">
+                    <img class="w-full h-full object-cover" alt="${p.title}" src="${p.image_url || 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80'}" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-neutral-slate-dark/70 via-transparent to-transparent"></div>
+                    <div class="absolute top-4 left-4">
+                      <span class="px-3 py-1 rounded-full ${isBestSeller ? 'bg-primary-container text-on-primary' : 'bg-sun-amber text-on-surface'} font-label-sm uppercase font-bold shadow-md">
+                        ${p.badge || 'PAKET PILIHAN'}
+                      </span>
+                    </div>
+                    <div class="absolute bottom-3 left-4 right-4 text-white">
+                      <h3 class="text-headline-sm font-headline-sm font-bold text-white">${p.title}</h3>
+                      <p class="text-label-md font-label-md text-amber-200">${p.duration || 'Full Day'}</p>
+                    </div>
+                  </div>
+                  <div class="p-6 flex-1 flex flex-col justify-between space-y-6">
+                    <ul class="space-y-3 text-body-md text-on-surface">
+                      ${stops.map(s => `
+                        <li class="flex items-start gap-3">
+                          <span class="text-lg mt-0.5">${s.icon || '📍'}</span>
+                          <div>
+                            <strong class="font-semibold block">${s.place || ''}</strong>
+                            <span class="text-on-surface-variant text-label-md">${s.desc || ''}</span>
+                          </div>
+                        </li>
+                      `).join('')}
+                    </ul>
+                    <div class="pt-4 border-t border-border-subtle">
+                      <div class="p-3 bg-surface-container-low rounded-xl mb-4 text-label-sm font-label-sm text-on-surface-variant">
+                        <span class="font-bold text-primary">🎁 Include:</span> ${p.includes || 'Activity Kit PDF · Driver Terlatih'}
+                      </div>
+                      <a class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-full ${isBestSeller ? 'bg-palm-green text-white hover:bg-palm-green/90' : 'bg-primary-container text-on-primary hover:bg-primary'} font-headline-sm text-label-md transition-colors shadow-sm font-bold" href="https://wa.me/${currentWA}?text=${waText}" target="_blank">
+                        <span class="material-symbols-outlined" data-icon="chat">chat</span>
+                        <span>Tanya Paket Ini</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join('');
+          }
+
+          // Populate form-package options dynamically
+          const select = document.getElementById('form-package');
+          if (select) {
+            select.innerHTML = pkgs.map(p => `
+              <option value="${p.title}">${p.title} (${p.duration || 'Pilihan Favorit'})</option>
+            `).join('') + `<option value="Paket Kustom Keluarga">✨ Paket Kustom Sendiri (Rute Bebas)</option>`;
+          }
+        }
+      } catch (err) {
+        console.warn('Error loading packages on homepage:', err);
+      }
+    }
+
+    async function loadDynamicActivityKits() {
+      try {
+        const { data: kits } = await db.from('activity_kits').select('*').order('order_index', { ascending: true });
+        if (kits && kits.length > 0) {
+          const container = document.getElementById('kits-grid-container');
+          if (container) {
+            container.innerHTML = kits.map(k => `
+              <div class="bg-cream-bg p-6 rounded-2xl border border-border-subtle custom-shadow-soft flex flex-col justify-between hover:scale-102 transition-transform duration-200 cursor-pointer group" onclick="openDownloadModal('${k.title.replace(/'/g, "\\'")}', '${(k.description || '').replace(/'/g, "\\'")}', '${k.file_url || ''}')">
+                <div>
+                  <div class="w-12 h-12 rounded-xl bg-coral-soft text-primary flex items-center justify-center mb-4 text-2xl overflow-hidden border border-border-subtle">
+                    ${k.image_url ? `<img src="${k.image_url}" alt="${k.title}" class="w-full h-full object-cover" />` : (k.icon || '🎨')}
+                  </div>
+                  <h4 class="text-headline-sm font-headline-sm text-on-surface mb-2 font-bold">${k.title}</h4>
+                  <p class="text-body-md font-body-md text-on-surface-variant mb-4">
+                    ${k.description || '-'}
+                  </p>
+                </div>
+                <span class="inline-flex items-center gap-1.5 text-label-sm font-label-sm font-bold text-primary bg-coral-soft/60 px-3 py-1.5 rounded-full w-fit">
+                  📄 ${k.sheet_count || 'PDF Siap Cetak'}
+                </span>
+              </div>
+            `).join('');
+          }
+        }
+      } catch (err) {
+        console.warn('Error loading kits on homepage:', err);
+      }
+    }
+
+    async function loadDynamicColoringBanner() {
+      try {
+        const { data: sheets } = await db.from('coloring_sheets').select('title').eq('is_active', true).order('order_index', { ascending: true });
+        if (sheets && sheets.length > 0) {
+          const bannerDesc = document.getElementById('mewarnai-banner-desc');
+          if (bannerDesc) {
+            const listNames = sheets.slice(0, 3).map(s => s.title).join(', ');
+            bannerDesc.textContent = `Si kecil bisa langsung mewarnai ${listNames} dan aneka ikon budaya Bali di layar HP atau tablet tanpa perlu instal aplikasi!`;
+          }
+        }
+      } catch (err) {}
+    }
+
+    async function loadDynamicParentingTips() {
+      try {
+        const { data: tips } = await db.from('parenting_tips').select('*').order('order_index', { ascending: true });
+        if (tips && tips.length > 0) {
+          const container = document.getElementById('home-parenting-tips-grid');
+          if (container) {
+            container.innerHTML = tips.map(t => {
+              const tipList = Array.isArray(t.tips) ? t.tips : [];
+              return `
+                <div class="bg-cream-bg p-8 rounded-3xl border border-border-subtle custom-shadow-soft flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center gap-3 mb-6">
+                      <div class="w-10 h-10 rounded-full bg-coral-soft text-primary flex items-center justify-center text-xl shrink-0">
+                        ${t.icon || '💡'}
+                      </div>
+                      <h3 class="text-headline-sm font-headline-sm font-bold text-on-surface">${t.title}</h3>
+                    </div>
+                    <ol class="space-y-4">
+                      ${tipList.map((pt, i) => `
+                        <li class="flex items-start gap-3">
+                          <span class="w-6 h-6 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-label-sm flex-shrink-0 mt-0.5">${i + 1}</span>
+                          <p class="text-body-md text-on-surface leading-relaxed">${pt}</p>
+                        </li>
+                      `).join('')}
+                    </ol>
+                  </div>
+                </div>
+              `;
+            }).join('');
+          }
+        }
+      } catch (err) {
+        console.warn('Error loading parenting tips on homepage:', err);
       }
     }
 
