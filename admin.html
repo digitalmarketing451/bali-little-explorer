@@ -1015,11 +1015,26 @@
         <input type="hidden" id="pkg-id" />
         
         <!-- Informasi Dasar Paket -->
-        <div>
-          <label class="block text-xs font-bold text-on-surface mb-1.5">Nama Paket Wisata *</label>
-          <input type="text" id="pkg-title" required placeholder="Contoh: Paket Family Explorer 3D2N"
-                 class="w-full px-3.5 py-2.5 bg-surface-container-low border border-border-subtle rounded-xl text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container focus:outline-none" />
-          <input type="hidden" id="pkg-icon" value="🏝️" />
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+          <div class="sm:col-span-2">
+            <label class="block text-xs font-bold text-on-surface mb-1.5">Nama Paket Wisata *</label>
+            <input type="text" id="pkg-title" required placeholder="Contoh: Paket Family Explorer 3D2N"
+                   class="w-full px-3.5 py-2.5 bg-surface-container-low border border-border-subtle rounded-xl text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container focus:outline-none" />
+            <input type="hidden" id="pkg-icon" value="🏝️" />
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="block text-xs font-bold text-on-surface">Harga Paket</label>
+              <span class="text-[10px] text-neutral-slate-muted font-bold">Teks Bebas</span>
+            </div>
+            <input type="text" id="pkg-price" placeholder="Contoh: Rp 2.500.000 / Kel"
+                   class="w-full px-3.5 py-2.5 bg-surface-container-low border border-border-subtle rounded-xl text-xs sm:text-sm font-bold text-primary-container focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container focus:outline-none mb-1.5" />
+            <div class="flex flex-wrap gap-1">
+              <button type="button" onclick="document.getElementById('pkg-price').value = 'Hubungi Kami'" class="text-[9px] font-bold bg-surface-container-low hover:bg-surface-container text-neutral-slate-muted border border-border-subtle px-2 py-0.5 rounded-full">Hubungi Kami</button>
+              <button type="button" onclick="document.getElementById('pkg-price').value = 'Mulai Rp 2.500.000'" class="text-[9px] font-bold bg-orange-50 hover:bg-orange-100 text-primary-container border border-orange-200/60 px-2 py-0.5 rounded-full">Rp 2.5jt</button>
+              <button type="button" onclick="document.getElementById('pkg-price').value = 'Mulai Rp 3.500.000'" class="text-[9px] font-bold bg-orange-50 hover:bg-orange-100 text-primary-container border border-orange-200/60 px-2 py-0.5 rounded-full">Rp 3.5jt</button>
+            </div>
+          </div>
         </div>
 
         <!-- Durasi & Badge -->
@@ -2016,6 +2031,7 @@
         document.getElementById('modal-package-title').textContent = 'Edit Paket Wisata';
         document.getElementById('pkg-id').value = p.id;
         document.getElementById('pkg-title').value = p.title;
+        document.getElementById('pkg-price').value = p.price_info || '';
         document.getElementById('pkg-icon').value = p.icon || '🏝️';
         document.getElementById('pkg-duration').value = p.duration || '3 Hari 2 Malam (3D2N)';
         document.getElementById('pkg-badge').value = p.badge || '';
@@ -2036,6 +2052,7 @@
         document.getElementById('modal-package-title').textContent = 'Tambah Paket Baru';
         document.getElementById('form-package-edit').reset();
         document.getElementById('pkg-id').value = '';
+        document.getElementById('pkg-price').value = '';
         document.getElementById('pkg-icon').value = '🏝️';
         document.getElementById('pkg-duration').value = '3 Hari 2 Malam (3D2N)';
         document.getElementById('pkg-img').value = '';
@@ -2066,6 +2083,7 @@
       e.preventDefault();
       const id = document.getElementById('pkg-id').value;
       const title = document.getElementById('pkg-title').value.trim();
+      const price_info = document.getElementById('pkg-price').value.trim() || 'Hubungi Kami';
       const icon = document.getElementById('pkg-icon').value.trim() || '🏝️';
       const duration = document.getElementById('pkg-duration').value.trim();
       const badge = document.getElementById('pkg-badge').value.trim();
@@ -2087,7 +2105,7 @@
         return { day_number, day_title, activities };
       });
 
-      const payload = { title, icon, duration, badge, gradient, includes, image_url, stops };
+      const payload = { title, icon, duration, badge, gradient, includes, image_url, stops, price_info };
 
       const submitBtn = e.target.querySelector('button[type="submit"]');
       const origText = submitBtn.textContent;
