@@ -906,6 +906,14 @@
       renderFilteredPackages();
     }
 
+    function renderStopIcon(icon, defaultIcon = 'location_on') {
+      const i = icon || defaultIcon;
+      if (/[\u{1F300}-\u{1F9FF}]/u.test(i) || i.length <= 2) {
+        return `<span class="text-sm select-none">${i}</span>`;
+      }
+      return `<span class="material-symbols-outlined text-[18px] leading-none select-none text-primary-container">${i}</span>`;
+    }
+
     function getPackageDayCount(p) {
       const days = getPackageDays(p);
       if (days.length > 1) {
@@ -1149,7 +1157,7 @@
             <ul class="space-y-2 text-body-md text-neutral-slate-muted mb-4">
               ${acts.map(s => `
                 <li class="flex items-start gap-2">
-                  <span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">${s.icon || 'location_on'}</span>
+                  <span class="shrink-0 mt-0.5 text-primary flex items-center justify-center">${renderStopIcon(s.icon)}</span>
                   <span class="text-xs"><strong>${s.place}</strong> — ${s.desc}</span>
                 </li>
               `).join('')}
@@ -1259,7 +1267,7 @@
           <div class="space-y-2.5">
             ${(d.activities || []).map((s, actIdx) => `
               <div class="flex items-start gap-3 bg-white p-3 rounded-xl border border-border-subtle/80 shadow-2xs">
-                <span class="w-7 h-7 rounded-lg bg-orange-50 text-primary-container flex items-center justify-center text-xs shrink-0 mt-0.5 font-bold">${s.icon || '📍'}</span>
+                <div class="w-8 h-8 rounded-xl bg-orange-50 text-primary-container flex items-center justify-center shrink-0 mt-0.5 font-bold shadow-2xs border border-orange-200/50">${renderStopIcon(s.icon)}</div>
                 <div class="flex-1 min-w-0">
                   <span class="font-bold text-xs text-on-surface block mb-0.5">${s.place}</span>
                   <p class="text-xs text-neutral-slate-muted leading-relaxed">${s.desc}</p>

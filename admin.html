@@ -127,7 +127,7 @@
       </form>
       <div class="mt-6 pt-4 border-t border-border-subtle flex items-center justify-between text-xs text-neutral-slate-muted">
         <span class="flex items-center gap-1">🔒 Sistem Terenkripsi</span>
-        <a href="index.html" class="hover:text-primary transition font-semibold">← Kembali ke Web</a>
+        <a href="https://explorerbth.jinztech.cloud" class="hover:text-primary transition font-semibold">← Kembali ke Web</a>
       </div>
     </div>
   </div>
@@ -148,7 +148,7 @@
         </div>
       </div>
       <div class="flex items-center gap-2.5">
-        <a href="index.html" target="_blank"
+        <a href="https://explorerbth.jinztech.cloud" target="_blank"
            class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-border-subtle bg-card-surface hover:bg-surface-container-low text-xs font-bold text-on-surface hover:text-primary transition shadow-xs">
           <span class="material-symbols-outlined text-base text-primary">visibility</span>
           <span>Buka Website</span>
@@ -256,7 +256,7 @@
               <option value="confirmed">Terkonfirmasi ✅</option>
               <option value="cancelled">Batal ✕</option>
             </select>
-            <a href="reservasi.html" target="_blank" class="text-xs bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle font-bold px-4 py-2 rounded-full transition flex items-center gap-1.5 shadow-xs">
+            <a href="https://explorerbth.jinztech.cloud/reservasi.html" target="_blank" class="text-xs bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle font-bold px-4 py-2 rounded-full transition flex items-center gap-1.5 shadow-xs">
               <span>👁️ Buka Reservasi</span>
               <span class="text-[10px]">↗</span>
             </a>
@@ -350,7 +350,7 @@
           <p class="text-xs text-neutral-slate-muted">Kelola rute, durasi, dan fasilitas paket ramah anak yang tampil di paket.html.</p>
         </div>
         <div class="flex items-center gap-2.5">
-          <a href="paket.html" target="_blank"
+          <a href="https://explorerbth.jinztech.cloud/paket.html" target="_blank"
              class="bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold px-4 py-2.5 rounded-full shadow-xs transition flex items-center gap-1.5">
             <span>👁️ Buka Halaman Paket</span>
             <span class="text-[10px]">↗</span>
@@ -380,7 +380,7 @@
           <p class="text-xs text-neutral-slate-muted">Kelola bundel lembar aktivitas edukatif siap cetak (PDF) dan template interaktif Studio Mewarnai Digital.</p>
         </div>
         <div class="flex flex-wrap items-center gap-2.5">
-          <a href="activity-kit.html" target="_blank"
+          <a href="https://explorerbth.jinztech.cloud/activity-kit.html" target="_blank"
              class="bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold px-4 py-2.5 rounded-full shadow-xs transition flex items-center gap-1.5">
             <span>👁️ Buka Laman Activity Kit</span>
             <span class="text-[10px]">↗</span>
@@ -469,7 +469,7 @@
             </p>
           </div>
           <div class="flex items-center gap-2">
-            <a href="parenting-tips.html" target="_blank" class="bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold px-4 py-2.5 rounded-full transition flex items-center gap-1.5 shadow-xs">
+            <a href="https://explorerbth.jinztech.cloud/parenting-tips.html" target="_blank" class="bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold px-4 py-2.5 rounded-full transition flex items-center gap-1.5 shadow-xs">
               <span>👁️ Buka Laman Tips</span>
               <span>↗</span>
             </a>
@@ -695,7 +695,7 @@
             </p>
           </div>
           <div class="flex items-center gap-2">
-            <a href="index.html" target="_blank" class="bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold px-4 py-2.5 rounded-full transition flex items-center gap-1.5 shadow-xs">
+            <a href="https://explorerbth.jinztech.cloud" target="_blank" class="bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold px-4 py-2.5 rounded-full transition flex items-center gap-1.5 shadow-xs">
               <span>👁️ Buka Halaman Depan</span>
               <span>↗</span>
             </a>
@@ -1798,7 +1798,15 @@
     }
 
     // ==================== PACKAGES ====================
-    async // Normalizes package stops into day-by-day structure
+    // Normalizes package stops into day-by-day structure
+    function renderStopIcon(icon, defaultIcon = 'location_on') {
+      const i = icon || defaultIcon;
+      if (/[\u{1F300}-\u{1F9FF}]/u.test(i) || i.length <= 2) {
+        return `<span class="text-sm select-none">${i}</span>`;
+      }
+      return `<span class="material-symbols-outlined text-base leading-none select-none text-primary-container align-middle">${i}</span>`;
+    }
+
     function getPackageDays(pkg) {
       if (!pkg || !pkg.stops) return [];
       const raw = Array.isArray(pkg.stops) ? pkg.stops : [];
@@ -1855,7 +1863,7 @@
             <div class="space-y-2 mb-4 text-xs text-on-surface">
               ${acts.map(s => `
                 <div class="flex items-start gap-2">
-                  <span class="text-primary-container shrink-0 mt-0.5">${s.icon || '📍'}</span>
+                  <span class="text-primary-container shrink-0 mt-0.5 flex items-center justify-center">${renderStopIcon(s.icon)}</span>
                   <span><strong>${s.place}:</strong> <span class="text-neutral-slate-muted">${s.desc}</span></span>
                 </div>
               `).join('')}
@@ -3038,7 +3046,7 @@
 
     // If accessed via admin subdomain, direct "Back to Web" links to main domain
     if (window.location.hostname === 'adminlittlebth.jinztech.cloud') {
-      document.querySelectorAll('a[href="index.html"]').forEach(a => {
+      document.querySelectorAll('a[href="https://explorerbth.jinztech.cloud"]').forEach(a => {
         a.href = 'https://explorerbth.jinztech.cloud';
       });
     }
