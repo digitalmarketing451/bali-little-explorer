@@ -269,7 +269,7 @@
     <!-- ==================== SECTION 3: FEATURE SHOWCASE - STUDIO MEWARNAI DIGITAL ONLINE ==================== -->
     <section class="py-space-2xl bg-card-surface border-y border-border-subtle relative overflow-hidden" id="digital-studio">
       <div class="max-w-7xl mx-auto px-margin">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
           <div>
             <div class="inline-flex items-center gap-2 bg-ocean-teal-soft text-secondary px-3.5 py-1 rounded-full mb-3">
               <span class="material-symbols-outlined text-sm" data-icon="star">star</span>
@@ -279,118 +279,128 @@
               Studio Mewarnai Digital Anak Online
             </h2>
             <p class="text-body-md font-body-md text-neutral-slate-muted mt-2 max-w-2xl leading-relaxed">
-              Si kecil bisa langsung mewarnai lumba-lumba Lovina, penyu Serangan, gajah Taro, &amp; pura Bali di layar HP atau tablet tanpa perlu instal aplikasi!
+              Si kecil bisa langsung mewarnai gambar karakter &amp; fauna Bali di layar HP atau tablet tanpa perlu instal aplikasi! Gambar langsung tersinkron dari Admin CMS.
             </p>
           </div>
-          <div class="flex items-center gap-2 text-label-md font-label-md text-neutral-slate-muted">
-            <span class="material-symbols-outlined text-palm-green" data-icon="check_circle">check_circle</span>
-            <span>Aman untuk Balita · Bebas Iklan</span>
+          <div class="flex items-center gap-2 text-label-md font-label-md text-palm-green font-bold bg-palm-soft/60 px-4 py-2 rounded-full border border-palm-green/20">
+            <span class="material-symbols-outlined text-palm-green text-lg" data-icon="sync">sync</span>
+            <span>Tersinkron dengan Gambar Admin</span>
           </div>
         </div>
 
         <!-- Interactive Canvas Playground Component -->
         <div class="bg-cream-bg rounded-3xl border border-border-subtle p-6 md:p-8 shadow-sm">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <!-- Controls & Characters Selector -->
-            <div class="lg:col-span-4 flex flex-col gap-5">
-              <span class="text-label-md font-label-md uppercase text-neutral-slate-muted tracking-wider font-bold">1. Pilih Karakter Fauna &amp; Budaya</span>
-              <div class="grid grid-cols-2 gap-3" id="character-selector">
-                <button class="char-btn active p-3 bg-card-surface rounded-2xl border-2 border-primary text-left flex items-center gap-3 transition-all hover:bg-surface-container" onclick="selectTemplate('dolphin', this)">
-                  <span class="text-2xl">🐬</span>
-                  <div>
-                    <p class="text-label-md font-label-md font-bold text-on-surface">Lumba-Lumba</p>
-                    <p class="text-label-sm font-label-sm text-neutral-slate-muted">Pantai Lovina</p>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <!-- Controls & Characters Selector (Col 1-5) -->
+            <div class="lg:col-span-5 flex flex-col gap-5">
+              <!-- 1. Sheet Selector from Admin -->
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-label-md font-label-md uppercase text-neutral-slate-muted tracking-wider font-bold">1. Pilih Gambar dari Admin</span>
+                  <span class="text-xs bg-primary/10 text-primary font-bold px-2 py-0.5 rounded-full" id="sheets-count-badge">Memuat...</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-56 overflow-y-auto pr-1" id="character-selector">
+                  <!-- Rendered dynamically by JS from Supabase coloring_sheets -->
+                  <div class="col-span-2 py-8 text-center text-neutral-slate-muted text-label-sm flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined animate-spin text-primary">progress_activity</span>
+                    <span>Memuat gambar dari Admin CMS...</span>
                   </div>
-                </button>
-                <button class="char-btn p-3 bg-card-surface rounded-2xl border border-border-subtle text-left flex items-center gap-3 transition-all hover:bg-surface-container" onclick="selectTemplate('turtle', this)">
-                  <span class="text-2xl">🐢</span>
-                  <div>
-                    <p class="text-label-md font-label-md font-bold text-on-surface">Penyu Hijau</p>
-                    <p class="text-label-sm font-label-sm text-neutral-slate-muted">Pulau Serangan</p>
-                  </div>
-                </button>
-                <button class="char-btn p-3 bg-card-surface rounded-2xl border border-border-subtle text-left flex items-center gap-3 transition-all hover:bg-surface-container" onclick="selectTemplate('elephant', this)">
-                  <span class="text-2xl">🐘</span>
-                  <div>
-                    <p class="text-label-md font-label-md font-bold text-on-surface">Gajah Jinak</p>
-                    <p class="text-label-sm font-label-sm text-neutral-slate-muted">Desa Taro Gianyar</p>
-                  </div>
-                </button>
-                <button class="char-btn p-3 bg-card-surface rounded-2xl border border-border-subtle text-left flex items-center gap-3 transition-all hover:bg-surface-container" onclick="selectTemplate('temple', this)">
-                  <span class="text-2xl">🛕</span>
-                  <div>
-                    <p class="text-label-md font-label-md font-bold text-on-surface">Pura Ulun Danu</p>
-                    <p class="text-label-sm font-label-sm text-neutral-slate-muted">Danau Beratan</p>
-                  </div>
-                </button>
+                </div>
               </div>
 
-              <!-- Color Palette -->
-              <span class="text-label-md font-label-md uppercase text-neutral-slate-muted tracking-wider pt-2 font-bold">2. Pilih Warna Tropis</span>
-              <div class="flex items-center gap-3 flex-wrap">
-                <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md ring-2 ring-primary-container" onclick="setColor('#ff6b35')" style="background-color: #ff6b35;"></button>
-                <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md" onclick="setColor('#FFB703')" style="background-color: #FFB703;"></button>
-                <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md" onclick="setColor('#16A34A')" style="background-color: #16A34A;"></button>
-                <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md" onclick="setColor('#00a7cb')" style="background-color: #00a7cb;"></button>
-                <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md" onclick="setColor('#ab3500')" style="background-color: #ab3500;"></button>
-                <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md" onclick="setColor('#89f5e7')" style="background-color: #89f5e7;"></button>
-                <button class="palette-swatch w-10 h-10 rounded-full border-2 border-outline-variant shadow-md" onclick="setColor('#FFFFFF')" style="background-color: #FFFFFF;"></button>
+              <!-- 2. Tool Mode Selector -->
+              <div>
+                <span class="text-label-md font-label-md uppercase text-neutral-slate-muted tracking-wider font-bold block mb-2">2. Pilih Alat Mewarnai</span>
+                <div class="flex items-center gap-2">
+                  <button id="btn-mode-bucket" class="mode-btn active px-3.5 py-2 rounded-xl text-xs font-bold border-2 border-primary bg-primary text-white flex items-center gap-1.5 transition shadow-xs" onclick="setMode('bucket', this)">
+                    <span class="text-sm">🪣</span>
+                    <span>Ember Cat (Sentuh &amp; Isi)</span>
+                  </button>
+                  <button id="btn-mode-brush" class="mode-btn px-3.5 py-2 rounded-xl text-xs font-bold border border-border-subtle bg-card-surface text-on-surface flex items-center gap-1.5 transition hover:border-primary" onclick="setMode('brush', this)">
+                    <span class="text-sm">🖌️</span>
+                    <span>Kuas Coret</span>
+                  </button>
+                  <button id="btn-mode-eraser" class="mode-btn px-3 py-2 rounded-xl text-xs font-bold border border-border-subtle bg-card-surface text-on-surface flex items-center gap-1.5 transition hover:border-primary" onclick="setMode('eraser', this)">
+                    <span class="text-sm">🧽</span>
+                    <span>Hapus</span>
+                  </button>
+                </div>
               </div>
 
-              <!-- Interactive Buttons -->
-              <div class="flex items-center gap-3 pt-3">
-                <button class="px-4 py-2.5 rounded-full border border-border-subtle bg-card-surface text-neutral-slate-muted hover:text-error text-label-md font-label-md flex items-center gap-1.5 transition-colors" onclick="clearCanvas()">
-                  <span class="material-symbols-outlined text-lg" data-icon="refresh">refresh</span>
-                  <span>Ulangi Warna</span>
+              <!-- 3. Color Palette -->
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-label-md font-label-md uppercase text-neutral-slate-muted tracking-wider font-bold">3. Pilih Warna Tropis</span>
+                  <span class="text-xs font-bold text-primary" id="selected-color-name">Coral Orange</span>
+                </div>
+                <div class="flex items-center gap-2.5 flex-wrap" id="palette-container">
+                  <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md ring-2 ring-primary-container" onclick="setColor('#ff6b35')" style="background-color: #ff6b35;" title="Coral Orange"></button>
+                  <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md" onclick="setColor('#FFB703')" style="background-color: #FFB703;" title="Matahari Amber"></button>
+                  <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md" onclick="setColor('#16A34A')" style="background-color: #16A34A;" title="Palm Green"></button>
+                  <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md" onclick="setColor('#00a7cb')" style="background-color: #00a7cb;" title="Ocean Blue"></button>
+                  <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md" onclick="setColor('#ab3500')" style="background-color: #ab3500;" title="Bata Merah Bali"></button>
+                  <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md" onclick="setColor('#89f5e7')" style="background-color: #89f5e7;" title="Pirus Tropis"></button>
+                  <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md" onclick="setColor('#8B5CF6')" style="background-color: #8B5CF6;" title="Lavender Bali"></button>
+                  <button class="palette-swatch w-10 h-10 rounded-full border-2 border-white shadow-md" onclick="setColor('#1E293B')" style="background-color: #1E293B;" title="Hitam Garis"></button>
+                  <button class="palette-swatch w-10 h-10 rounded-full border-2 border-outline-variant shadow-md" onclick="setColor('#FFFFFF')" style="background-color: #FFFFFF;" title="Putih"></button>
+                </div>
+              </div>
+
+              <!-- 4. Interactive Action Buttons -->
+              <div class="flex items-center gap-2 pt-2 border-t border-border-subtle">
+                <button id="btn-undo" class="px-3.5 py-2.5 rounded-full border border-border-subtle bg-card-surface text-neutral-slate-muted hover:text-on-surface text-label-sm font-label-sm flex items-center gap-1.5 transition-colors disabled:opacity-40" onclick="undo()" disabled>
+                  <span class="material-symbols-outlined text-base">undo</span>
+                  <span>Batal</span>
                 </button>
-                <button class="px-5 py-2.5 rounded-full bg-palm-green text-on-primary text-label-md font-label-md flex items-center gap-1.5 hover:bg-palm-green/90 transition-all shadow-sm active:scale-95" onclick="saveArt()">
-                  <span class="material-symbols-outlined text-lg" data-icon="save">save</span>
-                  <span>Simpan Gambar</span>
+                <button class="px-3.5 py-2.5 rounded-full border border-border-subtle bg-card-surface text-neutral-slate-muted hover:text-error text-label-sm font-label-sm flex items-center gap-1.5 transition-colors" onclick="confirmReset()">
+                  <span class="material-symbols-outlined text-base">refresh</span>
+                  <span>Ulangi</span>
+                </button>
+                <button class="flex-1 px-4 py-2.5 rounded-full bg-palm-green text-on-primary text-label-sm font-label-sm flex items-center justify-center gap-1.5 hover:bg-palm-green/90 transition-all shadow-sm active:scale-95 font-bold" onclick="saveArt()">
+                  <span class="material-symbols-outlined text-base">save_alt</span>
+                  <span>Simpan Karya Anak 🌟</span>
                 </button>
               </div>
             </div>
 
-            <!-- Canvas Interactive Preview -->
-            <div class="lg:col-span-8 flex flex-col items-center justify-center">
+            <!-- Canvas Interactive Playground (Col 6-12) -->
+            <div class="lg:col-span-7 flex flex-col items-center justify-center w-full">
               <div class="w-full bg-card-surface rounded-2xl border-2 border-dashed border-primary-container/40 p-4 flex flex-col items-center justify-center relative shadow-sm">
+                <!-- Top Info Bar -->
                 <div class="w-full flex items-center justify-between pb-3 px-2 border-b border-border-subtle text-label-sm font-label-sm text-neutral-slate-muted">
                   <span class="flex items-center gap-1.5">
-                    <span class="w-2.5 h-2.5 rounded-full bg-palm-green"></span>
-                    Canvas Interaktif: Sentuh bidang untuk mewarnai
+                    <span class="w-2.5 h-2.5 rounded-full bg-palm-green animate-pulse"></span>
+                    <span id="canvas-status-hint">Sentuh bidang gambar untuk mengisi warna</span>
                   </span>
-                  <span class="font-bold text-primary" id="active-template-title">Lumba-Lumba Lovina</span>
+                  <div class="flex items-center gap-2">
+                    <span class="font-bold text-primary truncate max-w-[180px]" id="active-template-title">Lumba Lumba Ceria</span>
+                    <span class="text-[11px] bg-secondary-fixed/40 text-secondary font-bold px-2 py-0.5 rounded-md" id="active-template-category">Hewan Laut</span>
+                  </div>
                 </div>
-                <div class="relative w-full max-w-xl h-80 md:h-96 flex items-center justify-center overflow-hidden my-2" id="canvas-container">
-                  <!-- SVG Coloring Template -->
-                  <svg class="w-full h-full max-h-80 drop-shadow-sm select-none cursor-pointer" id="coloring-svg" viewbox="0 0 500 400">
-                    <!-- Background Sun -->
-                    <circle cx="410" cy="90" fill="#FFFDF9" id="part-sun" onclick="colorPart(this)" r="45" stroke="#1E293B" stroke-dasharray="2 1" stroke-width="4"></circle>
-                    <!-- Ocean Waves -->
-                    <path d="M10,320 Q120,290 250,330 T490,320 L490,390 L10,390 Z" fill="#FFFDF9" id="part-sea1" onclick="colorPart(this)" stroke="#1E293B" stroke-width="4"></path>
-                    <path d="M20,350 Q140,320 260,355 T480,350 L480,390 L20,390 Z" fill="#FFFDF9" id="part-sea2" onclick="colorPart(this)" stroke="#1E293B" stroke-width="3"></path>
-                    <!-- Dolphin Body -->
-                    <path d="M110,230 C130,130 250,90 340,140 C370,160 410,185 430,195 C410,205 380,215 350,215 C280,215 210,270 140,265 C120,265 110,250 110,230 Z" fill="#FFFDF9" id="part-dolphin-body" onclick="colorPart(this)" stroke="#1E293B" stroke-width="5"></path>
-                    <!-- Dolphin Snout -->
-                    <path d="M410,185 C435,188 450,195 440,202 C420,210 400,205 400,205 Z" fill="#FFFDF9" id="part-dolphin-snout" onclick="colorPart(this)" stroke="#1E293B" stroke-width="4"></path>
-                    <!-- Fin / Sirip -->
-                    <path d="M250,180 C270,140 290,135 285,160 C280,180 260,210 240,215 Z" fill="#FFFDF9" id="part-dolphin-fin" onclick="colorPart(this)" stroke="#1E293B" stroke-width="4"></path>
-                    <!-- Tail -->
-                    <path d="M120,240 C90,215 60,200 45,210 C70,230 75,250 50,270 C70,270 95,255 120,245 Z" fill="#FFFDF9" id="part-dolphin-tail" onclick="colorPart(this)" stroke="#1E293B" stroke-width="4"></path>
-                    <!-- Belly White Patch -->
-                    <path d="M180,245 C230,230 310,210 370,210 C340,225 280,255 200,258 Z" fill="#FFFDF9" id="part-dolphin-belly" onclick="colorPart(this)" stroke="#1E293B" stroke-width="3"></path>
-                    <!-- Cute Eye -->
-                    <circle cx="360" cy="165" fill="#1E293B" r="7"></circle>
-                    <circle cx="362" cy="163" fill="#FFFFFF" r="2.5"></circle>
-                    <!-- Water Droplets -->
-                    <ellipse cx="300" cy="90" fill="#FFFDF9" id="part-drop1" onclick="colorPart(this)" rx="8" ry="12" stroke="#1E293B" stroke-width="3"></ellipse>
-                    <ellipse cx="325" cy="70" fill="#FFFDF9" id="part-drop2" onclick="colorPart(this)" rx="6" ry="9" stroke="#1E293B" stroke-width="3"></ellipse>
-                  </svg>
+
+                <!-- Dual Canvas Stacking Stage -->
+                <div class="relative w-full max-w-xl aspect-[4/3] md:aspect-[5/4] flex items-center justify-center overflow-hidden my-3 rounded-2xl bg-white border border-border-subtle shadow-inner cursor-crosshair select-none" id="coloring-stage">
+                  <!-- Bottom Layer: Color Canvas -->
+                  <canvas id="color-canvas" class="absolute inset-0 w-full h-full object-contain"></canvas>
+                  <!-- Top Layer: Outline Line Art with Multiply Blend Mode -->
+                  <canvas id="outline-canvas" class="absolute inset-0 w-full h-full object-contain pointer-events-none" style="mix-blend-mode: multiply;"></canvas>
+
+                  <!-- Loading Overlay -->
+                  <div id="stage-loading" class="hidden absolute inset-0 bg-white/90 backdrop-blur-xs flex flex-col items-center justify-center z-10 text-primary">
+                    <span class="material-symbols-outlined text-4xl animate-spin">progress_activity</span>
+                    <span class="text-xs font-bold mt-2 text-slate-700">Memuat Lembar dari Admin...</span>
+                  </div>
                 </div>
-                <div class="w-full flex items-center justify-between text-label-sm font-label-sm text-neutral-slate-muted pt-2 border-t border-border-subtle">
-                  <span>🎨 Warna Aktif Terpilih: <strong class="text-primary" id="selected-color-name">Coral Orange</strong></span>
-                  <a class="text-primary hover:underline font-bold flex items-center gap-1" href="#digital-studio">
-                    Studio Interaktif Anak ✨
-                  </a>
+
+                <!-- Bottom Status Bar -->
+                <div class="w-full flex flex-col sm:flex-row sm:items-center justify-between text-label-sm font-label-sm text-neutral-slate-muted pt-2 border-t border-border-subtle gap-2">
+                  <div class="flex items-center gap-2">
+                    <span>Mode: <strong class="text-slate-800 font-bold" id="selected-mode-name">Ember Cat (Sentuh &amp; Isi)</strong></span>
+                  </div>
+                  <div class="flex items-center gap-1.5 text-palm-green font-bold text-xs">
+                    <span class="material-symbols-outlined text-base">verified</span>
+                    <span>Gambar Asli Terhubung dari Admin CMS</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -879,6 +889,20 @@
     let currentWA = '6281234567890';
     let currentColor = '#ff6b35';
     let currentColorName = 'Coral Orange';
+    let currentMode = 'bucket'; // 'bucket' | 'brush' | 'eraser'
+    let brushSize = 18;
+    let isDrawing = false;
+    let lastX = 0, lastY = 0;
+
+    let coloringSheets = [];
+    let currentSheet = null;
+
+    const undoStack = [];
+    const redoStack = [];
+
+    let colorCanvas, colorCtx, outlineCanvas, outlineCtx, stage;
+    let activeImage = new Image();
+    activeImage.crossOrigin = 'anonymous';
 
     const colorNames = {
       '#ff6b35': 'Coral Orange',
@@ -887,12 +911,16 @@
       '#00a7cb': 'Ocean Blue',
       '#ab3500': 'Bata Merah Bali',
       '#89f5e7': 'Pirus Tropis',
+      '#8B5CF6': 'Lavender Bali',
+      '#1E293B': 'Hitam Garis',
       '#FFFFFF': 'Putih Bersih'
     };
 
     document.addEventListener('DOMContentLoaded', async () => {
       setupNavigation();
+      initCanvases();
       await fetchSiteSettings();
+      await loadColoringSheets();
     });
 
     function setupNavigation() {
@@ -927,7 +955,321 @@
       });
     }
 
-    // Coloring Playground Functions
+    // ==================== STUDIO MEWARNAI (CANVAS ENGINE) ====================
+    function initCanvases() {
+      stage = document.getElementById('coloring-stage');
+      colorCanvas = document.getElementById('color-canvas');
+      outlineCanvas = document.getElementById('outline-canvas');
+
+      if (!stage || !colorCanvas || !outlineCanvas) return;
+
+      colorCtx = colorCanvas.getContext('2d', { willReadFrequently: true });
+      outlineCtx = outlineCanvas.getContext('2d', { willReadFrequently: true });
+
+      // Event listeners for drawing & filling
+      stage.addEventListener('mousedown', handlePointerDown);
+      stage.addEventListener('mousemove', handlePointerMove);
+      window.addEventListener('mouseup', handlePointerUp);
+
+      stage.addEventListener('touchstart', handlePointerDown, { passive: false });
+      stage.addEventListener('touchmove', handlePointerMove, { passive: false });
+      window.addEventListener('touchend', handlePointerUp);
+    }
+
+    async function loadColoringSheets() {
+      const badge = document.getElementById('sheets-count-badge');
+      try {
+        const { data, error } = await db
+          .from('coloring_sheets')
+          .select('*')
+          .eq('is_active', true)
+          .order('order_index', { ascending: true });
+
+        if (error || !data || data.length === 0) {
+          throw new Error('Fallback sheets');
+        }
+
+        coloringSheets = data;
+        if (badge) badge.textContent = `${coloringSheets.length} Gambar Admin`;
+      } catch (e) {
+        console.warn('Menggunakan data cadangan:', e);
+        coloringSheets = [
+          {
+            id: 10,
+            title: 'Lumba Lumba Ceria',
+            category: 'Hewan Laut',
+            difficulty: 'Mudah (3–5 thn)',
+            image_url: 'https://kbyjkhmgjkuqgmcakvqp.supabase.co/storage/v1/object/public/site-images/coloring/1792584737644-sv9qwx.jpg'
+          },
+          {
+            id: 1,
+            title: 'Kelinci Ceria Tropis',
+            category: 'Fauna Lucu',
+            difficulty: 'Mudah (3–5 thn)',
+            image_url: 'coloring-assets/kelinci-ceria.png'
+          },
+          {
+            id: 2,
+            title: 'Rusa Bertanduk Menjangan',
+            category: 'Satwa Langka',
+            difficulty: 'Sedang (4–7 thn)',
+            image_url: 'coloring-assets/rusa-tanduk.png'
+          }
+        ];
+        if (badge) badge.textContent = `${coloringSheets.length} Gambar`;
+      }
+
+      renderSheetSelector();
+      if (coloringSheets.length > 0) {
+        selectSheet(coloringSheets[0]);
+      }
+    }
+
+    function renderSheetSelector() {
+      const container = document.getElementById('character-selector');
+      if (!container) return;
+
+      container.innerHTML = coloringSheets.map((s, idx) => `
+        <button class="char-btn p-2.5 bg-card-surface rounded-2xl border ${idx === 0 ? 'border-2 border-primary bg-surface-container' : 'border-border-subtle'} text-left flex items-center gap-3 transition-all hover:bg-surface-container group focus:outline-none" onclick="selectSheet(coloringSheets[${idx}], this)">
+          <div class="w-12 h-12 rounded-xl bg-white border border-border-subtle p-0.5 shrink-0 overflow-hidden flex items-center justify-center">
+            ${s.image_url ? `<img src="${s.image_url}" alt="${s.title}" class="w-full h-full object-contain group-hover:scale-105 transition" />` : '<span class="text-xl">🎨</span>'}
+          </div>
+          <div class="min-w-0 flex-1">
+            <p class="text-label-md font-label-md font-bold text-on-surface truncate">${s.title}</p>
+            <p class="text-label-sm font-label-sm text-neutral-slate-muted truncate">${s.category || 'Fauna Bali'} · ${s.difficulty || 'Mudah'}</p>
+          </div>
+        </button>
+      `).join('');
+    }
+
+    function selectSheet(sheet, btnElement = null) {
+      currentSheet = sheet;
+
+      // Update button visual state
+      if (btnElement) {
+        document.querySelectorAll('.char-btn').forEach(btn => {
+          btn.classList.remove('border-2', 'border-primary', 'bg-surface-container');
+          btn.classList.add('border-border-subtle');
+        });
+        btnElement.classList.add('border-2', 'border-primary', 'bg-surface-container');
+        btnElement.classList.remove('border-border-subtle');
+      }
+
+      // Update titles & labels
+      const titleEl = document.getElementById('active-template-title');
+      if (titleEl) titleEl.textContent = sheet.title;
+
+      const catEl = document.getElementById('active-template-category');
+      if (catEl) catEl.textContent = sheet.category || 'Hewan Laut';
+
+      // Show loader
+      const loader = document.getElementById('stage-loading');
+      if (loader) loader.classList.remove('hidden');
+
+      undoStack.length = 0;
+      updateUndoBtn();
+
+      // Load image
+      activeImage = new Image();
+      activeImage.crossOrigin = 'anonymous';
+
+      const imgSrc = sheet.image_url || 'https://kbyjkhmgjkuqgmcakvqp.supabase.co/storage/v1/object/public/site-images/coloring/1792584737644-sv9qwx.jpg';
+
+      activeImage.onload = () => {
+        setupCanvases(activeImage);
+        if (loader) loader.classList.add('hidden');
+        saveState();
+      };
+
+      activeImage.onerror = () => {
+        console.warn('Gagal memuat URL gambar, menggunakan fallback lokal:', imgSrc);
+        // Fallback to local image
+        if (imgSrc.startsWith('http')) {
+          activeImage.src = 'coloring-assets/kelinci-ceria.png';
+        } else {
+          if (loader) loader.classList.add('hidden');
+        }
+      };
+
+      activeImage.src = imgSrc;
+    }
+
+    function setupCanvases(img) {
+      const naturalW = img.naturalWidth || 800;
+      const naturalH = img.naturalHeight || 1000;
+
+      const targetW = 800;
+      const targetH = Math.round((naturalH / naturalW) * targetW);
+
+      colorCanvas.width = targetW;
+      colorCanvas.height = targetH;
+      outlineCanvas.width = targetW;
+      outlineCanvas.height = targetH;
+
+      // Reset color canvas with clean white
+      colorCtx.fillStyle = '#FFFFFF';
+      colorCtx.fillRect(0, 0, targetW, targetH);
+
+      // Draw outline line art onto top canvas
+      outlineCtx.clearRect(0, 0, targetW, targetH);
+      outlineCtx.drawImage(img, 0, 0, targetW, targetH);
+
+      colorCtx.lineCap = 'round';
+      colorCtx.lineJoin = 'round';
+    }
+
+    function getCanvasCoords(e) {
+      const rect = colorCanvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+      const scaleX = colorCanvas.width / rect.width;
+      const scaleY = colorCanvas.height / rect.height;
+
+      return {
+        x: Math.round((clientX - rect.left) * scaleX),
+        y: Math.round((clientY - rect.top) * scaleY)
+      };
+    }
+
+    // ==================== SCANLINE FLOOD FILL ====================
+    function hexToRgb(hex) {
+      hex = hex.replace('#', '');
+      return {
+        r: parseInt(hex.substring(0, 2), 16),
+        g: parseInt(hex.substring(2, 4), 16),
+        b: parseInt(hex.substring(4, 6), 16)
+      };
+    }
+
+    function isDarkOutline(c) {
+      const r = c & 0xFF;
+      const g = (c >> 8) & 0xFF;
+      const b = (c >> 16) & 0xFF;
+      return (r * 0.299 + g * 0.587 + b * 0.114) < 135;
+    }
+
+    function performFloodFill(startX, startY, fillColorHex) {
+      const w = colorCanvas.width;
+      const h = colorCanvas.height;
+      if (startX < 0 || startX >= w || startY < 0 || startY >= h) return;
+
+      const colorImg = colorCtx.getImageData(0, 0, w, h);
+      const colorData = new Uint32Array(colorImg.data.buffer);
+
+      const outlineImg = outlineCtx.getImageData(0, 0, w, h);
+      const outlineData = new Uint32Array(outlineImg.data.buffer);
+
+      const rgb = hexToRgb(fillColorHex);
+      const buf = new ArrayBuffer(4);
+      const u8 = new Uint8ClampedArray(buf);
+      const u32 = new Uint32Array(buf);
+      u8[0] = rgb.r; u8[1] = rgb.g; u8[2] = rgb.b; u8[3] = 255;
+      const newColor = u32[0];
+
+      const startIdx = startY * w + startX;
+      const targetColor = colorData[startIdx];
+
+      if (targetColor === newColor) return;
+      if (isDarkOutline(outlineData[startIdx])) return;
+
+      saveState();
+
+      const stack = [[startX, startY]];
+
+      while (stack.length > 0) {
+        const [cx, cy] = stack.pop();
+        let y = cy;
+        let x = cx;
+        let idx = y * w + x;
+
+        while (x >= 0 && colorData[idx] === targetColor && !isDarkOutline(outlineData[idx])) {
+          x--;
+          idx--;
+        }
+        x++;
+        idx++;
+
+        let spanAbove = false;
+        let spanBelow = false;
+
+        while (x < w && colorData[idx] === targetColor && !isDarkOutline(outlineData[idx])) {
+          colorData[idx] = newColor;
+
+          if (y > 0) {
+            const aboveIdx = (y - 1) * w + x;
+            if (!spanAbove && colorData[aboveIdx] === targetColor && !isDarkOutline(outlineData[aboveIdx])) {
+              stack.push([x, y - 1]);
+              spanAbove = true;
+            } else if (spanAbove && (colorData[aboveIdx] !== targetColor || isDarkOutline(outlineData[aboveIdx]))) {
+              spanAbove = false;
+            }
+          }
+
+          if (y < h - 1) {
+            const belowIdx = (y + 1) * w + x;
+            if (!spanBelow && colorData[belowIdx] === targetColor && !isDarkOutline(outlineData[belowIdx])) {
+              stack.push([x, y + 1]);
+              spanBelow = true;
+            } else if (spanBelow && (colorData[belowIdx] !== targetColor || isDarkOutline(outlineData[belowIdx]))) {
+              spanBelow = false;
+            }
+          }
+
+          x++;
+          idx++;
+        }
+      }
+
+      colorCtx.putImageData(colorImg, 0, 0);
+      playTone(520 + Math.random() * 80, 'sine', 0.12);
+    }
+
+    // ==================== POINTER & DRAWING EVENTS ====================
+    function handlePointerDown(e) {
+      const coords = getCanvasCoords(e);
+
+      if (currentMode === 'bucket') {
+        performFloodFill(coords.x, coords.y, currentColor);
+        return;
+      }
+
+      isDrawing = true;
+      lastX = coords.x;
+      lastY = coords.y;
+      saveState();
+
+      colorCtx.beginPath();
+      colorCtx.arc(coords.x, coords.y, brushSize / 2, 0, Math.PI * 2);
+      colorCtx.fillStyle = currentMode === 'eraser' ? '#FFFFFF' : currentColor;
+      colorCtx.fill();
+    }
+
+    function handlePointerMove(e) {
+      if (!isDrawing || currentMode === 'bucket') return;
+      if (e.cancelable) e.preventDefault();
+
+      const coords = getCanvasCoords(e);
+
+      colorCtx.beginPath();
+      colorCtx.moveTo(lastX, lastY);
+      colorCtx.lineTo(coords.x, coords.y);
+      colorCtx.strokeStyle = currentMode === 'eraser' ? '#FFFFFF' : currentColor;
+      colorCtx.lineWidth = currentMode === 'eraser' ? brushSize * 1.6 : brushSize;
+      colorCtx.stroke();
+
+      lastX = coords.x;
+      lastY = coords.y;
+    }
+
+    function handlePointerUp() {
+      if (isDrawing) {
+        isDrawing = false;
+        playTone(380, 'triangle', 0.05);
+      }
+    }
+
+    // ==================== CONTROLS: COLOR & MODES ====================
     function setColor(colorHex) {
       currentColor = colorHex;
       currentColorName = colorNames[colorHex] || colorHex;
@@ -943,46 +1285,177 @@
           el.classList.add('ring-2', 'ring-primary-container');
         }
       });
+      playTone(480, 'sine', 0.06);
     }
 
-    function colorPart(element) {
-      element.setAttribute('fill', currentColor);
-      element.style.transition = 'fill 0.25s ease';
-    }
-
-    function clearCanvas() {
-      const parts = ['part-sun', 'part-sea1', 'part-sea2', 'part-dolphin-body', 'part-dolphin-snout', 'part-dolphin-fin', 'part-dolphin-tail', 'part-dolphin-belly', 'part-drop1', 'part-drop2'];
-      parts.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.setAttribute('fill', '#FFFDF9');
+    function setMode(mode, btnEl) {
+      currentMode = mode;
+      document.querySelectorAll('.mode-btn').forEach(btn => {
+        btn.classList.remove('active', 'border-2', 'border-primary', 'bg-primary', 'text-white');
+        btn.classList.add('border-border-subtle', 'bg-card-surface', 'text-on-surface');
       });
-    }
-
-    function saveArt() {
-      alert('🌟 Keren sekali! Hasil mewarnai si kecil berhasil disimpan.');
-    }
-
-    function selectTemplate(type, btnElement) {
-      document.querySelectorAll('.char-btn').forEach(btn => {
-        btn.classList.remove('border-2', 'border-primary', 'bg-surface-container');
-        btn.classList.add('border', 'border-border-subtle');
-      });
-      if (btnElement) {
-        btnElement.classList.add('border-2', 'border-primary', 'bg-surface-container');
-        btnElement.classList.remove('border-border-subtle');
+      if (btnEl) {
+        btnEl.classList.add('active', 'border-2', 'border-primary', 'bg-primary', 'text-white');
+        btnEl.classList.remove('border-border-subtle', 'bg-card-surface', 'text-on-surface');
       }
 
-      const titles = {
-        'dolphin': 'Lumba-Lumba Lovina',
-        'turtle': 'Penyu Hijau Serangan',
-        'elephant': 'Gajah Jinak Taro',
-        'temple': 'Pura Ulun Danu Beratan'
+      const modeNames = {
+        'bucket': 'Ember Cat (Sentuh & Isi)',
+        'brush': 'Kuas Coret Bebas',
+        'eraser': 'Penghapus Putih'
       };
-      document.getElementById('active-template-title').innerText = titles[type] || 'Template Mewarnai';
-      clearCanvas();
+      const hintTexts = {
+        'bucket': 'Sentuh bidang gambar untuk mengisi warna langsung',
+        'brush': 'Tarik kursor atau jari untuk menggambar bebas di atas kanvas',
+        'eraser': 'Tarik kursor atau jari untuk menghapus warna'
+      };
+
+      const nameEl = document.getElementById('selected-mode-name');
+      if (nameEl) nameEl.textContent = modeNames[mode] || mode;
+
+      const hintEl = document.getElementById('canvas-status-hint');
+      if (hintEl) hintEl.textContent = hintTexts[mode] || 'Canvas Interaktif';
+
+      playTone(440, 'triangle', 0.08);
     }
 
-    // Modal Preview Handlers
+    // ==================== UNDO & RESET ====================
+    function saveState() {
+      if (!colorCtx || !colorCanvas) return;
+      const imgData = colorCtx.getImageData(0, 0, colorCanvas.width, colorCanvas.height);
+      undoStack.push(imgData);
+      if (undoStack.length > 25) undoStack.shift();
+      updateUndoBtn();
+    }
+
+    function undo() {
+      if (undoStack.length <= 1) return;
+      undoStack.pop();
+      const prev = undoStack[undoStack.length - 1];
+      colorCtx.putImageData(prev, 0, 0);
+      playTone(400, 'sine', 0.08);
+      updateUndoBtn();
+    }
+
+    function updateUndoBtn() {
+      const btn = document.getElementById('btn-undo');
+      if (btn) btn.disabled = undoStack.length <= 1;
+    }
+
+    function confirmReset() {
+      if (confirm('Ulangi dan bersihkan semua warna di kanvas ini? ✨')) {
+        saveState();
+        colorCtx.fillStyle = '#FFFFFF';
+        colorCtx.fillRect(0, 0, colorCanvas.width, colorCanvas.height);
+        playTone(300, 'sine', 0.15);
+      }
+    }
+
+    // ==================== SAVE ARTWORK (CERTIFICATE FRAME) ====================
+    function saveArt() {
+      if (!colorCanvas || !outlineCanvas) return;
+
+      const exportCanvas = document.createElement('canvas');
+      const w = 1200;
+      const h = 1400;
+      exportCanvas.width = w;
+      exportCanvas.height = h;
+      const eCtx = exportCanvas.getContext('2d');
+
+      // 1. Warm Background
+      eCtx.fillStyle = '#FFF8F0';
+      eCtx.fillRect(0, 0, w, h);
+
+      // 2. Decorative Outer Border
+      eCtx.strokeStyle = '#FF6B35';
+      eCtx.lineWidth = 10;
+      eCtx.strokeRect(30, 30, w - 60, h - 60);
+
+      // Inner Border
+      eCtx.strokeStyle = '#16A34A';
+      eCtx.lineWidth = 3;
+      eCtx.strokeRect(45, 45, w - 90, h - 90);
+
+      // Header Banner
+      eCtx.fillStyle = '#FF6B35';
+      eCtx.font = 'bold 44px "Plus Jakarta Sans", sans-serif';
+      eCtx.textAlign = 'center';
+      eCtx.fillText('BALI LITTLE EXPLORER', w / 2, 115);
+
+      eCtx.fillStyle = '#64748B';
+      eCtx.font = '22px "Plus Jakarta Sans", sans-serif';
+      eCtx.fillText('Karya Seni Petualang Cilik • Edisi Liburan Keluarga di Bali', w / 2, 155);
+
+      // Artwork Inner Box
+      const boxX = 70;
+      const boxY = 190;
+      const boxW = w - 140;
+      const boxH = h - 310;
+
+      eCtx.fillStyle = '#FFFFFF';
+      eCtx.strokeStyle = '#E2E8F0';
+      eCtx.lineWidth = 4;
+      eCtx.beginPath();
+      eCtx.roundRect(boxX, boxY, boxW, boxH, 20);
+      eCtx.fill();
+      eCtx.stroke();
+
+      // Clip inside frame
+      eCtx.save();
+      eCtx.beginPath();
+      eCtx.roundRect(boxX, boxY, boxW, boxH, 20);
+      eCtx.clip();
+
+      // Draw color layer
+      eCtx.drawImage(colorCanvas, boxX, boxY, boxW, boxH);
+
+      // Draw outline layer with multiply blend
+      eCtx.globalCompositeOperation = 'multiply';
+      eCtx.drawImage(outlineCanvas, boxX, boxY, boxW, boxH);
+      eCtx.restore();
+
+      // Footer Information
+      const title = currentSheet ? currentSheet.title : 'Karya Mewarnai Bali';
+      eCtx.fillStyle = '#ab3500';
+      eCtx.font = 'bold 28px "Plus Jakarta Sans", sans-serif';
+      eCtx.textAlign = 'left';
+      eCtx.fillText(`🎨 Judul: ${title}`, boxX + 10, h - 65);
+
+      const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+      eCtx.fillStyle = '#64748B';
+      eCtx.font = '20px "Plus Jakarta Sans", sans-serif';
+      eCtx.textAlign = 'right';
+      eCtx.fillText(`Tanggal: ${today} | explorerbth.jinztech.cloud`, w - boxX - 10, h - 65);
+
+      // Trigger instant download
+      const link = document.createElement('a');
+      const safeTitle = title.toLowerCase().replace(/[^a-z0-9]/g, '-');
+      link.download = `karya-bali-little-explorer-${safeTitle}.png`;
+      link.href = exportCanvas.toDataURL('image/png');
+      link.click();
+
+      playTone(600, 'sine', 0.25);
+    }
+
+    function playTone(freq, type = 'sine', duration = 0.1) {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(0.08, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch (_) {}
+    }
+
+    // ==================== MODAL PREVIEW HANDLERS ====================
     function openPreviewModal(title, desc) {
       document.getElementById('modal-title').innerText = title;
       document.getElementById('modal-desc').innerText = desc;
@@ -993,7 +1466,7 @@
       document.getElementById('preview-modal').classList.add('hidden');
     }
 
-    // Bundle Download Lead Handler
+    // ==================== BUNDLE DOWNLOAD LEAD HANDLER ====================
     async function handleBundleDownload(e) {
       e.preventDefault();
       const btn = document.getElementById('btn-bundle-submit');
@@ -1025,7 +1498,6 @@
         successEl.scrollIntoView({ behavior: 'smooth' });
       }
 
-      // Auto trigger sample download asset
       const dlLink = document.getElementById('btn-manual-dl');
       if (dlLink) {
         dlLink.click();
