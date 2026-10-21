@@ -1000,75 +1000,113 @@
   </main>
 
   <!-- ====================== MODAL FORM PAKET ====================== -->
+  <!-- ====================== MODAL FORM PAKET ====================== -->
   <div id="modal-package" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop overflow-y-auto">
-    <div class="bg-card-surface rounded-3xl max-w-lg w-full p-7 border border-border-subtle shadow-2xl my-8 relative">
-      <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
-        <h4 class="font-baloo font-bold text-xl text-on-surface" id="modal-package-title">Tambah Paket Wisata</h4>
+    <div class="bg-card-surface rounded-3xl max-w-3xl w-full p-6 sm:p-8 border border-border-subtle shadow-2xl my-6 relative max-h-[92vh] flex flex-col">
+      <div class="flex items-center justify-between pb-4 border-b border-border-subtle mb-4 shrink-0">
+        <div>
+          <h4 class="font-baloo font-bold text-2xl text-on-surface" id="modal-package-title">Tambah Paket Wisata</h4>
+          <p class="text-xs text-neutral-slate-muted">Kelola nama, durasi menginap, foto, dan rincian itinerary per hari.</p>
+        </div>
         <button type="button" onclick="closePackageModal()" class="w-9 h-9 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center font-bold text-sm transition">✕</button>
       </div>
-      <form id="form-package-edit" class="space-y-4">
+
+      <form id="form-package-edit" class="space-y-5 overflow-y-auto pr-1 flex-1">
         <input type="hidden" id="pkg-id" />
-        <div class="grid grid-cols-3 gap-3">
-          <div class="col-span-2">
-            <label class="block text-xs font-bold text-slate-700 mb-1">Nama Paket *</label>
-            <input type="text" id="pkg-title" required placeholder="Contoh: Seni & Budaya Bali"
-                   class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-primary focus:outline-none" />
+        
+        <!-- Informasi Dasar Paket -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+          <div class="sm:col-span-2">
+            <label class="block text-xs font-bold text-on-surface mb-1.5">Nama Paket Wisata *</label>
+            <input type="text" id="pkg-title" required placeholder="Contoh: Paket Family Explorer 3D2N"
+                   class="w-full px-3.5 py-2.5 bg-surface-container-low border border-border-subtle rounded-xl text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container focus:outline-none" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Icon Emoji</label>
-            <input type="text" id="pkg-icon" placeholder="🎭"
-                   class="w-full text-center px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-primary focus:outline-none" />
+            <label class="block text-xs font-bold text-on-surface mb-1.5">Icon Emoji</label>
+            <input type="text" id="pkg-icon" placeholder="🏝️"
+                   class="w-full text-center px-3.5 py-2.5 bg-surface-container-low border border-border-subtle rounded-xl text-base font-bold focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container focus:outline-none" />
           </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-3">
+        <!-- Durasi & Badge -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
           <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Durasi</label>
-            <input type="text" id="pkg-duration" placeholder="Half Day · 4–5 Jam"
-                   class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-primary focus:outline-none" />
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="block text-xs font-bold text-on-surface">Durasi Paket *</label>
+              <span class="text-[10px] text-neutral-slate-muted font-bold">Preset Cepat:</span>
+            </div>
+            <input type="text" id="pkg-duration" required placeholder="Contoh: 3 Hari 2 Malam (3D2N)"
+                   class="w-full px-3.5 py-2.5 bg-surface-container-low border border-border-subtle rounded-xl text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container focus:outline-none mb-2" />
+            <!-- Preset Pills -->
+            <div class="flex flex-wrap gap-1.5">
+              <button type="button" onclick="applyDurationPreset('3 Hari 2 Malam (3D2N)', 3)" class="text-[10px] font-bold bg-orange-50 hover:bg-orange-100 text-primary-container border border-orange-200/60 px-2.5 py-1 rounded-full transition">3 Hari 2 Malam (3D2N)</button>
+              <button type="button" onclick="applyDurationPreset('4 Hari 3 Malam (4D3N)', 4)" class="text-[10px] font-bold bg-orange-50 hover:bg-orange-100 text-primary-container border border-orange-200/60 px-2.5 py-1 rounded-full transition">4 Hari 3 Malam (4D3N)</button>
+              <button type="button" onclick="applyDurationPreset('2 Hari 1 Malam (2D1N)', 2)" class="text-[10px] font-bold bg-orange-50 hover:bg-orange-100 text-primary-container border border-orange-200/60 px-2.5 py-1 rounded-full transition">2 Hari 1 Malam (2D1N)</button>
+              <button type="button" onclick="applyDurationPreset('Full Day · 7–8 Jam', 1)" class="text-[10px] font-bold bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle px-2.5 py-1 rounded-full transition">Full Day</button>
+              <button type="button" onclick="applyDurationPreset('Half Day · 4–5 Jam', 1)" class="text-[10px] font-bold bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle px-2.5 py-1 rounded-full transition">Half Day</button>
+            </div>
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Badge (Opsional)</label>
-            <input type="text" id="pkg-badge" placeholder="POPULER ⭐"
-                   class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-primary focus:outline-none" />
+            <label class="block text-xs font-bold text-on-surface mb-1.5">Badge Promo / Kategori (Opsional)</label>
+            <input type="text" id="pkg-badge" placeholder="Contoh: BEST SELLER 🏆 atau 3D2N KELUARGA"
+                   class="w-full px-3.5 py-2.5 bg-surface-container-low border border-border-subtle rounded-xl text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container focus:outline-none mb-2" />
+            <div class="flex flex-wrap gap-1.5">
+              <button type="button" onclick="document.getElementById('pkg-badge').value = 'TERLARIS 🏆'" class="text-[10px] font-bold bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle px-2.5 py-1 rounded-full">🏆 TERLARIS</button>
+              <button type="button" onclick="document.getElementById('pkg-badge').value = 'POPULER ⭐'" class="text-[10px] font-bold bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle px-2.5 py-1 rounded-full">⭐ POPULER</button>
+              <button type="button" onclick="document.getElementById('pkg-badge').value = 'REKOMENDASI KELUARGA 🌺'" class="text-[10px] font-bold bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle px-2.5 py-1 rounded-full">🌺 REKOMENDASI</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-1.5">Tema Warna Kartu</label>
+            <select id="pkg-gradient" class="w-full px-3.5 py-2.5 bg-surface-container-low border border-border-subtle rounded-xl text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container focus:outline-none">
+              <option value="from-orange-400 to-orange-600">Orange Hangat (Seni & Budaya)</option>
+              <option value="from-primary via-orange-500 to-secondary">Golden Explorer (Alam Flora Fauna)</option>
+              <option value="from-teal to-emerald-500">Teal Segar (Pantai & Laut)</option>
+              <option value="from-indigo-500 to-purple-600">Ungu Kreatif</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-1.5">Fasilitas Termasuk (Inclusions)</label>
+            <input type="text" id="pkg-includes" placeholder="Activity Kit PDF · Driver Ramah Anak · Mobil AC Privat"
+                   class="w-full px-3.5 py-2.5 bg-surface-container-low border border-border-subtle rounded-xl text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container focus:outline-none" />
           </div>
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Tema Gradient Card</label>
-          <select id="pkg-gradient" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-primary focus:outline-none">
-            <option value="from-orange-400 to-orange-600">Orange Hangat (Seni & Budaya)</option>
-            <option value="from-primary via-orange-500 to-secondary">Golden Explorer (Alam Flora Fauna)</option>
-            <option value="from-teal to-emerald-500">Teal Segar (Pantai & Laut)</option>
-            <option value="from-indigo-500 to-purple-600">Ungu Kreatif</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Fasilitas Termasuk (Include)</label>
-          <input type="text" id="pkg-includes" placeholder="Activity Kit PDF · Storytelling Guide · Driver Terlatih"
-                 class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-primary focus:outline-none" />
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Foto Header Paket</label>
+          <label class="block text-xs font-bold text-on-surface mb-1.5">Foto Header Paket</label>
           <input type="hidden" id="pkg-img" />
           <div id="upload-widget-pkg-img"></div>
         </div>
 
-        <div>
-          <div class="flex items-center justify-between mb-1.5">
-            <label class="block text-xs font-bold text-slate-700">Daftar Destinasi / Stops (Itinerary)</label>
-            <button type="button" onclick="addStopRow()" class="text-[11px] text-primary font-bold hover:underline">+ Tambah Titik</button>
+        <!-- FITUR ITINERARY BERDASARKAN HARI (TAMBAH HARI) -->
+        <div class="pt-3 border-t border-border-subtle">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary-container text-lg">calendar_month</span>
+                <h5 class="font-baloo font-bold text-lg text-on-surface">Itinerary &amp; Jadwal Per Hari</h5>
+              </div>
+              <p class="text-xs text-neutral-slate-muted">Atur destinasi dan aktivitas ramah anak yang tersusun rapi per hari perjalanan.</p>
+            </div>
+            <button type="button" onclick="addDayCard()" class="inline-flex items-center gap-1.5 bg-primary-container hover:bg-primary text-white text-xs font-bold px-4 py-2 rounded-full shadow-sm transition shrink-0 self-start sm:self-auto">
+              <span class="material-symbols-outlined text-sm">add_circle</span>
+              <span>+ Tambah Hari</span>
+            </button>
           </div>
-          <div id="stops-container" class="space-y-2 max-h-48 overflow-y-auto pr-1">
-            <!-- Dynamic stop rows -->
+
+          <!-- Container Hari -->
+          <div id="days-container" class="space-y-4">
+            <!-- Dynamic Day Cards will be inserted here -->
           </div>
         </div>
 
-        <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-2">
-          <button type="button" onclick="closePackageModal()" class="px-4 py-2 rounded-xl text-xs font-bold text-neutral-slate-muted hover:bg-slate-100">Batal</button>
-          <button type="submit" class="bg-primary hover:bg-primary-dark text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow">Simpan Paket</button>
+        <!-- Bottom Action Bar -->
+        <div class="pt-4 border-t border-border-subtle flex items-center justify-end gap-2.5 shrink-0">
+          <button type="button" onclick="closePackageModal()" class="px-5 py-2.5 rounded-full text-xs font-bold text-neutral-slate-muted hover:bg-surface-container-low transition">Batal</button>
+          <button type="submit" class="bg-primary-container hover:bg-primary text-white text-xs font-bold px-7 py-2.5 rounded-full shadow-md transition">Simpan Paket Wisata 💾</button>
         </div>
       </form>
     </div>
@@ -1760,63 +1798,210 @@
     }
 
     // ==================== PACKAGES ====================
+    async // Normalizes package stops into day-by-day structure
+    function getPackageDays(pkg) {
+      if (!pkg || !pkg.stops) return [];
+      const raw = Array.isArray(pkg.stops) ? pkg.stops : [];
+      if (raw.length === 0) return [];
+
+      // If already structured by days
+      if (raw[0] && (raw[0].day_number !== undefined || raw[0].day_title !== undefined || raw[0].activities !== undefined)) {
+        return raw.map((d, idx) => ({
+          day_number: d.day_number || (idx + 1),
+          day_title: d.day_title || `Hari ${d.day_number || (idx + 1)}`,
+          activities: Array.isArray(d.activities) ? d.activities : []
+        }));
+      }
+
+      // Legacy flat stops: wrap into Day 1
+      return [{
+        day_number: 1,
+        day_title: 'Hari 1: Jadwal Rute',
+        activities: raw
+      }];
+    }
+
     async function loadPackages() {
       const { data } = await db.from('packages').select('*').order('order_index', { ascending: true });
       packagesData = data || [];
       document.getElementById('stat-packages').textContent = packagesData.length;
 
       const container = document.getElementById('packages-grid');
-      container.innerHTML = packagesData.map(p => `
-        <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft overflow-hidden flex flex-col justify-between hover:shadow-lg hover:-translate-y-0.5 transition duration-200">
-          <div>
-            ${p.image_url ? `
-              <div class="h-44 relative overflow-hidden">
-                <img src="${p.image_url}" alt="${p.title}" class="w-full h-full object-cover" />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-end p-5">
-                  <div>
-                    <h4 class="font-baloo font-bold text-xl text-white leading-tight">${p.title}</h4>
-                    <p class="text-xs text-white/90 font-medium">${p.duration || 'Full Day'}</p>
-                  </div>
-                </div>
-                ${p.badge ? `<span class="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-sm text-primary-container font-bold text-[10px] px-3 py-1 rounded-full shadow-xs border border-white/50">${p.badge}</span>` : ''}
-              </div>
-            ` : `
-              <div class="bg-gradient-to-br ${p.gradient || 'from-orange-400 to-orange-600'} p-6 text-white text-center relative">
-                <div class="text-5xl mb-2">${p.icon || '🏝️'}</div>
-                <h4 class="font-baloo font-bold text-xl">${p.title}</h4>
-                <p class="text-xs text-white/80 mt-1">${p.duration || 'Full Day'}</p>
-                ${p.badge ? `<span class="absolute top-3 right-3 bg-white/20 backdrop-blur-sm text-[10px] font-bold px-2 py-0.5 rounded-lg">${p.badge}</span>` : ''}
-              </div>
-            `}
-            <div class="p-6">
-              <p class="text-[11px] font-bold text-neutral-slate-muted uppercase tracking-wider mb-2.5">Destinasi & Stops:</p>
-              <div class="space-y-2 mb-4 text-xs text-on-surface">
-                ${(Array.isArray(p.stops) ? p.stops : []).map(s => `
-                  <div class="flex items-start gap-2">
-                    <span class="text-primary-container shrink-0 mt-0.5">${s.icon || '📍'}</span>
-                    <span><strong>${s.place}:</strong> <span class="text-neutral-slate-muted">${s.desc}</span></span>
+      container.innerHTML = packagesData.map(p => {
+        const days = getPackageDays(p);
+        const isMultiDay = days.length > 1;
+
+        let itineraryHtml = '';
+        if (isMultiDay) {
+          itineraryHtml = `
+            <div class="space-y-2 mb-4">
+              <span class="inline-flex items-center gap-1.5 bg-orange-50 border border-orange-200/60 text-primary-container text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+                🗓️ Paket ${days.length} Hari Menginap
+              </span>
+              <div class="space-y-1.5 text-xs pt-1">
+                ${days.slice(0, 3).map(d => `
+                  <div class="p-2 rounded-xl bg-surface-container-low border border-border-subtle/70">
+                    <span class="font-bold text-on-surface block text-[11px]">${d.day_title || `Hari ${d.day_number}`}</span>
+                    <span class="text-neutral-slate-muted text-[10px] block truncate">${d.activities.map(a => a.place).join(' · ') || 'Aktivitas santai & check-in'}</span>
                   </div>
                 `).join('')}
+                ${days.length > 3 ? `<p class="text-[10px] text-neutral-slate-muted font-bold pl-2">+ ${days.length - 3} hari perjalanan lainnya</p>` : ''}
               </div>
-              <p class="text-xs text-neutral-slate-muted pt-3 border-t border-border-subtle/60">🎁 Inclusions: <strong class="text-on-surface">${p.includes || '-'}</strong></p>
+            </div>
+          `;
+        } else {
+          const acts = (days[0] ? days[0].activities : []).slice(0, 3);
+          itineraryHtml = `
+            <div class="space-y-2 mb-4 text-xs text-on-surface">
+              ${acts.map(s => `
+                <div class="flex items-start gap-2">
+                  <span class="text-primary-container shrink-0 mt-0.5">${s.icon || '📍'}</span>
+                  <span><strong>${s.place}:</strong> <span class="text-neutral-slate-muted">${s.desc}</span></span>
+                </div>
+              `).join('')}
+              ${(days[0] ? days[0].activities.length : 0) > 3 ? `<p class="text-[10px] text-neutral-slate-muted font-bold pl-5">+ ${days[0].activities.length - 3} titik lainnya</p>` : ''}
+            </div>
+          `;
+        }
+
+        return `
+          <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft overflow-hidden flex flex-col justify-between hover:shadow-lg hover:-translate-y-0.5 transition duration-200">
+            <div>
+              ${p.image_url ? `
+                <div class="h-44 relative overflow-hidden">
+                  <img src="${p.image_url}" alt="${p.title}" class="w-full h-full object-cover" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-end p-5">
+                    <div>
+                      <h4 class="font-baloo font-bold text-xl text-white leading-tight">${p.title}</h4>
+                      <p class="text-xs text-white/90 font-medium">${p.duration || 'Full Day'}</p>
+                    </div>
+                  </div>
+                  ${p.badge ? `<span class="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-sm text-primary-container font-bold text-[10px] px-3 py-1 rounded-full shadow-xs border border-white/50">${p.badge}</span>` : ''}
+                </div>
+              ` : `
+                <div class="bg-gradient-to-br ${p.gradient || 'from-orange-400 to-orange-600'} p-6 text-white text-center relative">
+                  <div class="text-5xl mb-2">${p.icon || '🏝️'}</div>
+                  <h4 class="font-baloo font-bold text-xl">${p.title}</h4>
+                  <p class="text-xs text-white/80 mt-1">${p.duration || 'Full Day'}</p>
+                  ${p.badge ? `<span class="absolute top-3 right-3 bg-white/20 backdrop-blur-sm text-[10px] font-bold px-2 py-0.5 rounded-lg">${p.badge}</span>` : ''}
+                </div>
+              `}
+              <div class="p-6">
+                <p class="text-[11px] font-bold text-neutral-slate-muted uppercase tracking-wider mb-2.5">Rute &amp; Jadwal Perjalanan:</p>
+                ${itineraryHtml}
+                <p class="text-xs text-neutral-slate-muted pt-3 border-t border-border-subtle/60">🎁 Inclusions: <strong class="text-on-surface">${p.includes || '-'}</strong></p>
+              </div>
+            </div>
+            <div class="p-4 bg-surface-container-low border-t border-border-subtle flex items-center justify-between">
+              <span class="font-baloo font-bold text-base text-primary-container">${p.price_info || 'Hubungi Kami'}</span>
+              <div class="flex items-center gap-2">
+                <button onclick="editPackage(${p.id})" class="text-xs bg-card-surface hover:bg-surface-container text-on-surface font-bold px-3.5 py-1.5 rounded-full border border-border-subtle shadow-xs transition">Edit ✏️</button>
+                <button onclick="deletePackage(${p.id})" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold px-3 py-1.5 rounded-full border border-rose-200/60 transition" title="Hapus">Hapus</button>
+              </div>
             </div>
           </div>
-          <div class="p-4 bg-surface-container-low border-t border-border-subtle flex items-center justify-between">
-            <span class="font-baloo font-bold text-base text-primary-container">${p.price_info || 'Hubungi Kami'}</span>
-            <div class="flex items-center gap-2">
-              <button onclick="editPackage(${p.id})" class="text-xs bg-card-surface hover:bg-surface-container text-on-surface font-bold px-3.5 py-1.5 rounded-full border border-border-subtle shadow-xs transition">Edit ✏️</button>
-              <button onclick="deletePackage(${p.id})" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold px-3 py-1.5 rounded-full border border-rose-200/60 transition" title="Hapus">Hapus</button>
-            </div>
+        `;
+      }).join('');
+    }
+
+    // Days & Activities management
+    function addDayCard(dayTitle = '', activities = []) {
+      const container = document.getElementById('days-container');
+      const dayIndex = container.querySelectorAll('.day-card').length + 1;
+      const defaultTitle = dayTitle || `Hari ${dayIndex}: Rute & Destinasi Pilihan`;
+
+      const dayCard = document.createElement('div');
+      dayCard.className = 'day-card bg-[#FAF8F5] border border-border-subtle rounded-2xl p-4 sm:p-5 shadow-2xs transition';
+      
+      dayCard.innerHTML = `
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-3 mb-3 border-b border-border-subtle">
+          <div class="flex items-center gap-2 flex-1">
+            <span class="day-badge bg-primary-container text-white text-xs font-bold px-3 py-1 rounded-full shrink-0">Hari ${dayIndex}</span>
+            <input type="text" class="day-title w-full font-bold text-xs sm:text-sm bg-white border border-border-subtle rounded-xl px-3 py-1.5 focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container text-on-surface" placeholder="Judul Hari (Contoh: Penjemputan & Wisata Budaya Ubud)" value="${defaultTitle.replace(/"/g, '&quot;')}" />
+          </div>
+          <div class="flex items-center gap-2 self-end sm:self-auto shrink-0">
+            <button type="button" onclick="addActivityRow(this)" class="inline-flex items-center gap-1 text-xs font-bold bg-white hover:bg-surface-container text-on-surface border border-border-subtle px-3 py-1.5 rounded-full shadow-2xs transition">
+              <span class="text-primary-container font-black">+</span> <span>Tambah Titik</span>
+            </button>
+            <button type="button" onclick="deleteDayCard(this)" class="text-xs text-neutral-slate-muted hover:text-rose-600 p-1.5 rounded-full hover:bg-rose-50 transition" title="Hapus Hari Ini">
+              <span class="material-symbols-outlined text-sm">delete</span>
+            </button>
           </div>
         </div>
-      `).join('');
+        <div class="activities-list space-y-2">
+          <!-- Activity rows -->
+        </div>
+      `;
+
+      container.appendChild(dayCard);
+      const actList = dayCard.querySelector('.activities-list');
+
+      if (activities && activities.length > 0) {
+        activities.forEach(a => addActivityRowToContainer(actList, a.place, a.desc, a.icon));
+      } else {
+        addActivityRowToContainer(actList, 'Destinasi 1', 'Pengenalan budaya/alam ramah anak...', '📍');
+        addActivityRowToContainer(actList, 'Jeda Ramah Anak', 'Makan siang & istirahat bermain...', '🍱');
+      }
+
+      renumberDayCards();
+    }
+
+    function addActivityRow(btn) {
+      const dayCard = btn.closest('.day-card');
+      const actList = dayCard.querySelector('.activities-list');
+      addActivityRowToContainer(actList);
+    }
+
+    function addActivityRowToContainer(container, place = '', desc = '', icon = '📍') {
+      const div = document.createElement('div');
+      div.className = 'flex items-center gap-2 activity-row bg-white p-2.5 rounded-xl border border-border-subtle shadow-2xs';
+      div.innerHTML = `
+        <input type="text" placeholder="📍" value="${(icon || '📍').replace(/"/g, '&quot;')}" class="activity-icon w-9 text-center text-xs p-1.5 border border-border-subtle rounded-lg bg-surface-container-low shrink-0" title="Emoji icon" />
+        <input type="text" placeholder="Nama Tempat / Destinasi" value="${(place || '').replace(/"/g, '&quot;')}" class="activity-place text-xs p-1.5 border border-border-subtle rounded-lg w-1/3 bg-white font-bold text-on-surface" />
+        <input type="text" placeholder="Deskripsi aktivitas ramah anak (durasi & fasilitas)" value="${(desc || '').replace(/"/g, '&quot;')}" class="activity-desc text-xs p-1.5 border border-border-subtle rounded-lg flex-1 bg-white text-neutral-slate-muted" />
+        <button type="button" onclick="this.parentElement.remove()" class="text-neutral-slate-muted hover:text-rose-600 text-xs p-1 rounded-full hover:bg-rose-50 shrink-0" title="Hapus titik ini">✕</button>
+      `;
+      container.appendChild(div);
+    }
+
+    function deleteDayCard(btn) {
+      const container = document.getElementById('days-container');
+      const cards = container.querySelectorAll('.day-card');
+      if (cards.length <= 1) {
+        alert('Paket minimal harus memiliki 1 hari perjalanan.');
+        return;
+      }
+      btn.closest('.day-card').remove();
+      renumberDayCards();
+    }
+
+    function renumberDayCards() {
+      const container = document.getElementById('days-container');
+      const cards = container.querySelectorAll('.day-card');
+      cards.forEach((card, idx) => {
+        const num = idx + 1;
+        const badge = card.querySelector('.day-badge');
+        if (badge) badge.textContent = `Hari ${num}`;
+      });
+    }
+
+    function applyDurationPreset(durationStr, targetDays) {
+      document.getElementById('pkg-duration').value = durationStr;
+      const container = document.getElementById('days-container');
+      const currentCards = container.querySelectorAll('.day-card').length;
+      
+      if (targetDays && targetDays > currentCards) {
+        for (let i = currentCards; i < targetDays; i++) {
+          addDayCard(`Hari ${i + 1}: Eksplorasi Hari Ke-${i + 1}`);
+        }
+      }
     }
 
     function openPackageModal(p = null) {
       document.getElementById('modal-package').classList.remove('hidden');
       document.getElementById('modal-package').classList.add('flex');
-      const stopsContainer = document.getElementById('stops-container');
-      stopsContainer.innerHTML = '';
+      const daysContainer = document.getElementById('days-container');
+      daysContainer.innerHTML = '';
 
       if (p) {
         document.getElementById('modal-package-title').textContent = 'Edit Paket Wisata';
@@ -1830,35 +2015,25 @@
         document.getElementById('pkg-img').value = p.image_url || '';
         syncUploadWidget('pkg-img', p.image_url || '');
 
-        const stops = Array.isArray(p.stops) ? p.stops : [];
-        stops.forEach(s => addStopRow(s.place, s.desc, s.icon));
+        const days = getPackageDays(p);
+        if (days.length > 0) {
+          days.forEach(d => addDayCard(d.day_title, d.activities));
+        } else {
+          addDayCard('Hari 1: Jadwal & Destinasi');
+        }
       } else {
         document.getElementById('modal-package-title').textContent = 'Tambah Paket Baru';
         document.getElementById('form-package-edit').reset();
         document.getElementById('pkg-id').value = '';
         document.getElementById('pkg-img').value = '';
         syncUploadWidget('pkg-img', '');
-        addStopRow('Destinasi 1', 'Aktivitas pengenalan...', '📍');
-        addStopRow('Jeda Istirahat', 'Snack & bermain ramah balita', '☕');
+        addDayCard('Hari 1: Kedatangan & Wisata Budaya');
       }
     }
 
     function closePackageModal() {
       document.getElementById('modal-package').classList.add('hidden');
       document.getElementById('modal-package').classList.remove('flex');
-    }
-
-    function addStopRow(place = '', desc = '', icon = '📍') {
-      const container = document.getElementById('stops-container');
-      const div = document.createElement('div');
-      div.className = 'flex items-center gap-2 stop-row bg-slate-50 p-2 rounded-xl border border-slate-100';
-      div.innerHTML = `
-        <input type="text" placeholder="📍" value="${icon}" class="stop-icon w-8 text-center text-xs p-1 border rounded bg-white" />
-        <input type="text" placeholder="Nama Tempat" value="${place}" class="stop-place text-xs p-1 border rounded w-1/3 bg-white font-semibold" />
-        <input type="text" placeholder="Deskripsi aktivitas & durasi" value="${desc}" class="stop-desc text-xs p-1 border rounded flex-1 bg-white" />
-        <button type="button" onclick="this.parentElement.remove()" class="text-rose-500 font-bold text-xs px-1">✕</button>
-      `;
-      container.appendChild(div);
     }
 
     function editPackage(id) {
@@ -1883,23 +2058,42 @@
       const includes = document.getElementById('pkg-includes').value.trim();
       const image_url = document.getElementById('pkg-img').value.trim();
 
-      const stopElements = document.querySelectorAll('.stop-row');
-      const stops = Array.from(stopElements).map(row => ({
-        icon: row.querySelector('.stop-icon').value.trim() || '📍',
-        place: row.querySelector('.stop-place').value.trim(),
-        desc: row.querySelector('.stop-desc').value.trim(),
-      })).filter(s => s.place);
+      const dayCards = document.querySelectorAll('#days-container .day-card');
+      const stops = Array.from(dayCards).map((card, idx) => {
+        const day_number = idx + 1;
+        const day_title = card.querySelector('.day-title').value.trim() || `Hari ${day_number}`;
+        const actRows = card.querySelectorAll('.activity-row');
+        const activities = Array.from(actRows).map(row => ({
+          icon: row.querySelector('.activity-icon').value.trim() || '📍',
+          place: row.querySelector('.activity-place').value.trim(),
+          desc: row.querySelector('.activity-desc').value.trim()
+        })).filter(a => a.place);
+
+        return { day_number, day_title, activities };
+      });
 
       const payload = { title, icon, duration, badge, gradient, includes, image_url, stops };
 
-      if (id) {
-        await db.from('packages').update(payload).eq('id', id);
-      } else {
-        await db.from('packages').insert({ ...payload, order_index: packagesData.length + 1 });
-      }
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const origText = submitBtn.textContent;
+      submitBtn.textContent = 'Menyimpan...';
+      submitBtn.disabled = true;
 
-      closePackageModal();
-      loadPackages();
+      try {
+        if (id) {
+          await db.from('packages').update(payload).eq('id', id);
+        } else {
+          await db.from('packages').insert({ ...payload, order_index: packagesData.length + 1 });
+        }
+        closePackageModal();
+        await loadPackages();
+      } catch (err) {
+        console.error('Error saving package:', err);
+        alert('Gagal menyimpan paket: ' + err.message);
+      } finally {
+        submitBtn.textContent = origText;
+        submitBtn.disabled = false;
+      }
     });
 
     // ==================== ACTIVITY KITS ====================

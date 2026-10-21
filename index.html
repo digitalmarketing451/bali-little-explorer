@@ -1552,8 +1552,8 @@
                         <li class="flex items-start gap-3">
                           <span class="text-lg mt-0.5">${s.icon || '📍'}</span>
                           <div>
-                            <strong class="font-semibold block">${s.place || ''}</strong>
-                            <span class="text-on-surface-variant text-label-md">${s.desc || ''}</span>
+                            <strong class="font-semibold block">${s.place || s.day_title || ''}</strong>
+                            <span class="text-on-surface-variant text-label-md">${s.desc || (Array.isArray(s.activities) ? s.activities.map(a => a.place).join(' · ') : '')}</span>
                           </div>
                         </li>
                       `).join('')}

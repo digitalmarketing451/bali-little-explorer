@@ -359,11 +359,14 @@
               <button class="filter-duration-btn active px-4 py-2 rounded-full text-label-md font-bold transition-all bg-primary-container text-white shadow-sm" data-duration="all">
                 Semua Durasi
               </button>
-              <button class="filter-duration-btn px-4 py-2 rounded-full text-label-md font-semibold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface" data-duration="half">
-                Half Day (4–5 Jam)
+              <button class="filter-duration-btn px-4 py-2 rounded-full text-label-md font-semibold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface" data-duration="multi">
+                Paket Menginap (3D2N / 4D3N / dst) 🏨
               </button>
               <button class="filter-duration-btn px-4 py-2 rounded-full text-label-md font-semibold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface" data-duration="full">
                 Full Day (7–8 Jam)
+              </button>
+              <button class="filter-duration-btn px-4 py-2 rounded-full text-label-md font-semibold transition-all bg-surface-container-low hover:bg-surface-container text-on-surface" data-duration="half">
+                Half Day (4–5 Jam)
               </button>
             </div>
           </div>
@@ -694,6 +697,26 @@
     const db = createClient(SUPABASE_URL, SUPABASE_ANON);
 
     let allPackages = [];
+
+    function getPackageDays(pkg) {
+      if (!pkg || !pkg.stops) return [];
+      const raw = Array.isArray(pkg.stops) ? pkg.stops : [];
+      if (raw.length === 0) return [];
+
+      if (raw[0] && (raw[0].day_number !== undefined || raw[0].day_title !== undefined || raw[0].activities !== undefined)) {
+        return raw.map((d, idx) => ({
+          day_number: d.day_number || (idx + 1),
+          day_title: d.day_title || `Hari ${d.day_number || (idx + 1)}`,
+          activities: Array.isArray(d.activities) ? d.activities : []
+        }));
+      }
+
+      return [{
+        day_number: 1,
+        day_title: 'Hari 1: Jadwal Rute',
+        activities: raw
+      }];
+    }
     let activeDurationFilter = 'all';
     let searchQuery = '';
     let currentWA = '6281234567890';
@@ -846,10 +869,17 @@
       const filtered = allPackages.filter(p => {
         const durationText = (p.duration || '').toLowerCase();
         let matchesDuration = true;
-        if (activeDurationFilter === 'half') {
+        if (activeDurationFilter === 'multi') {
+          matchesDuration = durationText.includes('malam') || 
+                            durationText.includes('2n') || 
+                            durationText.includes('3n') || 
+                            durationText.includes('4n') || 
+                            (durationText.includes('hari') && !durationText.includes('half') && !durationText.includes('1 hari') && !durationText.includes('full day')) ||
+                            (Array.isArray(p.stops) && p.stops.length > 1 && p.stops[0].day_number !== undefined);
+        } else if (activeDurationFilter === 'half') {
           matchesDuration = durationText.includes('half') || durationText.includes('4') || durationText.includes('5');
         } else if (activeDurationFilter === 'full') {
-          matchesDuration = durationText.includes('full') || durationText.includes('7') || durationText.includes('8');
+          matchesDuration = (durationText.includes('full') || durationText.includes('1 hari') || durationText.includes('7') || durationText.includes('8')) && !durationText.includes('malam');
         }
 
         let matchesSearch = true;
@@ -885,7 +915,8 @@
         const isTerlaris = (p.badge || '').toUpperCase().includes('TERLARIS');
         const badgeColor = isTerlaris ? 'bg-primary-container text-on-primary' : ((p.badge || '').includes('SERU') ? 'bg-secondary text-on-secondary' : 'bg-sun-amber text-on-surface');
         const cardBorder = isTerlaris ? 'border-2 border-primary-container/40' : 'border border-border-subtle';
-        const stops = Array.isArray(p.stops) ? p.stops.slice(0, 3) : [];
+        const days = getPackageDays(p);
+        const isMultiDay = days.length > 1;
         const waText = encodeURIComponent(`Halo, saya tertarik dengan paket "${p.title}" (${p.duration || 'Full Day'}). Bisakah saya konsultasikan jadwal dan ketersediaannya? 😊`);
         const coverImg = p.image_url || 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80';
 
@@ -973,18 +1004,27 @@
       document.getElementById('detail-includes').textContent = p.includes || 'Activity Kit PDF, Driver Terlatih Ramah Balita, Mobil Privat AC Bersih.';
 
       const stopsContainer = document.getElementById('detail-stops-list');
-      const stops = Array.isArray(p.stops) ? p.stops : [];
-      stopsContainer.innerHTML = stops.map((s, idx) => `
-        <div class="relative pl-8">
-          <div class="absolute left-1 top-0.5 w-6 h-6 rounded-full bg-primary-container text-white flex items-center justify-center text-xs font-bold">
-            ${idx + 1}
+      const days = getPackageDays(p);
+
+      stopsContainer.innerHTML = days.map((d, dIdx) => `
+        <div class="mb-5 last:mb-0 bg-surface-container-low/70 border border-border-subtle rounded-2xl p-4 sm:p-5">
+          <div class="flex items-center gap-2.5 mb-3.5 pb-2.5 border-b border-border-subtle">
+            <span class="bg-primary-container text-white text-xs font-bold px-3 py-1 rounded-full shadow-2xs">
+              Hari ${d.day_number || (dIdx + 1)}
+            </span>
+            <h5 class="font-baloo font-bold text-base text-on-surface">${d.day_title || `Hari ${d.day_number || (dIdx + 1)}`}</h5>
           </div>
-          <div class="bg-surface-container-low border border-border-subtle rounded-xl p-3">
-            <div class="flex items-center gap-1.5 font-bold text-on-surface text-xs mb-1">
-              <span class="material-symbols-outlined text-sm text-primary">${s.icon || 'location_on'}</span>
-              <span>${s.place}</span>
-            </div>
-            <p class="text-xs text-on-surface-variant leading-relaxed">${s.desc}</p>
+          <div class="space-y-2.5">
+            ${(d.activities || []).map((s, actIdx) => `
+              <div class="flex items-start gap-3 bg-white p-3 rounded-xl border border-border-subtle/80 shadow-2xs">
+                <span class="w-7 h-7 rounded-lg bg-orange-50 text-primary-container flex items-center justify-center text-xs shrink-0 mt-0.5 font-bold">${s.icon || '📍'}</span>
+                <div class="flex-1 min-w-0">
+                  <span class="font-bold text-xs text-on-surface block mb-0.5">${s.place}</span>
+                  <p class="text-xs text-neutral-slate-muted leading-relaxed">${s.desc}</p>
+                </div>
+              </div>
+            `).join('')}
+            ${(!d.activities || d.activities.length === 0) ? `<p class="text-xs text-neutral-slate-muted italic">Aktivitas santai bersama keluarga & istirahat hotel.</p>` : ''}
           </div>
         </div>
       `).join('');
