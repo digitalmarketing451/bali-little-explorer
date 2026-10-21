@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,209 +11,282 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="shortcut icon" href="favicon.ico" />
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet" />
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <script>
+  <script id="tailwind-config">
     tailwind.config = {
+      darkMode: "class",
       theme: {
         extend: {
           colors: {
-            primary:   { DEFAULT: '#FF6B35', light: '#FF8C5A', dark: '#E05020' },
-            secondary: { DEFAULT: '#FFD166', light: '#FFE499' },
-            teal:      { DEFAULT: '#06D6A0', dark: '#04B882' },
-            indigo:    { DEFAULT: '#4361EE' },
-            dark:      { DEFAULT: '#1E293B', card: '#0F172A' }
+            "on-surface": "#261814",
+            "on-surface-variant": "#594139",
+            "surface-variant": "#f7ddd5",
+            "secondary": "#006a61",
+            "palm-green": "#16A34A",
+            "palm-soft": "#DCFCE7",
+            "border-subtle": "#F1EDE6",
+            "primary": "#ab3500",
+            "primary-container": "#ff6b35",
+            "primary-dark": "#e05020",
+            "tertiary": "#00677e",
+            "tertiary-container": "#00a7cb",
+            "neutral-slate-muted": "#64748B",
+            "neutral-slate-dark": "#1E293B",
+            "cream-bg": "#FFFDF9",
+            "coral-soft": "#FFEDD5",
+            "card-surface": "#FFFFFF",
+            "ocean-teal-soft": "#CCFBF1",
+            "sun-amber": "#FFB703",
+            "surface-container-low": "#fff1ed",
+            "surface-container": "#ffe9e3",
+            "background": "#fff8f6"
           },
           fontFamily: {
-            nunito: ['Nunito', 'sans-serif'],
-            baloo:  ['Baloo 2', 'cursive'],
-          },
-        },
-      },
+            sans: ["Plus Jakarta Sans", "sans-serif"],
+            baloo: ["Plus Jakarta Sans", "sans-serif"],
+          }
+        }
+      }
     };
   </script>
 
   <style>
-    * { font-family: 'Nunito', sans-serif; }
-    h1, h2, h3, h4, .font-baloo { font-family: 'Baloo 2', cursive; }
+    * { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-size: 20px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .custom-shadow-soft {
+      box-shadow: 0px 4px 20px -2px rgba(100, 116, 139, 0.08);
+    }
+    .custom-shadow-hover {
+      box-shadow: 0px 14px 30px -4px rgba(255, 107, 53, 0.18);
+    }
+    .tab-btn {
+      transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
     .tab-btn.active {
-      background-color: #FF6B35;
-      color: #ffffff;
-      box-shadow: 0 4px 14px rgba(255,107,53,0.35);
+      background-color: #ff6b35 !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 16px rgba(255, 107, 53, 0.28) !important;
+      border-color: transparent !important;
     }
     .modal-backdrop {
-      background: rgba(15, 23, 42, 0.65);
-      backdrop-filter: blur(4px);
+      background: rgba(30, 41, 59, 0.65);
+      backdrop-filter: blur(8px);
     }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #FFF8F6; }
+    ::-webkit-scrollbar-thumb { background: #FF6B35; border-radius: 9999px; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+<body class="bg-cream-bg text-on-surface font-sans min-h-screen flex flex-col selection:bg-coral-soft selection:text-primary relative overflow-x-hidden">
+
+  <!-- Ambient Tropical Blobs -->
+  <div class="absolute -top-24 -right-24 w-96 h-96 bg-coral-soft/50 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute top-1/3 -left-20 w-80 h-80 bg-ocean-teal-soft/40 rounded-full blur-3xl pointer-events-none"></div>
 
   <!-- ====================== AUTH PIN OVERLAY ====================== -->
-  <div id="login-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm">
-    <div class="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl border border-slate-100 text-center">
-      <div class="w-20 h-20 mx-auto mb-3">
-        <img src="logo.png" alt="Bali Little Explorer" class="w-full h-full object-contain drop-shadow" />
+  <div id="login-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-md">
+    <div class="bg-card-surface rounded-3xl p-8 max-w-sm w-full shadow-2xl border border-border-subtle text-center relative overflow-hidden">
+      <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-primary-container via-sun-amber to-palm-green"></div>
+      
+      <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-surface-container flex items-center justify-center p-1 border-2 border-primary-container shadow-sm">
+        <img src="logo.png" alt="Bali Little Explorer" class="w-full h-full object-contain" />
       </div>
-      <h2 class="font-baloo font-extrabold text-2xl text-slate-800">Admin Login</h2>
-      <p class="text-xs text-slate-500 mt-1 mb-6">Portal Pengelola Konten & Reservasi<br/><strong class="text-primary">Bali Little Explorer</strong></p>
+      <h2 class="font-bold text-2xl text-on-surface tracking-tight">Admin Portal</h2>
+      <p class="text-xs text-neutral-slate-muted mt-1 mb-6">Kelola Konten &amp; Reservasi Wisata<br/><strong class="text-primary-container">Bali Little Explorer</strong></p>
       
       <form id="pin-form" class="space-y-4">
         <div>
-          <label class="block text-xs font-bold text-slate-600 mb-1.5 text-left">Masukkan PIN Admin</label>
+          <label class="block text-xs font-bold text-neutral-slate-dark mb-1.5 text-left">Masukkan PIN Akses Admin</label>
           <input type="password" id="admin-pin-input" placeholder="••••••••" required autofocus
-                 class="w-full text-center text-lg tracking-widest px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:outline-none transition" />
-          <p id="pin-error" class="hidden text-xs text-rose-500 font-bold mt-2">PIN salah! Coba lagi.</p>
+                 class="w-full text-center text-lg tracking-widest px-4 py-3 bg-[#FAFAF8] border border-[#E5E5E0] rounded-xl focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 focus:outline-none transition" />
+          <p id="pin-error" class="hidden text-xs text-rose-500 font-bold mt-2">PIN salah! Periksa kembali kode keamanan Anda.</p>
         </div>
         <button type="submit"
-                class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-xl shadow-lg shadow-orange-500/20 transition duration-200">
+                class="w-full bg-primary-container hover:bg-primary text-white font-bold py-3 px-6 rounded-full shadow-md active:scale-95 transition-all">
           Masuk ke Dashboard 🚀
         </button>
       </form>
-      <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-        <span>Sistem Keamanan Terenkripsi 🔒</span>
-        <a href="index.html" class="hover:text-primary transition">← Kembali ke Web</a>
+      <div class="mt-6 pt-4 border-t border-border-subtle flex items-center justify-between text-xs text-neutral-slate-muted">
+        <span class="flex items-center gap-1">🔒 Sistem Terenkripsi</span>
+        <a href="index.html" class="hover:text-primary transition font-semibold">← Kembali ke Web</a>
       </div>
     </div>
   </div>
 
   <!-- ====================== TOP NAVBAR ====================== -->
-  <header class="bg-white border-b border-slate-200/80 sticky top-0 z-30 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+  <header class="bg-card-surface/95 backdrop-blur-md border-b border-border-subtle sticky top-0 z-30 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <img src="logo.png" alt="Bali Little Explorer" class="w-9 h-9 object-contain" />
+        <div class="w-11 h-11 rounded-full overflow-hidden bg-surface-container flex items-center justify-center p-0.5 border-2 border-primary-container shadow-xs shrink-0">
+          <img src="logo.png" alt="Bali Little Explorer" class="w-full h-full object-contain" />
+        </div>
         <div>
-          <span class="font-baloo font-bold text-lg text-slate-900 leading-tight block">Bali Little Explorer</span>
-          <span class="text-[11px] font-semibold text-primary block leading-tight">Admin CMS & Reservation Hub</span>
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-lg text-on-surface leading-tight block tracking-tight">Bali Little Explorer</span>
+            <span class="bg-coral-soft text-primary text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-primary/10">Admin Portal</span>
+          </div>
+          <span class="text-xs text-neutral-slate-muted block leading-tight">by Bali Top Holiday · Edu-Tourism Hub</span>
         </div>
       </div>
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2.5">
         <a href="index.html" target="_blank"
-           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-bold text-slate-600 hover:text-primary hover:border-primary transition">
-          <span>Lihat Website</span>
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-border-subtle bg-card-surface hover:bg-surface-container-low text-xs font-bold text-on-surface hover:text-primary transition shadow-xs">
+          <span class="material-symbols-outlined text-base text-primary">visibility</span>
+          <span>Buka Website</span>
+          <span class="text-[10px]">↗</span>
         </a>
         <button onclick="handleLogout()"
-                class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-rose-50 text-xs font-bold text-slate-600 hover:text-rose-600 transition">
+                class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-cream-bg border border-border-subtle hover:bg-rose-50 text-xs font-bold text-neutral-slate-muted hover:text-rose-600 transition shadow-xs">
+          <span class="material-symbols-outlined text-base">lock</span>
           <span>Keluar</span>
-          <span>🔒</span>
         </button>
       </div>
     </div>
   </header>
 
   <!-- ====================== MAIN CONTENT WRAPPER ====================== -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
     
-    <!-- STATS OVERVIEW -->
+    <!-- STATS OVERVIEW BENTO RIBBON -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-      <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-orange-100 text-primary flex items-center justify-center text-2xl shrink-0">📋</div>
+      <div class="bg-card-surface rounded-3xl p-5 border border-border-subtle custom-shadow-soft flex items-center gap-4 hover:shadow-md transition">
+        <div class="w-12 h-12 rounded-2xl bg-coral-soft text-primary-container flex items-center justify-center text-2xl shrink-0">
+          <span class="material-symbols-outlined text-2xl text-primary-container">assignment</span>
+        </div>
         <div>
-          <p class="text-xs font-semibold text-slate-400">Total Reservasi</p>
-          <p class="text-2xl font-black text-slate-800 font-baloo" id="stat-reservations">0</p>
+          <p class="text-xs font-bold text-neutral-slate-muted uppercase tracking-wider">Total Reservasi</p>
+          <p class="text-2xl font-extrabold text-on-surface tracking-tight" id="stat-reservations">0</p>
         </div>
       </div>
-      <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-teal/15 text-teal-dark flex items-center justify-center text-2xl shrink-0">📥</div>
+
+      <div class="bg-card-surface rounded-3xl p-5 border border-border-subtle custom-shadow-soft flex items-center gap-4 hover:shadow-md transition">
+        <div class="w-12 h-12 rounded-2xl bg-ocean-teal-soft text-secondary flex items-center justify-center text-2xl shrink-0">
+          <span class="material-symbols-outlined text-2xl text-secondary">download</span>
+        </div>
         <div>
-          <p class="text-xs font-semibold text-slate-400">Leads Unduh Kit</p>
-          <p class="text-2xl font-black text-slate-800 font-baloo" id="stat-leads">0</p>
+          <p class="text-xs font-bold text-neutral-slate-muted uppercase tracking-wider">Leads Unduh Kit</p>
+          <p class="text-2xl font-extrabold text-secondary tracking-tight" id="stat-leads">0</p>
         </div>
       </div>
-      <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl shrink-0">🗺️</div>
+
+      <div class="bg-card-surface rounded-3xl p-5 border border-border-subtle custom-shadow-soft flex items-center gap-4 hover:shadow-md transition">
+        <div class="w-12 h-12 rounded-2xl bg-palm-soft text-palm-green flex items-center justify-center text-2xl shrink-0">
+          <span class="material-symbols-outlined text-2xl text-palm-green">travel_explore</span>
+        </div>
         <div>
-          <p class="text-xs font-semibold text-slate-400">Paket Wisata Aktif</p>
-          <p class="text-2xl font-black text-slate-800 font-baloo" id="stat-packages">0</p>
+          <p class="text-xs font-bold text-neutral-slate-muted uppercase tracking-wider">Paket Wisata Aktif</p>
+          <p class="text-2xl font-extrabold text-palm-green tracking-tight" id="stat-packages">0</p>
         </div>
       </div>
-      <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-indigo/10 text-indigo flex items-center justify-center text-2xl shrink-0">🎨</div>
+
+      <div class="bg-card-surface rounded-3xl p-5 border border-border-subtle custom-shadow-soft flex items-center gap-4 hover:shadow-md transition">
+        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl shrink-0">
+          <span class="material-symbols-outlined text-2xl text-amber-700">palette</span>
+        </div>
         <div>
-          <p class="text-xs font-semibold text-slate-400">Kids Activity &amp; Mewarnai</p>
-          <p class="text-2xl font-black text-slate-800 font-baloo" id="stat-kits">0</p>
+          <p class="text-xs font-bold text-neutral-slate-muted uppercase tracking-wider">Activity &amp; Mewarnai</p>
+          <p class="text-2xl font-extrabold text-amber-700 tracking-tight" id="stat-kits">0</p>
         </div>
       </div>
     </div>
 
     <!-- NAVIGATION TABS -->
-    <div class="flex overflow-x-auto gap-2 pb-2 mb-6 border-b border-slate-200 text-sm font-bold no-scrollbar">
-      <button class="tab-btn active px-4 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition flex items-center gap-2 shrink-0" onclick="switchTab('tab-reservasi', this)">
+    <div class="bg-card-surface/90 backdrop-blur-md p-1.5 rounded-2xl border border-border-subtle custom-shadow-soft flex overflow-x-auto gap-1.5 mb-8 no-scrollbar">
+      <button class="tab-btn active px-4 py-2.5 rounded-xl font-bold text-xs text-neutral-slate-muted hover:text-on-surface hover:bg-surface-container-low transition flex items-center gap-2 shrink-0 border border-transparent" onclick="switchTab('tab-reservasi', this)">
         <span>📋 Reservasi Masuk</span>
-        <span id="badge-new-reservations" class="bg-white/30 text-xs px-2 py-0.5 rounded-full font-black">0</span>
+        <span id="badge-new-reservations" class="bg-white/30 text-white text-[10px] px-2 py-0.5 rounded-full font-extrabold">0</span>
       </button>
-      <button class="tab-btn px-4 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition flex items-center gap-2 shrink-0" onclick="switchTab('tab-leads', this)">
+      <button class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs text-neutral-slate-muted hover:text-on-surface hover:bg-surface-container-low transition flex items-center gap-2 shrink-0 border border-transparent" onclick="switchTab('tab-leads', this)">
         <span>📥 Leads Activity Kit</span>
       </button>
-      <button class="tab-btn px-4 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition flex items-center gap-2 shrink-0" onclick="switchTab('tab-packages', this)">
+      <button class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs text-neutral-slate-muted hover:text-on-surface hover:bg-surface-container-low transition flex items-center gap-2 shrink-0 border border-transparent" onclick="switchTab('tab-packages', this)">
         <span>🗺️ Kelola Paket Wisata</span>
       </button>
-      <button class="tab-btn px-4 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition flex items-center gap-2 shrink-0" onclick="switchTab('tab-kits', this)">
-        <span>🎨 Kids Activity & Mewarnai</span>
-        <span id="badge-kids-activity-count" class="bg-primary/20 text-primary text-xs px-2 py-0.5 rounded-full font-black">0</span>
+      <button class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs text-neutral-slate-muted hover:text-on-surface hover:bg-surface-container-low transition flex items-center gap-2 shrink-0 border border-transparent" onclick="switchTab('tab-kits', this)">
+        <span>🎨 Kids Activity &amp; Mewarnai</span>
+        <span id="badge-kids-activity-count" class="bg-coral-soft text-primary text-[10px] px-2 py-0.5 rounded-full font-extrabold">0</span>
       </button>
-      <button class="tab-btn px-4 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition flex items-center gap-2 shrink-0" onclick="switchTab('tab-tips', this)">
+      <button class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs text-neutral-slate-muted hover:text-on-surface hover:bg-surface-container-low transition flex items-center gap-2 shrink-0 border border-transparent" onclick="switchTab('tab-tips', this)">
         <span>💡 Parenting Tips</span>
       </button>
-      <button class="tab-btn px-4 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition flex items-center gap-2 shrink-0" onclick="switchTab('tab-homepage', this)">
-        <span>🖼️ Foto & Tampilan Beranda</span>
+      <button class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs text-neutral-slate-muted hover:text-on-surface hover:bg-surface-container-low transition flex items-center gap-2 shrink-0 border border-transparent" onclick="switchTab('tab-homepage', this)">
+        <span>🖼️ Foto &amp; Tampilan Beranda</span>
       </button>
-      <button class="tab-btn px-4 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition flex items-center gap-2 shrink-0" onclick="switchTab('tab-settings', this)">
-        <span>⚙️ Kontak & Pengaturan</span>
+      <button class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs text-neutral-slate-muted hover:text-on-surface hover:bg-surface-container-low transition flex items-center gap-2 shrink-0 border border-transparent" onclick="switchTab('tab-settings', this)">
+        <span>⚙️ Kontak &amp; Pengaturan</span>
       </button>
     </div>
 
     <!-- ==================== TAB 1: RESERVASI ==================== -->
     <section id="tab-reservasi" class="tab-content block">
-      <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 sm:p-8">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-5 border-b border-border-subtle">
           <div>
-            <h3 class="font-baloo font-bold text-xl text-slate-900">Permintaan Reservasi Keluarga</h3>
-            <p class="text-xs text-slate-500">Data calon wisatawan ramah anak yang masuk dari formulir website.</p>
+            <div class="inline-flex items-center gap-2 bg-orange-50 border border-orange-200/60 text-primary-container font-bold text-[11px] px-3 py-1 rounded-full mb-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+              <span>Data Masuk Real-Time</span>
+            </div>
+            <h3 class="font-baloo font-bold text-2xl text-on-surface">Permintaan Reservasi Keluarga</h3>
+            <p class="text-xs text-neutral-slate-muted">Data calon wisatawan ramah anak yang masuk dari formulir website.</p>
           </div>
-          <div class="flex items-center gap-2">
-            <select id="filter-reservasi-status" onchange="loadReservations()" class="text-xs border border-slate-200 rounded-xl px-3 py-2 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-primary">
+          <div class="flex flex-wrap items-center gap-2.5">
+            <select id="filter-reservasi-status" onchange="loadReservations()" class="text-xs font-bold border border-border-subtle rounded-full px-4 py-2 bg-surface-container-low text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container cursor-pointer transition shadow-xs">
               <option value="all">Semua Status</option>
-              <option value="new">Hanya Baru</option>
-              <option value="contacted">Sudah Dihubungi</option>
-              <option value="confirmed">Terkonfirmasi</option>
-              <option value="cancelled">Batal</option>
+              <option value="new">Hanya Baru 🔥</option>
+              <option value="contacted">Sudah Dihubungi 💬</option>
+              <option value="confirmed">Terkonfirmasi ✅</option>
+              <option value="cancelled">Batal ✕</option>
             </select>
-            <a href="reservasi.html" target="_blank" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3 py-2 rounded-xl transition flex items-center gap-1">
-              <span>👁️ Buka Reservasi ↗</span>
+            <a href="reservasi.html" target="_blank" class="text-xs bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle font-bold px-4 py-2 rounded-full transition flex items-center gap-1.5 shadow-xs">
+              <span>👁️ Buka Reservasi</span>
+              <span class="text-[10px]">↗</span>
             </a>
-            <button onclick="exportReservationsCSV()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3 py-2 rounded-xl transition flex items-center gap-1">
+            <button onclick="exportReservationsCSV()" class="text-xs bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle font-bold px-4 py-2 rounded-full transition flex items-center gap-1.5 shadow-xs">
               <span>📥 Ekspor CSV</span>
             </button>
-            <button onclick="loadReservations()" class="text-xs bg-primary text-white font-bold px-3 py-2 rounded-xl hover:bg-primary-dark transition">
-              🔄 Refresh
+            <button onclick="loadReservations()" class="text-xs bg-primary-container hover:bg-primary text-white font-bold px-4 py-2 rounded-full transition flex items-center gap-1.5 shadow-sm">
+              <span class="material-symbols-outlined text-sm">refresh</span>
+              <span>Refresh</span>
             </button>
           </div>
         </div>
 
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto rounded-2xl border border-border-subtle">
           <table class="w-full text-left text-sm">
-            <thead class="text-xs font-bold text-slate-400 uppercase bg-slate-50 border-y border-slate-100">
+            <thead class="text-[11px] font-bold text-neutral-slate-muted uppercase tracking-wider bg-surface-container-low border-b border-border-subtle">
               <tr>
-                <th class="py-3 px-4">Tgl Masuk</th>
-                <th class="py-3 px-4">Orang Tua</th>
-                <th class="py-3 px-4">WhatsApp</th>
-                <th class="py-3 px-4">Anak</th>
-                <th class="py-3 px-4">Paket Dipilih</th>
-                <th class="py-3 px-4">Tgl Rencana</th>
-                <th class="py-3 px-4">Status</th>
-                <th class="py-3 px-4 text-right">Aksi</th>
+                <th class="py-3.5 px-4">Tgl Masuk</th>
+                <th class="py-3.5 px-4">Orang Tua</th>
+                <th class="py-3.5 px-4">WhatsApp</th>
+                <th class="py-3.5 px-4">Anak</th>
+                <th class="py-3.5 px-4">Paket Dipilih</th>
+                <th class="py-3.5 px-4">Tgl Rencana</th>
+                <th class="py-3.5 px-4">Status</th>
+                <th class="py-3.5 px-4 text-right">Aksi</th>
               </tr>
             </thead>
-            <tbody id="reservasi-table-body" class="divide-y divide-slate-100 text-slate-700">
+            <tbody id="reservasi-table-body" class="divide-y divide-border-subtle/70 text-on-surface">
               <tr>
-                <td colspan="8" class="text-center py-8 text-slate-400 text-xs">Memuat data reservasi...</td>
+                <td colspan="8" class="text-center py-10 text-neutral-slate-muted text-xs">Memuat data reservasi...</td>
               </tr>
             </tbody>
           </table>
@@ -223,36 +296,41 @@
 
     <!-- ==================== TAB 2: LEADS DOWNLOAD ==================== -->
     <section id="tab-leads" class="tab-content hidden">
-      <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 sm:p-8">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-5 border-b border-border-subtle">
           <div>
-            <h3 class="font-baloo font-bold text-xl text-slate-900">Leads Unduh Activity Kit</h3>
-            <p class="text-xs text-slate-500">Data orang tua yang tertarik mengunduh lembar aktivitas anak.</p>
+            <div class="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200/60 text-secondary font-bold text-[11px] px-3 py-1 rounded-full mb-2">
+              <span class="material-symbols-outlined text-xs">download</span>
+              <span>Koleksi Database Orang Tua</span>
+            </div>
+            <h3 class="font-baloo font-bold text-2xl text-on-surface">Leads Unduh Activity Kit</h3>
+            <p class="text-xs text-neutral-slate-muted">Data orang tua yang tertarik mengunduh lembar aktivitas anak di website.</p>
           </div>
-          <div class="flex items-center gap-2">
-            <button onclick="exportLeadsCSV()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3 py-2 rounded-xl transition flex items-center gap-1">
+          <div class="flex items-center gap-2.5">
+            <button onclick="exportLeadsCSV()" class="text-xs bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle font-bold px-4 py-2 rounded-full transition flex items-center gap-1.5 shadow-xs">
               <span>📥 Ekspor CSV</span>
             </button>
-            <button onclick="loadLeads()" class="text-xs bg-primary text-white font-bold px-3 py-2 rounded-xl hover:bg-primary-dark transition">
-              🔄 Refresh
+            <button onclick="loadLeads()" class="text-xs bg-primary-container hover:bg-primary text-white font-bold px-4 py-2 rounded-full transition flex items-center gap-1.5 shadow-sm">
+              <span class="material-symbols-outlined text-sm">refresh</span>
+              <span>Refresh</span>
             </button>
           </div>
         </div>
 
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto rounded-2xl border border-border-subtle">
           <table class="w-full text-left text-sm">
-            <thead class="text-xs font-bold text-slate-400 uppercase bg-slate-50 border-y border-slate-100">
+            <thead class="text-[11px] font-bold text-neutral-slate-muted uppercase tracking-wider bg-surface-container-low border-b border-border-subtle">
               <tr>
-                <th class="py-3 px-4">Waktu</th>
-                <th class="py-3 px-4">Nama Lengkap</th>
-                <th class="py-3 px-4">Email</th>
-                <th class="py-3 px-4">Activity Kit yang Diminta</th>
-                <th class="py-3 px-4 text-right">Aksi</th>
+                <th class="py-3.5 px-4">Waktu</th>
+                <th class="py-3.5 px-4">Nama Lengkap</th>
+                <th class="py-3.5 px-4">Email</th>
+                <th class="py-3.5 px-4">Activity Kit yang Diminta</th>
+                <th class="py-3.5 px-4 text-right">Aksi</th>
               </tr>
             </thead>
-            <tbody id="leads-table-body" class="divide-y divide-slate-100 text-slate-700">
+            <tbody id="leads-table-body" class="divide-y divide-border-subtle/70 text-on-surface">
               <tr>
-                <td colspan="5" class="text-center py-8 text-slate-400 text-xs">Memuat data leads...</td>
+                <td colspan="5" class="text-center py-10 text-neutral-slate-muted text-xs">Memuat data leads...</td>
               </tr>
             </tbody>
           </table>
@@ -262,19 +340,24 @@
 
     <!-- ==================== TAB 3: KELOLA PAKET ==================== -->
     <section id="tab-packages" class="tab-content hidden">
-      <div class="flex items-center justify-between mb-6">
+      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 sm:p-8 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h3 class="font-baloo font-bold text-2xl text-slate-900">Katalog Paket Wisata</h3>
-          <p class="text-xs text-slate-500">Kelola rute, durasi, dan fasilitas paket ramah anak di website.</p>
+          <div class="inline-flex items-center gap-2 bg-orange-50 border border-orange-200/60 text-primary-container font-bold text-[11px] px-3 py-1 rounded-full mb-2">
+            <span class="material-symbols-outlined text-xs">tour</span>
+            <span>Itinerary Ramah Balita & Keluarga</span>
+          </div>
+          <h3 class="font-baloo font-bold text-2xl text-on-surface">Katalog Paket Wisata</h3>
+          <p class="text-xs text-neutral-slate-muted">Kelola rute, durasi, dan fasilitas paket ramah anak yang tampil di paket.html.</p>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2.5">
           <a href="paket.html" target="_blank"
-             class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3.5 py-2.5 rounded-xl shadow-sm transition flex items-center gap-1.5">
+             class="bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold px-4 py-2.5 rounded-full shadow-xs transition flex items-center gap-1.5">
             <span>👁️ Buka Halaman Paket</span>
-            <span>↗</span>
+            <span class="text-[10px]">↗</span>
           </a>
-          <button onclick="openPackageModal()" class="bg-primary hover:bg-primary-dark text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-1.5">
-            <span>+ Tambah Paket Baru</span>
+          <button onclick="openPackageModal()" class="bg-primary-container hover:bg-primary text-white text-xs font-bold px-5 py-2.5 rounded-full shadow transition flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-sm">add</span>
+            <span>Tambah Paket Baru</span>
           </button>
         </div>
       </div>
@@ -287,24 +370,27 @@
     <!-- ==================== TAB: KELOLA KIDS ACTIVITY & MEWARNAI DIGITAL ==================== -->
     <section id="tab-kits" class="tab-content hidden">
       <!-- Main Header -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 sm:p-8 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div class="inline-flex items-center gap-2 bg-primary/10 text-primary font-bold text-xs px-3 py-1 rounded-full mb-1">
-            <span>🎨 Modul Kreativitas &amp; Edukasi Anak</span>
+          <div class="inline-flex items-center gap-2 bg-orange-50 border border-orange-200/60 text-primary-container font-bold text-[11px] px-3 py-1 rounded-full mb-2">
+            <span class="material-symbols-outlined text-xs">palette</span>
+            <span>Modul Kreativitas &amp; Edukasi Anak</span>
           </div>
-          <h3 class="font-baloo font-bold text-2xl text-slate-900">Kids Activity &amp; Studio Mewarnai Digital</h3>
-          <p class="text-xs text-slate-500">Kelola bundel lembar aktivitas edukatif siap cetak (PDF) dan template interaktif Studio Mewarnai Digital.</p>
+          <h3 class="font-baloo font-bold text-2xl text-on-surface">Kids Activity &amp; Studio Mewarnai Digital</h3>
+          <p class="text-xs text-neutral-slate-muted">Kelola bundel lembar aktivitas edukatif siap cetak (PDF) dan template interaktif Studio Mewarnai Digital.</p>
         </div>
-        <div class="flex flex-wrap items-center gap-2">
+        <div class="flex flex-wrap items-center gap-2.5">
           <a href="activity-kit.html" target="_blank"
-             class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3.5 py-2.5 rounded-xl shadow-sm transition flex items-center gap-1.5">
+             class="bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold px-4 py-2.5 rounded-full shadow-xs transition flex items-center gap-1.5">
             <span>👁️ Buka Laman Activity Kit</span>
-            <span>↗</span>
+            <span class="text-[10px]">↗</span>
           </a>
-          <button onclick="openKitModal()" class="bg-teal hover:bg-teal-dark text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-1.5">
+          <button onclick="openKitModal()" class="bg-secondary hover:bg-secondary-dark text-white text-xs font-bold px-5 py-2.5 rounded-full shadow transition flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-sm">picture_as_pdf</span>
             <span>+ Tambah Kit PDF</span>
           </button>
-          <button onclick="openColoringModal()" class="bg-primary hover:bg-primary-dark text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-1.5">
+          <button onclick="openColoringModal()" class="bg-primary-container hover:bg-primary text-white text-xs font-bold px-5 py-2.5 rounded-full shadow transition flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-sm">draw</span>
             <span>+ Tambah Lembar Mewarnai</span>
           </button>
         </div>
@@ -312,34 +398,34 @@
 
       <!-- Quick Summary Stats -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
-          <span class="text-xs text-slate-400 font-bold block">Bundel Kit PDF</span>
-          <span id="stat-kits-count-sub" class="font-baloo font-black text-2xl text-teal-dark">0</span>
+        <div class="bg-card-surface p-5 rounded-2xl border border-border-subtle custom-shadow-soft">
+          <span class="text-[11px] text-neutral-slate-muted font-bold block uppercase tracking-wider mb-1">Bundel Kit PDF</span>
+          <span id="stat-kits-count-sub" class="font-baloo font-black text-3xl text-secondary">0</span>
         </div>
-        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
-          <span class="text-xs text-slate-400 font-bold block">Total Lembar Mewarnai</span>
-          <span id="stat-coloring-total" class="font-baloo font-black text-2xl text-slate-800">0</span>
+        <div class="bg-card-surface p-5 rounded-2xl border border-border-subtle custom-shadow-soft">
+          <span class="text-[11px] text-neutral-slate-muted font-bold block uppercase tracking-wider mb-1">Total Lembar Mewarnai</span>
+          <span id="stat-coloring-total" class="font-baloo font-black text-3xl text-on-surface">0</span>
         </div>
-        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
-          <span class="text-xs text-slate-400 font-bold block">Mewarnai Aktif</span>
-          <span id="stat-coloring-active" class="font-baloo font-black text-2xl text-emerald-600">0</span>
+        <div class="bg-card-surface p-5 rounded-2xl border border-border-subtle custom-shadow-soft">
+          <span class="text-[11px] text-neutral-slate-muted font-bold block uppercase tracking-wider mb-1">Mewarnai Aktif</span>
+          <span id="stat-coloring-active" class="font-baloo font-black text-3xl text-palm-green">0</span>
         </div>
-        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
-          <span class="text-xs text-slate-400 font-bold block">Kategori Unik</span>
-          <span id="stat-coloring-categories" class="font-baloo font-black text-2xl text-indigo-600">0</span>
+        <div class="bg-card-surface p-5 rounded-2xl border border-border-subtle custom-shadow-soft">
+          <span class="text-[11px] text-neutral-slate-muted font-bold block uppercase tracking-wider mb-1">Kategori Unik</span>
+          <span id="stat-coloring-categories" class="font-baloo font-black text-3xl text-primary-container">0</span>
         </div>
       </div>
 
       <!-- SUB-SECTION 1: BUNDEL ACTIVITY KIT (PDF SIAP CETAK) -->
-      <div class="mb-10">
-        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200">
+      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 sm:p-8 mb-8">
+        <div class="flex items-center justify-between pb-4 mb-6 border-b border-border-subtle">
           <div>
-            <h4 class="font-baloo font-bold text-lg text-slate-800 flex items-center gap-2">
+            <h4 class="font-baloo font-bold text-xl text-on-surface flex items-center gap-2">
               <span>📄 Bundel Lembar Aktivitas Cetak (PDF)</span>
             </h4>
-            <p class="text-xs text-slate-400">Lembar aktivitas teka-teki, maze, tracing motorik untuk usia 3–7 tahun.</p>
+            <p class="text-xs text-neutral-slate-muted">Lembar aktivitas teka-teki, maze, tracing motorik untuk usia 3–7 tahun.</p>
           </div>
-          <button onclick="openKitModal()" class="text-xs text-teal-dark hover:underline font-bold">
+          <button onclick="openKitModal()" class="text-xs text-secondary hover:underline font-bold">
             + Tambah Kit
           </button>
         </div>
@@ -349,15 +435,15 @@
       </div>
 
       <!-- SUB-SECTION 2: TEMPLATE STUDIO MEWARNAI DIGITAL -->
-      <div class="pt-4">
-        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200">
+      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 sm:p-8">
+        <div class="flex items-center justify-between pb-4 mb-6 border-b border-border-subtle">
           <div>
-            <h4 class="font-baloo font-bold text-lg text-slate-800 flex items-center gap-2">
+            <h4 class="font-baloo font-bold text-xl text-on-surface flex items-center gap-2">
               <span>🖍️ Template Studio Mewarnai Digital Interaktif</span>
             </h4>
-            <p class="text-xs text-slate-400">Karakter dan ikon budaya Bali dengan outline SVG untuk diwarnai langsung di layar HP/tablet.</p>
+            <p class="text-xs text-neutral-slate-muted">Karakter dan ikon budaya Bali dengan outline SVG untuk diwarnai langsung di layar HP/tablet.</p>
           </div>
-          <button onclick="openColoringModal()" class="text-xs text-primary hover:underline font-bold">
+          <button onclick="openColoringModal()" class="text-xs text-primary-container hover:underline font-bold">
             + Tambah Template
           </button>
         </div>
@@ -372,33 +458,33 @@
     <section id="tab-tips" class="tab-content hidden">
       <div class="space-y-6">
         <!-- Header Info Bar -->
-        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div class="inline-flex items-center gap-2 bg-purple-100 text-purple-700 font-bold text-xs px-3 py-1 rounded-full mb-2">
               <span>💡 CMS Laman Parenting Tips & Panduan Keluarga</span>
             </div>
-            <h3 class="font-baloo font-bold text-2xl text-slate-900">Kelola Konten & Tips Parenting Perjalanan</h3>
-            <p class="text-xs text-slate-500 mt-1 max-w-xl">
+            <h3 class="font-baloo font-bold text-2xl text-on-surface">Kelola Konten & Tips Parenting Perjalanan</h3>
+            <p class="text-xs text-neutral-slate-muted mt-1 max-w-xl">
               Sesuaikan teks hero pengantar, foto kartu keluarga, kutipan tips cepat, 4 kartu tips psikologis (Bento Grid), checklist koper balita, serta testimoni keluarga yang tampil di laman parenting-tips.html.
             </p>
           </div>
           <div class="flex items-center gap-2">
-            <a href="parenting-tips.html" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-1.5 shadow-sm">
+            <a href="parenting-tips.html" target="_blank" class="bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold px-4 py-2.5 rounded-full transition flex items-center gap-1.5 shadow-xs">
               <span>👁️ Buka Laman Tips</span>
               <span>↗</span>
             </a>
-            <button type="button" onclick="submitParentingSettings()" class="bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow flex items-center gap-1.5">
+            <button type="button" onclick="submitParentingSettings()" class="bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold px-5 py-2.5 rounded-full transition shadow flex items-center gap-1.5">
               <span>💾 Simpan Semua Pengaturan</span>
             </button>
           </div>
         </div>
 
         <!-- 1. HERO SECTION & VISUAL BENTO CARD -->
-        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 md:p-8">
+        <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 md:p-8">
           <div class="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
             <span class="text-2xl p-2 bg-orange-100 text-orange-600 rounded-2xl">🌅</span>
             <div>
-              <h4 class="font-baloo font-bold text-lg text-slate-900">1. Hero Header & Kartu Visual (Bagian Atas Laman)</h4>
+              <h4 class="font-baloo font-bold text-lg text-on-surface">1. Hero Header & Kartu Visual (Bagian Atas Laman)</h4>
               <p class="text-xs text-slate-400">Judul utama, subjudul pengantar, foto kartu keluarga, dan kutipan "Tips Cepat Hari Ini".</p>
             </div>
           </div>
@@ -462,12 +548,12 @@
         </div>
 
         <!-- 2. BENTO GRID 4 SPECIALIZED TOPIC CARDS -->
-        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 md:p-8">
+        <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 md:p-8">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 mb-6 border-b border-slate-100">
             <div class="flex items-center gap-3">
               <span class="text-2xl p-2 bg-purple-100 text-purple-600 rounded-2xl">🧠</span>
               <div>
-                <h4 class="font-baloo font-bold text-lg text-slate-900">2. Katalog 4 Kartu Topik Tips Parenting (Bento Grid)</h4>
+                <h4 class="font-baloo font-bold text-lg text-on-surface">2. Katalog 4 Kartu Topik Tips Parenting (Bento Grid)</h4>
                 <p class="text-xs text-slate-400">Topik panduan psikologis di perjalanan dengan poin-poin solusi terstruktur.</p>
               </div>
             </div>
@@ -482,11 +568,11 @@
         </div>
 
         <!-- 3. INTERACTIVE PACKING CHECKLIST BALITA -->
-        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 md:p-8">
+        <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 md:p-8">
           <div class="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
             <span class="text-2xl p-2 bg-emerald-100 text-emerald-600 rounded-2xl">🧳</span>
             <div>
-              <h4 class="font-baloo font-bold text-lg text-slate-900">3. Checklist Persiapan Liburan Balita ke Bali</h4>
+              <h4 class="font-baloo font-bold text-lg text-on-surface">3. Checklist Persiapan Liburan Balita ke Bali</h4>
               <p class="text-xs text-slate-400">Daftar barang bawaan yang dapat dicentang dan diunduh langsung dalam format PDF oleh wisatawan.</p>
             </div>
           </div>
@@ -522,11 +608,11 @@
         </div>
 
         <!-- 4. TESTIMONI KELUARGA ("KATA KELUARGA KAMI ❤️") -->
-        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 md:p-8">
+        <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 md:p-8">
           <div class="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
             <span class="text-2xl p-2 bg-rose-100 text-rose-600 rounded-2xl">❤️</span>
             <div>
-              <h4 class="font-baloo font-bold text-lg text-slate-900">4. Ulasan & Testimoni Keluarga ("Kata Keluarga Kami ❤️")</h4>
+              <h4 class="font-baloo font-bold text-lg text-on-surface">4. Ulasan & Testimoni Keluarga ("Kata Keluarga Kami ❤️")</h4>
               <p class="text-xs text-slate-400">Pengalaman nyata orang tua berlibur bersama si kecil di Bali yang tampil di bagian bawah laman tips.</p>
             </div>
           </div>
@@ -598,22 +684,22 @@
     <section id="tab-homepage" class="tab-content hidden">
       <div class="space-y-6">
         <!-- Header Info -->
-        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div class="inline-flex items-center gap-2 bg-primary/10 text-primary font-bold text-xs px-3 py-1 rounded-full mb-2">
               <span>🖼️ CMS Halaman Utama</span>
             </div>
-            <h3 class="font-baloo font-bold text-2xl text-slate-900">Kelola Foto & Tampilan Beranda</h3>
-            <p class="text-xs text-slate-500 mt-1 max-w-xl">
+            <h3 class="font-baloo font-bold text-2xl text-on-surface">Kelola Foto & Tampilan Beranda</h3>
+            <p class="text-xs text-neutral-slate-muted mt-1 max-w-xl">
               Ganti foto utama, 3 kartu keunggulan, serta banner edukasi halaman depan. Setiap pembaruan langsung tampil secara live di website utama.
             </p>
           </div>
           <div class="flex items-center gap-2">
-            <a href="index.html" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-1.5 shadow-sm">
+            <a href="index.html" target="_blank" class="bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold px-4 py-2.5 rounded-full transition flex items-center gap-1.5 shadow-xs">
               <span>👁️ Buka Halaman Depan</span>
               <span>↗</span>
             </a>
-            <button type="button" onclick="submitHomepageForm()" class="bg-primary hover:bg-primary-dark text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow flex items-center gap-1.5">
+            <button type="button" onclick="submitHomepageForm()" class="bg-primary-container hover:bg-primary text-white text-xs font-bold px-5 py-2.5 rounded-full transition shadow flex items-center gap-1.5">
               <span>💾 Simpan Beranda</span>
             </button>
           </div>
@@ -621,11 +707,11 @@
 
         <form id="homepage-form" class="space-y-6">
           <!-- 1. HERO SECTION -->
-          <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 md:p-8">
+          <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 md:p-8">
             <div class="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
               <span class="text-2xl p-2 bg-orange-100 text-orange-600 rounded-2xl">🌅</span>
               <div>
-                <h4 class="font-baloo font-bold text-lg text-slate-900">1. Foto Utama & Teks Hero (Bagian Paling Atas)</h4>
+                <h4 class="font-baloo font-bold text-lg text-on-surface">1. Foto Utama & Teks Hero (Bagian Paling Atas)</h4>
                 <p class="text-xs text-slate-400">Foto kartu keluarga di sisi kanan hero dan teks pengantar utama.</p>
               </div>
             </div>
@@ -673,11 +759,11 @@
           </div>
 
           <!-- 2. KEUNGGULAN SECTION (3 CARDS) -->
-          <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 md:p-8">
+          <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 md:p-8">
             <div class="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
               <span class="text-2xl p-2 bg-teal/10 text-teal rounded-2xl">🌟</span>
               <div>
-                <h4 class="font-baloo font-bold text-lg text-slate-900">2. Foto 3 Keunggulan (Section "Mengapa Bali Little Explorer?")</h4>
+                <h4 class="font-baloo font-bold text-lg text-on-surface">2. Foto 3 Keunggulan (Section "Mengapa Bali Little Explorer?")</h4>
                 <p class="text-xs text-slate-400">Atur 3 foto ikonik dan penjelasannya pada section tentang program.</p>
               </div>
             </div>
@@ -754,11 +840,11 @@
           <!-- 3. STORYTELLING & CTA BANNERS -->
           <div class="grid md:grid-cols-2 gap-6">
             <!-- Storytelling Banner -->
-            <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6">
+            <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6">
               <div class="flex items-center gap-3 pb-4 mb-4 border-b border-slate-100">
                 <span class="text-2xl p-2 bg-indigo-100 text-indigo rounded-2xl">📖</span>
                 <div>
-                  <h4 class="font-baloo font-bold text-base text-slate-900">3. Banner Storytelling Budaya</h4>
+                  <h4 class="font-baloo font-bold text-base text-on-surface">3. Banner Storytelling Budaya</h4>
                   <p class="text-[11px] text-slate-400">Banner di bawah katalog paket wisata.</p>
                 </div>
               </div>
@@ -789,11 +875,11 @@
             </div>
 
             <!-- CTA Download Banner -->
-            <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6">
+            <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6">
               <div class="flex items-center gap-3 pb-4 mb-4 border-b border-slate-100">
                 <span class="text-2xl p-2 bg-emerald-100 text-emerald-600 rounded-2xl">🎁</span>
                 <div>
-                  <h4 class="font-baloo font-bold text-base text-slate-900">4. Banner Unduh Kit & Guide</h4>
+                  <h4 class="font-baloo font-bold text-base text-on-surface">4. Banner Unduh Kit & Guide</h4>
                   <p class="text-[11px] text-slate-400">Banner ajakan unduh di bawah koleksi kit.</p>
                 </div>
               </div>
@@ -825,7 +911,7 @@
           </div>
 
           <!-- SUBMIT ACTION BAR -->
-          <div class="bg-slate-900 rounded-3xl p-6 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+          <div class="bg-[#1B1C19] rounded-3xl p-6 sm:p-7 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl border border-white/10">
             <div class="flex items-center gap-3">
               <span class="text-3xl">✨</span>
               <div>
@@ -833,17 +919,17 @@
                 <p class="text-xs text-slate-400">Perubahan akan langsung tersimpan dan aktif di beranda.</p>
               </div>
             </div>
-            <button type="submit" class="bg-primary hover:bg-primary-dark text-white font-bold px-8 py-3 rounded-2xl shadow-lg transition duration-200 text-sm w-full sm:w-auto">
+            <button type="submit" class="bg-primary-container hover:bg-primary text-white font-bold px-8 py-3.5 rounded-full shadow-lg transition duration-200 text-sm w-full sm:w-auto">
               💾 Simpan Perubahan Beranda
             </button>
           </div>
         </form>
 
         <!-- 5. GALERI REKOMENDASI FOTO CEPAT (QUICK PRESET PICKER) -->
-        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 md:p-8">
+        <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 md:p-8">
           <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-100">
             <div>
-              <h4 class="font-baloo font-bold text-lg text-slate-900">✨ Galeri Rekomendasi Foto Wisata Bali & Anak</h4>
+              <h4 class="font-baloo font-bold text-lg text-on-surface">✨ Galeri Rekomendasi Foto Wisata Bali & Anak</h4>
               <p class="text-xs text-slate-400">Pilih salah satu foto di bawah, lalu klik menu cepat untuk langsung memasangnya ke bagian beranda tanpa perlu mencari URL manual.</p>
             </div>
           </div>
@@ -857,9 +943,9 @@
 
     <!-- ==================== TAB 6: PENGATURAN & KONTAK ==================== -->
     <section id="tab-settings" class="tab-content hidden">
-      <div class="max-w-2xl bg-white rounded-3xl border border-slate-200/80 shadow-sm p-8">
-        <h3 class="font-baloo font-bold text-2xl text-slate-900 mb-2">⚙️ Pengaturan Website & Kontak</h3>
-        <p class="text-xs text-slate-500 mb-6">Setelan nomor WhatsApp admin Bali Top Holiday, jam kerja, dan PIN akses admin.</p>
+      <div class="max-w-2xl bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-8 sm:p-10">
+        <h3 class="font-baloo font-bold text-2xl text-on-surface mb-2">⚙️ Pengaturan Website & Kontak</h3>
+        <p class="text-xs text-neutral-slate-muted mb-6">Setelan nomor WhatsApp admin Bali Top Holiday, jam kerja, dan PIN akses admin.</p>
 
         <form id="settings-form" class="space-y-5">
           <div>
@@ -904,7 +990,7 @@
           </div>
 
           <button type="submit"
-                  class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-xl shadow transition duration-200">
+                  class="w-full bg-primary-container hover:bg-primary text-white font-bold py-3.5 rounded-full shadow-md transition duration-200">
             💾 Simpan Semua Perubahan
           </button>
         </form>
@@ -915,10 +1001,10 @@
 
   <!-- ====================== MODAL FORM PAKET ====================== -->
   <div id="modal-package" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop overflow-y-auto">
-    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl my-8 relative">
+    <div class="bg-card-surface rounded-3xl max-w-lg w-full p-7 border border-border-subtle shadow-2xl my-8 relative">
       <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
-        <h4 class="font-baloo font-bold text-xl text-slate-900" id="modal-package-title">Tambah Paket Wisata</h4>
-        <button onclick="closePackageModal()" class="text-slate-400 hover:text-slate-600 text-lg">✕</button>
+        <h4 class="font-baloo font-bold text-xl text-on-surface" id="modal-package-title">Tambah Paket Wisata</h4>
+        <button type="button" onclick="closePackageModal()" class="w-9 h-9 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center font-bold text-sm transition">✕</button>
       </div>
       <form id="form-package-edit" class="space-y-4">
         <input type="hidden" id="pkg-id" />
@@ -981,7 +1067,7 @@
         </div>
 
         <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-2">
-          <button type="button" onclick="closePackageModal()" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:bg-slate-100">Batal</button>
+          <button type="button" onclick="closePackageModal()" class="px-4 py-2 rounded-xl text-xs font-bold text-neutral-slate-muted hover:bg-slate-100">Batal</button>
           <button type="submit" class="bg-primary hover:bg-primary-dark text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow">Simpan Paket</button>
         </div>
       </form>
@@ -990,10 +1076,10 @@
 
   <!-- ====================== MODAL FORM KIT ====================== -->
   <div id="modal-kit" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop">
-    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
+    <div class="bg-card-surface rounded-3xl max-w-md w-full p-7 border border-border-subtle shadow-2xl relative">
       <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
-        <h4 class="font-baloo font-bold text-xl text-slate-900" id="modal-kit-title">Kelola Activity Kit</h4>
-        <button onclick="closeKitModal()" class="text-slate-400 hover:text-slate-600 text-lg">✕</button>
+        <h4 class="font-baloo font-bold text-xl text-on-surface" id="modal-kit-title">Kelola Activity Kit</h4>
+        <button type="button" onclick="closeKitModal()" class="w-9 h-9 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center font-bold text-sm transition">✕</button>
       </div>
       <form id="form-kit-edit" class="space-y-4">
         <input type="hidden" id="kit-id" />
@@ -1042,7 +1128,7 @@
           <p class="text-[11px] text-slate-400 mt-1">Jika dikosongkan, pengunjung otomatis diarahkan minta berkas via WhatsApp.</p>
         </div>
         <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-2">
-          <button type="button" onclick="closeKitModal()" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:bg-slate-100">Batal</button>
+          <button type="button" onclick="closeKitModal()" class="px-4 py-2 rounded-xl text-xs font-bold text-neutral-slate-muted hover:bg-slate-100">Batal</button>
           <button type="submit" class="bg-teal hover:bg-teal-dark text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow">Simpan Kit</button>
         </div>
       </form>
@@ -1051,13 +1137,13 @@
 
   <!-- ====================== MODAL FORM COLORING SHEET ====================== -->
   <div id="modal-coloring" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop overflow-y-auto">
-    <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-7 shadow-2xl relative my-8 max-h-[92vh] flex flex-col">
+    <div class="bg-card-surface rounded-3xl max-w-xl w-full p-7 border border-border-subtle shadow-2xl relative my-8 max-h-[92vh] flex flex-col">
       <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4 shrink-0">
         <div>
-          <h4 class="font-baloo font-bold text-xl text-slate-900" id="modal-coloring-title">Tambah Lembar Mewarnai</h4>
+          <h4 class="font-baloo font-bold text-xl text-on-surface" id="modal-coloring-title">Tambah Lembar Mewarnai</h4>
           <p class="text-xs text-slate-400">Atur template outline SVG dan cerita edukasi untuk studio mewarnai anak</p>
         </div>
-        <button onclick="closeColoringModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-sm font-bold">✕</button>
+        <button type="button" onclick="closeColoringModal()" class="w-9 h-9 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center font-bold text-sm transition">✕</button>
       </div>
 
       <form id="form-coloring-edit" class="space-y-4 overflow-y-auto pr-1">
@@ -1147,8 +1233,8 @@
         </div>
 
         <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-2 shrink-0">
-          <button type="button" onclick="closeColoringModal()" class="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 text-xs font-bold transition">Batal</button>
-          <button type="submit" class="px-5 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold transition shadow-md">Simpan Lembar Mewarnai 💾</button>
+          <button type="button" onclick="closeColoringModal()" class="px-5 py-2.5 rounded-full text-neutral-slate-muted hover:bg-surface-container-low text-xs font-bold transition">Batal</button>
+          <button type="submit" class="px-6 py-2.5 rounded-full bg-primary-container hover:bg-primary text-white text-xs font-bold transition shadow-md">Simpan Lembar Mewarnai 💾</button>
         </div>
       </form>
     </div>
@@ -1156,10 +1242,10 @@
 
   <!-- ====================== MODAL FORM TIPS ====================== -->
   <div id="modal-tip" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop">
-    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
+    <div class="bg-card-surface rounded-3xl max-w-md w-full p-7 border border-border-subtle shadow-2xl relative">
       <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
-        <h4 class="font-baloo font-bold text-xl text-slate-900" id="modal-tip-title">Kelola Parenting Tips</h4>
-        <button onclick="closeTipModal()" class="text-slate-400 hover:text-slate-600 text-lg">✕</button>
+        <h4 class="font-baloo font-bold text-xl text-on-surface" id="modal-tip-title">Kelola Parenting Tips</h4>
+        <button type="button" onclick="closeTipModal()" class="w-9 h-9 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center font-bold text-sm transition">✕</button>
       </div>
       <form id="form-tip-edit" class="space-y-4">
         <input type="hidden" id="tip-id" />
@@ -1202,7 +1288,7 @@
           <textarea id="tip-point-3" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-600 focus:outline-none" placeholder="Contoh: Jeda 15 Menit: Jangan ragu minta driver berhenti di rest area teduh untuk stretch otot."></textarea>
         </div>
         <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-2">
-          <button type="button" onclick="closeTipModal()" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:bg-slate-100">Batal</button>
+          <button type="button" onclick="closeTipModal()" class="px-4 py-2 rounded-xl text-xs font-bold text-neutral-slate-muted hover:bg-slate-100">Batal</button>
           <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow">Simpan Tips</button>
         </div>
       </form>
@@ -1280,7 +1366,7 @@
               <span class="btn-text">Upload Foto Baru</span>
             </button>
             <button type="button" id="${widgetId}-toggle-url" title="Atau tempel link URL foto langsung"
-                    class="px-2.5 py-2 bg-white hover:bg-slate-100 border border-slate-200 text-slate-500 rounded-xl text-xs font-bold transition">
+                    class="px-2.5 py-2 bg-white hover:bg-slate-100 border border-slate-200 text-neutral-slate-muted rounded-xl text-xs font-bold transition">
               🔗 URL
             </button>
           </div>
@@ -1304,7 +1390,7 @@
           </div>
 
           <div id="${widgetId}-url-box" class="hidden space-y-1">
-            <label class="block text-[10px] font-bold text-slate-500">Atau Tempel URL Gambar:</label>
+            <label class="block text-[10px] font-bold text-neutral-slate-muted">Atau Tempel URL Gambar:</label>
             <input type="url" id="${widgetId}-url-input" placeholder="https://images.unsplash.com/..."
                    class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:ring-1 focus:ring-primary focus:outline-none" />
           </div>
@@ -1533,7 +1619,7 @@
     function renderReservationsTable() {
       const tbody = document.getElementById('reservasi-table-body');
       if (!reservationsData.length) {
-        tbody.innerHTML = `<tr><td colspan="8" class="text-center py-8 text-slate-400 text-xs">Belum ada data reservasi masuk.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center py-10 text-neutral-slate-muted text-xs">Belum ada data reservasi masuk.</td></tr>`;
         return;
       }
 
@@ -1541,10 +1627,10 @@
         const dateStr = new Date(r.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
         
         let statusBadge = '';
-        if (r.status === 'new') statusBadge = '<span class="bg-rose-100 text-rose-700 text-xs px-2.5 py-1 rounded-full font-bold">Baru 🔥</span>';
-        else if (r.status === 'contacted') statusBadge = '<span class="bg-amber-100 text-amber-700 text-xs px-2.5 py-1 rounded-full font-bold">Dihubungi 💬</span>';
-        else if (r.status === 'confirmed') statusBadge = '<span class="bg-emerald-100 text-emerald-700 text-xs px-2.5 py-1 rounded-full font-bold">Terkonfirmasi ✅</span>';
-        else statusBadge = '<span class="bg-slate-100 text-slate-500 text-xs px-2.5 py-1 rounded-full font-bold">Batal ✕</span>';
+        if (r.status === 'new') statusBadge = '<span class="bg-rose-50 text-rose-700 border border-rose-200/60 text-xs px-3 py-1 rounded-full font-bold inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span> Baru 🔥</span>';
+        else if (r.status === 'contacted') statusBadge = '<span class="bg-amber-50 text-amber-700 border border-amber-200/60 text-xs px-3 py-1 rounded-full font-bold">Dihubungi 💬</span>';
+        else if (r.status === 'confirmed') statusBadge = '<span class="bg-emerald-50 text-emerald-700 border border-emerald-200/60 text-xs px-3 py-1 rounded-full font-bold">Terkonfirmasi ✅</span>';
+        else statusBadge = '<span class="bg-surface-container-low text-neutral-slate-muted border border-border-subtle text-xs px-3 py-1 rounded-full font-bold">Batal ✕</span>';
 
         const rawPhone = r.phone.replace(/[^0-9]/g, '');
         const cleanPhone = rawPhone.startsWith('0') ? '62' + rawPhone.slice(1) : (rawPhone.startsWith('62') ? rawPhone : '62' + rawPhone);
@@ -1554,28 +1640,28 @@
         );
 
         return `
-          <tr class="hover:bg-slate-50/80 transition">
-            <td class="py-3 px-4 text-xs text-slate-400 whitespace-nowrap">${dateStr}</td>
-            <td class="py-3 px-4 font-bold text-slate-900">${r.name}</td>
-            <td class="py-3 px-4">
-              <span class="font-mono text-xs text-slate-600 block">${r.phone}</span>
+          <tr class="hover:bg-cream-bg/70 transition">
+            <td class="py-3.5 px-4 text-xs text-neutral-slate-muted whitespace-nowrap">${dateStr}</td>
+            <td class="py-3.5 px-4 font-bold text-on-surface">${r.name}</td>
+            <td class="py-3.5 px-4">
+              <span class="font-mono text-xs text-neutral-slate-muted block">${r.phone}</span>
             </td>
-            <td class="py-3 px-4 text-xs">${r.kids_count || '-'} ${r.kids_age ? `(${r.kids_age})` : ''}</td>
-            <td class="py-3 px-4 text-xs font-semibold text-primary max-w-xs truncate">${r.package || '-'}</td>
-            <td class="py-3 px-4 text-xs text-slate-600 whitespace-nowrap">${r.trip_date || '-'}</td>
-            <td class="py-3 px-4">${statusBadge}</td>
-            <td class="py-3 px-4 text-right whitespace-nowrap">
+            <td class="py-3.5 px-4 text-xs text-on-surface font-medium">${r.kids_count || '-'} ${r.kids_age ? `(${r.kids_age})` : ''}</td>
+            <td class="py-3.5 px-4 text-xs font-bold text-primary-container max-w-xs truncate">${r.package || '-'}</td>
+            <td class="py-3.5 px-4 text-xs text-neutral-slate-muted whitespace-nowrap">${r.trip_date || '-'}</td>
+            <td class="py-3.5 px-4 whitespace-nowrap">${statusBadge}</td>
+            <td class="py-3.5 px-4 text-right whitespace-nowrap">
               <a href="https://wa.me/${cleanPhone}?text=${waText}" target="_blank"
-                 class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold px-2.5 py-1 rounded-lg mr-1 shadow-sm transition" title="Chat WA Calon Wisatawan">
-                💬 WA
+                 class="inline-flex items-center gap-1 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold px-3 py-1.5 rounded-full mr-1.5 shadow-xs transition" title="Chat WA Calon Wisatawan">
+                <span>💬</span> <span>WA</span>
               </a>
-              <select onchange="updateReservationStatus(${r.id}, this.value)" class="text-xs border border-slate-200 rounded-lg px-2 py-1 bg-white">
+              <select onchange="updateReservationStatus(${r.id}, this.value)" class="text-xs font-semibold border border-border-subtle rounded-full px-2.5 py-1 bg-surface-container-low text-on-surface cursor-pointer focus:outline-none">
                 <option value="new" ${r.status === 'new' ? 'selected' : ''}>Baru</option>
                 <option value="contacted" ${r.status === 'contacted' ? 'selected' : ''}>Dihubungi</option>
                 <option value="confirmed" ${r.status === 'confirmed' ? 'selected' : ''}>Konfirmasi</option>
                 <option value="cancelled" ${r.status === 'cancelled' ? 'selected' : ''}>Batal</option>
               </select>
-              <button onclick="deleteReservation(${r.id})" class="text-slate-300 hover:text-rose-500 text-xs ml-1 transition" title="Hapus">🗑️</button>
+              <button onclick="deleteReservation(${r.id})" class="text-neutral-slate-muted hover:text-rose-500 text-xs ml-1.5 p-1 rounded-full hover:bg-rose-50 transition" title="Hapus">🗑️</button>
             </td>
           </tr>
         `;
@@ -1627,20 +1713,20 @@
 
       const tbody = document.getElementById('leads-table-body');
       if (!leadsData.length) {
-        tbody.innerHTML = `<tr><td colspan="5" class="text-center py-8 text-slate-400 text-xs">Belum ada leads unduh activity kit.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" class="text-center py-10 text-neutral-slate-muted text-xs">Belum ada leads unduh activity kit.</td></tr>`;
         return;
       }
 
       tbody.innerHTML = leadsData.map(l => {
         const dateStr = new Date(l.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
         return `
-          <tr class="hover:bg-slate-50 transition">
-            <td class="py-3 px-4 text-xs text-slate-400 whitespace-nowrap">${dateStr}</td>
-            <td class="py-3 px-4 font-bold text-slate-900">${l.name}</td>
-            <td class="py-3 px-4 text-xs text-slate-600 font-mono">${l.email || '-'}</td>
-            <td class="py-3 px-4 text-xs font-semibold text-teal-dark">${l.kit_name || 'Activity Kit'}</td>
-            <td class="py-3 px-4 text-right">
-              <button onclick="deleteLead(${l.id})" class="text-slate-300 hover:text-rose-500 text-xs transition" title="Hapus">🗑️</button>
+          <tr class="hover:bg-cream-bg/70 transition">
+            <td class="py-3.5 px-4 text-xs text-neutral-slate-muted whitespace-nowrap">${dateStr}</td>
+            <td class="py-3.5 px-4 font-bold text-on-surface">${l.name}</td>
+            <td class="py-3.5 px-4 text-xs text-neutral-slate-muted font-mono font-medium">${l.email || '-'}</td>
+            <td class="py-3.5 px-4 text-xs font-bold text-secondary">${l.kit_name || 'Activity Kit'}</td>
+            <td class="py-3.5 px-4 text-right">
+              <button onclick="deleteLead(${l.id})" class="text-neutral-slate-muted hover:text-rose-500 text-xs p-1.5 rounded-full hover:bg-rose-50 transition" title="Hapus">🗑️</button>
             </td>
           </tr>
         `;
@@ -1681,18 +1767,18 @@
 
       const container = document.getElementById('packages-grid');
       container.innerHTML = packagesData.map(p => `
-        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition">
+        <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft overflow-hidden flex flex-col justify-between hover:shadow-lg hover:-translate-y-0.5 transition duration-200">
           <div>
             ${p.image_url ? `
-              <div class="h-36 relative overflow-hidden">
+              <div class="h-44 relative overflow-hidden">
                 <img src="${p.image_url}" alt="${p.title}" class="w-full h-full object-cover" />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-4">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-end p-5">
                   <div>
-                    <h4 class="font-baloo font-bold text-lg text-white leading-tight">${p.title}</h4>
-                    <p class="text-xs text-white/80">${p.duration || 'Full Day'}</p>
+                    <h4 class="font-baloo font-bold text-xl text-white leading-tight">${p.title}</h4>
+                    <p class="text-xs text-white/90 font-medium">${p.duration || 'Full Day'}</p>
                   </div>
                 </div>
-                ${p.badge ? `<span class="absolute top-3 right-3 bg-white/90 text-slate-800 text-[10px] font-bold px-2 py-0.5 rounded-lg shadow-sm">${p.badge}</span>` : ''}
+                ${p.badge ? `<span class="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-sm text-primary-container font-bold text-[10px] px-3 py-1 rounded-full shadow-xs border border-white/50">${p.badge}</span>` : ''}
               </div>
             ` : `
               <div class="bg-gradient-to-br ${p.gradient || 'from-orange-400 to-orange-600'} p-6 text-white text-center relative">
@@ -1702,24 +1788,24 @@
                 ${p.badge ? `<span class="absolute top-3 right-3 bg-white/20 backdrop-blur-sm text-[10px] font-bold px-2 py-0.5 rounded-lg">${p.badge}</span>` : ''}
               </div>
             `}
-            <div class="p-5">
-              <p class="text-xs font-bold text-slate-400 mb-2">Destinasi & Stops:</p>
-              <div class="space-y-1.5 mb-4 text-xs text-slate-600">
+            <div class="p-6">
+              <p class="text-[11px] font-bold text-neutral-slate-muted uppercase tracking-wider mb-2.5">Destinasi & Stops:</p>
+              <div class="space-y-2 mb-4 text-xs text-on-surface">
                 ${(Array.isArray(p.stops) ? p.stops : []).map(s => `
-                  <div class="flex items-start gap-1.5">
-                    <span>${s.icon || '📍'}</span>
-                    <span><strong>${s.place}:</strong> ${s.desc}</span>
+                  <div class="flex items-start gap-2">
+                    <span class="text-primary-container shrink-0 mt-0.5">${s.icon || '📍'}</span>
+                    <span><strong>${s.place}:</strong> <span class="text-neutral-slate-muted">${s.desc}</span></span>
                   </div>
                 `).join('')}
               </div>
-              <p class="text-[11px] text-slate-400">🎁 Inclusions: <strong class="text-slate-700">${p.includes || '-'}</strong></p>
+              <p class="text-xs text-neutral-slate-muted pt-3 border-t border-border-subtle/60">🎁 Inclusions: <strong class="text-on-surface">${p.includes || '-'}</strong></p>
             </div>
           </div>
-          <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
-            <span class="text-xs font-bold text-primary">${p.price_info || 'Hubungi Kami'}</span>
-            <div class="flex gap-2">
-              <button onclick="editPackage(${p.id})" class="text-xs bg-slate-200 hover:bg-slate-300 font-bold px-3 py-1.5 rounded-lg transition">Edit ✏️</button>
-              <button onclick="deletePackage(${p.id})" class="text-xs bg-rose-100 hover:bg-rose-200 text-rose-700 font-bold px-2.5 py-1.5 rounded-lg transition">Hapus</button>
+          <div class="p-4 bg-surface-container-low border-t border-border-subtle flex items-center justify-between">
+            <span class="font-baloo font-bold text-base text-primary-container">${p.price_info || 'Hubungi Kami'}</span>
+            <div class="flex items-center gap-2">
+              <button onclick="editPackage(${p.id})" class="text-xs bg-card-surface hover:bg-surface-container text-on-surface font-bold px-3.5 py-1.5 rounded-full border border-border-subtle shadow-xs transition">Edit ✏️</button>
+              <button onclick="deletePackage(${p.id})" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold px-3 py-1.5 rounded-full border border-rose-200/60 transition" title="Hapus">Hapus</button>
             </div>
           </div>
         </div>
@@ -1827,25 +1913,25 @@
 
       const container = document.getElementById('kits-grid');
       container.innerHTML = kitsData.map(k => `
-        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-5 text-center flex flex-col justify-between hover:shadow-md transition">
+        <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 text-center flex flex-col justify-between hover:shadow-lg hover:-translate-y-0.5 transition duration-200">
           <div>
             ${k.image_url ? `
-              <div class="w-20 h-20 mx-auto mb-3 rounded-2xl overflow-hidden shadow-sm border border-slate-100">
+              <div class="w-24 h-24 mx-auto mb-3 rounded-2xl overflow-hidden shadow-xs border border-border-subtle bg-surface-container-low">
                 <img src="${k.image_url}" alt="${k.title}" class="w-full h-full object-cover" />
               </div>
             ` : `
-              <div class="text-4xl mb-3">${k.icon || '🎨'}</div>
+              <div class="text-5xl mb-3">${k.icon || '🎨'}</div>
             `}
-            <h4 class="font-baloo font-bold text-slate-800 text-base mb-1">${k.title}</h4>
-            <p class="text-xs text-slate-500 mb-3">${k.description || '-'}</p>
-            <span class="text-xs bg-slate-100 text-slate-700 font-bold px-2.5 py-1 rounded-full inline-block">
+            <h4 class="font-baloo font-bold text-on-surface text-lg mb-1">${k.title}</h4>
+            <p class="text-xs text-neutral-slate-muted mb-3 line-clamp-2 leading-relaxed">${k.description || '-'}</p>
+            <span class="text-xs bg-emerald-50 text-secondary border border-emerald-200/60 font-bold px-3 py-1 rounded-full inline-block">
               📄 ${k.sheet_count || 'PDF Ready'}
             </span>
-            ${k.file_url ? `<p class="text-[10px] text-teal-dark mt-2 truncate max-w-full">🔗 Terhubung: ${k.file_url}</p>` : ''}
+            ${k.file_url ? `<p class="text-[10px] text-secondary font-bold mt-2 truncate max-w-full">🔗 Terhubung Drive / PDF</p>` : ''}
           </div>
-          <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-center gap-2">
-            <button onclick="editKit(${k.id})" class="text-xs bg-slate-100 hover:bg-slate-200 font-bold px-3 py-1 rounded-lg">Edit ✏️</button>
-            <button onclick="deleteKit(${k.id})" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold px-2.5 py-1 rounded-lg">Hapus</button>
+          <div class="pt-4 mt-4 border-t border-border-subtle flex items-center justify-center gap-2">
+            <button onclick="editKit(${k.id})" class="text-xs bg-surface-container-low hover:bg-surface-container text-on-surface font-bold px-4 py-1.5 rounded-full border border-border-subtle transition">Edit ✏️</button>
+            <button onclick="deleteKit(${k.id})" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold px-3 py-1.5 rounded-full border border-rose-200/60 transition">Hapus</button>
           </div>
         </div>
       `).join('');
@@ -1961,28 +2047,28 @@
 
       if (coloringData.length === 0) {
         container.innerHTML = `
-          <div class="col-span-full bg-white rounded-3xl p-12 text-center border border-slate-200">
+          <div class="col-span-full bg-card-surface rounded-3xl p-12 text-center border border-border-subtle custom-shadow-soft">
             <span class="text-4xl block mb-2">🎨</span>
-            <h4 class="font-baloo font-bold text-slate-800 text-lg">Belum ada lembar mewarnai</h4>
-            <p class="text-xs text-slate-500 mb-4">Tambahkan gambar outline pertama untuk studio anak.</p>
-            <button onclick="openColoringModal()" class="bg-primary text-white font-bold text-xs px-4 py-2 rounded-xl">Tambah Sekarang</button>
+            <h4 class="font-baloo font-bold text-on-surface text-lg">Belum ada lembar mewarnai</h4>
+            <p class="text-xs text-neutral-slate-muted mb-4">Tambahkan gambar outline pertama untuk studio anak.</p>
+            <button onclick="openColoringModal()" class="bg-primary-container hover:bg-primary text-white font-bold text-xs px-5 py-2.5 rounded-full shadow-sm transition">Tambah Sekarang</button>
           </div>
         `;
         return;
       }
 
       container.innerHTML = coloringData.map(c => `
-        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col justify-between hover:border-primary/50 transition">
+        <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft overflow-hidden flex flex-col justify-between hover:border-primary-container/40 hover:shadow-lg hover:-translate-y-0.5 transition duration-200">
           <div>
             <!-- Thumbnail preview -->
-            <div class="h-44 bg-amber-50/40 p-4 border-b border-slate-100 flex items-center justify-center relative overflow-hidden group">
+            <div class="h-48 bg-[#FAF8F5] p-4 border-b border-border-subtle flex items-center justify-center relative overflow-hidden group">
               <div class="w-full h-full flex items-center justify-center pointer-events-none scale-90 group-hover:scale-95 transition">
                 ${c.image_url ? `<img src="${c.image_url}" alt="${c.title}" class="max-h-full max-w-full object-contain" />` : (c.svg_data || '<span class="text-3xl text-slate-400">🎨</span>')}
               </div>
-              <span class="absolute top-3 left-3 text-[10px] font-bold px-2 py-0.5 rounded-full ${c.is_active ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-600'}">
+              <span class="absolute top-3 left-3 text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${c.is_active ? 'bg-emerald-50 text-secondary border-emerald-200/60' : 'bg-surface-container-low text-neutral-slate-muted border-border-subtle'}">
                 ${c.is_active ? '● Aktif' : '○ Non-aktif'}
               </span>
-              <span class="absolute top-3 right-3 text-[10px] bg-white/90 backdrop-blur-xs font-bold text-slate-600 px-2 py-0.5 rounded-md shadow-xs border border-slate-200">
+              <span class="absolute top-3 right-3 text-[10px] bg-white/95 backdrop-blur-sm font-bold text-on-surface px-2.5 py-0.5 rounded-full shadow-xs border border-border-subtle">
                 #${c.order_index || 1}
               </span>
             </div>
@@ -1990,24 +2076,24 @@
             <!-- Content Details -->
             <div class="p-5">
               <div class="flex items-center gap-2 mb-2">
-                <span class="text-[11px] bg-primary/10 text-primary font-bold px-2.5 py-0.5 rounded-full">${c.category || 'Bali'}</span>
-                <span class="text-[11px] text-slate-400 font-semibold">${c.difficulty || 'Mudah'}</span>
+                <span class="text-[11px] bg-orange-50 border border-orange-200/60 text-primary-container font-bold px-2.5 py-0.5 rounded-full">${c.category || 'Bali'}</span>
+                <span class="text-[11px] text-neutral-slate-muted font-semibold bg-surface-container-low px-2 py-0.5 rounded-full border border-border-subtle">${c.difficulty || 'Mudah'}</span>
               </div>
-              <h4 class="font-baloo font-bold text-base text-slate-900 mb-1 leading-snug">${c.title}</h4>
-              <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-3">${c.description || 'Tidak ada deskripsi cerita.'}</p>
+              <h4 class="font-baloo font-bold text-base text-on-surface mb-1 leading-snug">${c.title}</h4>
+              <p class="text-xs text-neutral-slate-muted line-clamp-2 leading-relaxed mb-3">${c.description || 'Tidak ada deskripsi cerita.'}</p>
             </div>
           </div>
 
           <!-- Bottom Actions -->
-          <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between gap-2">
-            <button onclick="toggleColoringActive(${c.id}, ${!c.is_active})" class="text-xs font-bold ${c.is_active ? 'text-amber-600 hover:text-amber-700' : 'text-emerald-600 hover:text-emerald-700'}">
+          <div class="p-3.5 bg-surface-container-low border-t border-border-subtle flex items-center justify-between gap-2">
+            <button onclick="toggleColoringActive(${c.id}, ${!c.is_active})" class="text-xs font-bold ${c.is_active ? 'text-amber-700 hover:text-amber-800' : 'text-palm-green hover:text-emerald-700'}">
               ${c.is_active ? 'Nonaktifkan' : 'Aktifkan'}
             </button>
             <div class="flex items-center gap-1.5">
-              <button onclick="editColoring(${c.id})" class="text-xs bg-white hover:bg-slate-100 font-bold px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs">
+              <button onclick="editColoring(${c.id})" class="text-xs bg-card-surface hover:bg-surface-container text-on-surface font-bold px-3.5 py-1.5 rounded-full border border-border-subtle shadow-xs transition">
                 Edit ✏️
               </button>
-              <button onclick="deleteColoring(${c.id})" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold px-2.5 py-1.5 rounded-xl border border-rose-100">
+              <button onclick="deleteColoring(${c.id})" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold px-3 py-1.5 rounded-full border border-rose-200/60 transition">
                 Hapus
               </button>
             </div>
@@ -2123,10 +2209,10 @@
       const container = document.getElementById('tips-grid');
       
       const themeConfig = {
-        orange: { box: 'bg-orange-100 text-orange-600', badge: 'bg-orange-100 text-orange-700', defTag: 'Di Dalam Kendaraan', defFoot: 'Tersedia di semua armada' },
-        teal: { box: 'bg-teal-100 text-teal-700', badge: 'bg-teal-100 text-teal-800', defTag: 'Regulasi Emosi', defFoot: 'Rute dirancang tidak terburu-buru' },
-        palm: { box: 'bg-emerald-100 text-emerald-700', badge: 'bg-emerald-100 text-emerald-800', defTag: 'Iklim Tropis Bali', defFoot: 'P3K Medis siap di mobil' },
-        purple: { box: 'bg-purple-100 text-purple-700', badge: 'bg-purple-100 text-purple-800', defTag: 'Daya Ingat & Belajar', defFoot: 'Free Journal Memory Template' }
+        orange: { box: 'bg-orange-100 text-orange-600', badge: 'bg-orange-50 text-orange-700 border border-orange-200/60', defTag: 'Di Dalam Kendaraan', defFoot: 'Tersedia di semua armada' },
+        teal: { box: 'bg-teal-100 text-teal-700', badge: 'bg-teal-50 text-teal-800 border border-teal-200/60', defTag: 'Regulasi Emosi', defFoot: 'Rute dirancang tidak terburu-buru' },
+        palm: { box: 'bg-emerald-100 text-emerald-700', badge: 'bg-emerald-50 text-emerald-800 border border-emerald-200/60', defTag: 'Iklim Tropis Bali', defFoot: 'P3K Medis siap di mobil' },
+        purple: { box: 'bg-purple-100 text-purple-700', badge: 'bg-purple-50 text-purple-800 border border-purple-200/60', defTag: 'Daya Ingat & Belajar', defFoot: 'Free Journal Memory Template' }
       };
 
       container.innerHTML = tipsData.map((t) => {
@@ -2141,18 +2227,18 @@
         }
 
         return `
-          <div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-5 flex flex-col justify-between hover:shadow-md transition">
+          <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 flex flex-col justify-between hover:shadow-lg hover:-translate-y-0.5 transition duration-200">
             <div>
-              <div class="flex items-center justify-between mb-3">
-                <div class="w-10 h-10 rounded-xl ${theme.box} flex items-center justify-center font-bold">
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-11 h-11 rounded-2xl ${theme.box} flex items-center justify-center font-bold shadow-xs">
                   ${iconHtml}
                 </div>
-                <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${theme.badge}">
+                <span class="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full ${theme.badge}">
                   ${theme.defTag}
                 </span>
               </div>
-              <h4 class="font-baloo font-bold text-base text-slate-900 mb-3">${t.title}</h4>
-              <ul class="space-y-2 text-xs text-slate-600 mb-4">
+              <h4 class="font-baloo font-bold text-lg text-on-surface mb-3">${t.title}</h4>
+              <ul class="space-y-2.5 text-xs text-on-surface mb-4">
                 ${tips.map((p, pIdx) => {
                   let strong = '';
                   let rest = p;
@@ -2166,23 +2252,23 @@
                     rest = parts.slice(1).join('—').trim();
                   }
                   return `
-                    <li class="flex items-start gap-2">
-                      <span class="w-4 h-4 rounded-full ${theme.box} font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">
+                    <li class="flex items-start gap-2.5">
+                      <span class="w-5 h-5 rounded-full ${theme.box} font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">
                         ${pIdx + 1}
                       </span>
-                      <span>${strong ? `<strong>${strong}</strong> ` : ''}${rest}</span>
+                      <span class="leading-relaxed">${strong ? `<strong class="text-on-surface font-bold">${strong}</strong> ` : ''}<span class="text-neutral-slate-muted">${rest}</span></span>
                     </li>
                   `;
                 }).join('')}
               </ul>
             </div>
-            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-              <span class="text-[11px] font-bold text-slate-400 flex items-center gap-1">
-                <span>✓</span> ${theme.defFoot}
+            <div class="pt-4 border-t border-border-subtle flex items-center justify-between">
+              <span class="text-[11px] font-bold text-neutral-slate-muted flex items-center gap-1.5">
+                <span class="text-palm-green">✓</span> ${theme.defFoot}
               </span>
-              <div class="flex items-center gap-1.5">
-                <button onclick="editTip(${t.id})" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3 py-1 rounded-lg transition">Edit ✏️</button>
-                <button onclick="deleteTip(${t.id})" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold px-2.5 py-1 rounded-lg transition">Hapus</button>
+              <div class="flex items-center gap-2">
+                <button onclick="editTip(${t.id})" class="text-xs bg-surface-container-low hover:bg-surface-container text-on-surface font-bold px-3.5 py-1.5 rounded-full border border-border-subtle transition">Edit ✏️</button>
+                <button onclick="deleteTip(${t.id})" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold px-3 py-1.5 rounded-full border border-rose-200/60 transition">Hapus</button>
               </div>
             </div>
           </div>
