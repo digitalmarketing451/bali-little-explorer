@@ -1846,8 +1846,10 @@
     }
 
     async function loadPackages() {
-      const { data } = await db.from('packages').select('*').order('order_index', { ascending: true });
-      packagesData = data || [];
+      const { data, error } = await db.from('packages').select('*').order('order_index', { ascending: true });
+      if (!error && data) {
+        packagesData = data;
+      }
       document.getElementById('stat-packages').textContent = packagesData.length;
 
       const container = document.getElementById('packages-grid');
@@ -2111,12 +2113,22 @@
       if (p) {
         document.getElementById('modal-package-title').textContent = 'Edit Paket Wisata';
         document.getElementById('pkg-id').value = p.id;
-        document.getElementById('pkg-title').value = p.title;
+        document.getElementById('pkg-title').value = p.title || '';
         document.getElementById('pkg-price').value = p.price_info || '';
         document.getElementById('pkg-icon').value = p.icon || '🏝️';
         document.getElementById('pkg-duration').value = p.duration || '3 Hari 2 Malam (3D2N)';
         document.getElementById('pkg-badge').value = p.badge || '';
-        document.getElementById('pkg-gradient').value = p.gradient || 'from-orange-400 to-orange-600';
+        
+        // Ensure gradient option exists
+        const gradSelect = document.getElementById('pkg-gradient');
+        if (p.gradient && !Array.from(gradSelect.options).some(o => o.value === p.gradient)) {
+          const opt = document.createElement('option');
+          opt.value = p.gradient;
+          opt.textContent = `Warna Custom (${p.badge || 'Tema Paket'})`;
+          gradSelect.appendChild(opt);
+        }
+        gradSelect.value = p.gradient || 'from-orange-400 to-orange-600';
+
         document.getElementById('pkg-includes').value = p.includes || '';
         document.getElementById('pkg-img').value = p.image_url || '';
         syncUploadWidget('pkg-img', p.image_url || '');
@@ -2150,19 +2162,23 @@
     }
 
     function editPackage(id) {
-      const p = packagesData.find(item => item.id === id);
+      const p = packagesData.find(item => item.id == id);
       if (p) openPackageModal(p);
     }
 
     async function deletePackage(id) {
       if (!confirm('Hapus paket wisata ini?')) return;
-      await db.from('packages').delete().eq('id', id);
-      loadPackages();
+      const { error } = await db.from('packages').delete().eq('id', Number(id));
+      if (error) {
+        alert('Gagal menghapus paket: ' + error.message);
+        return;
+      }
+      await loadPackages();
     }
 
     document.getElementById('form-package-edit').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const id = document.getElementById('pkg-id').value;
+      const rawId = document.getElementById('pkg-id').value.trim();
       const title = document.getElementById('pkg-title').value.trim();
       const price_info = document.getElementById('pkg-price').value.trim() || 'Hubungi Kami';
       const icon = document.getElementById('pkg-icon').value.trim() || '🏝️';
@@ -2178,9 +2194,9 @@
         const day_title = card.querySelector('.day-title').value.trim() || `Hari ${day_number}`;
         const actRows = card.querySelectorAll('.activity-row');
         const activities = Array.from(actRows).map(row => ({
-          icon: row.querySelector('.activity-icon').value.trim() || '📍',
-          place: row.querySelector('.activity-place').value.trim(),
-          desc: row.querySelector('.activity-desc').value.trim()
+          icon: (row.querySelector('.activity-icon') ? row.querySelector('.activity-icon').value.trim() : '') || '📍',
+          place: (row.querySelector('.activity-place') ? row.querySelector('.activity-place').value.trim() : ''),
+          desc: (row.querySelector('.activity-desc') ? row.querySelector('.activity-desc').value.trim() : '')
         })).filter(a => a.place);
 
         return { day_number, day_title, activities };
@@ -2194,13 +2210,23 @@
       submitBtn.disabled = true;
 
       try {
-        if (id) {
-          await db.from('packages').update(payload).eq('id', id);
+        if (rawId) {
+          const numId = parseInt(rawId, 10);
+          const { error } = await db.from('packages').update(payload).eq('id', numId);
+          if (error) {
+            console.error('Update error:', error);
+            throw new Error(error.message || 'Gagal memperbarui paket wisata');
+          }
         } else {
-          await db.from('packages').insert({ ...payload, order_index: packagesData.length + 1 });
+          const { error } = await db.from('packages').insert({ ...payload, order_index: packagesData.length + 1 });
+          if (error) {
+            console.error('Insert error:', error);
+            throw new Error(error.message || 'Gagal menambahkan paket wisata baru');
+          }
         }
         closePackageModal();
         await loadPackages();
+        alert('✅ Paket wisata dan harga berhasil disimpan!');
       } catch (err) {
         console.error('Error saving package:', err);
         alert('Gagal menyimpan paket: ' + err.message);

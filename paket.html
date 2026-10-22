@@ -2032,6 +2032,7 @@
               badge: pkg.badge || fallback.badge,
               image_url: pkg.image_url || fallback.image_url,
               includes: pkg.includes || fallback.includes,
+              price_info: pkg.price_info || fallback.price_info || 'Hubungi Kami',
               stops: Array.isArray(pkg.stops) && pkg.stops.length > 0 ? pkg.stops : fallback.stops
             };
           });
