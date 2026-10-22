@@ -63,6 +63,12 @@
 
   <style>
     * { font-family: 'Plus Jakarta Sans', sans-serif; }
+    html, body {
+      overflow-x: hidden !important;
+      max-width: 100vw;
+      width: 100%;
+      position: relative;
+    }
     .material-symbols-outlined {
       font-family: 'Material Symbols Outlined';
       font-size: 20px;
@@ -96,11 +102,13 @@
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
-<body class="bg-cream-bg text-on-surface font-sans min-h-screen flex flex-col selection:bg-coral-soft selection:text-primary relative overflow-x-hidden">
+<body class="bg-cream-bg text-on-surface font-sans min-h-screen flex flex-col selection:bg-coral-soft selection:text-primary relative overflow-x-hidden w-full max-w-full">
 
-  <!-- Ambient Tropical Blobs -->
-  <div class="absolute -top-24 -right-24 w-96 h-96 bg-coral-soft/50 rounded-full blur-3xl pointer-events-none"></div>
-  <div class="absolute top-1/3 -left-20 w-80 h-80 bg-ocean-teal-soft/40 rounded-full blur-3xl pointer-events-none"></div>
+  <!-- Ambient Tropical Blobs (Contained) -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+    <div class="absolute -top-24 -right-24 w-96 h-96 bg-coral-soft/50 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-1/3 -left-20 w-80 h-80 bg-ocean-teal-soft/40 rounded-full blur-3xl pointer-events-none"></div>
+  </div>
 
   <!-- ====================== AUTH PIN OVERLAY ====================== -->
   <div id="login-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-md">
@@ -133,84 +141,85 @@
   </div>
 
   <!-- ====================== TOP NAVBAR ====================== -->
-  <header class="bg-card-surface/95 backdrop-blur-md border-b border-border-subtle sticky top-0 z-30 shadow-xs">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-11 h-11 rounded-full overflow-hidden bg-surface-container flex items-center justify-center p-0.5 border-2 border-primary-container shadow-xs shrink-0">
+  <header class="bg-card-surface/95 backdrop-blur-md border-b border-border-subtle sticky top-0 z-30 shadow-xs w-full max-w-full">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 min-h-[4rem] sm:h-20 py-2 sm:py-0 flex items-center justify-between gap-2 w-full">
+      <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden bg-surface-container flex items-center justify-center p-0.5 border-2 border-primary-container shadow-xs shrink-0">
           <img src="logo.png" alt="Bali Little Explorer" class="w-full h-full object-contain" />
         </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="font-bold text-lg text-on-surface leading-tight block tracking-tight">Bali Little Explorer</span>
-            <span class="bg-coral-soft text-primary text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-primary/10">Admin Portal</span>
+        <div class="min-w-0">
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <span class="font-bold text-sm sm:text-lg text-on-surface leading-tight tracking-tight truncate">Bali Little Explorer</span>
+            <span class="bg-coral-soft text-primary text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider border border-primary/10 shrink-0">Admin</span>
           </div>
-          <span class="text-xs text-neutral-slate-muted block leading-tight">by Bali Top Holiday · Edu-Tourism Hub</span>
+          <span class="text-[10px] sm:text-xs text-neutral-slate-muted block leading-tight truncate">by Bali Top Holiday · Edu-Hub</span>
         </div>
       </div>
-      <div class="flex items-center gap-2.5">
+      <div class="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
         <a href="https://explorerbth.jinztech.cloud" target="_blank"
-           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-border-subtle bg-card-surface hover:bg-surface-container-low text-xs font-bold text-on-surface hover:text-primary transition shadow-xs">
-          <span class="material-symbols-outlined text-base text-primary">visibility</span>
-          <span>Buka Website</span>
+           class="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full border border-border-subtle bg-card-surface hover:bg-surface-container-low text-xs font-bold text-on-surface hover:text-primary transition shadow-xs" title="Buka Website">
+          <span class="material-symbols-outlined text-sm sm:text-base text-primary">visibility</span>
+          <span class="hidden sm:inline">Buka Website</span>
+          <span class="sm:hidden text-xs">Web</span>
           <span class="text-[10px]">↗</span>
         </a>
         <button onclick="handleLogout()"
-                class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-cream-bg border border-border-subtle hover:bg-rose-50 text-xs font-bold text-neutral-slate-muted hover:text-rose-600 transition shadow-xs">
-          <span class="material-symbols-outlined text-base">lock</span>
-          <span>Keluar</span>
+                class="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-cream-bg border border-border-subtle hover:bg-rose-50 text-xs font-bold text-neutral-slate-muted hover:text-rose-600 transition shadow-xs" title="Keluar">
+          <span class="material-symbols-outlined text-sm sm:text-base">lock</span>
+          <span class="hidden sm:inline">Keluar</span>
         </button>
       </div>
     </div>
   </header>
 
   <!-- ====================== MAIN CONTENT WRAPPER ====================== -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
+  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 relative z-10 min-w-0">
     
     <!-- STATS OVERVIEW BENTO RIBBON -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-      <div class="bg-card-surface rounded-3xl p-5 border border-border-subtle custom-shadow-soft flex items-center gap-4 hover:shadow-md transition">
-        <div class="w-12 h-12 rounded-2xl bg-coral-soft text-primary-container flex items-center justify-center text-2xl shrink-0">
-          <span class="material-symbols-outlined text-2xl text-primary-container">assignment</span>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 mb-6 sm:mb-8">
+      <div class="bg-card-surface rounded-2xl sm:rounded-3xl p-3 sm:p-5 border border-border-subtle custom-shadow-soft flex items-center gap-2.5 sm:gap-4 hover:shadow-md transition min-w-0">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-coral-soft text-primary-container flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-xl sm:text-2xl text-primary-container">assignment</span>
         </div>
-        <div>
-          <p class="text-xs font-bold text-neutral-slate-muted uppercase tracking-wider">Total Reservasi</p>
-          <p class="text-2xl font-extrabold text-on-surface tracking-tight" id="stat-reservations">0</p>
-        </div>
-      </div>
-
-      <div class="bg-card-surface rounded-3xl p-5 border border-border-subtle custom-shadow-soft flex items-center gap-4 hover:shadow-md transition">
-        <div class="w-12 h-12 rounded-2xl bg-ocean-teal-soft text-secondary flex items-center justify-center text-2xl shrink-0">
-          <span class="material-symbols-outlined text-2xl text-secondary">download</span>
-        </div>
-        <div>
-          <p class="text-xs font-bold text-neutral-slate-muted uppercase tracking-wider">Leads Unduh Kit</p>
-          <p class="text-2xl font-extrabold text-secondary tracking-tight" id="stat-leads">0</p>
+        <div class="min-w-0 flex-1">
+          <p class="text-[10px] sm:text-xs font-bold text-neutral-slate-muted uppercase tracking-wider leading-tight truncate">Total Reservasi</p>
+          <p class="text-xl sm:text-2xl font-extrabold text-on-surface tracking-tight mt-0.5" id="stat-reservations">0</p>
         </div>
       </div>
 
-      <div class="bg-card-surface rounded-3xl p-5 border border-border-subtle custom-shadow-soft flex items-center gap-4 hover:shadow-md transition">
-        <div class="w-12 h-12 rounded-2xl bg-palm-soft text-palm-green flex items-center justify-center text-2xl shrink-0">
-          <span class="material-symbols-outlined text-2xl text-palm-green">travel_explore</span>
+      <div class="bg-card-surface rounded-2xl sm:rounded-3xl p-3 sm:p-5 border border-border-subtle custom-shadow-soft flex items-center gap-2.5 sm:gap-4 hover:shadow-md transition min-w-0">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-ocean-teal-soft text-secondary flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-xl sm:text-2xl text-secondary">download</span>
         </div>
-        <div>
-          <p class="text-xs font-bold text-neutral-slate-muted uppercase tracking-wider">Paket Wisata Aktif</p>
-          <p class="text-2xl font-extrabold text-palm-green tracking-tight" id="stat-packages">0</p>
+        <div class="min-w-0 flex-1">
+          <p class="text-[10px] sm:text-xs font-bold text-neutral-slate-muted uppercase tracking-wider leading-tight truncate">Leads Unduh Kit</p>
+          <p class="text-xl sm:text-2xl font-extrabold text-secondary tracking-tight mt-0.5" id="stat-leads">0</p>
         </div>
       </div>
 
-      <div class="bg-card-surface rounded-3xl p-5 border border-border-subtle custom-shadow-soft flex items-center gap-4 hover:shadow-md transition">
-        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl shrink-0">
-          <span class="material-symbols-outlined text-2xl text-amber-700">palette</span>
+      <div class="bg-card-surface rounded-2xl sm:rounded-3xl p-3 sm:p-5 border border-border-subtle custom-shadow-soft flex items-center gap-2.5 sm:gap-4 hover:shadow-md transition min-w-0">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-palm-soft text-palm-green flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-xl sm:text-2xl text-palm-green">travel_explore</span>
         </div>
-        <div>
-          <p class="text-xs font-bold text-neutral-slate-muted uppercase tracking-wider">Activity &amp; Mewarnai</p>
-          <p class="text-2xl font-extrabold text-amber-700 tracking-tight" id="stat-kits">0</p>
+        <div class="min-w-0 flex-1">
+          <p class="text-[10px] sm:text-xs font-bold text-neutral-slate-muted uppercase tracking-wider leading-tight truncate">Paket Wisata</p>
+          <p class="text-xl sm:text-2xl font-extrabold text-palm-green tracking-tight mt-0.5" id="stat-packages">0</p>
+        </div>
+      </div>
+
+      <div class="bg-card-surface rounded-2xl sm:rounded-3xl p-3 sm:p-5 border border-border-subtle custom-shadow-soft flex items-center gap-2.5 sm:gap-4 hover:shadow-md transition min-w-0">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-xl sm:text-2xl text-amber-700">palette</span>
+        </div>
+        <div class="min-w-0 flex-1">
+          <p class="text-[10px] sm:text-xs font-bold text-neutral-slate-muted uppercase tracking-wider leading-tight truncate">Activity &amp; Mewarnai</p>
+          <p class="text-xl sm:text-2xl font-extrabold text-amber-700 tracking-tight mt-0.5" id="stat-kits">0</p>
         </div>
       </div>
     </div>
 
     <!-- NAVIGATION TABS -->
-    <div class="bg-card-surface/90 backdrop-blur-md p-1.5 rounded-2xl border border-border-subtle custom-shadow-soft flex overflow-x-auto gap-1.5 mb-8 no-scrollbar">
+    <div class="bg-card-surface/90 backdrop-blur-md p-1.5 rounded-2xl border border-border-subtle custom-shadow-soft flex overflow-x-auto gap-1.5 mb-6 sm:mb-8 no-scrollbar touch-pan-x min-w-0 max-w-full">
       <button class="tab-btn active px-4 py-2.5 rounded-xl font-bold text-xs text-neutral-slate-muted hover:text-on-surface hover:bg-surface-container-low transition flex items-center gap-2 shrink-0 border border-transparent" onclick="switchTab('tab-reservasi', this)">
         <span>📋 Reservasi Masuk</span>
         <span id="badge-new-reservations" class="bg-white/30 text-white text-[10px] px-2 py-0.5 rounded-full font-extrabold">0</span>
@@ -237,51 +246,51 @@
     </div>
 
     <!-- ==================== TAB 1: RESERVASI ==================== -->
-    <section id="tab-reservasi" class="tab-content block">
-      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 sm:p-8">
+    <section id="tab-reservasi" class="tab-content block min-w-0">
+      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-4 sm:p-8 min-w-0 overflow-hidden">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-5 border-b border-border-subtle">
-          <div>
+          <div class="min-w-0">
             <div class="inline-flex items-center gap-2 bg-orange-50 border border-orange-200/60 text-primary-container font-bold text-[11px] px-3 py-1 rounded-full mb-2">
               <span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
               <span>Data Masuk Real-Time</span>
             </div>
-            <h3 class="font-baloo font-bold text-2xl text-on-surface">Permintaan Reservasi Keluarga</h3>
+            <h3 class="font-baloo font-bold text-xl sm:text-2xl text-on-surface truncate">Permintaan Reservasi Keluarga</h3>
             <p class="text-xs text-neutral-slate-muted">Data calon wisatawan ramah anak yang masuk dari formulir website.</p>
           </div>
-          <div class="flex flex-wrap items-center gap-2.5">
-            <select id="filter-reservasi-status" onchange="loadReservations()" class="text-xs font-bold border border-border-subtle rounded-full px-4 py-2 bg-surface-container-low text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container cursor-pointer transition shadow-xs">
+          <div class="flex flex-wrap items-center gap-2">
+            <select id="filter-reservasi-status" onchange="loadReservations()" class="text-xs font-bold border border-border-subtle rounded-full px-3 py-1.5 bg-surface-container-low text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container cursor-pointer transition shadow-xs">
               <option value="all">Semua Status</option>
               <option value="new">Hanya Baru 🔥</option>
               <option value="contacted">Sudah Dihubungi 💬</option>
               <option value="confirmed">Terkonfirmasi ✅</option>
               <option value="cancelled">Batal ✕</option>
             </select>
-            <a href="https://explorerbth.jinztech.cloud/reservasi.html" target="_blank" class="text-xs bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle font-bold px-4 py-2 rounded-full transition flex items-center gap-1.5 shadow-xs">
+            <a href="https://explorerbth.jinztech.cloud/reservasi.html" target="_blank" class="text-xs bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle font-bold px-3 py-1.5 rounded-full transition flex items-center gap-1 shadow-xs">
               <span>👁️ Buka Reservasi</span>
               <span class="text-[10px]">↗</span>
             </a>
-            <button onclick="exportReservationsCSV()" class="text-xs bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle font-bold px-4 py-2 rounded-full transition flex items-center gap-1.5 shadow-xs">
+            <button onclick="exportReservationsCSV()" class="text-xs bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle font-bold px-3 py-1.5 rounded-full transition flex items-center gap-1 shadow-xs">
               <span>📥 Ekspor CSV</span>
             </button>
-            <button onclick="loadReservations()" class="text-xs bg-primary-container hover:bg-primary text-white font-bold px-4 py-2 rounded-full transition flex items-center gap-1.5 shadow-sm">
+            <button onclick="loadReservations()" class="text-xs bg-primary-container hover:bg-primary text-white font-bold px-3.5 py-1.5 rounded-full transition flex items-center gap-1 shadow-sm">
               <span class="material-symbols-outlined text-sm">refresh</span>
               <span>Refresh</span>
             </button>
           </div>
         </div>
 
-        <div class="overflow-x-auto rounded-2xl border border-border-subtle">
-          <table class="w-full text-left text-sm">
+        <div class="overflow-x-auto rounded-2xl border border-border-subtle w-full max-w-full touch-pan-x min-w-0">
+          <table class="w-full text-left text-xs sm:text-sm min-w-[700px]">
             <thead class="text-[11px] font-bold text-neutral-slate-muted uppercase tracking-wider bg-surface-container-low border-b border-border-subtle">
               <tr>
-                <th class="py-3.5 px-4">Tgl Masuk</th>
-                <th class="py-3.5 px-4">Orang Tua</th>
-                <th class="py-3.5 px-4">WhatsApp</th>
-                <th class="py-3.5 px-4">Anak</th>
-                <th class="py-3.5 px-4">Paket Dipilih</th>
-                <th class="py-3.5 px-4">Tgl Rencana</th>
-                <th class="py-3.5 px-4">Status</th>
-                <th class="py-3.5 px-4 text-right">Aksi</th>
+                <th class="py-3 px-3.5">Tgl Masuk</th>
+                <th class="py-3 px-3.5">Orang Tua</th>
+                <th class="py-3 px-3.5">WhatsApp</th>
+                <th class="py-3 px-3.5">Anak</th>
+                <th class="py-3 px-3.5">Paket Dipilih</th>
+                <th class="py-3 px-3.5">Tgl Rencana</th>
+                <th class="py-3 px-3.5">Status</th>
+                <th class="py-3 px-3.5 text-right">Aksi</th>
               </tr>
             </thead>
             <tbody id="reservasi-table-body" class="divide-y divide-border-subtle/70 text-on-surface">
@@ -295,37 +304,37 @@
     </section>
 
     <!-- ==================== TAB 2: LEADS DOWNLOAD ==================== -->
-    <section id="tab-leads" class="tab-content hidden">
-      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 sm:p-8">
+    <section id="tab-leads" class="tab-content hidden min-w-0">
+      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-4 sm:p-8 min-w-0 overflow-hidden">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-5 border-b border-border-subtle">
-          <div>
+          <div class="min-w-0">
             <div class="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200/60 text-secondary font-bold text-[11px] px-3 py-1 rounded-full mb-2">
               <span class="material-symbols-outlined text-xs">download</span>
               <span>Koleksi Database Orang Tua</span>
             </div>
-            <h3 class="font-baloo font-bold text-2xl text-on-surface">Leads Unduh Activity Kit</h3>
+            <h3 class="font-baloo font-bold text-xl sm:text-2xl text-on-surface truncate">Leads Unduh Activity Kit</h3>
             <p class="text-xs text-neutral-slate-muted">Data orang tua yang tertarik mengunduh lembar aktivitas anak di website.</p>
           </div>
-          <div class="flex items-center gap-2.5">
-            <button onclick="exportLeadsCSV()" class="text-xs bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle font-bold px-4 py-2 rounded-full transition flex items-center gap-1.5 shadow-xs">
+          <div class="flex items-center gap-2">
+            <button onclick="exportLeadsCSV()" class="text-xs bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle font-bold px-3 py-1.5 rounded-full transition flex items-center gap-1 shadow-xs">
               <span>📥 Ekspor CSV</span>
             </button>
-            <button onclick="loadLeads()" class="text-xs bg-primary-container hover:bg-primary text-white font-bold px-4 py-2 rounded-full transition flex items-center gap-1.5 shadow-sm">
+            <button onclick="loadLeads()" class="text-xs bg-primary-container hover:bg-primary text-white font-bold px-3.5 py-1.5 rounded-full transition flex items-center gap-1 shadow-sm">
               <span class="material-symbols-outlined text-sm">refresh</span>
               <span>Refresh</span>
             </button>
           </div>
         </div>
 
-        <div class="overflow-x-auto rounded-2xl border border-border-subtle">
-          <table class="w-full text-left text-sm">
+        <div class="overflow-x-auto rounded-2xl border border-border-subtle w-full max-w-full touch-pan-x min-w-0">
+          <table class="w-full text-left text-xs sm:text-sm min-w-[620px]">
             <thead class="text-[11px] font-bold text-neutral-slate-muted uppercase tracking-wider bg-surface-container-low border-b border-border-subtle">
               <tr>
-                <th class="py-3.5 px-4">Waktu</th>
-                <th class="py-3.5 px-4">Nama Lengkap</th>
-                <th class="py-3.5 px-4">Email</th>
-                <th class="py-3.5 px-4">Activity Kit yang Diminta</th>
-                <th class="py-3.5 px-4 text-right">Aksi</th>
+                <th class="py-3 px-3.5">Waktu</th>
+                <th class="py-3 px-3.5">Nama Lengkap</th>
+                <th class="py-3 px-3.5">Email</th>
+                <th class="py-3 px-3.5">Activity Kit yang Diminta</th>
+                <th class="py-3 px-3.5 text-right">Aksi</th>
               </tr>
             </thead>
             <tbody id="leads-table-body" class="divide-y divide-border-subtle/70 text-on-surface">
@@ -339,142 +348,142 @@
     </section>
 
     <!-- ==================== TAB 3: KELOLA PAKET ==================== -->
-    <section id="tab-packages" class="tab-content hidden">
-      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 sm:p-8 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
+    <section id="tab-packages" class="tab-content hidden min-w-0">
+      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-4 sm:p-8 mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 min-w-0">
+        <div class="min-w-0">
           <div class="inline-flex items-center gap-2 bg-orange-50 border border-orange-200/60 text-primary-container font-bold text-[11px] px-3 py-1 rounded-full mb-2">
             <span class="material-symbols-outlined text-xs">tour</span>
             <span>Itinerary Ramah Balita & Keluarga</span>
           </div>
-          <h3 class="font-baloo font-bold text-2xl text-on-surface">Katalog Paket Wisata</h3>
+          <h3 class="font-baloo font-bold text-xl sm:text-2xl text-on-surface truncate">Katalog Paket Wisata</h3>
           <p class="text-xs text-neutral-slate-muted">Kelola rute, durasi, dan fasilitas paket ramah anak yang tampil di paket.html.</p>
         </div>
-        <div class="flex items-center gap-2.5">
+        <div class="flex flex-wrap items-center gap-2">
           <a href="https://explorerbth.jinztech.cloud/paket.html" target="_blank"
-             class="bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold px-4 py-2.5 rounded-full shadow-xs transition flex items-center gap-1.5">
+             class="bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold px-3.5 py-2 rounded-full shadow-xs transition flex items-center gap-1">
             <span>👁️ Buka Halaman Paket</span>
             <span class="text-[10px]">↗</span>
           </a>
-          <button onclick="openPackageModal()" class="bg-primary-container hover:bg-primary text-white text-xs font-bold px-5 py-2.5 rounded-full shadow transition flex items-center gap-1.5">
+          <button onclick="openPackageModal()" class="bg-primary-container hover:bg-primary text-white text-xs font-bold px-4 py-2 rounded-full shadow transition flex items-center gap-1">
             <span class="material-symbols-outlined text-sm">add</span>
             <span>Tambah Paket Baru</span>
           </button>
         </div>
       </div>
 
-      <div id="packages-grid" class="grid md:grid-cols-3 gap-6">
+      <div id="packages-grid" class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
         <!-- Rendered by JS -->
       </div>
     </section>
 
     <!-- ==================== TAB: KELOLA KIDS ACTIVITY & MEWARNAI DIGITAL ==================== -->
-    <section id="tab-kits" class="tab-content hidden">
+    <section id="tab-kits" class="tab-content hidden min-w-0">
       <!-- Main Header -->
-      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 sm:p-8 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
+      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-4 sm:p-8 mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 min-w-0">
+        <div class="min-w-0">
           <div class="inline-flex items-center gap-2 bg-orange-50 border border-orange-200/60 text-primary-container font-bold text-[11px] px-3 py-1 rounded-full mb-2">
             <span class="material-symbols-outlined text-xs">palette</span>
             <span>Modul Kreativitas &amp; Edukasi Anak</span>
           </div>
-          <h3 class="font-baloo font-bold text-2xl text-on-surface">Kids Activity &amp; Studio Mewarnai Digital</h3>
+          <h3 class="font-baloo font-bold text-xl sm:text-2xl text-on-surface truncate">Kids Activity &amp; Studio Mewarnai Digital</h3>
           <p class="text-xs text-neutral-slate-muted">Kelola bundel lembar aktivitas edukatif siap cetak (PDF) dan template interaktif Studio Mewarnai Digital.</p>
         </div>
-        <div class="flex flex-wrap items-center gap-2.5">
+        <div class="flex flex-wrap items-center gap-2">
           <a href="https://explorerbth.jinztech.cloud/activity-kit.html" target="_blank"
-             class="bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold px-4 py-2.5 rounded-full shadow-xs transition flex items-center gap-1.5">
-            <span>👁️ Buka Laman Activity Kit</span>
+             class="bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold px-3.5 py-2 rounded-full shadow-xs transition flex items-center gap-1">
+            <span>👁️ Buka Activity Kit</span>
             <span class="text-[10px]">↗</span>
           </a>
-          <button onclick="openKitModal()" class="bg-secondary hover:bg-secondary-dark text-white text-xs font-bold px-5 py-2.5 rounded-full shadow transition flex items-center gap-1.5">
+          <button onclick="openKitModal()" class="bg-secondary hover:bg-secondary-dark text-white text-xs font-bold px-4 py-2 rounded-full shadow transition flex items-center gap-1">
             <span class="material-symbols-outlined text-sm">picture_as_pdf</span>
-            <span>+ Tambah Kit PDF</span>
+            <span>+ Kit PDF</span>
           </button>
-          <button onclick="openColoringModal()" class="bg-primary-container hover:bg-primary text-white text-xs font-bold px-5 py-2.5 rounded-full shadow transition flex items-center gap-1.5">
+          <button onclick="openColoringModal()" class="bg-primary-container hover:bg-primary text-white text-xs font-bold px-4 py-2 rounded-full shadow transition flex items-center gap-1">
             <span class="material-symbols-outlined text-sm">draw</span>
-            <span>+ Tambah Lembar Mewarnai</span>
+            <span>+ Lembar Mewarnai</span>
           </button>
         </div>
       </div>
 
       <!-- Quick Summary Stats -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-        <div class="bg-card-surface p-5 rounded-2xl border border-border-subtle custom-shadow-soft">
-          <span class="text-[11px] text-neutral-slate-muted font-bold block uppercase tracking-wider mb-1">Bundel Kit PDF</span>
-          <span id="stat-kits-count-sub" class="font-baloo font-black text-3xl text-secondary">0</span>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 mb-6 sm:mb-8">
+        <div class="bg-card-surface p-3.5 sm:p-5 rounded-2xl border border-border-subtle custom-shadow-soft min-w-0">
+          <span class="text-[10px] sm:text-[11px] text-neutral-slate-muted font-bold block uppercase tracking-wider mb-1 truncate">Bundel Kit PDF</span>
+          <span id="stat-kits-count-sub" class="font-baloo font-black text-2xl sm:text-3xl text-secondary">0</span>
         </div>
-        <div class="bg-card-surface p-5 rounded-2xl border border-border-subtle custom-shadow-soft">
-          <span class="text-[11px] text-neutral-slate-muted font-bold block uppercase tracking-wider mb-1">Total Lembar Mewarnai</span>
-          <span id="stat-coloring-total" class="font-baloo font-black text-3xl text-on-surface">0</span>
+        <div class="bg-card-surface p-3.5 sm:p-5 rounded-2xl border border-border-subtle custom-shadow-soft min-w-0">
+          <span class="text-[10px] sm:text-[11px] text-neutral-slate-muted font-bold block uppercase tracking-wider mb-1 truncate">Total Mewarnai</span>
+          <span id="stat-coloring-total" class="font-baloo font-black text-2xl sm:text-3xl text-on-surface">0</span>
         </div>
-        <div class="bg-card-surface p-5 rounded-2xl border border-border-subtle custom-shadow-soft">
-          <span class="text-[11px] text-neutral-slate-muted font-bold block uppercase tracking-wider mb-1">Mewarnai Aktif</span>
-          <span id="stat-coloring-active" class="font-baloo font-black text-3xl text-palm-green">0</span>
+        <div class="bg-card-surface p-3.5 sm:p-5 rounded-2xl border border-border-subtle custom-shadow-soft min-w-0">
+          <span class="text-[10px] sm:text-[11px] text-neutral-slate-muted font-bold block uppercase tracking-wider mb-1 truncate">Mewarnai Aktif</span>
+          <span id="stat-coloring-active" class="font-baloo font-black text-2xl sm:text-3xl text-palm-green">0</span>
         </div>
-        <div class="bg-card-surface p-5 rounded-2xl border border-border-subtle custom-shadow-soft">
-          <span class="text-[11px] text-neutral-slate-muted font-bold block uppercase tracking-wider mb-1">Kategori Unik</span>
-          <span id="stat-coloring-categories" class="font-baloo font-black text-3xl text-primary-container">0</span>
+        <div class="bg-card-surface p-3.5 sm:p-5 rounded-2xl border border-border-subtle custom-shadow-soft min-w-0">
+          <span class="text-[10px] sm:text-[11px] text-neutral-slate-muted font-bold block uppercase tracking-wider mb-1 truncate">Kategori</span>
+          <span id="stat-coloring-categories" class="font-baloo font-black text-2xl sm:text-3xl text-primary-container">0</span>
         </div>
       </div>
 
       <!-- SUB-SECTION 1: BUNDEL ACTIVITY KIT (PDF SIAP CETAK) -->
-      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 sm:p-8 mb-8">
+      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-4 sm:p-8 mb-6 sm:mb-8 min-w-0">
         <div class="flex items-center justify-between pb-4 mb-6 border-b border-border-subtle">
           <div>
-            <h4 class="font-baloo font-bold text-xl text-on-surface flex items-center gap-2">
+            <h4 class="font-baloo font-bold text-lg sm:text-xl text-on-surface flex items-center gap-2">
               <span>📄 Bundel Lembar Aktivitas Cetak (PDF)</span>
             </h4>
             <p class="text-xs text-neutral-slate-muted">Lembar aktivitas teka-teki, maze, tracing motorik untuk usia 3–7 tahun.</p>
           </div>
-          <button onclick="openKitModal()" class="text-xs text-secondary hover:underline font-bold">
+          <button onclick="openKitModal()" class="text-xs text-secondary hover:underline font-bold shrink-0">
             + Tambah Kit
           </button>
         </div>
-        <div id="kits-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div id="kits-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           <!-- Rendered by JS -->
         </div>
       </div>
 
       <!-- SUB-SECTION 2: TEMPLATE STUDIO MEWARNAI DIGITAL -->
-      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 sm:p-8">
+      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-4 sm:p-8 min-w-0">
         <div class="flex items-center justify-between pb-4 mb-6 border-b border-border-subtle">
           <div>
-            <h4 class="font-baloo font-bold text-xl text-on-surface flex items-center gap-2">
+            <h4 class="font-baloo font-bold text-lg sm:text-xl text-on-surface flex items-center gap-2">
               <span>🖍️ Template Studio Mewarnai Digital Interaktif</span>
             </h4>
             <p class="text-xs text-neutral-slate-muted">Karakter dan ikon budaya Bali dengan outline SVG untuk diwarnai langsung di layar HP/tablet.</p>
           </div>
-          <button onclick="openColoringModal()" class="text-xs text-primary-container hover:underline font-bold">
+          <button onclick="openColoringModal()" class="text-xs text-primary-container hover:underline font-bold shrink-0">
             + Tambah Template
           </button>
         </div>
         <!-- Coloring Grid -->
-        <div id="coloring-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div id="coloring-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           <!-- Rendered by JS -->
         </div>
       </div>
     </section>
 
     <!-- ==================== TAB 5: PARENTING TIPS ==================== -->
-    <section id="tab-tips" class="tab-content hidden">
+    <section id="tab-tips" class="tab-content hidden min-w-0">
       <div class="space-y-6">
         <!-- Header Info Bar -->
-        <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
+        <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-4 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 min-w-0">
+          <div class="min-w-0">
             <div class="inline-flex items-center gap-2 bg-purple-100 text-purple-700 font-bold text-xs px-3 py-1 rounded-full mb-2">
               <span>💡 CMS Laman Parenting Tips & Panduan Keluarga</span>
             </div>
-            <h3 class="font-baloo font-bold text-2xl text-on-surface">Kelola Konten & Tips Parenting Perjalanan</h3>
+            <h3 class="font-baloo font-bold text-xl sm:text-2xl text-on-surface truncate">Kelola Konten & Tips Parenting Perjalanan</h3>
             <p class="text-xs text-neutral-slate-muted mt-1 max-w-xl">
               Sesuaikan teks hero pengantar, foto kartu keluarga, kutipan tips cepat, 4 kartu tips psikologis (Bento Grid), checklist koper balita, serta testimoni keluarga yang tampil di laman parenting-tips.html.
             </p>
           </div>
-          <div class="flex items-center gap-2">
-            <a href="https://explorerbth.jinztech.cloud/parenting-tips.html" target="_blank" class="bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold px-4 py-2.5 rounded-full transition flex items-center gap-1.5 shadow-xs">
+          <div class="flex flex-wrap items-center gap-2 shrink-0">
+            <a href="https://explorerbth.jinztech.cloud/parenting-tips.html" target="_blank" class="bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold px-3.5 py-2 rounded-full transition flex items-center gap-1 shadow-xs">
               <span>👁️ Buka Laman Tips</span>
               <span>↗</span>
             </a>
-            <button type="button" onclick="submitParentingSettings()" class="bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold px-5 py-2.5 rounded-full transition shadow flex items-center gap-1.5">
-              <span>💾 Simpan Semua Pengaturan</span>
+            <button type="button" onclick="submitParentingSettings()" class="bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold px-4 py-2 rounded-full transition shadow flex items-center gap-1">
+              <span>💾 Simpan Pengaturan</span>
             </button>
           </div>
         </div>
@@ -681,25 +690,25 @@
     </section>
 
     <!-- ==================== TAB: FOTO & TAMPILAN BERANDA ==================== -->
-    <section id="tab-homepage" class="tab-content hidden">
+    <section id="tab-homepage" class="tab-content hidden min-w-0">
       <div class="space-y-6">
         <!-- Header Info -->
-        <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
+        <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 min-w-0">
+          <div class="min-w-0">
             <div class="inline-flex items-center gap-2 bg-primary/10 text-primary font-bold text-xs px-3 py-1 rounded-full mb-2">
               <span>🖼️ CMS Halaman Utama</span>
             </div>
-            <h3 class="font-baloo font-bold text-2xl text-on-surface">Kelola Foto & Tampilan Beranda</h3>
+            <h3 class="font-baloo font-bold text-xl sm:text-2xl text-on-surface truncate">Kelola Foto & Tampilan Beranda</h3>
             <p class="text-xs text-neutral-slate-muted mt-1 max-w-xl">
               Ganti foto utama, 3 kartu keunggulan, serta banner edukasi halaman depan. Setiap pembaruan langsung tampil secara live di website utama.
             </p>
           </div>
-          <div class="flex items-center gap-2">
-            <a href="https://explorerbth.jinztech.cloud" target="_blank" class="bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold px-4 py-2.5 rounded-full transition flex items-center gap-1.5 shadow-xs">
-              <span>👁️ Buka Halaman Depan</span>
+          <div class="flex flex-wrap items-center gap-2 shrink-0">
+            <a href="https://explorerbth.jinztech.cloud" target="_blank" class="bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold px-3.5 py-2 rounded-full transition flex items-center gap-1 shadow-xs">
+              <span>👁️ Buka Depan</span>
               <span>↗</span>
             </a>
-            <button type="button" onclick="submitHomepageForm()" class="bg-primary-container hover:bg-primary text-white text-xs font-bold px-5 py-2.5 rounded-full transition shadow flex items-center gap-1.5">
+            <button type="button" onclick="submitHomepageForm()" class="bg-primary-container hover:bg-primary text-white text-xs font-bold px-4 py-2 rounded-full transition shadow flex items-center gap-1">
               <span>💾 Simpan Beranda</span>
             </button>
           </div>
@@ -941,9 +950,9 @@
       </div>
     </section>
 
-    <!-- ==================== TAB 6: PENGATURAN & KONTAK ==================== -->
-    <section id="tab-settings" class="tab-content hidden">
-      <div class="max-w-2xl bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-8 sm:p-10">
+    <!-- ==================== TAB 7: PENGATURAN & KONTAK ==================== -->
+    <section id="tab-settings" class="tab-content hidden min-w-0">
+      <div class="max-w-2xl bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-5 sm:p-10 min-w-0">
         <h3 class="font-baloo font-bold text-2xl text-on-surface mb-2">⚙️ Pengaturan Website & Kontak</h3>
         <p class="text-xs text-neutral-slate-muted mb-6">Setelan nomor WhatsApp admin Bali Top Holiday, jam kerja, dan PIN akses admin.</p>
 
@@ -1000,9 +1009,8 @@
   </main>
 
   <!-- ====================== MODAL FORM PAKET ====================== -->
-  <!-- ====================== MODAL FORM PAKET ====================== -->
-  <div id="modal-package" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop overflow-y-auto">
-    <div class="bg-card-surface rounded-3xl max-w-3xl w-full p-6 sm:p-8 border border-border-subtle shadow-2xl my-6 relative max-h-[92vh] flex flex-col">
+  <div id="modal-package" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-4 modal-backdrop overflow-y-auto">
+    <div class="bg-card-surface rounded-3xl max-w-3xl w-full p-4 sm:p-8 border border-border-subtle shadow-2xl my-4 sm:my-6 relative max-h-[92vh] flex flex-col">
       <div class="flex items-center justify-between pb-4 border-b border-border-subtle mb-4 shrink-0">
         <div>
           <h4 class="font-baloo font-bold text-2xl text-on-surface" id="modal-package-title">Tambah Paket Wisata</h4>
@@ -2009,7 +2017,7 @@
     function addActivityRowToContainer(container, place = '', desc = '', icon = '📍') {
       const displayEmoji = iconToEmoji(icon);
       const div = document.createElement('div');
-      div.className = 'flex items-center gap-2 activity-row bg-white p-2.5 rounded-xl border border-border-subtle shadow-2xs';
+      div.className = 'flex flex-col sm:flex-row items-stretch sm:items-center gap-2 activity-row bg-white p-2.5 rounded-xl border border-border-subtle shadow-2xs min-w-0';
       
       const commonEmojis = [
         { e: '📍', label: '📍 Destinasi' },
@@ -2040,12 +2048,15 @@
       }
 
       div.innerHTML = `
-        <select class="activity-icon text-xs px-2 py-1.5 border border-border-subtle rounded-xl bg-surface-container-low shrink-0 cursor-pointer font-bold focus:ring-1 focus:ring-primary-container focus:outline-none" title="Pilih icon aktivitas">
-          ${optionsHtml}
-        </select>
-        <input type="text" placeholder="Nama Tempat / Destinasi" value="${(place || '').replace(/"/g, '&quot;')}" class="activity-place text-xs p-1.5 border border-border-subtle rounded-lg w-1/3 bg-white font-bold text-on-surface focus:ring-1 focus:ring-primary-container focus:outline-none" />
-        <input type="text" placeholder="Deskripsi aktivitas ramah anak (durasi & fasilitas)" value="${(desc || '').replace(/"/g, '&quot;')}" class="activity-desc text-xs p-1.5 border border-border-subtle rounded-lg flex-1 bg-white text-neutral-slate-muted focus:ring-1 focus:ring-primary-container focus:outline-none" />
-        <button type="button" onclick="this.parentElement.remove()" class="text-neutral-slate-muted hover:text-rose-600 text-xs p-1 rounded-full hover:bg-rose-50 shrink-0" title="Hapus titik ini">✕</button>
+        <div class="flex items-center gap-2 w-full sm:w-auto min-w-0">
+          <select class="activity-icon text-xs px-2 py-1.5 border border-border-subtle rounded-xl bg-surface-container-low shrink-0 cursor-pointer font-bold focus:ring-1 focus:ring-primary-container focus:outline-none" title="Pilih icon aktivitas">
+            ${optionsHtml}
+          </select>
+          <input type="text" placeholder="Nama Tempat / Destinasi" value="${(place || '').replace(/"/g, '&quot;')}" class="activity-place text-xs p-1.5 border border-border-subtle rounded-lg flex-1 sm:w-44 bg-white font-bold text-on-surface focus:ring-1 focus:ring-primary-container focus:outline-none" />
+          <button type="button" onclick="this.closest('.activity-row').remove()" class="sm:hidden text-neutral-slate-muted hover:text-rose-600 text-xs p-1 rounded-full hover:bg-rose-50 shrink-0" title="Hapus titik ini">✕</button>
+        </div>
+        <input type="text" placeholder="Deskripsi aktivitas ramah anak (durasi & fasilitas)" value="${(desc || '').replace(/"/g, '&quot;')}" class="activity-desc text-xs p-1.5 border border-border-subtle rounded-lg flex-1 bg-white text-neutral-slate-muted focus:ring-1 focus:ring-primary-container focus:outline-none min-w-0" />
+        <button type="button" onclick="this.closest('.activity-row').remove()" class="hidden sm:block text-neutral-slate-muted hover:text-rose-600 text-xs p-1 rounded-full hover:bg-rose-50 shrink-0" title="Hapus titik ini">✕</button>
       `;
       container.appendChild(div);
     }
