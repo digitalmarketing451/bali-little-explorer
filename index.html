@@ -1537,6 +1537,8 @@
             container.innerHTML = pkgs.map((p, idx) => {
               const isBestSeller = idx === 1 || (p.badge && p.badge.includes('TERLARIS'));
               const stops = Array.isArray(p.stops) ? p.stops : [];
+              const displayStops = stops.slice(0, 3);
+              const remainingCount = stops.length - 3;
               const waText = encodeURIComponent(`Halo Admin Bali Top Holiday! Saya tertarik dengan paket "${p.title}" dari Bali Little Explorer untuk keluarga saya.`);
               return `
                 <div class="bg-card-surface rounded-2xl ${isBestSeller ? 'border-2 border-primary-container shadow-lg scale-100 lg:-translate-y-2' : 'border border-border-subtle custom-shadow-soft'} overflow-hidden flex flex-col hover:custom-shadow-hover transition-all duration-300">
@@ -1555,15 +1557,20 @@
                   </div>
                   <div class="p-6 flex-1 flex flex-col justify-between space-y-6">
                     <ul class="space-y-3 text-body-md text-on-surface">
-                      ${stops.map(s => `
+                      ${displayStops.map(s => `
                         <li class="flex items-start gap-3">
-                          <span class="text-lg mt-0.5">${s.icon || '📍'}</span>
+                          <span class="text-lg mt-0.5">${s.icon || '🗓️'}</span>
                           <div>
                             <strong class="font-semibold block">${s.place || s.day_title || ''}</strong>
                             <span class="text-on-surface-variant text-label-md">${s.desc || (Array.isArray(s.activities) ? s.activities.map(a => a.place).join(' · ') : '')}</span>
                           </div>
                         </li>
                       `).join('')}
+                      ${remainingCount > 0 ? `
+                        <li class="text-xs font-bold text-primary-container pl-8">
+                          + ${remainingCount} hari petualangan seru lainnya
+                        </li>
+                      ` : ''}
                     </ul>
                     <div class="pt-4 border-t border-border-subtle">
                       <div class="p-3 bg-surface-container-low rounded-xl mb-4 text-label-sm font-label-sm text-on-surface-variant">
