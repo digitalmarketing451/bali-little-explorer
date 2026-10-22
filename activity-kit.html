@@ -188,7 +188,7 @@
 
       <!-- Trailing Action -->
       <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
-        <a id="nav-wa-btn" class="bg-palm-green text-on-primary font-label-md text-xs sm:text-label-md px-3 sm:px-5 py-2 sm:py-2.5 rounded-full flex items-center gap-1 sm:gap-2 hover:bg-palm-green/90 transition-all duration-200 active:scale-95 shadow-sm" href="https://wa.me/6281234567890?text=Halo%2C%20saya%20ingin%20tanya%20activity%20kit%20Bali%20Little%20Explorer!" target="_blank">
+        <a id="nav-wa-btn" class="bg-palm-green text-on-primary font-label-md text-xs sm:text-label-md px-3 sm:px-5 py-2 sm:py-2.5 rounded-full flex items-center gap-1 sm:gap-2 hover:bg-palm-green/90 transition-all duration-200 active:scale-95 shadow-sm" href="https://wa.me/6285190434988?text=Halo%2C%20saya%20ingin%20tanya%20activity%20kit%20Bali%20Little%20Explorer!" target="_blank">
           <span class="material-symbols-outlined text-base sm:text-lg" data-icon="chat">chat</span>
           <span class="hidden sm:inline">Tanya Via WA</span>
           <span class="sm:hidden text-xs">WA</span>
@@ -841,7 +841,7 @@
             Platform Edu-Tourism ramah anak di Bali bersama Bali Top Holiday. Menghadirkan paket wisata aman, panduan parenting ramah balita, dan activity kit kreatif.
           </p>
           <div class="flex items-center gap-3 pt-2">
-            <a class="w-9 h-9 rounded-full bg-card-surface/10 text-card-surface hover:text-white transition-colors duration-200 flex items-center justify-center" href="https://wa.me/6281234567890" target="_blank">
+            <a class="w-9 h-9 rounded-full bg-card-surface/10 text-card-surface hover:text-white transition-colors duration-200 flex items-center justify-center" href="https://wa.me/6285190434988" target="_blank">
               <span class="material-symbols-outlined text-lg" data-icon="chat">chat</span>
             </a>
           </div>
@@ -893,7 +893,7 @@
     const { createClient } = supabase;
     const db = createClient(SUPABASE_URL, SUPABASE_ANON);
 
-    let currentWA = '6281234567890';
+    let currentWA = '6285190434988';
     let currentColor = '#ff6b35';
     let currentColorName = 'Coral Orange';
     let currentMode = 'bucket'; // 'bucket' | 'brush' | 'eraser'
@@ -1008,6 +1008,7 @@
         const { data } = await db.from('site_settings').select('*').eq('id', 'general').single();
         if (data && data.whatsapp_number) {
           currentWA = data.whatsapp_number.replace(/[^0-9]/g, '');
+          if (currentWA.startsWith('0')) currentWA = '62' + currentWA.slice(1);
           updateAllWALinks(currentWA);
         }
       } catch (e) {
