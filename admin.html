@@ -1009,15 +1009,20 @@
   </main>
 
   <!-- ====================== MODAL FORM PAKET ====================== -->
-  <div id="modal-package" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-4 modal-backdrop overflow-y-auto">
-    <div class="bg-card-surface rounded-3xl max-w-3xl w-full p-4 sm:p-8 border border-border-subtle shadow-2xl my-4 sm:my-6 relative max-h-[92vh] flex flex-col">
-      <div class="flex items-center justify-between pb-4 border-b border-border-subtle mb-4 shrink-0">
-        <div>
-          <h4 class="font-baloo font-bold text-2xl text-on-surface" id="modal-package-title">Tambah Paket Wisata</h4>
-          <p class="text-xs text-neutral-slate-muted">Kelola nama, durasi menginap, foto, dan rincian itinerary per hari.</p>
+  <div id="modal-package" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 modal-backdrop overflow-y-auto" onclick="if(event.target === this) closePackageModal()">
+    <div class="relative max-w-3xl w-full my-auto z-10">
+      <!-- Tombol X di Luar Border (Fixed, Tidak ikut ter-scroll) -->
+      <button type="button" onclick="closePackageModal()" class="absolute -top-3.5 -right-2 sm:-top-4 sm:-right-4 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-card-surface text-on-surface hover:text-primary-container shadow-2xl border-2 border-border-subtle hover:border-primary-container flex items-center justify-center text-sm sm:text-base font-extrabold transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer" title="Tutup (Esc)" aria-label="Tutup">
+        ✕
+      </button>
+
+      <div class="bg-card-surface rounded-3xl w-full p-4 sm:p-8 border border-border-subtle shadow-2xl relative max-h-[92vh] flex flex-col">
+        <div class="flex items-center justify-between pb-4 border-b border-border-subtle mb-4 shrink-0">
+          <div>
+            <h4 class="font-baloo font-bold text-2xl text-on-surface" id="modal-package-title">Tambah Paket Wisata</h4>
+            <p class="text-xs text-neutral-slate-muted">Kelola nama, durasi menginap, foto, dan rincian itinerary per hari.</p>
+          </div>
         </div>
-        <button type="button" onclick="closePackageModal()" class="w-9 h-9 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center font-bold text-sm transition">✕</button>
-      </div>
 
       <form id="form-package-edit" novalidate class="space-y-5 overflow-y-auto pr-1 flex-1">
         <input type="hidden" id="pkg-id" />
@@ -1129,14 +1134,20 @@
       </form>
     </div>
   </div>
+</div>
 
   <!-- ====================== MODAL FORM KIT ====================== -->
-  <div id="modal-kit" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop">
-    <div class="bg-card-surface rounded-3xl max-w-md w-full p-7 border border-border-subtle shadow-2xl relative">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
-        <h4 class="font-baloo font-bold text-xl text-on-surface" id="modal-kit-title">Kelola Activity Kit</h4>
-        <button type="button" onclick="closeKitModal()" class="w-9 h-9 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center font-bold text-sm transition">✕</button>
-      </div>
+  <div id="modal-kit" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop" onclick="if(event.target === this) closeKitModal()">
+    <div class="relative max-w-md w-full my-auto z-10">
+      <!-- Tombol X di Luar Border (Fixed, Tidak ikut ter-scroll) -->
+      <button type="button" onclick="closeKitModal()" class="absolute -top-3.5 -right-2 sm:-top-4 sm:-right-4 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-card-surface text-on-surface hover:text-primary-container shadow-2xl border-2 border-border-subtle hover:border-primary-container flex items-center justify-center text-sm sm:text-base font-extrabold transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer" title="Tutup (Esc)" aria-label="Tutup">
+        ✕
+      </button>
+
+      <div class="bg-card-surface rounded-3xl w-full p-7 border border-border-subtle shadow-2xl relative">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
+          <h4 class="font-baloo font-bold text-xl text-on-surface" id="modal-kit-title">Kelola Activity Kit</h4>
+        </div>
       <form id="form-kit-edit" novalidate class="space-y-4">
         <input type="hidden" id="kit-id" />
         <div class="grid grid-cols-3 gap-3">
@@ -1190,17 +1201,23 @@
       </form>
     </div>
   </div>
+</div>
 
   <!-- ====================== MODAL FORM COLORING SHEET ====================== -->
-  <div id="modal-coloring" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop overflow-y-auto">
-    <div class="bg-card-surface rounded-3xl max-w-xl w-full p-7 border border-border-subtle shadow-2xl relative my-8 max-h-[92vh] flex flex-col">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4 shrink-0">
-        <div>
-          <h4 class="font-baloo font-bold text-xl text-on-surface" id="modal-coloring-title">Tambah Lembar Mewarnai</h4>
-          <p class="text-xs text-slate-400">Atur template outline SVG dan cerita edukasi untuk studio mewarnai anak</p>
+  <div id="modal-coloring" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop overflow-y-auto" onclick="if(event.target === this) closeColoringModal()">
+    <div class="relative max-w-xl w-full my-auto z-10">
+      <!-- Tombol X di Luar Border (Fixed, Tidak ikut ter-scroll) -->
+      <button type="button" onclick="closeColoringModal()" class="absolute -top-3.5 -right-2 sm:-top-4 sm:-right-4 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-card-surface text-on-surface hover:text-primary-container shadow-2xl border-2 border-border-subtle hover:border-primary-container flex items-center justify-center text-sm sm:text-base font-extrabold transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer" title="Tutup (Esc)" aria-label="Tutup">
+        ✕
+      </button>
+
+      <div class="bg-card-surface rounded-3xl w-full p-7 border border-border-subtle shadow-2xl relative my-8 max-h-[92vh] flex flex-col">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4 shrink-0">
+          <div>
+            <h4 class="font-baloo font-bold text-xl text-on-surface" id="modal-coloring-title">Tambah Lembar Mewarnai</h4>
+            <p class="text-xs text-slate-400">Atur template outline SVG dan cerita edukasi untuk studio mewarnai anak</p>
+          </div>
         </div>
-        <button type="button" onclick="closeColoringModal()" class="w-9 h-9 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center font-bold text-sm transition">✕</button>
-      </div>
 
       <form id="form-coloring-edit" novalidate class="space-y-4 overflow-y-auto pr-1">
         <input type="hidden" id="coloring-id" />
@@ -1295,14 +1312,20 @@
       </form>
     </div>
   </div>
+</div>
 
   <!-- ====================== MODAL FORM TIPS ====================== -->
-  <div id="modal-tip" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop">
-    <div class="bg-card-surface rounded-3xl max-w-md w-full p-7 border border-border-subtle shadow-2xl relative">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
-        <h4 class="font-baloo font-bold text-xl text-on-surface" id="modal-tip-title">Kelola Parenting Tips</h4>
-        <button type="button" onclick="closeTipModal()" class="w-9 h-9 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center font-bold text-sm transition">✕</button>
-      </div>
+  <div id="modal-tip" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop" onclick="if(event.target === this) closeTipModal()">
+    <div class="relative max-w-md w-full my-auto z-10">
+      <!-- Tombol X di Luar Border (Fixed, Tidak ikut ter-scroll) -->
+      <button type="button" onclick="closeTipModal()" class="absolute -top-3.5 -right-2 sm:-top-4 sm:-right-4 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-card-surface text-on-surface hover:text-primary-container shadow-2xl border-2 border-border-subtle hover:border-primary-container flex items-center justify-center text-sm sm:text-base font-extrabold transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer" title="Tutup (Esc)" aria-label="Tutup">
+        ✕
+      </button>
+
+      <div class="bg-card-surface rounded-3xl w-full p-7 border border-border-subtle shadow-2xl relative">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
+          <h4 class="font-baloo font-bold text-xl text-on-surface" id="modal-tip-title">Kelola Parenting Tips</h4>
+        </div>
       <form id="form-tip-edit" novalidate class="space-y-4">
         <input type="hidden" id="tip-id" />
         <div class="grid grid-cols-3 gap-3">
@@ -1350,6 +1373,7 @@
       </form>
     </div>
   </div>
+</div>
 
   <!-- ====================== SCRIPTS & LOGIC ====================== -->
   <script>
@@ -1620,6 +1644,16 @@
       }
       submitBtn.textContent = origText;
       submitBtn.disabled = false;
+    });
+
+    // Close open modals on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closePackageModal();
+        closeKitModal();
+        closeColoringModal();
+        closeTipModal();
+      }
     });
 
     function handleLogout() {

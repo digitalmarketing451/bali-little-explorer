@@ -800,27 +800,31 @@
   </main>
 
   <!-- ==================== QUICK PREVIEW MODAL ==================== -->
-  <div class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-neutral-slate-dark/50 backdrop-blur-sm" id="preview-modal">
-    <div class="bg-card-surface rounded-3xl max-w-lg w-full p-6 md:p-8 border border-border-subtle shadow-2xl relative">
-      <button class="absolute top-5 right-5 text-neutral-slate-muted hover:text-on-surface p-1 rounded-full transition-colors" onclick="closePreviewModal()">
-        <span class="material-symbols-outlined text-2xl" data-icon="close">close</span>
+  <div class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 bg-neutral-slate-dark/50 backdrop-blur-sm" id="preview-modal" onclick="if(event.target === this) closePreviewModal()">
+    <div class="relative max-w-lg w-full my-auto z-10">
+      <!-- Tombol X di Luar Border (Fixed, Tidak ikut ter-scroll) -->
+      <button type="button" onclick="closePreviewModal()" class="absolute -top-3.5 -right-2 sm:-top-4 sm:-right-4 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-card-surface text-on-surface hover:text-primary-container shadow-2xl border-2 border-border-subtle hover:border-primary-container flex items-center justify-center text-sm sm:text-base font-extrabold transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer" title="Tutup Preview (Esc)" aria-label="Tutup">
+        ✕
       </button>
-      <div class="flex items-center gap-2 text-primary text-label-sm font-label-sm uppercase font-bold mb-2">
-        <span class="material-symbols-outlined text-base" data-icon="search">search</span>
-        <span>Preview Kit Edukasi</span>
-      </div>
-      <h3 class="text-headline-sm font-headline-sm text-on-surface mb-2 font-bold" id="modal-title">Judul Lembar</h3>
-      <p class="text-body-md font-body-md text-neutral-slate-muted mb-6 leading-relaxed" id="modal-desc">Deskripsi lembar aktivitas PDF.</p>
-      
-      <!-- Mock Preview Visual -->
-      <div class="aspect-[4/3] bg-cream-bg rounded-xl border border-dashed border-primary-container/40 flex flex-col items-center justify-center p-6 text-center mb-6">
-        <span class="material-symbols-outlined text-5xl text-primary mb-2" data-icon="picture_as_pdf">picture_as_pdf</span>
-        <p class="text-label-md font-label-md text-on-surface font-bold">Berkas Standar Cetak Kertas A4 (300 DPI)</p>
-        <p class="text-label-sm font-label-sm text-neutral-slate-muted mt-1 max-w-xs">Format siap print hitam-putih maupun berwarna ramah printer rumah.</p>
-      </div>
-      <div class="flex items-center justify-end gap-3">
-        <button class="px-5 py-2.5 rounded-full border border-border-subtle text-neutral-slate-muted hover:text-on-surface font-label-md text-label-md" onclick="closePreviewModal()">Tutup</button>
-        <a class="px-6 py-2.5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md font-bold hover:bg-primary transition-all shadow-sm" href="#download-bundle-form" onclick="closePreviewModal()">Unduh Sekarang</a>
+
+      <div class="bg-card-surface rounded-3xl w-full p-6 md:p-8 border border-border-subtle shadow-2xl max-h-[88vh] overflow-y-auto">
+        <div class="flex items-center gap-2 text-primary text-label-sm font-label-sm uppercase font-bold mb-2">
+          <span class="material-symbols-outlined text-base" data-icon="search">search</span>
+          <span>Preview Kit Edukasi</span>
+        </div>
+        <h3 class="text-headline-sm font-headline-sm text-on-surface mb-2 font-bold" id="modal-title">Judul Lembar</h3>
+        <p class="text-body-md font-body-md text-neutral-slate-muted mb-6 leading-relaxed" id="modal-desc">Deskripsi lembar aktivitas PDF.</p>
+        
+        <!-- Mock Preview Visual -->
+        <div class="aspect-[4/3] bg-cream-bg rounded-xl border border-dashed border-primary-container/40 flex flex-col items-center justify-center p-6 text-center mb-6">
+          <span class="material-symbols-outlined text-5xl text-primary mb-2" data-icon="picture_as_pdf">picture_as_pdf</span>
+          <p class="text-label-md font-label-md text-on-surface font-bold">Berkas Standar Cetak Kertas A4 (300 DPI)</p>
+          <p class="text-label-sm font-label-sm text-neutral-slate-muted mt-1 max-w-xs">Format siap print hitam-putih maupun berwarna ramah printer rumah.</p>
+        </div>
+        <div class="flex items-center justify-end gap-3">
+          <button class="px-5 py-2.5 rounded-full border border-border-subtle text-neutral-slate-muted hover:text-on-surface font-label-md text-label-md" onclick="closePreviewModal()">Tutup</button>
+          <a class="px-6 py-2.5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md font-bold hover:bg-primary transition-all shadow-sm" href="#download-bundle-form" onclick="closePreviewModal()">Unduh Sekarang</a>
+        </div>
       </div>
     </div>
   </div>

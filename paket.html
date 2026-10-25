@@ -405,118 +405,124 @@
   </div>
 
   <!-- ==================== MODAL ITINERARY DETAIL ==================== -->
-  <div id="modal-itinerary" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
-    <div class="bg-card-surface rounded-3xl max-w-2xl w-full p-6 sm:p-8 max-h-[90vh] overflow-y-auto border border-border-subtle custom-shadow-hover relative">
-      <button onclick="closeItineraryModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-surface-container-low hover:bg-surface-container text-neutral-slate-muted flex items-center justify-center text-sm font-bold transition">
+  <div id="modal-itinerary" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4 sm:p-6" onclick="if(event.target === this) closeItineraryModal()">
+    <div class="relative w-full max-w-2xl my-auto">
+      <!-- Tombol X di Luar Border (Fixed, Tidak ikut ter-scroll) -->
+      <button type="button" onclick="closeItineraryModal()" class="absolute -top-3.5 -right-2 sm:-top-4 sm:-right-4 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-card-surface text-on-surface hover:text-primary-container shadow-2xl border-2 border-border-subtle hover:border-primary-container flex items-center justify-center text-sm sm:text-base font-extrabold transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer" title="Tutup Detail Itinerary (Esc)" aria-label="Tutup">
         ✕
       </button>
 
-      <div class="flex items-center gap-3 mb-4">
-        <span id="detail-icon" class="text-3xl">🌴</span>
-        <div>
-          <span id="detail-badge" class="bg-sun-amber text-on-surface text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider inline-block mb-1">POPULER</span>
-          <h3 id="detail-title" class="font-bold text-2xl text-on-surface leading-tight">Nama Paket</h3>
-          <div class="flex items-center gap-2.5 mt-1 flex-wrap">
-            <p id="detail-duration" class="text-xs font-semibold text-primary">⏱️ 3 Hari 2 Malam (3D2N)</p>
-            <span class="text-border-subtle">•</span>
-            <p id="detail-price" class="text-xs font-bold text-primary-container">💰 Hubungi Kami</p>
+      <div class="bg-card-surface rounded-3xl w-full p-6 sm:p-8 max-h-[85vh] sm:max-h-[88vh] overflow-y-auto border border-border-subtle custom-shadow-hover">
+        <div class="flex items-center gap-3 mb-4">
+          <span id="detail-icon" class="text-3xl">🌴</span>
+          <div>
+            <span id="detail-badge" class="bg-sun-amber text-on-surface text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider inline-block mb-1">POPULER</span>
+            <h3 id="detail-title" class="font-bold text-2xl text-on-surface leading-tight">Nama Paket</h3>
+            <div class="flex items-center gap-2.5 mt-1 flex-wrap">
+              <p id="detail-duration" class="text-xs font-semibold text-primary">⏱️ 3 Hari 2 Malam (3D2N)</p>
+              <span class="text-border-subtle">•</span>
+              <p id="detail-price" class="text-xs font-bold text-primary-container">💰 Hubungi Kami</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="p-4 bg-surface-container-low rounded-2xl border border-border-subtle mb-6">
-        <p class="text-label-sm font-bold text-on-surface mb-1 uppercase tracking-wider">Fasilitas Termasuk:</p>
-        <p id="detail-includes" class="text-xs text-on-surface-variant leading-relaxed">
-          Activity Kit PDF, Driver Terlatih Ramah Balita, Mobil Privat AC Bersih.
-        </p>
-      </div>
-
-      <div class="mb-6">
-        <h4 class="font-bold text-sm text-on-surface mb-3 uppercase tracking-wider">Rencana Titik Perjalanan Ramah Anak:</h4>
-        <div id="detail-stops-list" class="space-y-3">
-          <!-- Populated dynamically via JS -->
+        <div class="p-4 bg-surface-container-low rounded-2xl border border-border-subtle mb-6">
+          <p class="text-label-sm font-bold text-on-surface mb-1 uppercase tracking-wider">Fasilitas Termasuk:</p>
+          <p id="detail-includes" class="text-xs text-on-surface-variant leading-relaxed">
+            Activity Kit PDF, Driver Terlatih Ramah Balita, Mobil Privat AC Bersih.
+          </p>
         </div>
-      </div>
 
-      <div class="pt-4 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-3">
-        <span class="text-xs text-neutral-slate-muted">Gratis ganti jadwal jika si kecil kurang fit!</span>
-        <div class="flex items-center gap-2.5 w-full sm:w-auto justify-end">
-          <a id="detail-wa-btn" href="#" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full bg-palm-green hover:bg-palm-green/90 text-white font-bold text-xs transition">
-            <span class="material-symbols-outlined text-base">chat</span>
-            <span>Tanya via WA</span>
-          </a>
-          <button onclick="openBookingFromDetail()" class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full bg-primary-container hover:bg-primary text-white font-bold text-xs transition shadow-sm">
-            <span>Pesan Jadwal Ini 🚀</span>
-          </button>
+        <div class="mb-6">
+          <h4 class="font-bold text-sm text-on-surface mb-3 uppercase tracking-wider">Rencana Titik Perjalanan Ramah Anak:</h4>
+          <div id="detail-stops-list" class="space-y-3">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-3">
+          <span class="text-xs text-neutral-slate-muted">Gratis ganti jadwal jika si kecil kurang fit!</span>
+          <div class="flex items-center gap-2.5 w-full sm:w-auto justify-end">
+            <a id="detail-wa-btn" href="#" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full bg-palm-green hover:bg-palm-green/90 text-white font-bold text-xs transition">
+              <span class="material-symbols-outlined text-base">chat</span>
+              <span>Tanya via WA</span>
+            </a>
+            <button onclick="openBookingFromDetail()" class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full bg-primary-container hover:bg-primary text-white font-bold text-xs transition shadow-sm">
+              <span>Pesan Jadwal Ini 🚀</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- ==================== MODAL BOOKING PEMESANAN ==================== -->
-  <div id="modal-booking" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
-    <div class="bg-card-surface rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-border-subtle custom-shadow-hover relative">
-      <button onclick="closeBookingModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-surface-container-low hover:bg-surface-container text-neutral-slate-muted flex items-center justify-center text-sm font-bold transition">
+  <div id="modal-booking" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4 sm:p-6" onclick="if(event.target === this) closeBookingModal()">
+    <div class="relative w-full max-w-lg my-auto">
+      <!-- Tombol X di Luar Border (Fixed, Tidak ikut ter-scroll) -->
+      <button type="button" onclick="closeBookingModal()" class="absolute -top-3.5 -right-2 sm:-top-4 sm:-right-4 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-card-surface text-on-surface hover:text-primary-container shadow-2xl border-2 border-border-subtle hover:border-primary-container flex items-center justify-center text-sm sm:text-base font-extrabold transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer" title="Tutup Formulir (Esc)" aria-label="Tutup">
         ✕
       </button>
 
-      <div class="mb-5">
-        <span class="text-label-sm font-bold text-primary uppercase tracking-wider block mb-1">Pemesanan Langsung</span>
-        <h3 class="font-bold text-2xl text-on-surface">Reservasi Jadwal Tour</h3>
-        <p class="text-xs text-neutral-slate-muted mt-1">Data Anda aman. Admin akan segera mengonfirmasi armada privat Anda via WA.</p>
+      <div class="bg-card-surface rounded-3xl w-full p-6 sm:p-8 max-h-[88vh] overflow-y-auto border border-border-subtle custom-shadow-hover">
+        <div class="mb-5">
+          <span class="text-label-sm font-bold text-primary uppercase tracking-wider block mb-1">Pemesanan Langsung</span>
+          <h3 class="font-bold text-2xl text-on-surface">Reservasi Jadwal Tour</h3>
+          <p class="text-xs text-neutral-slate-muted mt-1">Data Anda aman. Admin akan segera mengonfirmasi armada privat Anda via WA.</p>
+        </div>
+
+        <form id="booking-form" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-1">Pilihan Paket Wisata *</label>
+            <select id="book-package" required class="w-full px-3.5 py-2.5 border border-border-subtle rounded-xl text-xs font-semibold focus:ring-1 focus:ring-primary focus:outline-none bg-surface-container-low/50">
+              <option value="Seni & Budaya Bali (3D2N)">Seni & Budaya Bali (3 Hari 2 Malam)</option>
+              <option value="Alam & Flora Fauna (4D3N)">Alam & Flora Fauna (4 Hari 3 Malam)</option>
+              <option value="Pantai & Spiritualitas (5D4N)">Pantai & Spiritualitas (5 Hari 4 Malam)</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-on-surface mb-1">Nama Orang Tua *</label>
+              <input type="text" id="book-name" required placeholder="Bunda Sarah"
+                     class="w-full px-3.5 py-2.5 border border-border-subtle rounded-xl text-xs focus:ring-1 focus:ring-primary focus:outline-none bg-surface-container-low/30" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-on-surface mb-1">Nomor WhatsApp *</label>
+              <input type="tel" id="book-phone" required placeholder="081234567890"
+                     class="w-full px-3.5 py-2.5 border border-border-subtle rounded-xl text-xs focus:ring-1 focus:ring-primary focus:outline-none bg-surface-container-low/30" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-on-surface mb-1">Rencana Tanggal *</label>
+              <input type="date" id="book-date" required
+                     class="w-full px-3.5 py-2.5 border border-border-subtle rounded-xl text-xs focus:ring-1 focus:ring-primary focus:outline-none bg-surface-container-low/30" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-on-surface mb-1">Jumlah Peserta</label>
+              <input type="text" id="book-kids" placeholder="1 Balita, 2 Dewasa"
+                     class="w-full px-3.5 py-2.5 border border-border-subtle rounded-xl text-xs focus:ring-1 focus:ring-primary focus:outline-none bg-surface-container-low/30" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-1">Catatan / Hotel Jemput</label>
+            <input type="text" id="book-notes" placeholder="Contoh: Hotel The Westin Nusa Dua, butuh baby car seat"
+                   class="w-full px-3.5 py-2.5 border border-border-subtle rounded-xl text-xs focus:ring-1 focus:ring-primary focus:outline-none bg-surface-container-low/30" />
+          </div>
+
+          <div class="pt-3 border-t border-border-subtle flex items-center justify-end gap-3">
+            <button type="button" onclick="closeBookingModal()" class="px-5 py-2.5 rounded-full text-label-md font-semibold text-neutral-slate-muted hover:bg-surface-container transition">
+              Batal
+            </button>
+            <button type="submit" id="book-submit-btn" class="px-6 py-2.5 rounded-full bg-primary-container hover:bg-primary text-white font-bold text-label-md shadow-md transition">
+              Kirim Reservasi Sekarang 🚀
+            </button>
+          </div>
+        </form>
       </div>
-
-      <form id="booking-form" class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold text-on-surface mb-1">Pilihan Paket Wisata *</label>
-          <select id="book-package" required class="w-full px-3.5 py-2.5 border border-border-subtle rounded-xl text-xs font-semibold focus:ring-1 focus:ring-primary focus:outline-none bg-surface-container-low/50">
-            <option value="Seni & Budaya Bali (3D2N)">Seni & Budaya Bali (3 Hari 2 Malam)</option>
-            <option value="Alam & Flora Fauna (4D3N)">Alam & Flora Fauna (4 Hari 3 Malam)</option>
-            <option value="Pantai & Spiritualitas (5D4N)">Pantai & Spiritualitas (5 Hari 4 Malam)</option>
-          </select>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-bold text-on-surface mb-1">Nama Orang Tua *</label>
-            <input type="text" id="book-name" required placeholder="Bunda Sarah"
-                   class="w-full px-3.5 py-2.5 border border-border-subtle rounded-xl text-xs focus:ring-1 focus:ring-primary focus:outline-none bg-surface-container-low/30" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-on-surface mb-1">Nomor WhatsApp *</label>
-            <input type="tel" id="book-phone" required placeholder="081234567890"
-                   class="w-full px-3.5 py-2.5 border border-border-subtle rounded-xl text-xs focus:ring-1 focus:ring-primary focus:outline-none bg-surface-container-low/30" />
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-bold text-on-surface mb-1">Rencana Tanggal *</label>
-            <input type="date" id="book-date" required
-                   class="w-full px-3.5 py-2.5 border border-border-subtle rounded-xl text-xs focus:ring-1 focus:ring-primary focus:outline-none bg-surface-container-low/30" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-on-surface mb-1">Jumlah Peserta</label>
-            <input type="text" id="book-kids" placeholder="1 Balita, 2 Dewasa"
-                   class="w-full px-3.5 py-2.5 border border-border-subtle rounded-xl text-xs focus:ring-1 focus:ring-primary focus:outline-none bg-surface-container-low/30" />
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-on-surface mb-1">Catatan / Hotel Jemput</label>
-          <input type="text" id="book-notes" placeholder="Contoh: Hotel The Westin Nusa Dua, butuh baby car seat"
-                 class="w-full px-3.5 py-2.5 border border-border-subtle rounded-xl text-xs focus:ring-1 focus:ring-primary focus:outline-none bg-surface-container-low/30" />
-        </div>
-
-        <div class="pt-3 border-t border-border-subtle flex items-center justify-end gap-3">
-          <button type="button" onclick="closeBookingModal()" class="px-5 py-2.5 rounded-full text-label-md font-semibold text-neutral-slate-muted hover:bg-surface-container transition">
-            Batal
-          </button>
-          <button type="submit" id="book-submit-btn" class="px-6 py-2.5 rounded-full bg-primary-container hover:bg-primary text-white font-bold text-label-md shadow-md transition">
-            Kirim Reservasi Sekarang 🚀
-          </button>
-        </div>
-      </form>
     </div>
   </div>
 
@@ -2567,6 +2573,14 @@
         } finally {
           submitBtn.textContent = origText;
           submitBtn.disabled = false;
+        }
+      });
+
+      // Close modal on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeItineraryModal();
+          closeBookingModal();
         }
       });
     }

@@ -1400,28 +1400,35 @@
   </div>
 
   <!-- ====================== DOWNLOAD MODAL ====================== -->
-  <div id="download-modal" class="fixed inset-0 z-[9999] hidden items-center justify-center p-4">
+  <div id="download-modal" class="fixed inset-0 z-[9999] hidden items-center justify-center p-4 sm:p-6" onclick="if(event.target === this) closeDownloadModal()">
     <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeDownloadModal()"></div>
-    <div class="relative bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl z-10 text-center">
-      <div class="w-16 h-16 rounded-2xl bg-coral-soft text-primary flex items-center justify-center mx-auto mb-4">
-        <span class="material-symbols-outlined text-3xl">download</span>
-      </div>
-      <h3 class="font-bold text-2xl text-on-surface mb-2" id="modal-title">Download Activity Kit</h3>
-      <p class="text-neutral-slate-muted text-sm mb-6" id="modal-desc">15+ Lembar mewarnai & latihan motorik anak</p>
-
-      <div class="bg-surface-container-low rounded-2xl p-4 mb-6 text-left">
-        <p class="text-xs text-neutral-slate-muted mb-2">📧 Isi data untuk mendapatkan link download langsung:</p>
-        <input type="text" id="modal-name" placeholder="Nama Anda"
-               class="w-full bg-white border border-border-subtle rounded-xl px-4 py-2.5 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-primary-container" />
-        <input type="email" id="modal-email" placeholder="Email (opsional)"
-               class="w-full bg-white border border-border-subtle rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-container" />
-      </div>
-
-      <button onclick="handleDownload()"
-              class="w-full bg-primary-container text-white py-3.5 rounded-full font-bold hover:bg-primary transition shadow-lg mb-3">
-              📥 Unduh Sekarang (Gratis)
+    <div class="relative max-w-md w-full my-auto z-10">
+      <!-- Tombol X di Luar Border (Fixed, Tidak ikut ter-scroll) -->
+      <button type="button" onclick="closeDownloadModal()" class="absolute -top-3.5 -right-2 sm:-top-4 sm:-right-4 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white text-on-surface hover:text-primary-container shadow-2xl border-2 border-slate-200 flex items-center justify-center text-sm sm:text-base font-extrabold transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer" title="Tutup Modal" aria-label="Tutup">
+        ✕
       </button>
-      <button onclick="closeDownloadModal()" class="text-sm text-neutral-slate-muted hover:text-on-surface transition">Batal</button>
+
+      <div class="relative bg-white rounded-3xl p-6 sm:p-8 w-full shadow-2xl text-center max-h-[88vh] overflow-y-auto">
+        <div class="w-16 h-16 rounded-2xl bg-coral-soft text-primary flex items-center justify-center mx-auto mb-4">
+          <span class="material-symbols-outlined text-3xl">download</span>
+        </div>
+        <h3 class="font-bold text-2xl text-on-surface mb-2" id="modal-title">Download Activity Kit</h3>
+        <p class="text-neutral-slate-muted text-sm mb-6" id="modal-desc">15+ Lembar mewarnai & latihan motorik anak</p>
+
+        <div class="bg-surface-container-low rounded-2xl p-4 mb-6 text-left">
+          <p class="text-xs text-neutral-slate-muted mb-2">📧 Isi data untuk mendapatkan link download langsung:</p>
+          <input type="text" id="modal-name" placeholder="Nama Anda"
+                 class="w-full bg-white border border-border-subtle rounded-xl px-4 py-2.5 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-primary-container" />
+          <input type="email" id="modal-email" placeholder="Email (opsional)"
+                 class="w-full bg-white border border-border-subtle rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-container" />
+        </div>
+
+        <button onclick="handleDownload()"
+                class="w-full bg-primary-container text-white py-3.5 rounded-full font-bold hover:bg-primary transition shadow-lg mb-3">
+                📥 Unduh Sekarang (Gratis)
+        </button>
+        <button onclick="closeDownloadModal()" class="text-sm text-neutral-slate-muted hover:text-on-surface transition">Batal</button>
+      </div>
     </div>
   </div>
 
