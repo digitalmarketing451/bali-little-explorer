@@ -461,6 +461,172 @@
           <!-- Rendered by JS -->
         </div>
       </div>
+
+      <!-- SUB-SECTION 3: E-BOOK BONUS - FAMILY TRAVEL GUIDE BALI -->
+      <div class="bg-card-surface rounded-3xl border border-border-subtle custom-shadow-soft p-4 sm:p-8 min-w-0">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-6 border-b border-border-subtle gap-2">
+          <div>
+            <div class="inline-flex items-center gap-1.5 text-primary text-[11px] font-bold uppercase tracking-wider mb-1">
+              <span>🎁 Bonus Spesial Orang Tua</span>
+            </div>
+            <h4 class="font-baloo font-bold text-lg sm:text-xl text-on-surface flex items-center gap-2">
+              <span>📖 Kelola E-Book Family Travel Guide Bali</span>
+            </h4>
+            <p class="text-xs text-neutral-slate-muted">Atur sampul 3D e-book, judul, deskripsi, 4 poin fasilitas unggulan, dan tautan unduhan berkas PDF di halaman Activity Kit.</p>
+          </div>
+          <a href="https://explorerbth.jinztech.cloud/activity-kit.html#family-travel-guide-section" target="_blank"
+             class="text-xs bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle font-bold px-3.5 py-1.5 rounded-full transition flex items-center gap-1 self-start sm:self-auto shadow-xs">
+            <span>👁️ Pratinjau di Web</span>
+            <span class="text-[10px]">↗</span>
+          </a>
+        </div>
+
+        <form id="form-family-guide" class="space-y-6">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <!-- Left: Cover Preview & Upload -->
+            <div class="lg:col-span-4 flex flex-col items-center">
+              <label class="block text-xs font-bold text-on-surface mb-2 self-start">Pratinjau Cover E-Book 3D:</label>
+              <div class="relative w-48 sm:w-56 shadow-2xl rounded-2xl overflow-hidden border-4 border-card-surface rotate-[-2deg] hover:rotate-0 transition-transform duration-300 mb-4 bg-slate-100 aspect-[3/4] flex items-center justify-center">
+                <img id="prev-fg-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXQp3yJYISQNjl64jAVspTIH9BDeAyZL9XQNlw-5eYBw4JnVWPQyGy0_lQwYcUj0o3HAoKnC5_O5tTsqjf8kb_1fmhUYl0M7eSVZPub18JfeiBaUPEapZVYNBSEJYWLs87Q_fGaME74urDb4XCR8i6sr66e2eOQLlix4Q5AJMMbu3OMVfMxKBnDDnHh6hqyIWKJfLUp1eWU1pIiq1c6dll6OXFsFiM-AgCm3ieTCqDGlhaD1LTggLUSw"
+                     alt="Cover E-Book" class="w-full h-full object-cover" />
+                <div id="prev-fg-cover-badge" class="absolute top-3 right-3 bg-sun-amber text-neutral-slate-dark font-bold text-[10px] px-2.5 py-0.5 rounded-full shadow">
+                  E-BOOK GRATIS
+                </div>
+              </div>
+
+              <!-- Cover image upload / URL widget -->
+              <div class="w-full space-y-3">
+                <div>
+                  <label class="block text-xs font-bold text-on-surface mb-1">Ganti Foto Sampul E-Book</label>
+                  <input type="hidden" id="fg-cover-url" />
+                  <div id="upload-widget-fg-cover-url"></div>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="block text-[10px] font-bold text-neutral-slate-muted mb-0.5">Badge di Foto Cover</label>
+                    <input type="text" id="fg-cover-badge" placeholder="E-BOOK GRATIS"
+                           class="w-full px-3 py-2 bg-surface-container-low border border-border-subtle rounded-xl text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-primary" />
+                  </div>
+                  <div>
+                    <label class="block text-[10px] font-bold text-neutral-slate-muted mb-0.5">Tautan Unduh PDF</label>
+                    <input type="text" id="fg-download-link" placeholder="#download-bundle-form"
+                           class="w-full px-3 py-2 bg-surface-container-low border border-border-subtle rounded-xl text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-primary" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Content Information & 4 Features -->
+            <div class="lg:col-span-8 space-y-4">
+              <!-- General Info -->
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="sm:col-span-1">
+                  <label class="block text-xs font-bold text-on-surface mb-1">Badge Atas *</label>
+                  <input type="text" id="fg-badge" required placeholder="🎁 Bonus Spesial Orang Tua"
+                         class="w-full px-3.5 py-2.5 bg-surface-container-low border border-border-subtle rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:ring-1 focus:ring-primary" />
+                </div>
+                <div class="sm:col-span-2">
+                  <label class="block text-xs font-bold text-on-surface mb-1">Judul E-Book Panduan *</label>
+                  <input type="text" id="fg-title" required placeholder="Family Travel Guide Bali (Edisi Balita & Anak)"
+                         class="w-full px-3.5 py-2.5 bg-surface-container-low border border-border-subtle rounded-xl text-xs sm:text-sm font-bold text-on-surface focus:outline-none focus:ring-1 focus:ring-primary" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-on-surface mb-1">Deskripsi Lengkap E-Book *</label>
+                <textarea id="fg-desc" rows="3" required placeholder="Buku panduan digital komprehensif 28 halaman..."
+                          class="w-full px-3.5 py-2.5 bg-surface-container-low border border-border-subtle rounded-xl text-xs sm:text-sm leading-relaxed focus:outline-none focus:ring-1 focus:ring-primary"></textarea>
+              </div>
+
+              <!-- 4 Feature Highlights -->
+              <div class="pt-2">
+                <label class="block text-xs font-bold text-on-surface mb-2">4 Poin Fitur & Fasilitas Unggulan Panduan:</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <!-- Poin 1 -->
+                  <div class="p-3.5 bg-surface-container-low/60 rounded-2xl border border-border-subtle space-y-2">
+                    <div class="flex items-center gap-2">
+                      <select id="fg-p1-icon" class="text-xs bg-white border border-border-subtle rounded-lg px-2 py-1.5 font-bold text-palm-green">
+                        <option value="baby_changing_station">🚼 Nursery Room</option>
+                        <option value="stroller">🛒 Stroller</option>
+                        <option value="restaurant">🍽️ Restoran</option>
+                        <option value="medical_services">🏥 Medis/Dokter</option>
+                        <option value="local_pharmacy">💊 Farmasi</option>
+                        <option value="child_friendly">🧸 Baby Friendly</option>
+                      </select>
+                      <input type="text" id="fg-p1-title" placeholder="Daftar Nursery Room Terbersih"
+                             class="flex-1 px-3 py-1.5 bg-white border border-border-subtle rounded-xl text-xs font-bold focus:outline-none focus:ring-1 focus:ring-primary" />
+                    </div>
+                    <textarea id="fg-p1-desc" rows="2" placeholder="Lokasi ruang menyusui & ganti popok di sekeliling Bali."
+                              class="w-full px-3 py-1.5 bg-white border border-border-subtle rounded-xl text-xs text-neutral-slate-muted focus:outline-none focus:ring-1 focus:ring-primary"></textarea>
+                  </div>
+
+                  <!-- Poin 2 -->
+                  <div class="p-3.5 bg-surface-container-low/60 rounded-2xl border border-border-subtle space-y-2">
+                    <div class="flex items-center gap-2">
+                      <select id="fg-p2-icon" class="text-xs bg-white border border-border-subtle rounded-lg px-2 py-1.5 font-bold text-primary">
+                        <option value="stroller">🛒 Stroller</option>
+                        <option value="baby_changing_station">🚼 Nursery Room</option>
+                        <option value="restaurant">🍽️ Restoran</option>
+                        <option value="medical_services">🏥 Medis/Dokter</option>
+                        <option value="directions_car">🚗 Car Seat</option>
+                        <option value="park">🌳 Taman</option>
+                      </select>
+                      <input type="text" id="fg-p2-title" placeholder="Rute Ramah Stroller & Kursi Bayi"
+                             class="flex-1 px-3 py-1.5 bg-white border border-border-subtle rounded-xl text-xs font-bold focus:outline-none focus:ring-1 focus:ring-primary" />
+                    </div>
+                    <textarea id="fg-p2-desc" rows="2" placeholder="Destinasi tanpa tangga curam yang aman untuk kereta dorong."
+                              class="w-full px-3 py-1.5 bg-white border border-border-subtle rounded-xl text-xs text-neutral-slate-muted focus:outline-none focus:ring-1 focus:ring-primary"></textarea>
+                  </div>
+
+                  <!-- Poin 3 -->
+                  <div class="p-3.5 bg-surface-container-low/60 rounded-2xl border border-border-subtle space-y-2">
+                    <div class="flex items-center gap-2">
+                      <select id="fg-p3-icon" class="text-xs bg-white border border-border-subtle rounded-lg px-2 py-1.5 font-bold text-secondary">
+                        <option value="restaurant">🍽️ Restoran</option>
+                        <option value="baby_changing_station">🚼 Nursery Room</option>
+                        <option value="stroller">🛒 Stroller</option>
+                        <option value="medical_services">🏥 Medis/Dokter</option>
+                        <option value="soup_kitchen">🥣 Menu Anak</option>
+                        <option value="icecream">🍦 Snack Sehat</option>
+                      </select>
+                      <input type="text" id="fg-p3-title" placeholder="Restoran Ramah Anak & Menu Balita"
+                             class="flex-1 px-3 py-1.5 bg-white border border-border-subtle rounded-xl text-xs font-bold focus:outline-none focus:ring-1 focus:ring-primary" />
+                    </div>
+                    <textarea id="fg-p3-desc" rows="2" placeholder="Tempat makan higienis dengan high-chair dan play area."
+                              class="w-full px-3 py-1.5 bg-white border border-border-subtle rounded-xl text-xs text-neutral-slate-muted focus:outline-none focus:ring-1 focus:ring-primary"></textarea>
+                  </div>
+
+                  <!-- Poin 4 -->
+                  <div class="p-3.5 bg-surface-container-low/60 rounded-2xl border border-border-subtle space-y-2">
+                    <div class="flex items-center gap-2">
+                      <select id="fg-p4-icon" class="text-xs bg-white border border-border-subtle rounded-lg px-2 py-1.5 font-bold text-purple-600">
+                        <option value="medical_services">🏥 Medis/Dokter</option>
+                        <option value="baby_changing_station">🚼 Nursery Room</option>
+                        <option value="stroller">🛒 Stroller</option>
+                        <option value="restaurant">🍽️ Restoran</option>
+                        <option value="emergency">🚨 Kontak Darurat</option>
+                        <option value="call">📞 Hotline 24 Jam</option>
+                      </select>
+                      <input type="text" id="fg-p4-title" placeholder="Kontak Darurat Dokter Anak"
+                             class="flex-1 px-3 py-1.5 bg-white border border-border-subtle rounded-xl text-xs font-bold focus:outline-none focus:ring-1 focus:ring-primary" />
+                    </div>
+                    <textarea id="fg-p4-desc" rows="2" placeholder="Nomor darurat RS & klinik internasional 24 jam di Bali."
+                              class="w-full px-3 py-1.5 bg-white border border-border-subtle rounded-xl text-xs text-neutral-slate-muted focus:outline-none focus:ring-1 focus:ring-primary"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Submit button -->
+              <div class="pt-4 flex items-center justify-end">
+                <button type="submit" id="fg-submit-btn" class="bg-primary-container hover:bg-primary text-white text-xs sm:text-sm font-bold px-6 py-2.5 rounded-full shadow-md active:scale-95 transition flex items-center gap-2">
+                  <span>💾</span>
+                  <span>Simpan Pengaturan Family Travel Guide</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </section>
 
     <!-- ==================== TAB 5: PARENTING TIPS ==================== -->
@@ -1594,6 +1760,9 @@
       // Parenting widgets
       createUploadWidget({ containerId: 'upload-widget-parenting-hero-img', inputId: 'parenting-hero-img', previewImgId: 'prev-parenting-hero-img', folder: 'parenting' });
 
+      // Family Travel Guide widget
+      createUploadWidget({ containerId: 'upload-widget-fg-cover-url', inputId: 'fg-cover-url', previewImgId: 'prev-fg-cover', folder: 'family_guide' });
+
       // Modal widgets
       createUploadWidget({ containerId: 'upload-widget-pkg-img', inputId: 'pkg-img', folder: 'packages' });
       createUploadWidget({ containerId: 'upload-widget-kit-img', inputId: 'kit-img', folder: 'kits' });
@@ -1668,6 +1837,9 @@
       const target = document.getElementById(tabId);
       if (target) target.classList.remove('hidden');
       if (btn) btn.classList.add('active');
+      if (tabId === 'tab-kits') {
+        loadFamilyGuideSettings();
+      }
     }
 
     // --- Initialize Dashboard ---
@@ -1681,6 +1853,7 @@
         loadColoringSheets(),
         loadTips(),
         loadParentingSettings(),
+        loadFamilyGuideSettings(),
         loadHomepageSettings(),
         loadSettingsForm(),
       ]);
@@ -2918,6 +3091,116 @@
         alert('🎉 Pengaturan Laman Parenting Tips berhasil disimpan! Perubahan langsung aktif di website parenting-tips.html.');
       } catch (err) {
         alert('Gagal menyimpan pengaturan: ' + err.message);
+      }
+    }
+
+    // ==================== FAMILY TRAVEL GUIDE CMS (TAB KIDS ACTIVITY) ====================
+    async function loadFamilyGuideSettings() {
+      // Setup preview listener for cover image
+      const coverInput = document.getElementById('fg-cover-url');
+      const prevCover = document.getElementById('prev-fg-cover');
+      if (coverInput && prevCover) {
+        coverInput.addEventListener('input', () => {
+          prevCover.src = coverInput.value.trim() || 'https://lh3.googleusercontent.com/aida-public/AB6AXuBXQp3yJYISQNjl64jAVspTIH9BDeAyZL9XQNlw-5eYBw4JnVWPQyGy0_lQwYcUj0o3HAoKnC5_O5tTsqjf8kb_1fmhUYl0M7eSVZPub18JfeiBaUPEapZVYNBSEJYWLs87Q_fGaME74urDb4XCR8i6sr66e2eOQLlix4Q5AJMMbu3OMVfMxKBnDDnHh6hqyIWKJfLUp1eWU1pIiq1c6dll6OXFsFiM-AgCm3ieTCqDGlhaD1LTggLUSw';
+        });
+      }
+
+      const coverBadgeInput = document.getElementById('fg-cover-badge');
+      const prevCoverBadge = document.getElementById('prev-fg-cover-badge');
+      if (coverBadgeInput && prevCoverBadge) {
+        coverBadgeInput.addEventListener('input', () => {
+          prevCoverBadge.textContent = coverBadgeInput.value.trim() || 'E-BOOK GRATIS';
+        });
+      }
+
+      try {
+        const { data, error } = await db.from('site_settings').select('*').eq('id', 'family_guide').single();
+        if (data) {
+          setVal('fg-badge', data.hero_badge || '🎁 Bonus Spesial Orang Tua');
+          setVal('fg-title', data.hero_title || 'Family Travel Guide Bali (Edisi Balita & Anak)');
+          setVal('fg-desc', data.hero_subtitle || 'Buku panduan digital komprehensif 28 halaman yang disusun oleh travel mom & tim Bali Top Holiday untuk memastikan liburan keluarga Anda di Bali berlangsung tenang, nyaman, dan ramah popok!');
+          setVal('fg-cover-badge', data.cta_banner_title || 'E-BOOK GRATIS');
+          setVal('fg-download-link', data.cta_banner_desc || '#download-bundle-form');
+
+          if (data.hero_image_url) {
+            setVal('fg-cover-url', data.hero_image_url);
+            if (prevCover) prevCover.src = data.hero_image_url;
+            syncUploadWidget('fg-cover-url', data.hero_image_url);
+          }
+          if (prevCoverBadge) {
+            prevCoverBadge.textContent = data.cta_banner_title || 'E-BOOK GRATIS';
+          }
+
+          // Poin 1
+          setVal('fg-p1-title', data.feature_1_title || 'Daftar Nursery Room Terbersih');
+          setVal('fg-p1-desc', data.feature_1_desc || 'Lokasi ruang menyusui & ganti popok di sekeliling Bali.');
+          setVal('fg-p1-icon', data.feature_1_image_url || 'baby_changing_station');
+
+          // Poin 2
+          setVal('fg-p2-title', data.feature_2_title || 'Rute Ramah Stroller & Kursi Bayi');
+          setVal('fg-p2-desc', data.feature_2_desc || 'Destinasi tanpa tangga curam yang aman untuk kereta dorong.');
+          setVal('fg-p2-icon', data.feature_2_image_url || 'stroller');
+
+          // Poin 3
+          setVal('fg-p3-title', data.feature_3_title || 'Restoran Ramah Anak & Menu Balita');
+          setVal('fg-p3-desc', data.feature_3_desc || 'Tempat makan higienis dengan high-chair dan play area.');
+          setVal('fg-p3-icon', data.feature_3_image_url || 'restaurant');
+
+          // Poin 4
+          setVal('fg-p4-title', data.story_banner_title || 'Kontak Darurat Dokter Anak');
+          setVal('fg-p4-desc', data.story_banner_desc || 'Nomor darurat RS & klinik internasional 24 jam di Bali.');
+          setVal('fg-p4-icon', data.story_banner_image_url || 'medical_services');
+        }
+      } catch (err) {
+        console.warn('Gagal memuat setting Family Travel Guide:', err);
+      }
+
+      // Hook submit form
+      const fgForm = document.getElementById('form-family-guide');
+      if (fgForm && !fgForm.dataset.listenerAttached) {
+        fgForm.dataset.listenerAttached = 'true';
+        fgForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const submitBtn = document.getElementById('fg-submit-btn');
+          const origText = submitBtn.innerHTML;
+          submitBtn.innerHTML = '<span>⏳ Menyimpan...</span>';
+          submitBtn.disabled = true;
+
+          const payload = {
+            id: 'family_guide',
+            hero_badge: document.getElementById('fg-badge').value.trim(),
+            hero_title: document.getElementById('fg-title').value.trim(),
+            hero_subtitle: document.getElementById('fg-desc').value.trim(),
+            hero_image_url: document.getElementById('fg-cover-url').value.trim() || 'https://lh3.googleusercontent.com/aida-public/AB6AXuBXQp3yJYISQNjl64jAVspTIH9BDeAyZL9XQNlw-5eYBw4JnVWPQyGy0_lQwYcUj0o3HAoKnC5_O5tTsqjf8kb_1fmhUYl0M7eSVZPub18JfeiBaUPEapZVYNBSEJYWLs87Q_fGaME74urDb4XCR8i6sr66e2eOQLlix4Q5AJMMbu3OMVfMxKBnDDnHh6hqyIWKJfLUp1eWU1pIiq1c6dll6OXFsFiM-AgCm3ieTCqDGlhaD1LTggLUSw',
+            cta_banner_title: document.getElementById('fg-cover-badge').value.trim() || 'E-BOOK GRATIS',
+            cta_banner_desc: document.getElementById('fg-download-link').value.trim() || '#download-bundle-form',
+            feature_1_title: document.getElementById('fg-p1-title').value.trim(),
+            feature_1_desc: document.getElementById('fg-p1-desc').value.trim(),
+            feature_1_image_url: document.getElementById('fg-p1-icon').value,
+            feature_2_title: document.getElementById('fg-p2-title').value.trim(),
+            feature_2_desc: document.getElementById('fg-p2-desc').value.trim(),
+            feature_2_image_url: document.getElementById('fg-p2-icon').value,
+            feature_3_title: document.getElementById('fg-p3-title').value.trim(),
+            feature_3_desc: document.getElementById('fg-p3-desc').value.trim(),
+            feature_3_image_url: document.getElementById('fg-p3-icon').value,
+            story_banner_title: document.getElementById('fg-p4-title').value.trim(),
+            story_banner_desc: document.getElementById('fg-p4-desc').value.trim(),
+            story_banner_image_url: document.getElementById('fg-p4-icon').value,
+            updated_at: new Date().toISOString()
+          };
+
+          try {
+            const { error } = await db.from('site_settings').upsert(payload, { onConflict: 'id' });
+            if (error) throw error;
+            alert('🎉 Pengaturan E-Book Family Travel Guide berhasil disimpan! Perubahan otomatis aktif di halaman Activity Kit.');
+            await loadFamilyGuideSettings();
+          } catch (err) {
+            alert('Gagal menyimpan pengaturan: ' + err.message);
+          } finally {
+            submitBtn.innerHTML = origText;
+            submitBtn.disabled = false;
+          }
+        });
       }
     }
 

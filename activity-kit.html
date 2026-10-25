@@ -592,29 +592,29 @@
     </section>
 
     <!-- ==================== SECTION 5: E-BOOK BONUS - FAMILY TRAVEL GUIDE BALI ==================== -->
-    <section class="py-space-2xl bg-surface-container-low border-y border-border-subtle">
+    <section class="py-space-2xl bg-surface-container-low border-y border-border-subtle" id="family-travel-guide-section">
       <div class="max-w-7xl mx-auto px-margin">
         <div class="bg-card-surface rounded-3xl border border-border-subtle p-8 md:p-12 shadow-sm">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div class="lg:col-span-5 flex justify-center">
               <div class="relative w-64 md:w-80 shadow-2xl rounded-2xl overflow-hidden border-4 border-card-surface rotate-[-2deg] transition-transform hover:rotate-0 duration-300">
-                <img alt="E-Book Bonus Family Travel Guide Bali" class="w-full h-auto object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXQp3yJYISQNjl64jAVspTIH9BDeAyZL9XQNlw-5eYBw4JnVWPQyGy0_lQwYcUj0o3HAoKnC5_O5tTsqjf8kb_1fmhUYl0M7eSVZPub18JfeiBaUPEapZVYNBSEJYWLs87Q_fGaME74urDb4XCR8i6sr66e2eOQLlix4Q5AJMMbu3OMVfMxKBnDDnHh6hqyIWKJfLUp1eWU1pIiq1c6dll6OXFsFiM-AgCm3ieTCqDGlhaD1LTggLUSw"/>
-                <div class="absolute top-4 right-4 bg-sun-amber text-neutral-slate-dark font-bold text-label-sm font-label-sm px-3 py-1 rounded-full shadow">
+                <img id="fg-section-cover" alt="E-Book Bonus Family Travel Guide Bali" class="w-full h-auto object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXQp3yJYISQNjl64jAVspTIH9BDeAyZL9XQNlw-5eYBw4JnVWPQyGy0_lQwYcUj0o3HAoKnC5_O5tTsqjf8kb_1fmhUYl0M7eSVZPub18JfeiBaUPEapZVYNBSEJYWLs87Q_fGaME74urDb4XCR8i6sr66e2eOQLlix4Q5AJMMbu3OMVfMxKBnDDnHh6hqyIWKJfLUp1eWU1pIiq1c6dll6OXFsFiM-AgCm3ieTCqDGlhaD1LTggLUSw"/>
+                <div id="fg-section-cover-badge" class="absolute top-4 right-4 bg-sun-amber text-neutral-slate-dark font-bold text-label-sm font-label-sm px-3 py-1 rounded-full shadow">
                   E-BOOK GRATIS
                 </div>
               </div>
             </div>
             <div class="lg:col-span-7 flex flex-col items-start gap-4">
-              <span class="px-3.5 py-1 rounded-full bg-coral-soft text-primary font-label-sm font-label-sm font-bold uppercase">
+              <span id="fg-section-badge" class="px-3.5 py-1 rounded-full bg-coral-soft text-primary font-label-sm font-label-sm font-bold uppercase">
                 🎁 Bonus Spesial Orang Tua
               </span>
-              <h2 class="text-headline-md md:text-headline-lg font-headline-md md:font-headline-lg text-on-surface">
+              <h2 id="fg-section-title" class="text-headline-md md:text-headline-lg font-headline-md md:font-headline-lg text-on-surface">
                 Family Travel Guide Bali (Edisi Balita &amp; Anak)
               </h2>
-              <p class="text-body-lg font-body-lg text-neutral-slate-muted leading-relaxed">
+              <p id="fg-section-desc" class="text-body-lg font-body-lg text-neutral-slate-muted leading-relaxed">
                 Buku panduan digital komprehensif 28 halaman yang disusun oleh travel mom &amp; tim Bali Top Holiday untuk memastikan liburan keluarga Anda di Bali berlangsung tenang, nyaman, dan ramah popok!
               </p>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full pt-2">
+              <div id="fg-section-features" class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full pt-2">
                 <div class="flex items-start gap-3">
                   <div class="p-2 rounded-xl bg-palm-soft text-palm-green shrink-0">
                     <span class="material-symbols-outlined" data-icon="baby_changing_station">baby_changing_station</span>
@@ -643,7 +643,7 @@
                   </div>
                 </div>
                 <div class="flex items-start gap-3">
-                  <div class="p-2 rounded-xl bg-surface-container text-on-surface-variant shrink-0">
+                  <div class="p-2 rounded-xl bg-purple-100 text-purple-600 shrink-0">
                     <span class="material-symbols-outlined" data-icon="medical_services">medical_services</span>
                   </div>
                   <div>
@@ -653,7 +653,7 @@
                 </div>
               </div>
               <div class="pt-4 flex items-center gap-3">
-                <a class="bg-primary text-on-primary px-6 py-3 rounded-full text-label-md font-label-md font-bold hover:bg-primary/90 transition-all flex items-center gap-2 shadow-sm active:scale-95" href="#download-bundle-form">
+                <a id="fg-section-btn" class="bg-primary text-on-primary px-6 py-3 rounded-full text-label-md font-label-md font-bold hover:bg-primary/90 transition-all flex items-center gap-2 shadow-sm active:scale-95" href="#download-bundle-form">
                   <span class="material-symbols-outlined text-lg" data-icon="menu_book">menu_book</span>
                   <span>Unduh E-Book Bersama Activity Kit</span>
                 </a>
@@ -933,6 +933,7 @@
       await fetchSiteSettings();
       await loadColoringSheets();
       await loadActivityKits();
+      await fetchFamilyGuideSettings();
     });
 
     async function loadActivityKits() {
@@ -1028,6 +1029,88 @@
           link.href = `https://wa.me/${wa}${text ? '?text=' + encodeURIComponent(text) : ''}`;
         } catch (_) {}
       });
+    }
+
+    async function fetchFamilyGuideSettings() {
+      try {
+        const { data, error } = await db.from('site_settings').select('*').eq('id', 'family_guide').single();
+        if (error || !data) return;
+
+        if (data.hero_image_url) {
+          const imgEl = document.getElementById('fg-section-cover');
+          if (imgEl) imgEl.src = data.hero_image_url;
+        }
+        if (data.cta_banner_title) {
+          const badgeCover = document.getElementById('fg-section-cover-badge');
+          if (badgeCover) badgeCover.textContent = data.cta_banner_title;
+        }
+        if (data.hero_badge) {
+          const badgeEl = document.getElementById('fg-section-badge');
+          if (badgeEl) badgeEl.textContent = data.hero_badge;
+        }
+        if (data.hero_title) {
+          const titleEl = document.getElementById('fg-section-title');
+          if (titleEl) titleEl.textContent = data.hero_title;
+        }
+        if (data.hero_subtitle) {
+          const descEl = document.getElementById('fg-section-desc');
+          if (descEl) descEl.textContent = data.hero_subtitle;
+        }
+        if (data.cta_banner_desc) {
+          const btnEl = document.getElementById('fg-section-btn');
+          if (btnEl) {
+            btnEl.href = data.cta_banner_desc;
+            if (data.cta_banner_desc.startsWith('http')) {
+              btnEl.target = '_blank';
+            }
+          }
+        }
+
+        // 4 Dynamic Features
+        const features = [
+          {
+            icon: data.feature_1_image_url || 'baby_changing_station',
+            title: data.feature_1_title || 'Daftar Nursery Room Terbersih',
+            desc: data.feature_1_desc || 'Lokasi ruang menyusui & ganti popok di sekeliling Bali.',
+            color: 'bg-palm-soft text-palm-green'
+          },
+          {
+            icon: data.feature_2_image_url || 'stroller',
+            title: data.feature_2_title || 'Rute Ramah Stroller & Kursi Bayi',
+            desc: data.feature_2_desc || 'Destinasi tanpa tangga curam yang aman untuk kereta dorong.',
+            color: 'bg-coral-soft text-primary'
+          },
+          {
+            icon: data.feature_3_image_url || 'restaurant',
+            title: data.feature_3_title || 'Restoran Ramah Anak & Menu Balita',
+            desc: data.feature_3_desc || 'Tempat makan higienis dengan high-chair dan play area.',
+            color: 'bg-ocean-teal-soft text-secondary'
+          },
+          {
+            icon: data.story_banner_image_url || 'medical_services',
+            title: data.story_banner_title || 'Kontak Darurat Dokter Anak',
+            desc: data.story_banner_desc || 'Nomor darurat RS & klinik internasional 24 jam di Bali.',
+            color: 'bg-purple-100 text-purple-600'
+          }
+        ];
+
+        const featContainer = document.getElementById('fg-section-features');
+        if (featContainer) {
+          featContainer.innerHTML = features.map(f => `
+            <div class="flex items-start gap-3">
+              <div class="p-2 rounded-xl ${f.color} shrink-0">
+                <span class="material-symbols-outlined" data-icon="${f.icon}">${f.icon}</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-on-surface text-label-md font-label-md">${f.title}</h4>
+                <p class="text-label-sm font-label-sm text-neutral-slate-muted">${f.desc}</p>
+              </div>
+            </div>
+          `).join('');
+        }
+      } catch (err) {
+        console.warn('Gagal memuat setting Family Travel Guide:', err);
+      }
     }
 
     // ==================== STUDIO MEWARNAI (CANVAS ENGINE) ====================
