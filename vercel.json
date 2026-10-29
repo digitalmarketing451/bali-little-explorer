@@ -76,7 +76,7 @@
       ]
     },
     {
-      "source": "/(images|coloring-assets)/(.*)",
+      "source": "/images/:path*",
       "headers": [
         {
           "key": "Cache-Control",
@@ -85,7 +85,16 @@
       ]
     },
     {
-      "source": "/(logo\\.png|favicon(.*)|apple-touch-icon\\.png)",
+      "source": "/coloring-assets/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/:path*\\.(png|jpg|jpeg|webp|svg|ico)",
       "headers": [
         {
           "key": "Cache-Control",
