@@ -262,6 +262,28 @@
           </div>
         </div>
 
+        <!-- ==================== E-BROSUR RESMI PAKET WISATA (PDF) ==================== -->
+        <div id="brochures-section" class="mb-10 bg-gradient-to-br from-amber-50/70 via-orange-50/40 to-white rounded-3xl p-5 sm:p-7 border border-orange-200/80 custom-shadow-resting">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 pb-4 border-b border-orange-100">
+            <div>
+              <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-orange-100 text-primary font-extrabold text-[11px] mb-1.5">
+                <span class="material-symbols-outlined text-xs">picture_as_pdf</span>
+                <span>Katalog Resmi Siap Unduh (PDF)</span>
+              </div>
+              <h2 class="text-xl sm:text-2xl font-baloo font-bold text-on-surface">E-Brosur Resmi Wisata Ramah Keluarga</h2>
+              <p class="text-xs text-neutral-slate-muted">Unduh brosur resmi Bali Little Explorer (3D2N) dan Family Bali Adventures (4D3N) lengkap dengan rute, fasilitas, dan kontak langsung.</p>
+            </div>
+            <span class="inline-flex items-center gap-1 text-xs font-bold text-palm-green bg-green-50 px-3 py-1.5 rounded-full border border-green-200 self-start sm:self-center shrink-0">
+              <span class="material-symbols-outlined text-sm">verified</span>
+              <span>Resmi Bali Top Holiday</span>
+            </span>
+          </div>
+
+          <div id="public-brochures-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+            <!-- Rendered by JS from Supabase site_settings -->
+          </div>
+        </div>
+
         <!-- Filter & Search Toolbar (With Scroll Filter by Days) -->
         <div class="bg-card-surface rounded-3xl p-4 sm:p-6 custom-shadow-resting border border-border-subtle mb-8 space-y-4 min-w-0 max-w-full overflow-hidden">
           <!-- Top Row: Search Input -->
@@ -2003,8 +2025,103 @@
       setupBookingForm();
       await fetchSiteSettings();
       await fetchPackages();
+      await fetchBrochures();
       checkUrlForPackage();
     });
+
+    
+    // ==================== FETCH & RENDER E-BROSUR RESMI (PDF) ====================
+    async function fetchBrochures() {
+      const container = document.getElementById('public-brochures-grid');
+      if (!container) return;
+
+      let list = [
+        {
+          id: 'brochure-3d2n',
+          title: 'Brosur Wisata Privat Balita (3D2N)',
+          subtitle: 'Bali Little Explorer by Bali Top Holiday',
+          badge: 'E-Brosur 3 Hari 2 Malam',
+          duration: '3 Hari 2 Malam (3D2N)',
+          packages_count: '6 Pilihan Paket',
+          file_size: '8.6 MB',
+          description: 'Brosur resmi format lipat 3 (trifold) berisi 6 pilihan paket wisata edukasi ramah balita: Little Wildlife Explorer, Turtle Friends Sanur, Kuta Beach Splash, Little Artist Ubud, Mini Chef Ubud, dan Butterfly & Temple Bali. Dilengkapi daftar fasilitas termasuk & kontak reservasi.',
+          pdf_url: 'Brosur-Paket-Wisata-3D2N-Bali-Little-Explorer.pdf',
+          cover_image_url: 'https://kbyjkhmgjkuqgmcakvqp.supabase.co/storage/v1/object/public/site-images/packages/brosur-3d2n-cover.jpg'
+        },
+        {
+          id: 'brochure-4d3n',
+          title: 'Brosur Family Bali Adventures (4D3N)',
+          subtitle: 'Pilihan Perjalanan Keluarga 4 Hari 3 Malam',
+          badge: 'E-Brosur 4 Hari 3 Malam',
+          duration: '4 Hari 3 Malam (4D3N)',
+          packages_count: '7 Pilihan Paket',
+          file_size: '1.9 MB',
+          description: 'Brosur resmi 5 halaman berisi 7 pilihan paket petualangan keluarga ramah anak: Wild Bali Adventure, Ocean Kids Sanur, Culture & Craft, Cool Highland Explorer, Splash & Play South, Bali Classic Family, dan Ubud & Beach Combo. Dilengkapi rincian destinasi lengkap.',
+          pdf_url: 'Brosur-Paket-Wisata-4D3N-Family-Bali-Adventures.pdf',
+          cover_image_url: 'https://kbyjkhmgjkuqgmcakvqp.supabase.co/storage/v1/object/public/site-images/packages/brosur-4d3n-cover.jpg'
+        }
+      ];
+
+      try {
+        const { data, error } = await db.from('site_settings').select('*').eq('id', 'package_brochures').single();
+        if (data && data.feature_2_desc) {
+          const parsed = JSON.parse(data.feature_2_desc);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            list = parsed;
+          }
+        }
+      } catch (err) {
+        console.warn('Gagal memuat e-brosur dari database, menggunakan fallback lokal:', err);
+      }
+
+      list.sort((a, b) => (Number(a.order_index) || 99) - (Number(b.order_index) || 99));
+
+      container.innerHTML = list.map(b => {
+        const coverImg = b.cover_image_url || 'https://kbyjkhmgjkuqgmcakvqp.supabase.co/storage/v1/object/public/site-images/packages/brosur-3d2n-cover.jpg';
+        const pdfUrl = b.pdf_url || '';
+        const isInternalPdf = pdfUrl && !pdfUrl.startsWith('http');
+        const fullPdfLink = isInternalPdf ? (window.location.origin + '/' + pdfUrl.replace(/^\//, '')) : pdfUrl;
+
+        return `
+          <div class="bg-card-surface rounded-2xl border border-orange-200/80 p-4 sm:p-5 flex flex-col justify-between hover:shadow-md transition">
+            <div>
+              <div class="flex items-start gap-3.5 sm:gap-4 mb-3">
+                <div class="relative w-24 sm:w-28 shrink-0 rounded-xl overflow-hidden shadow-md border-2 border-white aspect-[3/4] bg-slate-100">
+                  <img src="${coverImg}" alt="${b.title}" class="w-full h-full object-cover" />
+                  <span class="absolute top-1 right-1 bg-sun-amber text-neutral-slate-dark text-[8px] font-extrabold px-1.5 py-0.5 rounded shadow">
+                    PDF
+                  </span>
+                </div>
+                <div class="min-w-0 flex-1">
+                  <span class="inline-block text-[10px] font-bold text-primary bg-coral-soft px-2 py-0.5 rounded-full mb-1">
+                    ${b.badge || 'E-Brosur Resmi'}
+                  </span>
+                  <h3 class="font-baloo font-bold text-base sm:text-lg text-on-surface leading-snug line-clamp-2">${b.title}</h3>
+                  <p class="text-[11px] font-semibold text-neutral-slate-muted mb-2 line-clamp-1">${b.subtitle || ''}</p>
+                  <div class="flex flex-wrap gap-1.5 text-[10px] font-bold text-neutral-slate">
+                    <span class="bg-orange-50 border border-orange-200/60 px-2 py-0.5 rounded-md text-primary-container">⏱️ ${b.duration}</span>
+                    <span class="bg-slate-100 px-2 py-0.5 rounded-md text-neutral-slate">📦 ${b.packages_count}</span>
+                    <span class="bg-slate-100 px-2 py-0.5 rounded-md text-neutral-slate">💾 ${b.file_size}</span>
+                  </div>
+                </div>
+              </div>
+              <p class="text-xs text-neutral-slate-muted leading-relaxed mb-4 line-clamp-3">${b.description}</p>
+            </div>
+
+            <div class="pt-3 border-t border-border-subtle flex items-center justify-between gap-2">
+              <a href="${fullPdfLink}" target="_blank" download class="flex-1 inline-flex items-center justify-center gap-1.5 bg-primary-container hover:bg-primary text-white text-xs font-bold py-2.5 px-3 rounded-xl shadow transition">
+                <span class="material-symbols-outlined text-sm">download</span>
+                <span>Unduh Brosur (PDF)</span>
+              </a>
+              <a href="${fullPdfLink}" target="_blank" class="inline-flex items-center justify-center gap-1 bg-surface-container-low hover:bg-surface-container text-on-surface border border-border-subtle text-xs font-bold py-2.5 px-3 rounded-xl transition" title="Buka Pratinjau PDF">
+                <span class="material-symbols-outlined text-sm">visibility</span>
+                <span class="hidden sm:inline">Pratinjau</span>
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
 
     function setupNavigation() {
       const toggle = document.getElementById('mobile-toggle');

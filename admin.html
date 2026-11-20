@@ -371,6 +371,35 @@
         </div>
       </div>
 
+      <!-- Sub-bagian E-Brosur Resmi Paket Wisata (PDF) -->
+      <div class="bg-gradient-to-r from-amber-500/10 via-orange-500/5 to-transparent rounded-3xl border border-orange-200 p-4 sm:p-7 mb-6 sm:mb-8">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+          <div class="min-w-0">
+            <div class="inline-flex items-center gap-1.5 bg-orange-100 text-primary-container font-extrabold text-[11px] px-3 py-1 rounded-full mb-1.5">
+              <span class="material-symbols-outlined text-xs">picture_as_pdf</span>
+              <span>Dokumen Resmi Siap Unduh (Format PDF)</span>
+            </div>
+            <h4 class="font-baloo font-bold text-lg sm:text-xl text-on-surface">E-Brosur Resmi Paket Wisata</h4>
+            <p class="text-xs text-neutral-slate-muted">Brosur digital resmi Bali Little Explorer & Family Bali Adventures untuk dibagikan ke calon wisatawan atau diunduh dari paket.html.</p>
+          </div>
+          <button type="button" onclick="openBrochureModal()" class="shrink-0 bg-primary-container hover:bg-primary text-white text-xs font-bold px-4 py-2.5 rounded-full shadow transition flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-sm">add</span>
+            <span>+ Tambah E-Brosur</span>
+          </button>
+        </div>
+
+        <div id="brochures-grid" class="grid sm:grid-cols-2 gap-4 sm:gap-6">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h4 class="font-baloo font-bold text-lg sm:text-xl text-on-surface">Daftar Paket Satuan (Database Interaktif)</h4>
+          <p class="text-xs text-neutral-slate-muted">Detail paket wisata individual dengan rute harian, durasi, dan fasilitas.</p>
+        </div>
+      </div>
+
       <div id="packages-grid" class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
         <!-- Rendered by JS -->
       </div>
@@ -1572,6 +1601,119 @@
       </div>
     </div>
   </div>
+  <!-- ==================== MODAL: FORM E-BROSUR PAKET WISATA ==================== -->
+  <div id="modal-brochure" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 modal-backdrop overflow-y-auto" onclick="if(event.target === this) closeBrochureModal()">
+    <div class="relative max-w-2xl w-full my-auto z-10">
+      <button type="button" onclick="closeBrochureModal()" class="absolute -top-3.5 -right-2 sm:-top-4 sm:-right-4 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-card-surface text-on-surface hover:text-primary-container shadow-2xl border-2 border-border-subtle hover:border-primary-container flex items-center justify-center text-sm sm:text-base font-extrabold transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer" title="Tutup (Esc)" aria-label="Tutup">
+        ✕
+      </button>
+
+      <div class="bg-card-surface rounded-3xl w-full p-5 sm:p-8 border border-border-subtle shadow-2xl relative max-h-[92vh] flex flex-col">
+        <div class="flex items-center justify-between pb-4 border-b border-border-subtle mb-4 shrink-0">
+          <div>
+            <h4 class="font-baloo font-bold text-xl sm:text-2xl text-on-surface" id="modal-brochure-title">Tambah E-Brosur Paket</h4>
+            <p class="text-xs text-neutral-slate-muted">Kelola sampul brosur, file PDF, durasi, dan ringkasan paket untuk katalog paket.html.</p>
+          </div>
+        </div>
+
+        <form id="form-brochure-edit" novalidate class="space-y-4 overflow-y-auto pr-1 flex-1">
+          <input type="hidden" id="brochure-id" />
+
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-start">
+            <!-- Left: Cover preview & Upload -->
+            <div class="sm:col-span-5 flex flex-col items-center">
+              <label class="block text-xs font-bold text-on-surface mb-2 self-start">Sampul Brosur:</label>
+              <div class="relative w-36 sm:w-44 shadow-xl rounded-2xl overflow-hidden border-2 border-card-surface hover:scale-[1.02] transition-transform duration-300 mb-3 bg-slate-100 aspect-[3/4] flex items-center justify-center">
+                <img id="prev-brochure-cover" src="https://kbyjkhmgjkuqgmcakvqp.supabase.co/storage/v1/object/public/site-images/packages/brosur-3d2n-cover.jpg"
+                     alt="Sampul Brosur" class="w-full h-full object-cover" />
+                <div id="prev-brochure-badge" class="absolute top-2.5 right-2.5 bg-sun-amber text-neutral-slate-dark font-bold text-[9px] px-2 py-0.5 rounded-full shadow">
+                  E-Brosur
+                </div>
+              </div>
+
+              <div class="w-full space-y-2.5">
+                <div>
+                  <label class="block text-[11px] font-bold text-on-surface mb-1">Upload / Ganti Foto Sampul</label>
+                  <input type="hidden" id="brochure-cover-url" />
+                  <div id="upload-widget-brochure-cover-url"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Details -->
+            <div class="sm:col-span-7 space-y-3.5">
+              <div>
+                <label class="block text-xs font-bold text-on-surface mb-1">Judul Brosur *</label>
+                <input type="text" id="brochure-title" required placeholder="Contoh: Brosur Wisata Privat Balita (3D2N)"
+                       class="w-full px-3.5 py-2.5 bg-surface-container-low border border-border-subtle rounded-xl text-xs sm:text-sm font-bold text-on-surface focus:outline-none focus:ring-1 focus:ring-primary" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-on-surface mb-1">Subjudul / Tagline *</label>
+                <input type="text" id="brochure-subtitle" required placeholder="Contoh: Bali Little Explorer by Bali Top Holiday"
+                       class="w-full px-3 py-2 bg-surface-container-low border border-border-subtle rounded-xl text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-primary" />
+              </div>
+
+              <div class="grid grid-cols-2 gap-2.5">
+                <div>
+                  <label class="block text-[11px] font-bold text-on-surface mb-1">Badge Brosur</label>
+                  <input type="text" id="brochure-badge" placeholder="E-Brosur 3 Hari 2 Malam"
+                         class="w-full px-3 py-2 bg-surface-container-low border border-border-subtle rounded-xl text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-primary" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-on-surface mb-1">Kategori Durasi</label>
+                  <input type="text" id="brochure-duration" placeholder="3 Hari 2 Malam (3D2N)"
+                         class="w-full px-3 py-2 bg-surface-container-low border border-border-subtle rounded-xl text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-primary" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2.5">
+                <div>
+                  <label class="block text-[11px] font-bold text-on-surface mb-1">Jumlah Paket Termuat</label>
+                  <input type="text" id="brochure-packages-count" placeholder="6 Pilihan Paket"
+                         class="w-full px-3 py-2 bg-surface-container-low border border-border-subtle rounded-xl text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-primary" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-on-surface mb-1">Ukuran File PDF</label>
+                  <input type="text" id="brochure-file-size" placeholder="8.6 MB"
+                         class="w-full px-3 py-2 bg-surface-container-low border border-border-subtle rounded-xl text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-primary" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-on-surface mb-1">Nama Berkas / URL Berkas PDF *</label>
+                <input type="text" id="brochure-pdf-url" required placeholder="Brosur-Paket-Wisata-3D2N-Bali-Little-Explorer.pdf"
+                       class="w-full px-3 py-2 bg-surface-container-low border border-border-subtle rounded-xl text-xs font-mono font-medium focus:outline-none focus:ring-1 focus:ring-primary" />
+                <p class="text-[10px] text-neutral-slate-muted mt-1">Gunakan nama berkas lokal (contoh: <code class="bg-slate-100 px-1 py-0.5 rounded">Brosur-Paket-Wisata-3D2N-Bali-Little-Explorer.pdf</code>) atau tautan Google Drive / CDN.</p>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-on-surface mb-1">Ringkasan Brosur *</label>
+                <textarea id="brochure-desc" rows="3" required placeholder="Brosur resmi format lipat 3 (trifold) berisi 6 pilihan paket wisata edukasi ramah balita..."
+                          class="w-full px-3 py-2 bg-surface-container-low border border-border-subtle rounded-xl text-xs sm:text-sm leading-relaxed focus:outline-none focus:ring-1 focus:ring-primary"></textarea>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-on-surface mb-1">Urutan Tampilan</label>
+                <input type="number" id="brochure-order" value="1" min="1" max="99"
+                       class="w-24 px-3 py-1.5 bg-surface-container-low border border-border-subtle rounded-xl text-xs font-bold" />
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-border-subtle flex items-center justify-end gap-3 shrink-0">
+            <button type="button" onclick="closeBrochureModal()" class="px-5 py-2.5 rounded-full text-xs font-bold text-neutral-slate hover:bg-surface-container transition">
+              Batal
+            </button>
+            <button type="submit" id="brochure-modal-submit-btn" class="px-6 py-2.5 rounded-full text-xs font-bold bg-primary-container text-white shadow hover:bg-primary transition flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-sm">save</span>
+              <span>Simpan E-Brosur</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <!-- ====================== SCRIPTS & LOGIC ====================== -->
   <script>
@@ -1794,6 +1936,7 @@
 
       // E-Book & Family Travel Guide widget
       createUploadWidget({ containerId: 'upload-widget-ebook-cover-url', inputId: 'ebook-cover-url', previewImgId: 'prev-ebook-cover', folder: 'ebooks' });
+      createUploadWidget({ containerId: 'upload-widget-brochure-cover-url', inputId: 'brochure-cover-url', previewImgId: 'prev-brochure-cover', folder: 'packages' });
 
       // Modal widgets
       createUploadWidget({ containerId: 'upload-widget-pkg-img', inputId: 'pkg-img', folder: 'packages' });
@@ -1855,6 +1998,7 @@
         closeColoringModal();
         closeTipModal();
         closeEbookModal();
+        closeBrochureModal();
       }
     });
 
@@ -1882,6 +2026,7 @@
         loadReservations(),
         loadLeads(),
         loadPackages(),
+        loadBrochures(),
         loadKits(),
         loadColoringSheets(),
         loadTips(),
@@ -3474,6 +3619,321 @@
 
       const { error } = await db.from('site_settings').upsert(payload, { onConflict: 'id' });
       if (error) throw error;
+    }
+
+    
+    // ==================== E-BROSUR RESMI PAKET WISATA CMS ====================
+    let brochuresList = [];
+
+    async function loadBrochures() {
+      // Live preview listener for cover image inside brochure modal
+      const coverInput = document.getElementById('brochure-cover-url');
+      const prevCover = document.getElementById('prev-brochure-cover');
+      if (coverInput && prevCover) {
+        coverInput.addEventListener('input', () => {
+          prevCover.src = coverInput.value.trim() || 'https://kbyjkhmgjkuqgmcakvqp.supabase.co/storage/v1/object/public/site-images/packages/brosur-3d2n-cover.jpg';
+        });
+      }
+
+      const badgeInput = document.getElementById('brochure-badge');
+      const prevBadge = document.getElementById('prev-brochure-badge');
+      if (badgeInput && prevBadge) {
+        badgeInput.addEventListener('input', () => {
+          prevBadge.textContent = badgeInput.value.trim() || 'E-Brosur';
+        });
+      }
+
+      try {
+        const { data, error } = await db.from('site_settings').select('*').eq('id', 'package_brochures').single();
+        if (data && data.feature_2_desc) {
+          try {
+            brochuresList = JSON.parse(data.feature_2_desc);
+          } catch (_) {
+            brochuresList = [];
+          }
+        }
+      } catch (err) {
+        console.warn('Gagal memuat e-brosur dari database:', err);
+      }
+
+      // Default fallback if database empty
+      if (!Array.isArray(brochuresList) || brochuresList.length === 0) {
+        brochuresList = [
+          {
+            id: 'brochure-3d2n',
+            title: 'Brosur Wisata Privat Balita (3D2N)',
+            subtitle: 'Bali Little Explorer by Bali Top Holiday',
+            badge: 'E-Brosur 3 Hari 2 Malam',
+            duration: '3 Hari 2 Malam (3D2N)',
+            description: 'Brosur resmi format lipat 3 (trifold) berisi 6 pilihan paket wisata edukasi ramah balita: Little Wildlife Explorer, Turtle Friends Sanur, Kuta Beach Splash, Little Artist Ubud, Mini Chef Ubud, dan Butterfly & Temple Bali. Dilengkapi daftar fasilitas termasuk & kontak reservasi.',
+            pdf_url: 'Brosur-Paket-Wisata-3D2N-Bali-Little-Explorer.pdf',
+            cover_image_url: 'https://kbyjkhmgjkuqgmcakvqp.supabase.co/storage/v1/object/public/site-images/packages/brosur-3d2n-cover.jpg',
+            file_size: '8.6 MB',
+            order_index: 1,
+            packages_count: '6 Pilihan Paket'
+          },
+          {
+            id: 'brochure-4d3n',
+            title: 'Brosur Family Bali Adventures (4D3N)',
+            subtitle: 'Pilihan Perjalanan Keluarga 4 Hari 3 Malam',
+            badge: 'E-Brosur 4 Hari 3 Malam',
+            duration: '4 Hari 3 Malam (4D3N)',
+            description: 'Brosur resmi 5 halaman berisi 7 pilihan paket petualangan keluarga ramah anak: Wild Bali Adventure, Ocean Kids Sanur, Culture & Craft, Cool Highland Explorer, Splash & Play South, Bali Classic Family, dan Ubud & Beach Combo. Dilengkapi rincian destinasi lengkap.',
+            pdf_url: 'Brosur-Paket-Wisata-4D3N-Family-Bali-Adventures.pdf',
+            cover_image_url: 'https://kbyjkhmgjkuqgmcakvqp.supabase.co/storage/v1/object/public/site-images/packages/brosur-4d3n-cover.jpg',
+            file_size: '1.9 MB',
+            order_index: 2,
+            packages_count: '7 Pilihan Paket'
+          }
+        ];
+      }
+
+      renderBrochuresGrid();
+      setupBrochureFormSubmit();
+    }
+
+    function renderBrochuresGrid() {
+      const container = document.getElementById('brochures-grid');
+      if (!container) return;
+
+      if (!brochuresList || brochuresList.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full p-8 text-center bg-card-surface rounded-2xl border border-dashed border-border-subtle">
+            <span class="text-4xl mb-2 block">📄</span>
+            <p class="font-bold text-sm text-on-surface">Belum ada E-Brosur yang ditambahkan</p>
+            <p class="text-xs text-neutral-slate-muted mb-4">Tambahkan brosur resmi paket wisata agar calon wisatawan dapat mengunduh PDF.</p>
+            <button type="button" onclick="openBrochureModal()" class="px-4 py-2 rounded-full bg-primary-container text-white font-bold text-xs shadow-sm hover:bg-primary transition">
+              + Tambah E-Brosur Baru
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      // Sort by order_index
+      brochuresList.sort((a, b) => (Number(a.order_index) || 99) - (Number(b.order_index) || 99));
+
+      container.innerHTML = brochuresList.map((item) => {
+        const coverImg = item.cover_image_url || 'https://kbyjkhmgjkuqgmcakvqp.supabase.co/storage/v1/object/public/site-images/packages/brosur-3d2n-cover.jpg';
+        const pdfUrl = item.pdf_url || '';
+        const isInternalPdf = pdfUrl && !pdfUrl.startsWith('http');
+        const fullPdfLink = isInternalPdf ? (window.location.origin + '/' + pdfUrl.replace(/^\//, '')) : pdfUrl;
+
+        return `
+          <div class="bg-card-surface rounded-2xl border border-border-subtle p-5 flex flex-col justify-between hover:shadow-md transition relative group">
+            <div>
+              <div class="flex items-start gap-4 mb-4">
+                <div class="relative w-24 sm:w-28 shrink-0 shadow-lg rounded-xl overflow-hidden border-2 border-white group-hover:scale-105 transition-transform bg-slate-100 aspect-[3/4]">
+                  <img src="${coverImg}" alt="${item.title}" class="w-full h-full object-cover" />
+                  <span class="absolute top-1.5 right-1.5 bg-sun-amber text-neutral-slate-dark text-[8px] font-extrabold px-1.5 py-0.5 rounded shadow">
+                    PDF
+                  </span>
+                </div>
+                <div class="min-w-0 flex-1">
+                  <span class="inline-block text-[10px] font-bold text-primary bg-coral-soft px-2 py-0.5 rounded-full mb-1">
+                    ${item.badge || 'E-Brosur Resmi'}
+                  </span>
+                  <h5 class="font-baloo font-bold text-base text-on-surface leading-tight mb-1 line-clamp-2">${item.title}</h5>
+                  <p class="text-xs text-neutral-slate-muted mb-2 font-medium line-clamp-1">${item.subtitle || ''}</p>
+                  <div class="flex flex-wrap gap-1.5 text-[10px] font-bold text-neutral-slate">
+                    <span class="bg-orange-50 text-primary-container px-2 py-0.5 rounded-md border border-orange-100">${item.duration || 'Paket Wisata'}</span>
+                    <span class="bg-slate-100 px-2 py-0.5 rounded-md">${item.packages_count || 'Multi Paket'}</span>
+                    <span class="bg-slate-100 px-2 py-0.5 rounded-md">${item.file_size || 'PDF'}</span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="text-xs text-neutral-slate-muted leading-relaxed mb-4 line-clamp-3">${item.description || ''}</p>
+            </div>
+
+            <div class="pt-3 border-t border-border-subtle flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-1.5">
+                <a href="${fullPdfLink}" target="_blank" download class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-orange-50 text-primary-container font-bold text-xs hover:bg-orange-100 transition" title="Unduh Berkas PDF">
+                  <span class="material-symbols-outlined text-sm">download</span>
+                  <span>Unduh</span>
+                </a>
+                <button type="button" onclick="copyBrochureLink('${fullPdfLink}')" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-surface-container-low text-on-surface font-bold text-xs hover:bg-surface-container transition" title="Salin Tautan">
+                  <span class="material-symbols-outlined text-sm">content_copy</span>
+                  <span class="hidden sm:inline">Salin Link</span>
+                </button>
+              </div>
+
+              <div class="flex items-center gap-1">
+                <button type="button" onclick="openBrochureModal('${item.id}')" class="px-3 py-1.5 rounded-xl bg-surface-container-low text-on-surface font-bold text-xs hover:bg-surface-container transition flex items-center gap-1" title="Edit E-Brosur">
+                  <span class="material-symbols-outlined text-xs">edit</span>
+                  <span>Edit</span>
+                </button>
+                <button type="button" onclick="deleteBrochure('${item.id}')" class="p-1.5 rounded-xl text-red-500 hover:bg-red-50 transition" title="Hapus E-Brosur">
+                  <span class="material-symbols-outlined text-sm">delete</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openBrochureModal(id = null) {
+      const modal = document.getElementById('modal-brochure');
+      if (!modal) return;
+
+      const titleEl = document.getElementById('modal-brochure-title');
+      const idInput = document.getElementById('brochure-id');
+      const titleInput = document.getElementById('brochure-title');
+      const subtitleInput = document.getElementById('brochure-subtitle');
+      const badgeInput = document.getElementById('brochure-badge');
+      const durationInput = document.getElementById('brochure-duration');
+      const pkgCountInput = document.getElementById('brochure-packages-count');
+      const sizeInput = document.getElementById('brochure-file-size');
+      const pdfInput = document.getElementById('brochure-pdf-url');
+      const descInput = document.getElementById('brochure-desc');
+      const orderInput = document.getElementById('brochure-order');
+      const coverInput = document.getElementById('brochure-cover-url');
+      const prevCover = document.getElementById('prev-brochure-cover');
+      const prevBadge = document.getElementById('prev-brochure-badge');
+
+      if (id) {
+        const item = brochuresList.find(b => b.id === id);
+        if (item) {
+          titleEl.textContent = 'Edit E-Brosur Paket';
+          idInput.value = item.id;
+          titleInput.value = item.title || '';
+          subtitleInput.value = item.subtitle || '';
+          badgeInput.value = item.badge || '';
+          durationInput.value = item.duration || '';
+          pkgCountInput.value = item.packages_count || '';
+          sizeInput.value = item.file_size || '';
+          pdfInput.value = item.pdf_url || '';
+          descInput.value = item.description || '';
+          orderInput.value = item.order_index || 1;
+          coverInput.value = item.cover_image_url || '';
+          if (prevCover) prevCover.src = item.cover_image_url || 'https://kbyjkhmgjkuqgmcakvqp.supabase.co/storage/v1/object/public/site-images/packages/brosur-3d2n-cover.jpg';
+          if (prevBadge) prevBadge.textContent = item.badge || 'E-Brosur';
+        }
+      } else {
+        titleEl.textContent = 'Tambah E-Brosur Paket Baru';
+        idInput.value = 'brochure-' + Date.now();
+        titleInput.value = '';
+        subtitleInput.value = 'Bali Little Explorer by Bali Top Holiday';
+        badgeInput.value = 'E-Brosur Resmi';
+        durationInput.value = '3 Hari 2 Malam (3D2N)';
+        pkgCountInput.value = '6 Pilihan Paket';
+        sizeInput.value = '2.5 MB';
+        pdfInput.value = '';
+        descInput.value = '';
+        orderInput.value = brochuresList.length + 1;
+        coverInput.value = 'https://kbyjkhmgjkuqgmcakvqp.supabase.co/storage/v1/object/public/site-images/packages/brosur-3d2n-cover.jpg';
+        if (prevCover) prevCover.src = coverInput.value;
+        if (prevBadge) prevBadge.textContent = 'E-Brosur';
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeBrochureModal() {
+      const modal = document.getElementById('modal-brochure');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    function setupBrochureFormSubmit() {
+      const form = document.getElementById('form-brochure-edit');
+      if (!form || form.dataset.listenerAttached) return;
+      form.dataset.listenerAttached = 'true';
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('brochure-modal-submit-btn');
+        const origText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span>Menyimpan... ⏳</span>';
+        submitBtn.disabled = true;
+
+        const id = document.getElementById('brochure-id').value.trim() || ('brochure-' + Date.now());
+        const title = document.getElementById('brochure-title').value.trim();
+        const subtitle = document.getElementById('brochure-subtitle').value.trim();
+        const badge = document.getElementById('brochure-badge').value.trim() || 'E-Brosur Resmi';
+        const duration = document.getElementById('brochure-duration').value.trim() || 'Paket Wisata';
+        const packages_count = document.getElementById('brochure-packages-count').value.trim() || 'Multi Paket';
+        const file_size = document.getElementById('brochure-file-size').value.trim() || 'PDF';
+        const pdf_url = document.getElementById('brochure-pdf-url').value.trim();
+        const description = document.getElementById('brochure-desc').value.trim();
+        const order_index = Number(document.getElementById('brochure-order').value) || 1;
+        const cover_image_url = document.getElementById('brochure-cover-url').value.trim() || 'https://kbyjkhmgjkuqgmcakvqp.supabase.co/storage/v1/object/public/site-images/packages/brosur-3d2n-cover.jpg';
+
+        if (!title || !pdf_url) {
+          alert('Mohon lengkapi Judul Brosur dan Nama Berkas PDF!');
+          submitBtn.innerHTML = origText;
+          submitBtn.disabled = false;
+          return;
+        }
+
+        const itemData = {
+          id,
+          title,
+          subtitle,
+          badge,
+          duration,
+          packages_count,
+          file_size,
+          pdf_url,
+          description,
+          order_index,
+          cover_image_url
+        };
+
+        const existingIdx = brochuresList.findIndex(b => b.id === id);
+        if (existingIdx >= 0) {
+          brochuresList[existingIdx] = itemData;
+        } else {
+          brochuresList.push(itemData);
+        }
+
+        try {
+          await saveBrochuresToDatabase();
+          closeBrochureModal();
+          renderBrochuresGrid();
+          alert('🎉 E-Brosur berhasil disimpan! Perubahan otomatis aktif di katalog paket.html.');
+        } catch (err) {
+          alert('Gagal menyimpan E-Brosur: ' + err.message);
+        } finally {
+          submitBtn.innerHTML = origText;
+          submitBtn.disabled = false;
+        }
+      });
+    }
+
+    async function saveBrochuresToDatabase() {
+      const payload = {
+        id: 'package_brochures',
+        feature_2_desc: JSON.stringify(brochuresList),
+        updated_at: new Date().toISOString()
+      };
+
+      const { error } = await db.from('site_settings').upsert(payload, { onConflict: 'id' });
+      if (error) throw error;
+    }
+
+    async function deleteBrochure(id) {
+      if (!confirm('Apakah Anda yakin ingin menghapus E-Brosur ini dari koleksi katalog?')) return;
+      brochuresList = brochuresList.filter(b => b.id !== id);
+      try {
+        await saveBrochuresToDatabase();
+        renderBrochuresGrid();
+      } catch (err) {
+        alert('Gagal menghapus E-Brosur: ' + err.message);
+      }
+    }
+
+    function copyBrochureLink(url) {
+      if (!url) return;
+      navigator.clipboard.writeText(url).then(() => {
+        alert('📋 Tautan E-Brosur berhasil disalin ke clipboard:\\n' + url);
+      }).catch(() => {
+        prompt('Salin tautan berkas brosur ini:', url);
+      });
     }
 
     // ==================== HOMEPAGE & PHOTO SETTINGS ====================
